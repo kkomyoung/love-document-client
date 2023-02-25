@@ -1,14 +1,27 @@
 import React from 'react'
-import { CircleButton } from '../buttons/buttons'
+import styled from 'styled-components'
+import theme from '../../styles/theme'
+import { CircleButton } from '../buttons/Buttons'
 
-function Header() {
+function Header(props) {
+  const typeArray = props.type.split(',')
+
   return (
-    <div>
-      <CircleButton title="뒤로가기"></CircleButton>
-      <CircleButton title="삭제하기"></CircleButton>
-      <CircleButton title="닫기"></CircleButton>
-    </div>
+    <HeadDiv>
+      {typeArray.map((type, index) => {
+        return <CircleButton key={index} title={type}></CircleButton>
+      })}
+    </HeadDiv>
   )
 }
+
+const HeadDiv = styled.div`
+  position: sticky;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  padding: ${theme.calRem(12)} ${theme.calRem(24)};
+`
 
 export default Header
