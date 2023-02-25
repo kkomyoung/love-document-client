@@ -8,7 +8,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <Router />
+      <div id="wrap">
+        <Router />
+      </div>
     </ThemeProvider>
   )
 }
