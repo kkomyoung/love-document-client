@@ -4,29 +4,16 @@ import theme from '../../styles/theme'
 import IconArrowNext from '../../assets/icon_arrow_next.svg'
 import { ReactComponent as IconArrowPrev } from '../../assets/icon_arrow_prev.svg'
 import { ReactComponent as IconClose } from '../../assets/icon_close.svg'
-// import { ReactComponent as IconDelete } from '../../assets/icon_delete.svg'
+import { ReactComponent as IconDelete } from '../../assets/icon_delete.svg'
 
 const CircleButton = ({ feature }) => {
-  switch (feature) {
-    case 'back':
-      return (
-        <CircleBtn type="button" className={feature}>
-          <IconArrowPrev />
-        </CircleBtn>
-      )
-    case 'close':
-      return (
-        <CircleBtn type="button" className={feature}>
-          <IconClose />
-        </CircleBtn>
-      )
-    default:
-      return (
-        <CircleBtn type="button" className={feature}>
-          <IconClose />
-        </CircleBtn>
-      )
-  }
+  return (
+    <CircleBtn type="button" className={feature}>
+      {feature === 'back' && <IconArrowPrev />}
+      {feature === 'close' && <IconClose />}
+      {feature === 'delete' && <IconDelete />}
+    </CircleBtn>
+  )
 }
 const CircleBtn = styled.button`
   width: ${theme.calRem(60)};
@@ -34,6 +21,14 @@ const CircleBtn = styled.button`
   border-radius: 50%;
   border: none;
   background: #f6f6fc;
+
+  &.back {
+    float: left;
+  }
+  &.close,
+  &.delete {
+    float: right;
+  }
 `
 const RoundButton = ({ large, color, text, icon }) => {
   return (

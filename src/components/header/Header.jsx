@@ -1,18 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import theme from '../../styles/theme'
-import { CircleButton } from '../buttons/Buttons'
 
 function Header(props) {
-  const typeArray = props.type.split(',')
-
-  return (
-    <HeadDiv>
-      {typeArray.map((type, index) => {
-        return <CircleButton key={index} feature={type}></CircleButton>
-      })}
-    </HeadDiv>
-  )
+  return <HeadDiv>{props.children}</HeadDiv>
 }
 
 const HeadDiv = styled.div`

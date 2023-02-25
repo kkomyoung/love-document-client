@@ -2,14 +2,17 @@ import React from 'react'
 import styled from 'styled-components'
 import theme from '../styles/theme'
 import Header from '../components/header/Header'
-import { RoundButton } from '../components/buttons/Buttons'
+import { RoundButton, CircleButton } from '../components/buttons/Buttons'
 import { Title, TextDesc } from '../components/texts/Texts'
 import ImgTest from '../assets/img_test.png'
 
 function Onboarding() {
   return (
     <div>
-      <Header type="back, close, delete"></Header>
+      <Header>
+        <CircleButton feature="back" />
+        <CircleButton feature="close" />
+      </Header>
       <Wrapper>
         <ImgWrap>
           <img src={ImgTest} alt="" />
