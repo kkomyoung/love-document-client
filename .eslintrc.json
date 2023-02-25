@@ -17,6 +17,7 @@
   "rules": {
     "react/prop-types": "off",
     "prettier/prettier": ["error", { "singleQuote": true, "semi": false }],
-    "space-before-function-paren": ["error", "never"]
+    "space-before-function-paren": ["error", "never"],
+    "comma-dangle": "off"
   }
 }
