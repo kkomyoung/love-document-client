@@ -19,8 +19,6 @@ const HeadDiv = styled.div`
   position: sticky;
   top: 0;
   left: 0;
-  /* display: flex;
-  justify-content: space-between; */
   padding: ${theme.calRem(12)} ${theme.calRem(24)};
 
   &:after {

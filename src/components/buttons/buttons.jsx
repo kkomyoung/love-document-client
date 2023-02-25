@@ -70,7 +70,6 @@ const RoundBtn = styled.button`
   ${(props) => {
     if (props.color === 'pink') {
       return `
-      width: 100%;
       background-color: #f85675;
       `
     } else if (props.color === 'white') {
