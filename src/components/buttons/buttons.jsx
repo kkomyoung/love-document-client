@@ -25,6 +25,7 @@ const RoundBtn = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 0 auto;
   border: none;
   border-radius: ${theme.calRem(53)};
   background-color: #181818;
