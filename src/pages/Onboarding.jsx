@@ -32,7 +32,7 @@ function Onboarding() {
 }
 
 const Wrapper = styled.article`
-  padding: 0 24px;
+  padding: 0 ${theme.calRem(24)};
 `
 
 const ImgWrap = styled.figure`
