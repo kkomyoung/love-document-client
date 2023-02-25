@@ -4,14 +4,15 @@ import theme from '../styles/theme'
 import Header from '../components/header/Header'
 import { RoundButton } from '../components/buttons/Buttons'
 import { Title, TextDesc } from '../components/texts/Texts'
+import ImgTest from '../assets/img_test.png'
 
 function Onboarding() {
   return (
     <div>
-      <Header type="back, close"></Header>
+      <Header type="back, close, delete"></Header>
       <Wrapper>
         <ImgWrap>
-          <img src="/assets/img_test.png" alt="" />
+          <img src={ImgTest} alt="" />
         </ImgWrap>
         <Title>연애서류합이란?</Title>
         <TextDesc>
