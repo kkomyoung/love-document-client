@@ -6,6 +6,24 @@ const GlobalStyle = createGlobalStyle`
 
   @font-face {
     font-family: 'Pretendard';
+    font-weight: 300;
+    font-display: swap;
+    src: local('Pretendard Light'),
+        url('../fonts/Pretendard-Light.woff2') format('woff2'),
+        url('../fonts/Pretendard-Light.woff') format('woff');
+  }
+
+  @font-face {
+    font-family: 'Pretendard';
+    font-weight: 400;
+    font-display: swap;
+    src: local('Pretendard Regular'),
+        url('../fonts/Pretendard-Regular.woff2') format('woff2'),
+        url('../fonts/Pretendard-Regular.woff') format('woff');
+  }
+
+  @font-face {
+    font-family: 'Pretendard';
     font-weight: 500;
     font-display: swap;
     src: local('Pretendard Medium'),
@@ -39,17 +57,22 @@ const GlobalStyle = createGlobalStyle`
   body{
     font-family: 'Pretendard', sans-serif;
     font-weight: 500;
+
   }
 
   #wrap {
     max-width: 480px; //최소 360px
     width: 100%;
     margin: 0 auto;
-   
   }
 
   button {
     cursor: pointer;
+  }
+
+  a { 
+    text-decoration: none;
+    color:inherit;
   }
 `
 
