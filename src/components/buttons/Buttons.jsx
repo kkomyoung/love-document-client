@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import theme from '../../styles/theme'
 import IconArrowNext from '../../assets/icon_arrow_next.svg'
 import { ReactComponent as IconArrowPrev } from '../../assets/icon_arrow_prev.svg'
 import { ReactComponent as IconClose } from '../../assets/icon_close.svg'
@@ -16,8 +15,8 @@ const CircleButton = ({ feature }) => {
   )
 }
 const CircleBtn = styled.button`
-  width: ${theme.calRem(60)};
-  height: ${theme.calRem(60)};
+  width: ${(props) => props.theme.calRem(60)};
+  height: ${(props) => props.theme.calRem(60)};
   border-radius: 50%;
   border: none;
   background: #f6f6fc;
@@ -44,42 +43,42 @@ const RoundBtn = styled.button`
   justify-content: center;
   margin: 0 auto;
   border: none;
-  border-radius: ${theme.calRem(53)};
-  background-color: #181818;
-  color: #fff;
+  border-radius: ${(props) => props.theme.calRem(53)};
+  background-color: ${(props) => props.theme.gray900};
+  color: ${(props) => props.theme.bgColor};
 
   img {
-    margin-left: ${theme.calRem(9)};
+    margin-left: ${(props) => props.theme.calRem(9)};
   }
 
-  // 크기
+  // 크기별
   ${(props) => {
     if (props.large) {
       return `
-      width: ${theme.calRem(160)};
-      height: ${theme.calRem(72)};
-      font-size: ${theme.calRem(18)};
+      width: ${(props) => props.theme.calRem(160)};
+      height: ${(props) => props.theme.calRem(72)};
+      font-size: ${(props) => props.theme.calRem(18)};
       
       `
     } else {
       return `
-      width: ${theme.calRem(136)};
-      height: ${theme.calRem(52)};
-      font-size: ${theme.calRem(16)};
+      width: ${(props) => props.theme.calRem(136)};
+      height: ${(props) => props.theme.calRem(52)};
+      font-size: ${(props) => props.theme.calRem(16)};
       `
     }
   }}
 
-  // 색상
+  // 색상별
   ${(props) => {
     if (props.color === 'pink') {
       return `
-      background-color: #f85675;
+      background-color: ${(props) => props.theme.pink700};
       `
     } else if (props.color === 'white') {
       return `
-      background-color: #ffffff;
-      color: #181818;
+      background-color: ${(props) => props.theme.bgColor};
+      color: ${(props) => props.theme.gray900};
       `
     }
   }}
