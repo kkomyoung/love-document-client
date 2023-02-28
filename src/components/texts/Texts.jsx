@@ -10,13 +10,13 @@ function TextDesc(props) {
 }
 
 const StyledTitle = styled.h1`
-  font-size: ${(props) => props.theme.calRem(32)};
+  font-size: 3.2rem;
   font-weight: 600;
   color: ${(props) => props.theme.gray900};
 `
 const StyledTextDesc = styled.p`
-  font-size: ${(props) => props.theme.calRem(14)};
-  margin-top: ${(props) => props.theme.calRem(14)};
+  font-size: 1.4rem;
+  margin-top: 1.4rem;
   line-height: 1.6;
   color: ${(props) => props.theme.gray800};
 `

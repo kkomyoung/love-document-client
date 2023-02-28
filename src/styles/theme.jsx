@@ -1,7 +1,4 @@
-const calRem = (size) => `${size / 16}rem`
-
 const theme = {
-  calRem,
   bgColor: '#FFFFFF',
   gray100: '#F9F9FB',
   gray200: '#BCBCBC',

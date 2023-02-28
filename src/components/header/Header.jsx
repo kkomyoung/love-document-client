@@ -9,7 +9,7 @@ const HeadDiv = styled.div`
   position: sticky;
   top: 0;
   left: 0;
-  padding: 12px 24px;
+  padding: 1.2rem 2.4rem;
 
   &:after {
     content: '';

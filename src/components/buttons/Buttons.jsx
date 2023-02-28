@@ -15,8 +15,8 @@ const CircleButton = ({ feature }) => {
   )
 }
 const CircleBtn = styled.button`
-  width: ${(props) => props.theme.calRem(60)};
-  height: ${(props) => props.theme.calRem(60)};
+  width: 6rem;
+  height: 6rem;
   border-radius: 50%;
   border: none;
   background: #f6f6fc;
@@ -43,28 +43,28 @@ const RoundBtn = styled.button`
   justify-content: center;
   margin: 0 auto;
   border: none;
-  border-radius: ${(props) => props.theme.calRem(53)};
+  border-radius: 5.3rem;
   background-color: ${(props) => props.theme.gray900};
   color: ${(props) => props.theme.bgColor};
 
   img {
-    margin-left: ${(props) => props.theme.calRem(9)};
+    margin-left: 0.9rem;
   }
 
   // 크기별
   ${(props) => {
     if (props.large) {
       return `
-      width: ${props.theme.calRem(160)};
-      height: ${props.theme.calRem(72)};
-      font-size: ${props.theme.calRem(18)};
+      width: 16rem;
+      height: 7.2rem;
+      font-size: 1.8rem;
       
       `
     } else {
       return `
-      width: ${props.theme.calRem(136)};
-      height: ${props.theme.calRem(52)};
-      font-size: ${props.theme.calRem(16)};
+      width: 13.6rem;
+      height: 5.2rem;
+      font-size: 1.6rem;
       `
     }
   }}
