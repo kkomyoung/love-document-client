@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import theme from '../styles/theme'
 import Header from '../components/header/Header'
 import { RoundButton, CircleButton } from '../components/buttons/Buttons'
 import { Title, TextDesc } from '../components/texts/Texts'
@@ -31,22 +30,22 @@ function Onboarding() {
 }
 
 const Wrapper = styled.article`
-  padding: 0 24px;
+  padding: 0 2.4rem;
 `
 
 const ImgWrap = styled.figure`
   width: 100%;
-  margin-bottom: ${theme.calRem(43)};
+  margin-bottom: 4.3rem;
   text-align: center;
 
   img {
     width: 100%;
-    max-width: ${theme.calRem(312)};
+    max-width: 31.2rem;
   }
 `
 const ButtonWrap = styled.div`
-  padding-bottom: ${theme.calRem(48)};
-  margin-top: ${theme.calRem(110)};
+  padding-bottom: 4.8rem;
+  margin-top: 11rem;
 `
 
 export default Onboarding

@@ -1,11 +1,4 @@
-const calRem = (size) => `${size / 16}rem`
-
-// const fontStyle = {
-//   title: calRem(32),
-// }
-
 const theme = {
-  calRem,
   bgColor: '#FFFFFF',
   gray100: '#F9F9FB',
   gray200: '#BCBCBC',

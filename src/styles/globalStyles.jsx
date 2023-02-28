@@ -54,6 +54,10 @@ const GlobalStyle = createGlobalStyle`
     word-break: keep-all;
   }
 
+  html {
+    font-size: 62.5%;
+  }
+
   body{
     font-family: 'Pretendard', sans-serif;
     font-weight: 500;
@@ -74,6 +78,7 @@ const GlobalStyle = createGlobalStyle`
     text-decoration: none;
     color:inherit;
   }
+  
 `
 
 export default GlobalStyle
