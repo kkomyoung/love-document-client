@@ -55,16 +55,16 @@ const RoundBtn = styled.button`
   ${(props) => {
     if (props.large) {
       return `
-      width: ${(props) => props.theme.calRem(160)};
-      height: ${(props) => props.theme.calRem(72)};
-      font-size: ${(props) => props.theme.calRem(18)};
+      width: ${props.theme.calRem(160)};
+      height: ${props.theme.calRem(72)};
+      font-size: ${props.theme.calRem(18)};
       
       `
     } else {
       return `
-      width: ${(props) => props.theme.calRem(136)};
-      height: ${(props) => props.theme.calRem(52)};
-      font-size: ${(props) => props.theme.calRem(16)};
+      width: ${props.theme.calRem(136)};
+      height: ${props.theme.calRem(52)};
+      font-size: ${props.theme.calRem(16)};
       `
     }
   }}
@@ -73,12 +73,12 @@ const RoundBtn = styled.button`
   ${(props) => {
     if (props.color === 'pink') {
       return `
-      background-color: ${(props) => props.theme.pink700};
+      background-color: ${props.theme.pink700};
       `
     } else if (props.color === 'white') {
       return `
-      background-color: ${(props) => props.theme.bgColor};
-      color: ${(props) => props.theme.gray900};
+      background-color: ${props.theme.bgColor};
+      color: ${props.theme.gray900};
       `
     }
   }}
