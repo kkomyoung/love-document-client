@@ -4,6 +4,47 @@ import reset from 'styled-reset'
 const GlobalStyle = createGlobalStyle`
   ${reset}
 
+
+  * {
+    word-break: keep-all;
+  }
+
+  html {
+    font-size: 62.5%;
+  }
+
+  /* HTML5 display-role reset for older browsers */
+  article, aside, details, figcaption, figure, 
+  footer, header, hgroup, menu, nav, section {
+    display: block;
+  }
+
+  body{
+    font-family: 'Pretendard', sans-serif;
+    font-weight: 500;
+    line-height: 1;
+
+  }
+
+  #wrap {
+    max-width: 480px; //최소 360px
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  a { 
+    text-decoration: none;
+    color:inherit;
+  }
+
+  ol, ul, li {
+    list-style: none;
+  }
+
   @font-face {
     font-family: 'Pretendard';
     font-weight: 300;
@@ -50,34 +91,6 @@ const GlobalStyle = createGlobalStyle`
   }
 
   
-  * {
-    word-break: keep-all;
-  }
-
-  html {
-    font-size: 62.5%;
-  }
-
-  body{
-    font-family: 'Pretendard', sans-serif;
-    font-weight: 500;
-
-  }
-
-  #wrap {
-    max-width: 480px; //최소 360px
-    width: 100%;
-    margin: 0 auto;
-  }
-
-  button {
-    cursor: pointer;
-  }
-
-  a { 
-    text-decoration: none;
-    color:inherit;
-  }
   
 `
 
