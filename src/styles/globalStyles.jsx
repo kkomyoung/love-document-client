@@ -42,7 +42,6 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Pretendard', sans-serif;
     font-weight: 500;
     line-height: 1;
-
   }
 
   #wrap {
@@ -113,9 +112,6 @@ const GlobalStyle = createGlobalStyle`
         url('../fonts/Pretendard-Bold.woff2') format('woff2'),
         url('../fonts/Pretendard-Bold.woff') format('woff');
   }
-
-  
-  
 `
 
 export default GlobalStyle
