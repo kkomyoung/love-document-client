@@ -1,9 +1,12 @@
 import React from 'react'
-import styled from 'styled-components'
 import Header from '../components/header/Header'
 import CategoryBoxList from '../components/category/Category'
 
-import { CircleButton, RoundButton } from '../components/buttons/Buttons'
+import {
+  ButtonArea,
+  CircleButton,
+  RoundButton,
+} from '../components/buttons/Buttons'
 import { TextArea, Title, TextDesc } from '../components/texts/Texts'
 
 const dummy = [
@@ -39,15 +42,10 @@ function Research() {
         </TextDesc>
       </TextArea>
       <CategoryBoxList data={dummy}></CategoryBoxList>
-      <ButtonWrap>
+      <ButtonArea>
         <RoundButton text="완료"></RoundButton>
-      </ButtonWrap>
+      </ButtonArea>
     </div>
   )
 }
-const ButtonWrap = styled.div`
-  padding-bottom: 4.8rem;
-  margin-top: 11rem;
-`
-
 export default Research
