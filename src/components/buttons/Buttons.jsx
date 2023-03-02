@@ -37,11 +37,15 @@ const RoundButton = ({ large, color, text, icon }) => {
     </RoundBtn>
   )
 }
+
+const ButtonArea = ({ children }) => {
+  return <ButtonWrap>{children}</ButtonWrap>
+}
+
 const RoundBtn = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
   border: none;
   border-radius: 5.3rem;
   background-color: ${(props) => props.theme.gray900};
@@ -83,5 +87,12 @@ const RoundBtn = styled.button`
     }
   }}
 `
-
-export { CircleButton, RoundButton }
+const ButtonWrap = styled.div`
+  padding-bottom: 4.8rem;
+  margin-top: 11rem;
+  display: flex;
+  justify-content: center;
+  /* flex-direction: column; */
+  /* align-items: center; */
+`
+export { CircleButton, RoundButton, ButtonArea }
