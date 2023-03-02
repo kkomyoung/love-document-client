@@ -1,13 +1,15 @@
 import React from 'react'
 import Header from '../components/header/Header'
 import CategoryBoxList from '../components/category/Category'
+import { LoginForm, LoginInput } from '../components/form/LoginForm'
+import { ReactComponent as IconAirplane } from '../assets/icon_airplane.svg'
 
 import {
   ButtonArea,
   CircleButton,
   RoundButton,
 } from '../components/buttons/Buttons'
-import { TextArea, Title, TextDesc } from '../components/texts/Texts'
+import { TextArea, Title, SubTitle, TextDesc } from '../components/texts/Texts'
 
 const dummy = [
   {
@@ -42,8 +44,25 @@ function Research() {
         </TextDesc>
       </TextArea>
       <CategoryBoxList data={dummy}></CategoryBoxList>
+      <TextArea margin="4.8rem 0 0 0">
+        <SubTitle>
+          <i aria-hidden="true">
+            <IconAirplane />
+          </i>
+          <span>질문지 저장</span>
+        </SubTitle>
+        <TextDesc>
+          <span>상대의 답변을 확인하려면 질문지를 저장해야해요</span>
+          <br />
+          <span>확인용 닉네임과 비밀번호를 설정해주세요</span>
+        </TextDesc>
+      </TextArea>
+      <LoginForm>
+        <LoginInput type="user" placeholder="닉네임 (최대 10자)" />
+        <LoginInput error type="password" placeholder="비밀번호 (최소 8자)" />
+      </LoginForm>
       <ButtonArea>
-        <RoundButton text="완료"></RoundButton>
+        <RoundButton large text="완료"></RoundButton>
       </ButtonArea>
     </div>
   )
