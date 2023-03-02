@@ -2,13 +2,9 @@ import styled from 'styled-components'
 import IconHeart from '../../assets/icon_heart.svg'
 import IconPlus from '../../assets/icon_plus.svg'
 
-const ItemList = styled.ul`
-  margin: -0.3rem;
-
-  li {
-    display: inline-flex;
-    margin: 0.3rem;
-  }
+const Item = styled.li`
+  display: inline-flex;
+  margin: 0.3rem;
 
   input {
     display: none;
@@ -47,9 +43,9 @@ const ItemList = styled.ul`
     background-size: 16px 16px;
   }
 `
-const Form = styled.form`
-  margin-top: 2.8rem;
-  padding: 0 2rem;
+
+const ItemList = styled.ul`
+  margin: -0.3rem;
 `
 
 const Box = styled.div`
@@ -78,4 +74,10 @@ const Box = styled.div`
     }
   }
 `
-export { ItemList, Form, Box }
+
+const Form = styled.form`
+  margin-top: 2.8rem;
+  padding: 0 2rem;
+`
+
+export { Item, ItemList, Form, Box }

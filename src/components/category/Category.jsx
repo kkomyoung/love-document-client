@@ -1,9 +1,9 @@
 import React from 'react'
-import { ItemList, Form, Box } from './CategoryStyle'
+import { Item, ItemList, Form, Box } from './CategoryStyle'
 
 const CategoryItem = ({ items, index, category }) => {
   return (
-    <li>
+    <Item>
       <input
         type="checkbox"
         name={category.title}
@@ -13,7 +13,7 @@ const CategoryItem = ({ items, index, category }) => {
         <i aria-hidden="true"></i>
         <span>{items}</span>
       </label>
-    </li>
+    </Item>
   )
 }
 
