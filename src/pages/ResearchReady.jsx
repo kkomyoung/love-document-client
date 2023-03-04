@@ -2,6 +2,7 @@ import React from 'react'
 import Header from '../components/header/Header'
 import {
   LabelM,
+  Text2,
   TextArea,
   TextDesc,
   Title,
@@ -14,6 +15,7 @@ import { CircleButton } from '../components/buttons/Buttons'
 import DocumentImage from '../assets/img_document.svg'
 import HeartPuzzleIcon from '../assets/icon_heart_puzzle_20.svg'
 import LoveLetterIcon from '../assets/icon_love_letter_36.svg'
+import KakaoLogoIcon from '../assets/icon_logo_kakao.svg'
 import { Link } from 'react-router-dom'
 import Answer from '../components/Answer'
 
@@ -80,6 +82,7 @@ function ResearchReady() {
 
             <ShareKakaoTalkBtn>
               <LabelM>
+                <img src={KakaoLogoIcon} alt="icon-logo-kakao" />
                 <Link to="/">카톡공유</Link>
               </LabelM>
             </ShareKakaoTalkBtn>
@@ -89,16 +92,16 @@ function ResearchReady() {
         <StandardBox>
           <StandardTop>
             <HeartPuzzleImg src={HeartPuzzleIcon} alt="heart-puzzle" />
-            <div>
+            <StandardTitleBox>
               <Title3B color={(props) => props.theme.pink700}>
                 내 기준에 부합할까?
               </Title3B>
-              <TextDesc>
+              <Text2>
                 바라는 조건을 알려주시면
                 <br />
                 상대방의 답변과 비교해드려요
-              </TextDesc>
-            </div>
+              </Text2>
+            </StandardTitleBox>
           </StandardTop>
           <WriteStandardBtn>
             <LabelM color={(props) => props.theme.white}>
@@ -205,6 +208,12 @@ const StandardTop = styled.div`
 const HeartPuzzleImg = styled.img`
   width: 100px;
   margin-right: 0.2rem;
+`
+
+const StandardTitleBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
 `
 
 const WriteStandardBtn = styled.button`

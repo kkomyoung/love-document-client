@@ -121,9 +121,12 @@ const StyledTextArea = styled.div`
 `
 
 const StyledLabelM = styled.label`
+  display: flex;
   font-size: 1.6rem;
   line-height: 10rem;
   color: ${(props) => props.color || props.theme.gray800};
+  align-items: center;
+  gap: 1rem;
 `
 
 export {
