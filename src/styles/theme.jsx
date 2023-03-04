@@ -1,4 +1,5 @@
 const theme = {
+  white: '#FFFFFF',
   bgColor: '#FFFFFF',
   gray100: '#F9F9FB',
   gray200: '#BCBCBC',
@@ -9,6 +10,7 @@ const theme = {
   gray700: '#606062',
   gray800: '#3A393D',
   gray900: '#181818',
+  black: '#000000',
 
   blue300: '#BDE4FF',
   blue500: '#79C7FF',
@@ -19,6 +21,8 @@ const theme = {
   pink400: '#FFAFBE',
   pink700: '#F85675',
   pink800: '#DD3F5D',
+
+  kakao: '#FBE34D',
 }
 
 export default theme
