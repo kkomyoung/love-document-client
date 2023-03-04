@@ -7,17 +7,39 @@ import {
   Title,
   Title3B,
   Title3M,
+  Title3MIocn,
 } from '../components/texts/Texts'
 import styled from 'styled-components'
 import { CircleButton } from '../components/buttons/Buttons'
-import DocumentImgAsset from '../assets/img-document.svg'
-import HeartPuzzleImgAsset from '../assets/img-heart-puzzle.svg'
+import DocumentImage from '../assets/img_document.svg'
+import HeartPuzzleIcon from '../assets/icon_heart_puzzle_20.svg'
+import LoveLetterIcon from '../assets/icon_love_letter_36.svg'
 import { Link } from 'react-router-dom'
+import Answer from '../components/Answer'
 
 const member = {
   name: '연서합',
   researchCnt: 4,
 }
+
+const answers = [
+  {
+    id: 1,
+    nickname: '영애',
+    age: 26,
+    address: '서울 강남구',
+    match: 70,
+    date: '2월 7일',
+  },
+  {
+    id: 2,
+    nickname: '본휘',
+    age: 29,
+    address: '서울 강남구',
+    match: null,
+    date: '2월 8일',
+  },
+]
 
 function ResearchReady() {
   console.log()
@@ -47,11 +69,11 @@ function ResearchReady() {
             </TextDesc>
           </Title3M>
 
-          <DocumentImg src={DocumentImgAsset} alt="document" />
+          <DocumentImg src={DocumentImage} alt="document" />
 
           <HorizontalBtnWrap>
             <CopyLinkBtn>
-              <LabelM fontColor={(props) => props.theme.white}>
+              <LabelM color={(props) => props.theme.white}>
                 <Link to="/">링크복사</Link>
               </LabelM>
             </CopyLinkBtn>
@@ -66,9 +88,9 @@ function ResearchReady() {
 
         <StandardBox>
           <StandardTop>
-            <HeartPuzzleImg src={HeartPuzzleImgAsset} alt="heart-puzzle" />
+            <HeartPuzzleImg src={HeartPuzzleIcon} alt="heart-puzzle" />
             <div>
-              <Title3B fontColor={(props) => props.theme.pink700}>
+              <Title3B color={(props) => props.theme.pink700}>
                 내 기준에 부합할까?
               </Title3B>
               <TextDesc>
@@ -79,24 +101,38 @@ function ResearchReady() {
             </div>
           </StandardTop>
           <WriteStandardBtn>
-            <LabelM fontColor={(props) => props.theme.white}>
+            <LabelM color={(props) => props.theme.white}>
               <Link> 내 기준 작성하기 &rarr;</Link>
             </LabelM>
           </WriteStandardBtn>
         </StandardBox>
       </ResearchContainer>
+
+      <AnswerContainer>
+        <TextArea>
+          <Title3MIocn icon={LoveLetterIcon}>도착한 답변</Title3MIocn>
+        </TextArea>
+
+        <AnswersBox>
+          {answers.map((answer) => (
+            <Answer key={answer.id} {...answer} />
+          ))}
+        </AnswersBox>
+      </AnswerContainer>
     </Container>
   )
 }
 
-const Container = styled.div``
+const Container = styled.div`
+  padding-bottom: 2rem;
+`
 
 const ResearchContainer = styled.section`
   display: flex;
   flex-direction: column;
   padding: 2.8rem 2rem;
 
-  div + div {
+  & > div + div {
     margin-top: 3.3rem;
   }
 `
@@ -180,6 +216,21 @@ const WriteStandardBtn = styled.button`
   border-radius: 53px;
   border: 0px;
   margin-top: 2.4rem;
+`
+
+const AnswerContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+  margin-top: 4.8rem;
+`
+
+const AnswersBox = styled.div`
+  padding: 0 2rem;
+  margin-top: 2.8rem;
+
+  & > div + div {
+    margin-top: 1.6rem;
+  }
 `
 
 export default ResearchReady
