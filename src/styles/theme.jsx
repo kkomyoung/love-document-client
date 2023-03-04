@@ -1,4 +1,35 @@
+const fontWeight = {
+  medium: 'font-weight: 500',
+  semibold: 'font-weight: 600',
+  bold: 'font-weight: 700',
+}
+
+const fontSize = {
+  // headline
+  h1: `font-size: 3.2rem; line-height: 1; ${fontWeight.semibold};`,
+  h2: `font-size: 2.4rem; line-height: 1; ${fontWeight.semibold};`,
+  h3_b: `font-size: 2rem; line-height: 1.2; ${fontWeight.bold};`,
+  h3_m: `font-size: 2rem; line-height: 1.2; ${fontWeight.medium};`,
+  h4_m: `font-size: 1.8rem; line-height: 1.2; ${fontWeight.medium};`,
+  h4_sb: `font-size: 1.8rem; line-height: 1.2; ${fontWeight.semibold};`,
+
+  // label
+  label_l: 'font-size: 1.8rem; line-height: 1;',
+  label_m_sb: `font-size: 1.6rem; line-height: 1; ${fontWeight.semibold};`,
+  label_m_m: `font-size: 1.6rem; line-height: 1; ${fontWeight.medium};`,
+  label_s_sb: `font-size: 1.4rem; line-height: 1; ${fontWeight.semibold};`,
+  label_s_m: `font-size: 1.4rem; line-height: 1; ${fontWeight.medium};`,
+
+  // body
+  b1: 'font-size: 1.6rem; line-height: 1.6;',
+  b2: 'font-size: 1.4rem; line-height: 1.6;',
+}
+
 const theme = {
+  fontWeight,
+  fontSize,
+
+  // color
   bgColor: '#FFFFFF',
   gray100: '#F9F9FB',
   gray200: '#BCBCBC',

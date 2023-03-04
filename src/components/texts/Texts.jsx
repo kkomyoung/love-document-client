@@ -18,16 +18,14 @@ const TextArea = ({ children, margin }) => {
 }
 
 const StyledTitle = styled.h1`
-  font-size: 3.2rem;
-  font-weight: 600;
+  ${(props) => props.theme.fontSize.h1}
   color: ${(props) => props.theme.gray900};
 `
 
 const StyledSubTitle = styled.h2`
   display: flex;
   align-items: center;
-  font-size: 2.4rem;
-  font-weight: 600;
+  ${(props) => props.theme.fontSize.h2}
   color: ${(props) => props.theme.gray900};
 
   i {

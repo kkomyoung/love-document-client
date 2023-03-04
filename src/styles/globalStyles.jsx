@@ -40,7 +40,7 @@ const GlobalStyle = createGlobalStyle`
 
   body{
     font-family: 'Pretendard', sans-serif;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 1;
 
   }
