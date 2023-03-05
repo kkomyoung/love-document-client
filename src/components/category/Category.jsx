@@ -1,5 +1,5 @@
 import React from 'react'
-import { Item, ItemList, Form, Box } from './CategoryStyle'
+import { Item, ItemList, Box } from './CategoryStyle'
 
 const CategoryItem = ({ items, index, category }) => {
   return (
@@ -46,11 +46,11 @@ const CategoryBox = ({ category }) => {
 
 const CategoryBoxList = ({ data }) => {
   return (
-    <Form>
+    <form action="">
       {data.map((category) => (
         <CategoryBox key={category.id} category={category} />
       ))}
-    </Form>
+    </form>
   )
 }
 

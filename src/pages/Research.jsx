@@ -1,7 +1,8 @@
 import React from 'react'
+import styled from 'styled-components'
 import Header from '../components/header/Header'
 import CategoryBoxList from '../components/category/Category'
-import { LoginForm, LoginInput } from '../components/form/LoginForm'
+import LoginInput from '../components/form/LoginInput'
 import { ReactComponent as IconAirplane } from '../assets/icon_airplane.svg'
 
 import {
@@ -9,7 +10,13 @@ import {
   CircleButton,
   RoundButton,
 } from '../components/buttons/Buttons'
-import { TextArea, Title, SubTitle, TextDesc } from '../components/texts/Texts'
+import {
+  TextArea,
+  SubTextArea,
+  Title,
+  SubTitle,
+  TextDesc,
+} from '../components/texts/Texts'
 
 const dummy = [
   {
@@ -31,40 +38,66 @@ const dummy = [
 
 function Research() {
   return (
-    <div>
+    <StyledMain>
       <Header>
         <CircleButton feature="back" />
       </Header>
-      <TextArea>
-        <Title>질문지 만들기</Title>
-        <TextDesc>
-          <span>내 애인후보... 이것만큼은..절대지켜!!</span>
-          <br />
-          <span>상대방에 대해 알고싶은 카테고리를 선택해주세요</span>
-        </TextDesc>
-      </TextArea>
-      <CategoryBoxList data={dummy}></CategoryBoxList>
-      <TextArea margin="4.8rem 0 0 0">
-        <SubTitle>
-          <i aria-hidden="true">
-            <IconAirplane />
-          </i>
-          <span>질문지 저장</span>
-        </SubTitle>
-        <TextDesc>
-          <span>상대의 답변을 확인하려면 질문지를 저장해야해요</span>
-          <br />
-          <span>확인용 닉네임과 비밀번호를 설정해주세요</span>
-        </TextDesc>
-      </TextArea>
-      <LoginForm>
-        <LoginInput type="user" placeholder="닉네임 (최대 10자)" />
-        <LoginInput error type="password" placeholder="비밀번호 (최소 8자)" />
-      </LoginForm>
-      <ButtonArea>
-        <RoundButton large text="완료"></RoundButton>
-      </ButtonArea>
-    </div>
+      <article>
+        <TextArea>
+          <Title>질문지 만들기</Title>
+          <TextDesc>
+            <span>내 애인후보... 이것만큼은..절대지켜!!</span>
+            <br />
+            <span>상대방에 대해 알고싶은 카테고리를 선택해주세요</span>
+          </TextDesc>
+        </TextArea>
+        <StyledSectionCategory>
+          <CategoryBoxList data={dummy}></CategoryBoxList>
+        </StyledSectionCategory>
+        <StyledSectionLogin>
+          <SubTextArea>
+            <SubTitle>
+              <i aria-hidden="true">
+                <IconAirplane />
+              </i>
+              <span>질문지 저장</span>
+            </SubTitle>
+            <TextDesc>
+              <span>상대의 답변을 확인하려면 질문지를 저장해야해요</span>
+              <br />
+              <span>확인용 닉네임과 비밀번호를 설정해주세요</span>
+            </TextDesc>
+          </SubTextArea>
+          <StyledLoginFormArea>
+            <LoginInput type="user" placeholder="닉네임 (최대 10자)" />
+            <LoginInput
+              error
+              type="password"
+              placeholder="비밀번호 (최소 8자)"
+            />
+          </StyledLoginFormArea>
+        </StyledSectionLogin>
+        <ButtonArea mt="8.3">
+          <RoundButton large text="완료"></RoundButton>
+        </ButtonArea>
+      </article>
+    </StyledMain>
   )
 }
+
+const StyledMain = styled.main`
+  padding-bottom: 4.8rem;
+`
+const StyledSectionLogin = styled.section`
+  margin-top: 4.8rem;
+  padding: 0 2rem;
+`
+const StyledSectionCategory = styled.section`
+  margin-top: 2.8rem;
+  padding: 0 2rem;
+`
+
+const StyledLoginFormArea = styled.div`
+  margin-top: 2.8rem;
+`
 export default Research
