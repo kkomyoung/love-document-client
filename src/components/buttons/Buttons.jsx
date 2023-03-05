@@ -8,14 +8,14 @@ import { ReactComponent as IconDelete } from '../../assets/icon_delete.svg'
 
 const CircleButton = ({ feature }) => {
   return (
-    <CircleBtn type="button" className={feature}>
+    <StyledCircleButton type="button" className={feature}>
       {feature === 'back' && <IconArrowPrev />}
       {feature === 'close' && <IconClose />}
       {feature === 'delete' && <IconDelete />}
-    </CircleBtn>
+    </StyledCircleButton>
   )
 }
-const CircleBtn = styled.button`
+const StyledCircleButton = styled.button`
   width: 6rem;
   height: 6rem;
   border-radius: 50%;
@@ -32,10 +32,10 @@ const CircleBtn = styled.button`
 `
 const RoundButton = ({ large, color, text, icon }) => {
   return (
-    <RoundBtn large={large} color={color} type="button">
+    <StyledRoundButton large={large} color={color} type="button">
       <span>{text}</span>
       {icon && <img src={IconArrowNext} />}
-    </RoundBtn>
+    </StyledRoundButton>
   )
 }
 
@@ -50,13 +50,13 @@ const KakaoButton = ({ children }) => {
 
 const ButtonArea = ({ children, type, mt, mr, mb, ml }) => {
   return (
-    <ButtonWrap type={type} mt={mt} mr={mr} mb={mb} ml={ml}>
+    <StyledButtonArea type={type} mt={mt} mr={mr} mb={mb} ml={ml}>
       {children}
-    </ButtonWrap>
+    </StyledButtonArea>
   )
 }
 
-const RoundBtn = styled.button`
+const StyledRoundButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -75,14 +75,14 @@ const RoundBtn = styled.button`
       return `
       width: 16rem;
       height: 7.2rem;
-      font-size: 1.8rem;
+      ${props.theme.fontSize.label_l}
       
       `
     } else {
       return `
       width: 13.6rem;
       height: 5.2rem;
-      font-size: 1.6rem;
+      ${props.theme.fontSize.label_m_m}
       `
     }
   }}
@@ -124,7 +124,7 @@ const StyledKakaoButton = styled.button`
   }
 `
 
-const ButtonWrap = styled.div`
+const StyledButtonArea = styled.div`
   display: flex;
   justify-content: center;
   /* flex-direction: column; */

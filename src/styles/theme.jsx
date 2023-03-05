@@ -15,10 +15,10 @@ const fontSize = {
 
   // label
   label_l: 'font-size: 1.8rem; line-height: 1;',
-  label_m_sb: `font-size: 1.6rem; line-height: 1; ${fontWeight.semibold};`,
   label_m_m: `font-size: 1.6rem; line-height: 1; ${fontWeight.medium};`,
-  label_s_sb: `font-size: 1.4rem; line-height: 1; ${fontWeight.semibold};`,
+  label_m_sb: `font-size: 1.6rem; line-height: 1; ${fontWeight.semibold};`,
   label_s_m: `font-size: 1.4rem; line-height: 1; ${fontWeight.medium};`,
+  label_s_sb: `font-size: 1.4rem; line-height: 1; ${fontWeight.semibold};`,
 
   // body
   b1: 'font-size: 1.6rem; line-height: 1.6;',
