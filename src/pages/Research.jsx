@@ -69,12 +69,14 @@ function Research() {
             </TextDesc>
           </SubTextArea>
           <StyledLoginFormArea>
-            <LoginInput type="user" placeholder="닉네임 (최대 10자)" />
-            <LoginInput
-              error
-              type="password"
-              placeholder="비밀번호 (최소 8자)"
-            />
+            <form action="">
+              <LoginInput type="user" placeholder="닉네임 (최대 10자)" />
+              <LoginInput
+                error
+                type="password"
+                placeholder="비밀번호 (최소 8자)"
+              />
+            </form>
           </StyledLoginFormArea>
         </StyledSectionLogin>
         <ButtonArea mt="8.3">
