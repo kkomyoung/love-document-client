@@ -9,7 +9,7 @@ const LoginInput = ({ type, placeholder, error }) => {
   const iconColor = error ? theme.pink700 : theme.gray500
 
   return (
-    <LoginInputWrap type={type} error={error}>
+    <StyledLoginInput type={type} error={error}>
       <div className="input-box">
         <i aria-hidden="true">
           {type === 'user' && <IconUser />}
@@ -23,11 +23,20 @@ const LoginInput = ({ type, placeholder, error }) => {
         )}
       </div>
       {error && <span className="message">error message</span>}
-    </LoginInputWrap>
+    </StyledLoginInput>
   )
 }
 
-const LoginInputWrap = styled.div`
+const LoginForm = () => {
+  return (
+    <form action="">
+      <LoginInput type="user" placeholder="닉네임 (최대 10자)" />
+      <LoginInput error type="password" placeholder="비밀번호 (최소 8자)" />
+    </form>
+  )
+}
+
+const StyledLoginInput = styled.div`
   & + & {
     margin-top: 1.6rem;
   }
@@ -76,4 +85,4 @@ const LoginInputWrap = styled.div`
   }
 `
 
-export default LoginInput
+export default LoginForm

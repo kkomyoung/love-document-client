@@ -2,7 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
 import CategoryBoxList from '../components/category/Category'
-import LoginInput from '../components/form/LoginInput'
+import LoginForm from '../components/form/LoginForm'
+
 import { ReactComponent as IconAirplane } from '../assets/icon_airplane.svg'
 
 import {
@@ -69,14 +70,7 @@ function Research() {
             </TextDesc>
           </SubTextArea>
           <StyledLoginFormArea>
-            <form action="">
-              <LoginInput type="user" placeholder="닉네임 (최대 10자)" />
-              <LoginInput
-                error
-                type="password"
-                placeholder="비밀번호 (최소 8자)"
-              />
-            </form>
+            <LoginForm />
           </StyledLoginFormArea>
         </StyledSectionLogin>
         <ButtonArea margin="8.3rem 0 0">
