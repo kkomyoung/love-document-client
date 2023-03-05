@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-function Header(props) {
+const Header = (props) => {
   return <HeadDiv>{props.children}</HeadDiv>
 }
 

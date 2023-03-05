@@ -1,8 +1,15 @@
 import React from 'react'
-import styled from 'styled-components'
 import Header from '../components/header/Header'
-import { CircleButton } from '../components/buttons/Buttons'
-import { Title, TextDesc } from '../components/texts/Texts'
+import CategoryBoxList from '../components/category/Category'
+import { LoginForm, LoginInput } from '../components/form/LoginForm'
+import { ReactComponent as IconAirplane } from '../assets/icon_airplane.svg'
+
+import {
+  ButtonArea,
+  CircleButton,
+  RoundButton,
+} from '../components/buttons/Buttons'
+import { TextArea, Title, SubTitle, TextDesc } from '../components/texts/Texts'
 
 const dummy = [
   {
@@ -22,59 +29,42 @@ const dummy = [
   },
 ]
 
-const CategoryItem = ({ items }) => {
-  const itemButtons = items.map((item, index) => {
-    return (
-      <ItemButton key={index}>
-        <label htmlFor="">{item}</label>
-        <input type="checkbox" />
-      </ItemButton>
-    )
-  })
-
-  return itemButtons
-}
-
-const ItemButton = styled.li`
-  background: #fff;
-`
-const CategoryBox = styled.li`
-  background: ${(props) => props.theme.gray100};
-`
-const Category = () => {
-  const titles = dummy.map((category) => {
-    return (
-      <CategoryBox key={category.id}>
-        <li>{category.title}</li>
-        <CategoryItem items={category.items}></CategoryItem>
-      </CategoryBox>
-    )
-  })
-
-  return <div>{titles}</div>
-}
-
 function Research() {
   return (
     <div>
       <Header>
         <CircleButton feature="back" />
       </Header>
-      <Wrapper>
+      <TextArea>
         <Title>질문지 만들기</Title>
         <TextDesc>
           <span>내 애인후보... 이것만큼은..절대지켜!!</span>
           <br />
           <span>상대방에 대해 알고싶은 카테고리를 선택해주세요</span>
         </TextDesc>
-        <Category></Category>
-      </Wrapper>
+      </TextArea>
+      <CategoryBoxList data={dummy}></CategoryBoxList>
+      <TextArea margin="4.8rem 0 0 0">
+        <SubTitle>
+          <i aria-hidden="true">
+            <IconAirplane />
+          </i>
+          <span>질문지 저장</span>
+        </SubTitle>
+        <TextDesc>
+          <span>상대의 답변을 확인하려면 질문지를 저장해야해요</span>
+          <br />
+          <span>확인용 닉네임과 비밀번호를 설정해주세요</span>
+        </TextDesc>
+      </TextArea>
+      <LoginForm>
+        <LoginInput type="user" placeholder="닉네임 (최대 10자)" />
+        <LoginInput error type="password" placeholder="비밀번호 (최소 8자)" />
+      </LoginForm>
+      <ButtonArea>
+        <RoundButton large text="완료"></RoundButton>
+      </ButtonArea>
     </div>
   )
 }
-
-const Wrapper = styled.article`
-  padding: 0 2.4rem;
-`
-
 export default Research
