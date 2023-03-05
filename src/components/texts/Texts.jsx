@@ -13,10 +13,13 @@ const TextDesc = ({ children }) => {
   return <StyledTextDesc>{children}</StyledTextDesc>
 }
 
-const TextArea = ({ children, margin }) => {
-  return <StyledTextArea margin={margin}>{children}</StyledTextArea>
+const TextArea = ({ children }) => {
+  return <StyledTextArea>{children}</StyledTextArea>
 }
 
+const SubTextArea = ({ children }) => {
+  return <StyledSubTextArea>{children}</StyledSubTextArea>
+}
 const StyledTitle = styled.h1`
   ${(props) => props.theme.fontSize.h1}
   color: ${(props) => props.theme.gray900};
@@ -51,8 +54,13 @@ const StyledTextDesc = styled.p`
 `
 
 const StyledTextArea = styled.div`
-  padding: 0 2.4rem;
+  padding: 1.6rem 2.4rem 0;
   margin: ${(props) => props.margin};
 `
 
-export { Title, SubTitle, TextDesc, TextArea }
+const StyledSubTextArea = styled.div`
+  padding: 0 0.4rem;
+  margin: ${(props) => props.margin};
+`
+
+export { Title, SubTitle, TextDesc, TextArea, SubTextArea }
