@@ -4,6 +4,7 @@ import { TextArea, TextDesc, Title } from '../../components/texts/Texts'
 import styled from 'styled-components'
 import { CircleButton } from '../../components/buttons/Buttons'
 import ShareResearch from './ShareResearch'
+import WriteStandard from './WriteStandard'
 
 const member = {
   name: '연서합',
@@ -48,6 +49,7 @@ function ResearchReady() {
       </TextArea>
 
       <ShareResearch {...member} />
+      <WriteStandard />
 
       {/* <StandardBox>
         <StandardTop>
