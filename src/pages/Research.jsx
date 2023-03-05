@@ -79,7 +79,7 @@ function Research() {
             </form>
           </StyledLoginFormArea>
         </StyledSectionLogin>
-        <ButtonArea mt="8.3">
+        <ButtonArea margin="8.3rem 0 0">
           <RoundButton large text="완료"></RoundButton>
         </ButtonArea>
       </article>
