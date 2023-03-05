@@ -12,7 +12,7 @@ const LoginInput = ({ type, placeholder, error }) => {
     <StyledLoginInput type={type} error={error}>
       <div className="input-box">
         <i aria-hidden="true">
-          {type === 'user' && <IconUser />}
+          {type === 'user' && <IconUser fill={iconColor} />}
           {type === 'password' && <IconLock fill={iconColor} />}
         </i>
         <input type="text" placeholder={placeholder} />
