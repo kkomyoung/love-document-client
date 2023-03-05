@@ -5,7 +5,7 @@ const Header = (props) => {
   return <HeadDiv>{props.children}</HeadDiv>
 }
 
-const HeadDiv = styled.div`
+const HeadDiv = styled.header`
   position: sticky;
   top: 0;
   left: 0;
