@@ -1,20 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
 import IconArrowNext from '../../assets/icon_arrow_next.svg'
+import IconKakaoLogo from '../../assets/icon_logo_kakao.svg'
 import { ReactComponent as IconArrowPrev } from '../../assets/icon_arrow_prev.svg'
 import { ReactComponent as IconClose } from '../../assets/icon_close.svg'
 import { ReactComponent as IconDelete } from '../../assets/icon_delete.svg'
 
 const CircleButton = ({ feature }) => {
   return (
-    <CircleBtn type="button" className={feature}>
+    <StyledCircleButton type="button" className={feature}>
       {feature === 'back' && <IconArrowPrev />}
       {feature === 'close' && <IconClose />}
       {feature === 'delete' && <IconDelete />}
-    </CircleBtn>
+    </StyledCircleButton>
   )
 }
-const CircleBtn = styled.button`
+const StyledCircleButton = styled.button`
   width: 6rem;
   height: 6rem;
   border-radius: 50%;
@@ -31,18 +32,31 @@ const CircleBtn = styled.button`
 `
 const RoundButton = ({ large, color, text, icon }) => {
   return (
-    <RoundBtn large={large} color={color} type="button">
+    <StyledRoundButton large={large} color={color} type="button">
       <span>{text}</span>
       {icon && <img src={IconArrowNext} />}
-    </RoundBtn>
+    </StyledRoundButton>
   )
 }
 
-const ButtonArea = ({ children }) => {
-  return <ButtonWrap>{children}</ButtonWrap>
+const KakaoButton = ({ children }) => {
+  return (
+    <StyledKakaoButton>
+      <img src={IconKakaoLogo} alt="kakao-logo-icon" />
+      {children}
+    </StyledKakaoButton>
+  )
 }
 
-const RoundBtn = styled.button`
+const ButtonArea = ({ children, type, mt, mr, mb, ml }) => {
+  return (
+    <StyledButtonArea type={type} mt={mt} mr={mr} mb={mb} ml={ml}>
+      {children}
+    </StyledButtonArea>
+  )
+}
+
+const StyledRoundButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -61,14 +75,14 @@ const RoundBtn = styled.button`
       return `
       width: 16rem;
       height: 7.2rem;
-      font-size: 1.8rem;
+      ${props.theme.fontSize.label_l}
       
       `
     } else {
       return `
       width: 13.6rem;
       height: 5.2rem;
-      font-size: 1.6rem;
+      ${props.theme.fontSize.label_m_m}
       `
     }
   }}
@@ -77,22 +91,64 @@ const RoundBtn = styled.button`
   ${(props) => {
     if (props.color === 'pink') {
       return `
-      background-color: ${props.theme.pink700};
+        background-color: ${props.theme.pink700};
       `
     } else if (props.color === 'white') {
       return `
-      background-color: ${props.theme.bgColor};
-      color: ${props.theme.gray900};
+        background-color: ${props.theme.bgColor};
+        color: ${props.theme.gray900};
+      `
+    } else if (props.color === 'kakao') {
+      return `
+        background-color: ${props.theme.kakao};
+        color: ${props.theme.gray900};
       `
     }
   }}
 `
-const ButtonWrap = styled.div`
-  padding-bottom: 4.8rem;
-  margin-top: 11rem;
+
+const StyledKakaoButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${(props) => props.theme.kakao};
+  ${(props) => props.theme.fontSize.label_m_m}
+  color: ${(props) => props.theme.gray900};
+  border: none;
+  border-radius: 53px;
+
+  img {
+    width: 2.4rem;
+    height: 2.4rem;
+    margin-right: 1rem;
+  }
+`
+
+const StyledButtonArea = styled.div`
   display: flex;
   justify-content: center;
   /* flex-direction: column; */
   /* align-items: center; */
+
+  ${(props) => {
+    if (props.mt) return `margin-top: ${props.mt}rem;`
+    if (props.mr) return `margin-right: ${props.mr}rem;`
+    if (props.mb) return `margin-bottom: ${props.mb}rem;`
+    if (props.ml) return `margin-left: ${props.ml}rem;`
+  }}
+
+  ${(props) => {
+    if (props.type === 'full') {
+      return `
+        button {
+          flex: 1;
+        }
+
+        button + button {
+          margin-left: 0.8rem;
+        }
+      `
+    }
+  }}
 `
-export { CircleButton, RoundButton, ButtonArea }
+export { CircleButton, RoundButton, KakaoButton, ButtonArea }
