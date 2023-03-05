@@ -27,9 +27,6 @@ const LoginInput = ({ type, placeholder, error }) => {
   )
 }
 
-const LoginForm = ({ children }) => {
-  return <Wrap>{children}</Wrap>
-}
 const LoginInputWrap = styled.div`
   & + & {
     margin-top: 1.6rem;
@@ -79,9 +76,4 @@ const LoginInputWrap = styled.div`
   }
 `
 
-const Wrap = styled.div`
-  padding: 0 2.4rem;
-  margin-top: 2.8rem;
-`
-
-export { LoginForm, LoginInput }
+export default LoginInput

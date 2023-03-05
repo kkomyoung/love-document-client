@@ -75,9 +75,4 @@ const Box = styled.div`
   }
 `
 
-const Form = styled.form`
-  margin-top: 2.8rem;
-  padding: 0 2rem;
-`
-
-export { Item, ItemList, Form, Box }
+export { Item, ItemList, Box }
