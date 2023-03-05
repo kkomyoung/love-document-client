@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import IconArrowNext from '../../assets/icon_arrow_next.svg'
+import IconKakaoLogo from '../../assets/icon_logo_kakao.svg'
 import { ReactComponent as IconArrowPrev } from '../../assets/icon_arrow_prev.svg'
 import { ReactComponent as IconClose } from '../../assets/icon_close.svg'
 import { ReactComponent as IconDelete } from '../../assets/icon_delete.svg'
@@ -38,8 +39,21 @@ const RoundButton = ({ large, color, text, icon }) => {
   )
 }
 
-const ButtonArea = ({ children }) => {
-  return <ButtonWrap>{children}</ButtonWrap>
+const KakaoButton = ({ children }) => {
+  return (
+    <StyledKakaoButton>
+      <img src={IconKakaoLogo} alt="kakao-logo-icon" />
+      {children}
+    </StyledKakaoButton>
+  )
+}
+
+const ButtonArea = ({ children, type, mt, mr, mb, ml }) => {
+  return (
+    <ButtonWrap type={type} mt={mt} mr={mr} mb={mb} ml={ml}>
+      {children}
+    </ButtonWrap>
+  )
 }
 
 const RoundBtn = styled.button`
@@ -77,22 +91,64 @@ const RoundBtn = styled.button`
   ${(props) => {
     if (props.color === 'pink') {
       return `
-      background-color: ${props.theme.pink700};
+        background-color: ${props.theme.pink700};
       `
     } else if (props.color === 'white') {
       return `
-      background-color: ${props.theme.bgColor};
-      color: ${props.theme.gray900};
+        background-color: ${props.theme.bgColor};
+        color: ${props.theme.gray900};
+      `
+    } else if (props.color === 'kakao') {
+      return `
+        background-color: ${props.theme.kakao};
+        color: ${props.theme.gray900};
       `
     }
   }}
 `
+
+const StyledKakaoButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${(props) => props.theme.kakao};
+  ${(props) => props.theme.fontSize.label_m_m}
+  color: ${(props) => props.theme.gray900};
+  border: none;
+  border-radius: 53px;
+
+  img {
+    width: 2.4rem;
+    height: 2.4rem;
+    margin-right: 1rem;
+  }
+`
+
 const ButtonWrap = styled.div`
-  padding-bottom: 4.8rem;
-  margin-top: 11rem;
   display: flex;
   justify-content: center;
   /* flex-direction: column; */
   /* align-items: center; */
+
+  ${(props) => {
+    if (props.mt) return `margin-top: ${props.mt}rem;`
+    if (props.mr) return `margin-right: ${props.mr}rem;`
+    if (props.mb) return `margin-bottom: ${props.mb}rem;`
+    if (props.ml) return `margin-left: ${props.ml}rem;`
+  }}
+
+  ${(props) => {
+    if (props.type === 'full') {
+      return `
+        button {
+          flex: 1;
+        }
+
+        button + button {
+          margin-left: 0.8rem;
+        }
+      `
+    }
+  }}
 `
-export { CircleButton, RoundButton, ButtonArea }
+export { CircleButton, RoundButton, KakaoButton, ButtonArea }

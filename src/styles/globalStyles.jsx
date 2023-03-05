@@ -42,7 +42,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Pretendard', sans-serif;
     font-weight: 400;
     line-height: 1;
-
+    color: ${(props) => props.theme.gray800}
   }
 
   #wrap {

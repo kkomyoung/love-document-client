@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import LogoImage from '../assets/img-logo.svg'
+import LogoImage from '../assets/img_logo.svg'
 import { Link } from 'react-router-dom'
 
 const Container = styled.div`
@@ -11,51 +11,51 @@ const Container = styled.div`
 `
 
 const LogoImg = styled.img`
-  margin-top: 38px;
+  margin-top: 3.8rem;
 `
 
 const Subtitle = styled.h2`
   font-weight: 400;
-  font-size: 45px;
+  font-size: 4.5rem;
   color: ${(props) => props.theme.gray100};
-  margin: 10px 0px 0px 26px;
+  margin: 1rem 0px 0px 2.6rem;
 `
 
 const Title = styled.h1`
   font-weight: 700;
-  font-size: 75px;
+  font-size: 7.5rem;
   color: ${(props) => props.theme.gray100};
-  margin: 5px 0px 0px 21px;
+  margin: 0.5rem 0 0 2.1rem;
 `
 
 const Description = styled.p`
   font-weight: 500;
-  font-size: 16px;
+  font-size: 1.6rem;
   color: ${(props) => props.theme.gray100};
-  margin: 21px 28px 0px 21px;
-  line-height: 22.4px;
+  margin: 2.1rem 2.8rem 0 2.1rem;
+  line-height: 2.24rem;
 `
 
 const StartBtn = styled.button`
   font-weight: 500;
-  font-size: 16px;
+  font-size: 1.6rem;
   color: ${(props) => props.theme.gray900};
   background-color: ${(props) => props.theme.bgColor};
   border: 1px solid ${(props) => props.theme.bgColor};
   border-radius: 53px;
-  padding: 18px 40.5px;
-  margin: 31px auto 0px auto;
+  padding: 1.8rem 4.05rem;
+  margin: 3.1rem auto 0 auto;
 `
 
 const LoginLinkWrapper = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: 21px;
+  margin-top: 2.1rem;
 
   a {
     color: ${(props) => props.theme.blue700};
     font-weight: 500;
-    font-size: 16px;
+    font-size: 1.6rem;
   }
 `
 
