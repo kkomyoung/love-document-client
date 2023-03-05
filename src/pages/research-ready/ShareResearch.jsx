@@ -2,7 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 
 import DocumentImage from '../../assets/img_document.svg'
-import { KakaoButton, RoundButton } from '../../components/buttons/Buttons'
+import {
+  ButtonArea,
+  KakaoButton,
+  RoundButton,
+} from '../../components/buttons/Buttons'
 
 function ShareResearch({ name, researchCnt }) {
   return (
@@ -17,7 +21,7 @@ function ShareResearch({ name, researchCnt }) {
 
         <DocumentImg src={DocumentImage} alt="document_image" />
 
-        <ButtonArea>
+        <ButtonArea type="full">
           <RoundButton text="링크복사" />
           <KakaoButton>카톡공유</KakaoButton>
         </ButtonArea>
@@ -65,18 +69,6 @@ const DocumentImg = styled.img`
   width: 360px;
   height: 280px;
   margin: 0 auto;
-`
-
-const ButtonArea = styled.div`
-  display: flex;
-
-  button {
-    flex: 1;
-  }
-
-  button + button {
-    margin-left: 0.8rem;
-  }
 `
 
 export default ShareResearch

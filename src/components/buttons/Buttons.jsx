@@ -48,8 +48,12 @@ const KakaoButton = ({ children }) => {
   )
 }
 
-const ButtonArea = ({ children, type }) => {
-  return <ButtonWrap type={type}>{children}</ButtonWrap>
+const ButtonArea = ({ children, type, mt, mr, mb, ml }) => {
+  return (
+    <ButtonWrap type={type} mt={mt} mr={mr} mb={mb} ml={ml}>
+      {children}
+    </ButtonWrap>
+  )
 }
 
 const RoundBtn = styled.button`
@@ -121,11 +125,17 @@ const StyledKakaoButton = styled.button`
 `
 
 const ButtonWrap = styled.div`
-  padding-bottom: 4.8rem;
   display: flex;
   justify-content: center;
   /* flex-direction: column; */
   /* align-items: center; */
+
+  ${(props) => {
+    if (props.mt) return `margin-top: ${props.mt}rem;`
+    if (props.mr) return `margin-right: ${props.mr}rem;`
+    if (props.mb) return `margin-bottom: ${props.mb}rem;`
+    if (props.ml) return `margin-left: ${props.ml}rem;`
+  }}
 
   ${(props) => {
     if (props.type === 'full') {

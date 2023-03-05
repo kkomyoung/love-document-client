@@ -5,30 +5,31 @@ import styled from 'styled-components'
 import { CircleButton } from '../../components/buttons/Buttons'
 import ShareResearch from './ShareResearch'
 import WriteStandard from './WriteStandard'
+import Answers from './Answers'
 
 const member = {
   name: '연서합',
   researchCnt: 4,
 }
 
-// const answers = [
-//   {
-//     id: 1,
-//     nickname: '영애',
-//     age: 26,
-//     address: '서울 강남구',
-//     match: 70,
-//     date: '2월 7일',
-//   },
-//   {
-//     id: 2,
-//     nickname: '본휘',
-//     age: 29,
-//     address: '서울 강남구',
-//     match: null,
-//     date: '2월 8일',
-//   },
-// ]
+const answers = [
+  {
+    id: 1,
+    nickname: '영애',
+    age: 26,
+    address: '서울 강남구',
+    match: 70,
+    date: '2월 7일',
+  },
+  {
+    id: 2,
+    nickname: '본휘',
+    age: 29,
+    address: '서울 강남구',
+    match: null,
+    date: '2월 8일',
+  },
+]
 
 function ResearchReady() {
   console.log()
@@ -38,7 +39,6 @@ function ResearchReady() {
         <CircleButton feature="back" />
         <CircleButton feature="close" />
       </Header>
-
       <TextArea>
         <Title>질문지 준비 완료</Title>
         <TextDesc>
@@ -47,32 +47,12 @@ function ResearchReady() {
           링크를 공유하고 답변을 요청해보세요
         </TextDesc>
       </TextArea>
-
       <ShareResearch {...member} />
       <WriteStandard />
 
-      {/* <StandardBox>
-        <StandardTop>
-          <HeartPuzzleImg src={HeartPuzzleIcon} alt="heart-puzzle" />
-          <StandardTitleBox>
-            <Title3B color={(props) => props.theme.pink700}>
-              내 기준에 부합할까?
-            </Title3B>
-            <Text2>
-              바라는 조건을 알려주시면
-              <br />
-              상대방의 답변과 비교해드려요
-            </Text2>
-          </StandardTitleBox>
-        </StandardTop>
-        <WriteStandardBtn>
-          <LabelM color={(props) => props.theme.white}>
-            <Link> 내 기준 작성하기 &rarr;</Link>
-          </LabelM>
-        </WriteStandardBtn>
-      </StandardBox>
+      <Answers answers={answers} />
 
-      <AnswerContainer>
+      {/* <AnswerContainer>
         <TextArea>
           <Title3MIocn icon={LoveLetterIcon}>도착한 답변</Title3MIocn>
         </TextArea>
@@ -82,7 +62,8 @@ function ResearchReady() {
             <Answer key={answer.id} {...answer} />
           ))}
         </AnswersBox>
-      </AnswerContainer> */}
+      </AnswerContainer>{' '}
+      */}
     </Container>
   )
 }

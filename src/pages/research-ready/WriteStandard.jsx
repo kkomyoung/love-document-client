@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import ImageHeartPuzzle from '../../assets/img_heart_puzzle.svg'
-import { RoundButton } from '../../components/buttons/Buttons'
+import { RoundButton, ButtonArea } from '../../components/buttons/Buttons'
 
 function WriteStandard() {
   return (
@@ -19,7 +19,7 @@ function WriteStandard() {
             </Subtitle>
           </TitleArea>
         </Header>
-        <ButtonArea>
+        <ButtonArea type="full" mt={2.4}>
           <RoundButton icon text="내 기준 작성하기" color="pink">
             <Link to="/"></Link>
           </RoundButton>
@@ -66,13 +66,4 @@ const Title = styled.h3`
 const Subtitle = styled.p`
   ${(props) => props.theme.fontSize.b2}
   margin-top: 0.8rem;
-`
-
-const ButtonArea = styled.div`
-  display: flex;
-  margin-top: 2.4rem;
-
-  button {
-    flex: 1;
-  }
 `
