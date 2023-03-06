@@ -48,7 +48,7 @@ const GlobalStyle = createGlobalStyle`
 
   #wrap {
     background: #fff;
-    max-width: 360px;
+    max-width: 768px;
     width: 100%;
     margin: 0 auto;
   }

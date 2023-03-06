@@ -35,7 +35,7 @@ const StyledHeader = styled.header`
 
   .inner {
     position: relative;
-    max-width: 360px;
+    max-width: 768px;
     width: 100%;
     height: 8.4rem;
     display: flex;
