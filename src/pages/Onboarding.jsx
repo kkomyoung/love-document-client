@@ -1,21 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
-import {
-  ButtonArea,
-  RoundButton,
-  CircleButton,
-} from '../components/buttons/Buttons'
+import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import { Title, TextDesc } from '../components/texts/Texts'
 import ImgTest from '../assets/img_test.png'
 
 function Onboarding() {
   return (
     <StyledMain>
-      <Header>
-        <CircleButton feature="back" />
-        <CircleButton feature="close" />
-      </Header>
+      <Header leftBtn="back" rightBtn="close" />
       <StyledAirticle>
         <StyledImgWrap>
           <img src={ImgTest} alt="" />

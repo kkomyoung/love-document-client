@@ -6,9 +6,9 @@ import { ReactComponent as IconArrowPrev } from '../../assets/icon_arrow_prev.sv
 import { ReactComponent as IconClose } from '../../assets/icon_close.svg'
 import { ReactComponent as IconDelete } from '../../assets/icon_delete.svg'
 
-const CircleButton = ({ feature }) => {
+const CircleButton = ({ feature, align }) => {
   return (
-    <StyledCircleButton type="button" className={feature}>
+    <StyledCircleButton type="button" className={align}>
       {feature === 'back' && <IconArrowPrev />}
       {feature === 'close' && <IconClose />}
       {feature === 'delete' && <IconDelete />}
@@ -21,14 +21,6 @@ const StyledCircleButton = styled.button`
   border-radius: 50%;
   border: none;
   background: #f6f6fc;
-
-  &.back {
-    float: left;
-  }
-  &.close,
-  &.delete {
-    float: right;
-  }
 `
 const RoundButton = ({ large, color, text, icon }) => {
   return (

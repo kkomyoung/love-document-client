@@ -6,11 +6,7 @@ import LoginForm from '../components/form/LoginForm'
 
 import { ReactComponent as IconAirplane } from '../assets/icon_airplane.svg'
 
-import {
-  ButtonArea,
-  CircleButton,
-  RoundButton,
-} from '../components/buttons/Buttons'
+import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import {
   TextArea,
   SubTextArea,
@@ -40,9 +36,7 @@ const dummy = [
 function Research() {
   return (
     <StyledMain>
-      <Header>
-        <CircleButton feature="back" />
-      </Header>
+      <Header title="질문지 만들기" leftBtn="back" rightBtn="close" />
       <article>
         <TextArea>
           <Title>질문지 만들기</Title>
