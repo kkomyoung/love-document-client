@@ -1,17 +1,32 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ButtonArea, RoundButton } from '../buttons/Buttons'
+import { RoundButton } from '../buttons/Buttons'
 
-const Modal = (props) => {
+const Modal = ({ setOpenModal, title, text, btnConfirm, btnCancle }) => {
+  document.body.style.overflow = 'hidden'
+  const buttonType = btnCancle ? 'full' : ''
+
+  const closeModal = () => {
+    setOpenModal(false)
+  }
+
   return (
     <StyledModal>
       <div className="popup">
-        <h3>뒤로가기</h3>
-        <p>질문지 작성 페이지로 돌아갈까요?</p>
-        <ButtonArea type="full">
-          <RoundButton color="white" text="아니요"></RoundButton>
-          <RoundButton text="확인"></RoundButton>
-        </ButtonArea>
+        {title && <h3>{title}</h3>}
+        {text && <p>{text}</p>}
+        <StyledButtonWrap type={buttonType}>
+          {btnCancle && (
+            <RoundButton
+              color="white"
+              text={btnCancle}
+              onClick={closeModal}
+            ></RoundButton>
+          )}
+          {btnConfirm && (
+            <RoundButton text={btnConfirm} onClick={closeModal}></RoundButton>
+          )}
+        </StyledButtonWrap>
       </div>
     </StyledModal>
   )
@@ -36,6 +51,33 @@ const StyledModal = styled.div`
     border-radius: 1.6rem;
     text-align: center;
   }
+
+  h3 {
+    ${(props) => props.theme.fontSize.h3_m}
+  }
+
+  p {
+    margin-top: 1.6rem;
+    ${(props) => props.theme.fontSize.b1}
+  }
 `
 
-export default Modal
+const StyledButtonWrap = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+
+  button + button {
+    margin-left: 0.8rem;
+  }
+
+  ${(props) => {
+    if (props.type === 'full') {
+      return `
+        button {flex: 1}
+      `
+    }
+  }}
+`
+
+export { Modal }

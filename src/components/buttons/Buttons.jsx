@@ -22,9 +22,14 @@ const StyledCircleButton = styled.button`
   border: none;
   background: #f6f6fc;
 `
-const RoundButton = ({ large, color, text, icon }) => {
+const RoundButton = ({ large, color, text, icon, onClick }) => {
   return (
-    <StyledRoundButton large={large} color={color} type="button">
+    <StyledRoundButton
+      large={large}
+      color={color}
+      onClick={onClick}
+      type="button"
+    >
       <span>{text}</span>
       {icon && <img src={IconArrowNext} />}
     </StyledRoundButton>
