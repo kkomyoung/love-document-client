@@ -6,9 +6,9 @@ import { ReactComponent as IconArrowPrev } from '../../assets/icon_arrow_prev.sv
 import { ReactComponent as IconClose } from '../../assets/icon_close.svg'
 import { ReactComponent as IconDelete } from '../../assets/icon_delete.svg'
 
-const CircleButton = ({ feature }) => {
+const CircleButton = ({ feature, align }) => {
   return (
-    <StyledCircleButton type="button" className={feature}>
+    <StyledCircleButton type="button" className={align}>
       {feature === 'back' && <IconArrowPrev />}
       {feature === 'close' && <IconClose />}
       {feature === 'delete' && <IconDelete />}
@@ -21,14 +21,6 @@ const StyledCircleButton = styled.button`
   border-radius: 50%;
   border: none;
   background: #f6f6fc;
-
-  &.back {
-    float: left;
-  }
-  &.close,
-  &.delete {
-    float: right;
-  }
 `
 const RoundButton = ({ large, color, text, icon }) => {
   return (
@@ -48,9 +40,9 @@ const KakaoButton = ({ children }) => {
   )
 }
 
-const ButtonArea = ({ children, type, mt, mr, mb, ml }) => {
+const ButtonArea = ({ children, type, margin, padding }) => {
   return (
-    <StyledButtonArea type={type} mt={mt} mr={mr} mb={mb} ml={ml}>
+    <StyledButtonArea type={type} margin={margin} padding={padding}>
       {children}
     </StyledButtonArea>
   )
@@ -131,10 +123,11 @@ const StyledButtonArea = styled.div`
   /* align-items: center; */
 
   ${(props) => {
-    if (props.mt) return `margin-top: ${props.mt}rem;`
-    if (props.mr) return `margin-right: ${props.mr}rem;`
-    if (props.mb) return `margin-bottom: ${props.mb}rem;`
-    if (props.ml) return `margin-left: ${props.ml}rem;`
+    if (props.margin) return `margin: ${props.margin};`
+  }}
+
+  ${(props) => {
+    if (props.padding) return `padding: ${props.padding};`
   }}
 
   ${(props) => {

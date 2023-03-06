@@ -2,14 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
 import CategoryBoxList from '../components/category/Category'
-import LoginInput from '../components/form/LoginInput'
+import LoginForm from '../components/form/LoginForm'
+
 import { ReactComponent as IconAirplane } from '../assets/icon_airplane.svg'
 
-import {
-  ButtonArea,
-  CircleButton,
-  RoundButton,
-} from '../components/buttons/Buttons'
+import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import {
   TextArea,
   SubTextArea,
@@ -39,9 +36,7 @@ const dummy = [
 function Research() {
   return (
     <StyledMain>
-      <Header>
-        <CircleButton feature="back" />
-      </Header>
+      <Header title="질문지 만들기" leftBtn="back" rightBtn="close" />
       <article>
         <TextArea>
           <Title>질문지 만들기</Title>
@@ -69,17 +64,10 @@ function Research() {
             </TextDesc>
           </SubTextArea>
           <StyledLoginFormArea>
-            <form action="">
-              <LoginInput type="user" placeholder="닉네임 (최대 10자)" />
-              <LoginInput
-                error
-                type="password"
-                placeholder="비밀번호 (최소 8자)"
-              />
-            </form>
+            <LoginForm />
           </StyledLoginFormArea>
         </StyledSectionLogin>
-        <ButtonArea mt="8.3">
+        <ButtonArea margin="8.3rem 0 0">
           <RoundButton large text="완료"></RoundButton>
         </ButtonArea>
       </article>

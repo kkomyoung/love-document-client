@@ -19,7 +19,7 @@ function WriteStandard() {
             </Subtitle>
           </TitleArea>
         </Header>
-        <ButtonArea type="full" mt={2.4}>
+        <ButtonArea type="full" margin="2.4rem 0 0 0">
           <RoundButton icon text="내 기준 작성하기" color="pink">
             <Link to="/"></Link>
           </RoundButton>

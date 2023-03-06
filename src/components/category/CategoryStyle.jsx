@@ -22,6 +22,7 @@ const Item = styled.li`
     border: 1px solid ${(props) => props.theme.gray300};
     color: ${(props) => props.theme.gray900};
     letter-spacing: -0.04rem;
+    cursor: pointer;
   }
 
   input:checked + label {

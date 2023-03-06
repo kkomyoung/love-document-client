@@ -42,17 +42,20 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Pretendard', sans-serif;
     font-weight: 400;
     line-height: 1;
-    color: ${(props) => props.theme.gray800}
+    color: ${(props) => props.theme.gray800};
+    background: #e1e1e1;
   }
 
   #wrap {
-    max-width: 480px; //최소 360px
+    background: #fff;
+    max-width: 768px;
     width: 100%;
     margin: 0 auto;
   }
 
   button {
     cursor: pointer;
+    padding: 0;
   }
 
   a { 
