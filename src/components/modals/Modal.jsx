@@ -8,11 +8,12 @@ const Modal = ({ setOpenModal, title, text, btnConfirm, btnCancle }) => {
 
   const closeModal = () => {
     setOpenModal(false)
+    document.body.style.overflow = ''
   }
 
   return (
     <StyledModal>
-      <div className="popup">
+      <div className="modal">
         {title && <h3>{title}</h3>}
         {text && <p>{text}</p>}
         <StyledButtonWrap type={buttonType}>
@@ -44,7 +45,7 @@ const StyledModal = styled.div`
   justify-content: center;
   padding: 0 2.4rem;
 
-  .popup {
+  .modal {
     background: #fff;
     width: 100%;
     padding: 3.6rem 1.6rem 3.2rem;
