@@ -74,7 +74,7 @@ function Research() {
           </StyledLoginFormArea>
         </StyledSectionLogin>
         <ButtonArea margin="8.3rem 0 0">
-          <RoundButton large text="완료" onClick={showModal} />
+          <RoundButton size="large" text="완료" onClick={showModal} />
         </ButtonArea>
       </article>
       {openModal && (

@@ -1,9 +1,40 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
+import { Link, useNavigate } from 'react-router-dom'
 import { CircleButton } from '../buttons/Buttons'
 
-const Header = ({ title, leftBtn, rightBtn }) => {
+const Header = ({ title, btnBack, btnClose, btnDelete, btnSetting }) => {
+  const navigate = useNavigate()
   const [isScrolled, setIsScrolled] = useState(false)
+
+  // 페이지 뒤로가기
+  const handleGoBack = () => {
+    navigate(-1)
+  }
+
+  // 버튼의 용도 체크
+  const checkButtonType = (button, feature, className) => {
+    // 링크일 때
+    if (typeof button === 'string') {
+      return (
+        <CircleButton
+          as={Link}
+          to={button}
+          feature={feature}
+          className={className}
+        />
+      )
+      // 버튼일 때
+    } else if (typeof button === 'function') {
+      return (
+        <CircleButton
+          onClick={button}
+          feature={feature}
+          className={className}
+        />
+      )
+    }
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,13 +49,18 @@ const Header = ({ title, leftBtn, rightBtn }) => {
   return (
     <StyledHeader className={isScrolled && title ? 'on' : ''}>
       <div className="inner">
-        {leftBtn && (
-          <CircleButton feature={leftBtn} align="left"></CircleButton>
+        {btnBack && (
+          <CircleButton
+            as="a"
+            onClick={handleGoBack}
+            feature="back"
+            className="left"
+          />
         )}
         {title && <p>{title}</p>}
-        {rightBtn && (
-          <CircleButton feature={rightBtn} align="right"></CircleButton>
-        )}
+        {btnClose && checkButtonType(btnClose, 'close', 'right')}
+        {btnDelete && checkButtonType(btnDelete, 'delete', 'right')}
+        {btnSetting && checkButtonType(btnSetting, 'setting', 'right')}
       </div>
     </StyledHeader>
   )
@@ -44,7 +80,8 @@ const StyledHeader = styled.header`
     transition: 0.3s;
   }
 
-  button {
+  button,
+  a {
     position: absolute;
   }
   .left {
@@ -80,7 +117,8 @@ const StyledHeader = styled.header`
         opacity: 1;
       }
 
-      button {
+      button,
+      a {
         width: 4.8rem;
         height: 4.8rem;
         background: none;

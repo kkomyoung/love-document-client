@@ -6,29 +6,34 @@ import { ReactComponent as IconArrowPrev } from '../../assets/icon_arrow_prev.sv
 import { ReactComponent as IconClose } from '../../assets/icon_close.svg'
 import { ReactComponent as IconDelete } from '../../assets/icon_delete.svg'
 
-const CircleButton = ({ feature, align }) => {
+const CircleButton = ({ as, to, onClick, feature, className }) => {
   return (
-    <StyledCircleButton type="button" className={align}>
+    <StyledCircleButton as={as} to={to} onClick={onClick} className={className}>
       {feature === 'back' && <IconArrowPrev />}
       {feature === 'close' && <IconClose />}
       {feature === 'delete' && <IconDelete />}
+      {feature === 'setting' && <IconDelete />}
     </StyledCircleButton>
   )
 }
 const StyledCircleButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 6rem;
   height: 6rem;
   border-radius: 50%;
   border: none;
   background: #f6f6fc;
 `
-const RoundButton = ({ large, color, text, icon, onClick }) => {
+const RoundButton = ({ as, to, onClick, size, color, text, icon }) => {
   return (
     <StyledRoundButton
-      large={large}
-      color={color}
+      as={as}
+      to={to}
       onClick={onClick}
-      type="button"
+      size={size}
+      color={color}
     >
       <span>{text}</span>
       {icon && <img src={IconArrowNext} />}
@@ -61,14 +66,12 @@ const StyledRoundButton = styled.button`
   border-radius: 5.3rem;
   background-color: ${(props) => props.theme.gray900};
   color: ${(props) => props.theme.bgColor};
-
   img {
     margin-left: 0.9rem;
   }
-
   // 크기별
   ${(props) => {
-    if (props.large) {
+    if (props.size === 'large') {
       return `
       width: 16rem;
       height: 7.2rem;
@@ -83,7 +86,6 @@ const StyledRoundButton = styled.button`
       `
     }
   }}
-
   // 색상별
   ${(props) => {
     if (props.color === 'pink') {
@@ -113,7 +115,6 @@ const StyledKakaoButton = styled.button`
   color: ${(props) => props.theme.gray900};
   border: none;
   border-radius: 53px;
-
   img {
     width: 2.4rem;
     height: 2.4rem;
@@ -126,22 +127,18 @@ const StyledButtonArea = styled.div`
   justify-content: center;
   /* flex-direction: column; */
   /* align-items: center; */
-
   ${(props) => {
     if (props.margin) return `margin: ${props.margin};`
   }}
-
   ${(props) => {
     if (props.padding) return `padding: ${props.padding};`
   }}
-
   ${(props) => {
     if (props.type === 'full') {
       return `
         button {
           flex: 1;
         }
-
         button + button {
           margin-left: 0.8rem;
         }
