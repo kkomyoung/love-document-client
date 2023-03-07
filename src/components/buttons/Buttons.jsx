@@ -66,11 +66,9 @@ const StyledRoundButton = styled.button`
   border-radius: 5.3rem;
   background-color: ${(props) => props.theme.gray900};
   color: ${(props) => props.theme.bgColor};
-
   img {
     margin-left: 0.9rem;
   }
-
   // 크기별
   ${(props) => {
     if (props.size === 'large') {
@@ -88,7 +86,6 @@ const StyledRoundButton = styled.button`
       `
     }
   }}
-
   // 색상별
   ${(props) => {
     if (props.color === 'pink') {
@@ -118,7 +115,6 @@ const StyledKakaoButton = styled.button`
   color: ${(props) => props.theme.gray900};
   border: none;
   border-radius: 53px;
-
   img {
     width: 2.4rem;
     height: 2.4rem;
@@ -131,22 +127,18 @@ const StyledButtonArea = styled.div`
   justify-content: center;
   /* flex-direction: column; */
   /* align-items: center; */
-
   ${(props) => {
     if (props.margin) return `margin: ${props.margin};`
   }}
-
   ${(props) => {
     if (props.padding) return `padding: ${props.padding};`
   }}
-
   ${(props) => {
     if (props.type === 'full') {
       return `
         button {
           flex: 1;
         }
-
         button + button {
           margin-left: 0.8rem;
         }
