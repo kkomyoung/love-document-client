@@ -42,7 +42,7 @@ function Research() {
 
   return (
     <StyledMain>
-      <Header title="질문지 만들기" leftBtn="back" rightBtn="close" />
+      <Header title="질문지 만들기" btnBack />
       <article>
         <TextArea>
           <Title>질문지 만들기</Title>
