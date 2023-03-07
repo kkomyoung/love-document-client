@@ -6,29 +6,34 @@ import { ReactComponent as IconArrowPrev } from '../../assets/icon_arrow_prev.sv
 import { ReactComponent as IconClose } from '../../assets/icon_close.svg'
 import { ReactComponent as IconDelete } from '../../assets/icon_delete.svg'
 
-const CircleButton = ({ feature, align }) => {
+const CircleButton = ({ as, to, onClick, feature, className }) => {
   return (
-    <StyledCircleButton type="button" className={align}>
+    <StyledCircleButton as={as} to={to} onClick={onClick} className={className}>
       {feature === 'back' && <IconArrowPrev />}
       {feature === 'close' && <IconClose />}
       {feature === 'delete' && <IconDelete />}
+      {feature === 'setting' && <IconDelete />}
     </StyledCircleButton>
   )
 }
 const StyledCircleButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 6rem;
   height: 6rem;
   border-radius: 50%;
   border: none;
   background: #f6f6fc;
 `
-const RoundButton = ({ large, color, text, icon, onClick }) => {
+const RoundButton = ({ as, to, onClick, size, color, text, icon }) => {
   return (
     <StyledRoundButton
-      large={large}
-      color={color}
+      as={as}
+      to={to}
       onClick={onClick}
-      type="button"
+      size={size}
+      color={color}
     >
       <span>{text}</span>
       {icon && <img src={IconArrowNext} />}
@@ -68,7 +73,7 @@ const StyledRoundButton = styled.button`
 
   // 크기별
   ${(props) => {
-    if (props.large) {
+    if (props.size === 'large') {
       return `
       width: 16rem;
       height: 7.2rem;
