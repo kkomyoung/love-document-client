@@ -1,14 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import Header from '../components/header/Header'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import { Title, TextDesc } from '../components/texts/Texts'
 import ImgTest from '../assets/img_test.png'
-
 function Onboarding() {
   return (
     <StyledMain>
-      <Header leftBtn="back" rightBtn="close" />
+      <Header btnBack btnClose="/" />
       <StyledAirticle>
         <StyledImgWrap>
           <img src={ImgTest} alt="" />
@@ -19,7 +19,7 @@ function Onboarding() {
           서비스 입니다. 질문지를 만들고 상대에게 공유해 확인해 보세요 😍
         </TextDesc>
         <ButtonArea margin="11rem 0 0 0">
-          <RoundButton large text="다음"></RoundButton>
+          <RoundButton as={Link} to="/login" size="large" text="다음" />
         </ButtonArea>
       </StyledAirticle>
     </StyledMain>
