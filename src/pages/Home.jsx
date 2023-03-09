@@ -6,7 +6,6 @@ import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import ImgTest from '../assets/img_test.png'
 import { ReactComponent as IconLetter } from '../assets/icon_letter.svg'
 import { ReactComponent as IconAirplane } from '../assets/icon_airplane.svg'
-import { ReactComponent as IconDelete } from '../assets/icon_delete.svg'
 function Home() {
   return (
     <StyledMain>
@@ -19,21 +18,20 @@ function Home() {
         <StyledImgWrap>
           <img src={ImgTest} alt="" />
         </StyledImgWrap>
-        <IconLetter />
-        <IconAirplane />
-        <IconDelete />
         <ButtonArea full>
-          <RoundButton as={Link} to="/login" color="white">
-            <i aria-hidden="true">
-              <IconLetter />
-            </i>
-            <span>도착한 답변</span>
-          </RoundButton>
-          <RoundButton as={Link} to="/login" color="white">
-            <i aria-hidden="true">
+          <RoundButton as={Link} to="/home/research" color="white">
+            <StyledIcon aria-hidden="true">
               <IconAirplane />
-            </i>
+            </StyledIcon>
             <span>내 질문지</span>
+          </RoundButton>
+        </ButtonArea>
+        <ButtonArea full margin="2rem 0 0">
+          <RoundButton as={Link} to="/home/answers" color="white">
+            <StyledIcon aria-hidden="true">
+              <IconLetter />
+            </StyledIcon>
+            <span>도착한 답변</span>
           </RoundButton>
         </ButtonArea>
       </StyledAirticle>
@@ -81,6 +79,10 @@ const StyledImgWrap = styled.figure`
     width: 100%;
     max-width: 31.2rem;
   }
+`
+
+const StyledIcon = styled.i`
+  margin-right: 1rem;
 `
 
 export default Home
