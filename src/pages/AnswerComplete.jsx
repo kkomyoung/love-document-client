@@ -6,22 +6,29 @@ import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import { Title, TextDesc } from '../components/texts/Texts'
 import ImgTest from '../assets/img_test.png'
 
-const StandardComplete = () => {
+const AnswerComplete = () => {
+  const name = '사과'
+
   return (
     <StyledMain>
-      <Header btnClose="/" />
+      <Header btnBack btnClose="/" />
       <StyledAirticle>
         <StyledImgWrap>
           <img src={ImgTest} alt="" />
         </StyledImgWrap>
-        <Title>내 기준 작성완료</Title>
+        <Title>답변 전달 완료</Title>
         <TextDesc>
-          <span>내 기준이 저장되었어요 😍</span>
+          <span>{name}님의 답변이 전달되었어요.</span>
           <br />
-          <span>상대방의 답변을 받은 후 내 기준과 비교해드릴게요</span>
+          <span>{name}님도 질문지를 만들어 상대에게 전달해보세요 😍</span>
         </TextDesc>
-        <ButtonArea margin="11rem 0 0 0">
-          <RoundButton as={Link} to="/home" size="large" text="확인" />
+        <ButtonArea margin="13.2rem 0 0 0">
+          <RoundButton
+            as={Link}
+            to="/research"
+            size="large"
+            text="질문지 만들기"
+          />
         </ButtonArea>
       </StyledAirticle>
     </StyledMain>
@@ -47,4 +54,4 @@ const StyledImgWrap = styled.figure`
   }
 `
 
-export default StandardComplete
+export default AnswerComplete

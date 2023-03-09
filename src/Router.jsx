@@ -7,6 +7,7 @@ import Home from './pages/Home'
 import Research from './pages/Research'
 import ResearchReadyPage from './pages/research-ready/ResearchReadyPage'
 import StandardComplete from './pages/StandardComplete'
+import AnswerComplete from './pages/AnswerComplete'
 
 function Router() {
   return (
@@ -21,6 +22,10 @@ function Router() {
         <Route
           path="/research/standard/complete"
           element={<StandardComplete />}
+        />
+        <Route
+          path="/research/question/answer/complete"
+          element={<AnswerComplete />}
         />
       </Routes>
     </BrowserRouter>
