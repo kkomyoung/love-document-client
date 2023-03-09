@@ -5,6 +5,7 @@ import IconKakaoLogo from '../../assets/icon_logo_kakao.svg'
 import { ReactComponent as IconArrowPrev } from '../../assets/icon_arrow_prev.svg'
 import { ReactComponent as IconClose } from '../../assets/icon_close.svg'
 import { ReactComponent as IconDelete } from '../../assets/icon_delete.svg'
+import { ReactComponent as IconSetting } from '../../assets/icon_setting.svg'
 
 const CircleButton = ({ as, to, onClick, feature, className }) => {
   return (
@@ -12,7 +13,7 @@ const CircleButton = ({ as, to, onClick, feature, className }) => {
       {feature === 'back' && <IconArrowPrev />}
       {feature === 'close' && <IconClose />}
       {feature === 'delete' && <IconDelete />}
-      {feature === 'setting' && <IconDelete />}
+      {feature === 'setting' && <IconSetting />}
     </StyledCircleButton>
   )
 }
@@ -26,7 +27,16 @@ const StyledCircleButton = styled.button`
   border: none;
   background: #f6f6fc;
 `
-const RoundButton = ({ as, to, onClick, size, color, text, icon }) => {
+const RoundButton = ({
+  as,
+  to,
+  onClick,
+  size,
+  color,
+  text,
+  icon,
+  children,
+}) => {
   return (
     <StyledRoundButton
       as={as}
@@ -34,8 +44,10 @@ const RoundButton = ({ as, to, onClick, size, color, text, icon }) => {
       onClick={onClick}
       size={size}
       color={color}
+      className="btn"
     >
       <span>{text}</span>
+      {children}
       {icon && <img src={IconArrowNext} />}
     </StyledRoundButton>
   )
@@ -50,9 +62,9 @@ const KakaoButton = ({ children }) => {
   )
 }
 
-const ButtonArea = ({ children, type, margin, padding }) => {
+const ButtonArea = ({ children, flex, full, margin, padding }) => {
   return (
-    <StyledButtonArea type={type} margin={margin} padding={padding}>
+    <StyledButtonArea flex={flex} full={full} margin={margin} padding={padding}>
       {children}
     </StyledButtonArea>
   )
@@ -123,10 +135,13 @@ const StyledKakaoButton = styled.button`
 `
 
 const StyledButtonArea = styled.div`
-  display: flex;
-  justify-content: center;
-  /* flex-direction: column; */
-  /* align-items: center; */
+  .btn {
+    margin: 0 auto;
+    & + .btn {
+      margin: 0.8rem auto 0;
+    }
+  }
+
   ${(props) => {
     if (props.margin) return `margin: ${props.margin};`
   }}
@@ -134,14 +149,24 @@ const StyledButtonArea = styled.div`
     if (props.padding) return `padding: ${props.padding};`
   }}
   ${(props) => {
-    if (props.type === 'full') {
+    if (props.flex) {
       return `
-        button {
-          flex: 1;
+        display: flex;
+        justify-content: center;
+
+        .btn + .btn {
+          margin: 0 0 0 0.8rem;
         }
-        button + button {
-          margin-left: 0.8rem;
+      `
+    }
+  }}
+  ${(props) => {
+    if (props.full) {
+      return `
+        .btn {
+          width: 100%;
         }
+        
       `
     }
   }}
