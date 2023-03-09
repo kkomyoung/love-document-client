@@ -45,6 +45,10 @@ const StandardComplete = () => {
 const StyledMain = styled.main`
   padding-bottom: 4.8rem;
   background: pink;
+
+  svg + svg {
+    display: none;
+  }
 `
 
 const StyledAirticle = styled.article`
