@@ -8,22 +8,24 @@ import {
   TextButton,
 } from '../components/buttons/Buttons'
 
-const Container = styled.div`
+const Container = styled.main`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  /* height: 100vh; */
   background-color: ${(props) => props.theme.blue500};
+  padding-bottom: 7.6rem;
 `
 
 const LogoImg = styled.img`
   margin-top: 3.8rem;
 `
 
-const Subtitle = styled.h2`
+const Subtitle = styled.span`
+  display: block;
   font-weight: 400;
   font-size: 4.5rem;
   color: ${(props) => props.theme.gray100};
-  margin: 1rem 0px 0px 2.6rem;
+  margin: 0 0 0.5rem 0.5rem;
 `
 
 const Title = styled.h1`
@@ -38,18 +40,21 @@ const Description = styled.p`
   font-size: 1.6rem;
   color: ${(props) => props.theme.gray100};
   margin: 2.1rem 2.8rem 0 2.1rem;
-  line-height: 2.24rem;
+  line-height: 1.4;
 `
 
 function Landing() {
   return (
     <Container>
       <LogoImg src={LogoImage} alt="logo-image" />
-      <Subtitle>두근 - 두근</Subtitle>
-      <Title>연애서류합</Title>
+      <Title>
+        <Subtitle>두근 - 두근</Subtitle>
+        연애서류합
+      </Title>
       <Description>
-        소개팅 상대가 내 기준에 얼마나 부합할까? 내 연애 서류를 만들고 답변을
-        받아봐요
+        <span>소개팅 상대가 내 기준에 얼마나 부합할까?</span>
+        <br />
+        <span>내 연애 서류를 만들고 답변을 받아봐요</span>
       </Description>
       <ButtonArea margin="3.1rem 0 0 0">
         <RoundButton as={Link} to="/onboarding" color="white" text="시작하기" />
