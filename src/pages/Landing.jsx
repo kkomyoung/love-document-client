@@ -2,6 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import LogoImage from '../assets/img_logo.svg'
 import { Link } from 'react-router-dom'
+import {
+  ButtonArea,
+  RoundButton,
+  TextButton,
+} from '../components/buttons/Buttons'
 
 const Container = styled.div`
   display: flex;
@@ -36,29 +41,6 @@ const Description = styled.p`
   line-height: 2.24rem;
 `
 
-const StartBtn = styled.button`
-  font-weight: 500;
-  font-size: 1.6rem;
-  color: ${(props) => props.theme.gray900};
-  background-color: ${(props) => props.theme.bgColor};
-  border: 1px solid ${(props) => props.theme.bgColor};
-  border-radius: 53px;
-  padding: 1.8rem 4.05rem;
-  margin: 3.1rem auto 0 auto;
-`
-
-const LoginLinkWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 2.1rem;
-
-  a {
-    color: ${(props) => props.theme.blue700};
-    font-weight: 500;
-    font-size: 1.6rem;
-  }
-`
-
 function Landing() {
   return (
     <Container>
@@ -69,14 +51,17 @@ function Landing() {
         소개팅 상대가 내 기준에 얼마나 부합할까? 내 연애 서류를 만들고 답변을
         받아봐요
       </Description>
-      <StartBtn>
-        <Link to="/onboarding">시작하기</Link>
-      </StartBtn>
-      <LoginLinkWrapper>
-        <Link to="/login">
-          <u>이미 질문지를 만들었다면? 로그인</u>
-        </Link>
-      </LoginLinkWrapper>
+      <ButtonArea margin="3.1rem 0 0 0">
+        <RoundButton as={Link} to="/onboarding" color="white" text="시작하기" />
+      </ButtonArea>
+      <ButtonArea margin="2.1rem 0 0 0">
+        <TextButton
+          as={Link}
+          to="/login"
+          type="underline"
+          text="이미 질문지를 만들었다면? 로그인"
+        />
+      </ButtonArea>
     </Container>
   )
 }

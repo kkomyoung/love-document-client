@@ -56,11 +56,15 @@ const GlobalStyle = createGlobalStyle`
   button {
     cursor: pointer;
     padding: 0;
+    border: none;
+    background: none;
   }
 
   a { 
     text-decoration: none;
     color:inherit;
+    border: none;
+    background: none;
   }
 
   ol, ul, li {

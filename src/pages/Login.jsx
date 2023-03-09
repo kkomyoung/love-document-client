@@ -1,13 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
-import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
+import {
+  ButtonArea,
+  RoundButton,
+  TextButton,
+} from '../components/buttons/Buttons'
 import { Title } from '../components/texts/Texts'
 import ImgTest from '../assets/img_test.png'
 import LoginForm from '../components/form/LoginForm'
 
 const LoginHandler = () => {
   console.log('로그인')
+}
+const sendEmail = () => {
+  console.log('이메일 문의')
 }
 
 const Login = () => {
@@ -22,11 +29,15 @@ const Login = () => {
         <StyledLoginFormArea>
           <LoginForm />
         </StyledLoginFormArea>
-        <StyledLinkArea>
-          <a href="#none">로그인 정보를 잊었다면? 문의하기</a>
-        </StyledLinkArea>
+        <ButtonArea margin="1.6rem 0 0 0">
+          <TextButton
+            type="underline"
+            text="로그인 정보를 잊었다면? 문의하기"
+            onClick={sendEmail}
+          />
+        </ButtonArea>
         <ButtonArea margin="4rem 0 0 0">
-          <RoundButton onClick={LoginHandler} size="large" text="다음" />
+          <RoundButton size="large" text="다음" onClick={LoginHandler} />
         </ButtonArea>
       </StyledAirticle>
     </StyledMain>
@@ -54,19 +65,6 @@ const StyledImgWrap = styled.figure`
 
 const StyledLoginFormArea = styled.div`
   margin-top: 2.8rem;
-`
-
-const StyledLinkArea = styled.div`
-  margin-top: 1.6rem;
-  text-align: center;
-
-  a {
-    display: inline-block;
-    padding-bottom: 0.4rem;
-    border-bottom: 1px solid ${(props) => props.theme.blue700};
-    ${(props) => props.theme.fontSize.label_m_sb};
-    color: ${(props) => props.theme.blue700};
-  }
 `
 
 export default Login

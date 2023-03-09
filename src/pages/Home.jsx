@@ -20,17 +20,17 @@ function Home() {
         </StyledImgWrap>
         <ButtonArea full>
           <RoundButton as={Link} to="/home/research" color="white">
-            <StyledIcon aria-hidden="true">
+            <i aria-hidden="true">
               <IconAirplane />
-            </StyledIcon>
+            </i>
             <span>내 질문지</span>
           </RoundButton>
         </ButtonArea>
         <ButtonArea full margin="2rem 0 0">
           <RoundButton as={Link} to="/home/answers" color="white">
-            <StyledIcon aria-hidden="true">
+            <i aria-hidden="true">
               <IconLetter />
-            </StyledIcon>
+            </i>
             <span>도착한 답변</span>
           </RoundButton>
         </ButtonArea>
@@ -79,10 +79,6 @@ const StyledImgWrap = styled.figure`
     width: 100%;
     max-width: 31.2rem;
   }
-`
-
-const StyledIcon = styled.i`
-  margin-right: 1rem;
 `
 
 export default Home
