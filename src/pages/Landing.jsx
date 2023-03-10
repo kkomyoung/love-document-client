@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import LogoImage from '../assets/img_logo.svg'
+import Lottie from '../components/lotties/Lottie'
 import { Link } from 'react-router-dom'
 import {
   ButtonArea,
@@ -14,10 +14,6 @@ const Container = styled.main`
   /* height: 100vh; */
   background-color: ${(props) => props.theme.blue500};
   padding-bottom: 7.6rem;
-`
-
-const LogoImg = styled.img`
-  margin-top: 3.8rem;
 `
 
 const Subtitle = styled.span`
@@ -46,7 +42,7 @@ const Description = styled.p`
 function Landing() {
   return (
     <Container>
-      <LogoImg src={LogoImage} alt="logo-image" />
+      <Lottie data="main" margin="3.8rem 0 0.8rem" />
       <Title>
         <Subtitle>두근 - 두근</Subtitle>
         연애서류합

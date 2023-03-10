@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import Header from '../components/header/Header'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
-import ImgTest from '../assets/img_test.png'
+import Lottie from '../components/lotties/Lottie'
 import { ReactComponent as IconLetter } from '../assets/icon_letter.svg'
 import { ReactComponent as IconAirplane } from '../assets/icon_airplane.svg'
 function Home() {
@@ -15,9 +15,7 @@ function Home() {
           <span>망고님의</span>
           연애서류합
         </StyledTitleArea>
-        <StyledImgWrap>
-          <img src={ImgTest} alt="" />
-        </StyledImgWrap>
+        <Lottie data="home" margin="7.4rem 0 7.4rem" />
         <ButtonArea full>
           <RoundButton as={Link} to="/home/research" color="white">
             <i aria-hidden="true">
@@ -67,17 +65,6 @@ const StyledTitleArea = styled.h1`
     font-weight: 500;
     line-height: 1.2;
     margin-bottom: 0.2rem;
-  }
-`
-
-const StyledImgWrap = styled.figure`
-  width: 100%;
-  margin: 7.4rem 0 7.4rem;
-  text-align: center;
-
-  img {
-    width: 100%;
-    max-width: 31.2rem;
   }
 `
 

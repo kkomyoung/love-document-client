@@ -4,16 +4,14 @@ import { Link } from 'react-router-dom'
 import Header from '../components/header/Header'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import { Title, TextDesc } from '../components/texts/Texts'
-import ImgTest from '../assets/img_test.png'
+import Lottie from '../components/lotties/Lottie'
 
 const StandardComplete = () => {
   return (
     <StyledMain>
       <Header btnClose="/" />
       <StyledAirticle>
-        <StyledImgWrap>
-          <img src={ImgTest} alt="" />
-        </StyledImgWrap>
+        <Lottie data="heart" margin="0 -2.4rem 4.6rem" />
         <Title>내 기준 작성완료</Title>
         <TextDesc>
           <span>내 기준이 저장되었어요 😍</span>
@@ -36,15 +34,10 @@ const StyledAirticle = styled.article`
   padding: 0 2.4rem;
 `
 
-const StyledImgWrap = styled.figure`
-  width: 100%;
-  margin-bottom: 4.3rem;
-  text-align: center;
-
-  img {
-    width: 100%;
-    max-width: 31.2rem;
-  }
-`
+// const StyledImgWrap = styled.figure`
+//   width: 100%;
+//   margin-bottom: 4.3rem;
+//   text-align: center;
+// `
 
 export default StandardComplete

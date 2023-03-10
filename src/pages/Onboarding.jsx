@@ -4,15 +4,14 @@ import { Link } from 'react-router-dom'
 import Header from '../components/header/Header'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import { Title, TextDesc } from '../components/texts/Texts'
-import ImgTest from '../assets/img_test.png'
+import Lottie from '../components/lotties/Lottie'
+
 function Onboarding() {
   return (
     <StyledMain>
       <Header btnBack btnClose="/" />
       <StyledAirticle>
-        <StyledImgWrap>
-          <img src={ImgTest} alt="" />
-        </StyledImgWrap>
+        <Lottie data="puzzle" margin="0 -2.4rem 4.6rem" />
         <Title>연애서류합이란?</Title>
         <TextDesc>
           소개팅을 하기 전 상대방이 나의 이상형과 얼마나 비슷한지 확인할 수 있는
@@ -32,17 +31,6 @@ const StyledMain = styled.main`
 
 const StyledAirticle = styled.article`
   padding: 0 2.4rem;
-`
-
-const StyledImgWrap = styled.figure`
-  width: 100%;
-  margin-bottom: 4.3rem;
-  text-align: center;
-
-  img {
-    width: 100%;
-    max-width: 31.2rem;
-  }
 `
 
 export default Onboarding
