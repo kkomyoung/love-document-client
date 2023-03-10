@@ -21,9 +21,9 @@ function ShareResearch({ name, researchCnt }) {
 
         <DocumentImg src={DocumentImage} alt="document_image" />
 
-        <ButtonArea type="full">
+        <ButtonArea flex full>
           <RoundButton text="링크복사" />
-          <KakaoButton>카톡공유</KakaoButton>
+          <KakaoButton text="카톡공유" />
         </ButtonArea>
       </Box>
     </Container>

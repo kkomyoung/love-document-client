@@ -2,23 +2,30 @@ import React from 'react'
 import styled from 'styled-components'
 import LogoImage from '../assets/img_logo.svg'
 import { Link } from 'react-router-dom'
+import {
+  ButtonArea,
+  RoundButton,
+  TextButton,
+} from '../components/buttons/Buttons'
 
-const Container = styled.div`
+const Container = styled.main`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  /* height: 100vh; */
   background-color: ${(props) => props.theme.blue500};
+  padding-bottom: 7.6rem;
 `
 
 const LogoImg = styled.img`
   margin-top: 3.8rem;
 `
 
-const Subtitle = styled.h2`
+const Subtitle = styled.span`
+  display: block;
   font-weight: 400;
   font-size: 4.5rem;
   color: ${(props) => props.theme.gray100};
-  margin: 1rem 0px 0px 2.6rem;
+  margin: 0 0 0.5rem 0.5rem;
 `
 
 const Title = styled.h1`
@@ -33,50 +40,33 @@ const Description = styled.p`
   font-size: 1.6rem;
   color: ${(props) => props.theme.gray100};
   margin: 2.1rem 2.8rem 0 2.1rem;
-  line-height: 2.24rem;
-`
-
-const StartBtn = styled.button`
-  font-weight: 500;
-  font-size: 1.6rem;
-  color: ${(props) => props.theme.gray900};
-  background-color: ${(props) => props.theme.bgColor};
-  border: 1px solid ${(props) => props.theme.bgColor};
-  border-radius: 53px;
-  padding: 1.8rem 4.05rem;
-  margin: 3.1rem auto 0 auto;
-`
-
-const LoginLinkWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 2.1rem;
-
-  a {
-    color: ${(props) => props.theme.blue700};
-    font-weight: 500;
-    font-size: 1.6rem;
-  }
+  line-height: 1.4;
 `
 
 function Landing() {
   return (
     <Container>
       <LogoImg src={LogoImage} alt="logo-image" />
-      <Subtitle>두근 - 두근</Subtitle>
-      <Title>연애서류합</Title>
+      <Title>
+        <Subtitle>두근 - 두근</Subtitle>
+        연애서류합
+      </Title>
       <Description>
-        소개팅 상대가 내 기준에 얼마나 부합할까? 내 연애 서류를 만들고 답변을
-        받아봐요
+        <span>소개팅 상대가 내 기준에 얼마나 부합할까?</span>
+        <br />
+        <span>내 연애 서류를 만들고 답변을 받아봐요</span>
       </Description>
-      <StartBtn>
-        <Link to="/onboarding">시작하기</Link>
-      </StartBtn>
-      <LoginLinkWrapper>
-        <Link to="/login">
-          <u>이미 질문지를 만들었다면? 로그인</u>
-        </Link>
-      </LoginLinkWrapper>
+      <ButtonArea margin="3.1rem 0 0 0">
+        <RoundButton as={Link} to="/onboarding" color="white" text="시작하기" />
+      </ButtonArea>
+      <ButtonArea margin="2.1rem 0 0 0">
+        <TextButton
+          as={Link}
+          to="/login"
+          type="underline"
+          text="이미 질문지를 만들었다면? 로그인"
+        />
+      </ButtonArea>
     </Container>
   )
 }

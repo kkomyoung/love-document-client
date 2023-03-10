@@ -2,7 +2,7 @@ import React from 'react'
 import Header from '../../components/header/Header'
 import { TextArea, TextDesc, Title } from '../../components/texts/Texts'
 import styled from 'styled-components'
-import { CircleButton } from '../../components/buttons/Buttons'
+// import { CircleButton } from '../../components/buttons/Buttons'
 import ShareResearch from './ShareResearch'
 import WriteStandard from './WriteStandard'
 import Answers from './Answers'
@@ -35,10 +35,7 @@ function ResearchReady() {
   console.log()
   return (
     <Container>
-      <Header>
-        <CircleButton feature="back" />
-        <CircleButton feature="close" />
-      </Header>
+      <Header btnBack btnClose="/home" />
       <TextArea>
         <Title>질문지 준비 완료</Title>
         <TextDesc>
