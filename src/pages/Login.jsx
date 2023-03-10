@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Header from '../components/header/Header'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import { Title } from '../components/texts/Texts'
-import ImgTest from '../assets/img_test.png'
+import { ReactComponent as ImgHeartLock } from '../assets/img_heart_lock.svg'
 import LoginForm from '../components/form/LoginForm'
 
 const LoginHandler = () => {
@@ -16,7 +16,7 @@ const Login = () => {
       <Header btnBack />
       <StyledAirticle>
         <StyledImgWrap>
-          <img src={ImgTest} alt="" />
+          <ImgHeartLock />
         </StyledImgWrap>
         <Title>로그인</Title>
         <StyledLoginFormArea>
@@ -42,13 +42,11 @@ const StyledAirticle = styled.article`
 `
 
 const StyledImgWrap = styled.figure`
-  width: 100%;
   margin-bottom: 4.3rem;
-  text-align: center;
 
-  img {
+  svg {
+    display: block;
     width: 100%;
-    max-width: 31.2rem;
   }
 `
 
