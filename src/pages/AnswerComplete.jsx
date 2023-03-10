@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import Header from '../components/header/Header'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import { Title, TextDesc } from '../components/texts/Texts'
-import ImgTest from '../assets/img_test.png'
+import { ReactComponent as ImgHeartWing } from '../assets/img_heart_wing.svg'
 
 const AnswerComplete = () => {
   const name = '사과'
@@ -14,7 +14,7 @@ const AnswerComplete = () => {
       <Header btnBack btnClose="/" />
       <StyledAirticle>
         <StyledImgWrap>
-          <img src={ImgTest} alt="" />
+          <ImgHeartWing />
         </StyledImgWrap>
         <Title>답변 전달 완료</Title>
         <TextDesc>
@@ -44,13 +44,11 @@ const StyledAirticle = styled.article`
 `
 
 const StyledImgWrap = styled.figure`
-  width: 100%;
-  margin-bottom: 4.3rem;
-  text-align: center;
+  margin: 0 -2.4rem 4.3rem;
 
-  img {
+  svg {
+    display: block;
     width: 100%;
-    max-width: 31.2rem;
   }
 `
 
