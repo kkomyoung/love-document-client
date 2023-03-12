@@ -45,6 +45,7 @@ function ResearchReady() {
         </TextDesc>
       </TextArea>
       <ShareResearch {...member} />
+
       <WriteStandard />
 
       <Answers answers={answers} />
