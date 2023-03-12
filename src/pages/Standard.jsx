@@ -4,6 +4,31 @@ import QuestionBox from '../components/\bquestion/QuestionBox'
 import Header from '../components/header/Header'
 import { TextArea, TextDesc, Title } from '../components/texts/Texts'
 
+const questions = [
+  {
+    id: 24,
+    title: '키는 어느정도를 선호하세요?',
+    type: 'RANGE',
+  },
+  {
+    id: 105,
+    title: '타투 어때요?',
+    type: 'YES-OR-NO',
+  },
+  {
+    id: 36,
+    title: '어떤 종교가 있었으면 하나요?',
+    type: 'MULTIPLE-CHOCIE-MULTIPLE',
+    examples: [
+      { id: 22, text: '무교' },
+      { id: 23, text: '기독교' },
+      { id: 24, text: '천주교' },
+      { id: 25, text: '불교' },
+      { id: 26, text: '기타' },
+    ],
+  },
+]
+
 function Standard() {
   return (
     <StyledMain>
@@ -19,7 +44,7 @@ function Standard() {
         </TextArea>
 
         <StyledSectionQuestion>
-          <QuestionBox category="외모" />
+          <QuestionBox category="외모" questions={questions} />
         </StyledSectionQuestion>
       </StyledAirticle>
     </StyledMain>
