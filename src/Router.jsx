@@ -8,6 +8,7 @@ import Research from './pages/Research'
 import ResearchReadyPage from './pages/research-ready/ResearchReadyPage'
 import StandardComplete from './pages/StandardComplete'
 import AnswerComplete from './pages/AnswerComplete'
+import Standard from './pages/Standard'
 
 function Router() {
   return (
@@ -19,6 +20,7 @@ function Router() {
         <Route path="/home" element={<Home />} />
         <Route path="/research" element={<Research />} />
         <Route path="/research/ready" element={<ResearchReadyPage />} />
+        <Route path="/research/standard" element={<Standard />} />
         <Route
           path="/research/standard/complete"
           element={<StandardComplete />}
