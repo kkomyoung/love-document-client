@@ -7,7 +7,7 @@ const Item = styled.li`
   margin: 0.3rem;
 
   input {
-    display: none;
+    ${(props) => props.theme.a11yHidden}
   }
 
   input + label {

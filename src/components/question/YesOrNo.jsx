@@ -2,14 +2,14 @@ import React from 'react'
 import styled from 'styled-components'
 import ExampleButton from './ExampleButton'
 
-function MultipleChoice({ name, isMultiChoice, examples }) {
+function YesOrNo({ name, examples }) {
   return (
     <StyledBox>
       {examples.map((example) => (
         <ExampleButton
           key={example.id}
           name={name}
-          isMultiChoice={isMultiChoice}
+          isMultiChoice={false}
           id={example.id}
           text={example.text}
         />
@@ -20,15 +20,18 @@ function MultipleChoice({ name, isMultiChoice, examples }) {
 
 const StyledBox = styled.ul`
   display: flex;
-  flex-direction: column;
+
+  li {
+    flex: 1;
+  }
 
   li > label {
     width: 100%;
   }
 
   li + li {
-    margin-top: 0.8rem;
+    margin-left: 0.8rem;
   }
 `
 
-export default MultipleChoice
+export default YesOrNo

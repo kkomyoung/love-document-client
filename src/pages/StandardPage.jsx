@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import QuestionBox from '../components/\bquestion/QuestionBox'
+import QuestionBox from '../components/question/QuestionContainer'
 import Header from '../components/header/Header'
 import { TextArea, TextDesc, Title } from '../components/texts/Texts'
 
@@ -14,11 +14,16 @@ const questions = [
     id: 105,
     title: '타투 어때요?',
     type: 'YES-OR-NO',
+    examples: [
+      { id: 1, text: '괜찮아요' },
+      { id: 2, text: '안돼요' },
+    ],
   },
   {
     id: 36,
     title: '어떤 종교가 있었으면 하나요?',
-    type: 'MULTIPLE-CHOCIE-MULTIPLE',
+    type: 'MULTIPLE-CHOCIE',
+    isMultiChoice: true,
     examples: [
       { id: 22, text: '무교' },
       { id: 23, text: '기독교' },
@@ -29,7 +34,7 @@ const questions = [
   },
 ]
 
-function Standard() {
+function StandardPage() {
   return (
     <StyledMain>
       <Header btnBack />
@@ -63,4 +68,4 @@ const StyledSectionQuestion = styled.section`
   margin-top: 2.8rem;
 `
 
-export default Standard
+export default StandardPage

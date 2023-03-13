@@ -1,42 +1,41 @@
 import React from 'react'
 import styled from 'styled-components'
-import CategoryLabel from '../category/CategoryLabel'
 import MultipleChoice from './MultipleChoice'
+import YesOrNo from './YesOrNo'
 
-function QuestionBox({ category, questions }) {
+function QuestionBox({ category, questionNumber, question }) {
   return (
     <StyledBox>
-      <CategoryLabel category={category} />
-
-      {questions.map((question, index) => (
-        <>
-          <StyledQuestionTitleArea key={question.id}>
-            <StyledQuestionTitle>
-              <span>Q{index + 1}</span>
-            </StyledQuestionTitle>
-            <StyledQuestionTitle>
-              {question.title}
-              {question.type === 'MULTIPLE-CHOCIE-MULTIPLE' && (
-                <p>복수 선택 가능</p>
-              )}
-            </StyledQuestionTitle>
-          </StyledQuestionTitleArea>
-
-          {question.type === 'MULTIPLE-CHOCIE-MULTIPLE' && (
-            <MultipleChoice type="MULTIPLE" examples={question.examples} />
+      <StyledQuestionTitleArea key={question.id}>
+        <StyledQuestionTitle>
+          <span>Q{questionNumber}</span>
+        </StyledQuestionTitle>
+        <StyledQuestionTitle>
+          {question.title}
+          {question.type === 'MULTIPLE-CHOCIE' && question.isMultiChoice && (
+            <p>복수 선택 가능</p>
           )}
-        </>
-      ))}
+        </StyledQuestionTitle>
+      </StyledQuestionTitleArea>
+
+      {question.type === 'MULTIPLE-CHOCIE' && (
+        <MultipleChoice
+          name={category + question.id}
+          isMultiChoice={question.isMultiChoice}
+          examples={question.examples}
+        />
+      )}
+
+      {question.type === 'YES-OR-NO' && (
+        <YesOrNo name={category + question.id} examples={question.examples} />
+      )}
     </StyledBox>
   )
 }
 
-const StyledBox = styled.div`
-  background-color: ${(props) => props.theme.gray100};
-  border-radius: 8px;
-  border: none;
-  padding: 2rem;
-`
+export default QuestionBox
+
+const StyledBox = styled.div``
 
 const StyledQuestionTitleArea = styled.div`
   display: flex;
@@ -61,4 +60,3 @@ const StyledQuestionTitle = styled.h4`
     color: ${(props) => props.theme.gray800};
   }
 `
-export default QuestionBox
