@@ -2,41 +2,52 @@ import React from 'react'
 import styled from 'styled-components'
 import { ReactComponent as IconHeart } from '../../assets/icon_heart.svg'
 
-function Score({ name, id }) {
+function Score({ name, positiveText, negativeText }) {
   return (
     <StyledBox>
-      <StyledButton>
-        <input type="radio" name={name} id={`${name}_1`} />
-        <label htmlFor={`${name}_1`} />
-        <IconHeart fill="white" />
-      </StyledButton>
-      <StyledButton>
-        <input type="radio" name={name} id={`${name}_2`} />
-        <label htmlFor={`${name}_2`} />
-        <IconHeart fill="white" />
-      </StyledButton>
-      <StyledButton>
-        <input type="radio" name={name} id={`${name}_3`} />
-        <label htmlFor={`${name}_3`} />
-        <IconHeart fill="white" />
-      </StyledButton>
-      <StyledButton>
-        <input type="radio" name={name} id={`${name}_4`} />
-        <label htmlFor={`${name}_4`} />
-        <IconHeart fill="white" />
-      </StyledButton>
-      <StyledButton>
-        <input type="radio" name={name} id={`${name}_5`} />
-        <label htmlFor={`${name}_5`} />
-        <IconHeart fill="white" />
-      </StyledButton>
+      <StyledScoreBox>
+        <StyledButton>
+          <input type="radio" name={name} id={`${name}_1`} />
+          <label htmlFor={`${name}_1`} />
+          <IconHeart fill="white" />
+        </StyledButton>
+        <StyledButton>
+          <input type="radio" name={name} id={`${name}_2`} />
+          <label htmlFor={`${name}_2`} />
+          <IconHeart fill="white" />
+        </StyledButton>
+        <StyledButton>
+          <input type="radio" name={name} id={`${name}_3`} />
+          <label htmlFor={`${name}_3`} />
+          <IconHeart fill="white" />
+        </StyledButton>
+        <StyledButton>
+          <input type="radio" name={name} id={`${name}_4`} />
+          <label htmlFor={`${name}_4`} />
+          <IconHeart fill="white" />
+        </StyledButton>
+        <StyledButton>
+          <input type="radio" name={name} id={`${name}_5`} />
+          <label htmlFor={`${name}_5`} />
+          <IconHeart fill="white" />
+        </StyledButton>
+      </StyledScoreBox>
+      <StyledExampleBox>
+        <StyledExampleText>{negativeText}</StyledExampleText>
+        <StyledExampleText>{positiveText}</StyledExampleText>
+      </StyledExampleBox>
     </StyledBox>
   )
 }
 
 export default Score
 
-const StyledBox = styled.ul`
+const StyledBox = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const StyledScoreBox = styled.ul`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -103,4 +114,24 @@ const StyledButton = styled.li`
     bottom: 0;
     margin: auto;
   }
+`
+
+const StyledExampleBox = styled.div`
+  margin-top: 0.8rem;
+
+  & span:nth-child(1) {
+    float: left;
+  }
+  & span:nth-child(2) {
+    float: right;
+  }
+`
+
+const StyledExampleText = styled.span`
+  ${(props) => props.theme.fontSize.label_s_m};
+  color: ${(props) => props.theme.gray700};
+  padding: 0.8rem 1.2rem;
+
+  background-color: ${(props) => props.theme.bgColor};
+  border-radius: 2.6rem;
 `

@@ -31,7 +31,13 @@ function QuestionBox({ category, questionNumber, question }) {
         <YesOrNo name={category + question.id} examples={question.examples} />
       )}
 
-      {question.type === 'SCORE' && <Score name={category + question.id} />}
+      {question.type === 'SCORE' && (
+        <Score
+          name={category + question.id}
+          positiveText={question.positiveText}
+          negativeText={question.negativeText}
+        />
+      )}
     </StyledBox>
   )
 }
