@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import MultipleChoice from './MultipleChoice'
+import Score from './Score'
 import YesOrNo from './YesOrNo'
 
 function QuestionBox({ category, questionNumber, question }) {
@@ -29,6 +30,8 @@ function QuestionBox({ category, questionNumber, question }) {
       {question.type === 'YES-OR-NO' && (
         <YesOrNo name={category + question.id} examples={question.examples} />
       )}
+
+      {question.type === 'SCORE' && <Score name={category + question.id} />}
     </StyledBox>
   )
 }

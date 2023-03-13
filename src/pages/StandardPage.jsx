@@ -32,6 +32,13 @@ const questions = [
       { id: 26, text: '기타' },
     ],
   },
+  {
+    id: 24,
+    title: '스킨십 선호가 어땠으면 하나요?',
+    type: 'SCORE',
+    positiveText: '스킨십 좋아해요',
+    negativeText: '좋아하지 않아요',
+  },
 ]
 
 function StandardPage() {
