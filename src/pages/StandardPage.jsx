@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
 import { TextArea, TextDesc, Title } from '../components/texts/Texts'
-import QuestionContainer from '../components/question/QuestionContainer'
+import QuestionContainer from '../components/question/QuestionContainer'
 import { RoundButton, ButtonArea } from '../components/buttons/Buttons'
 
 const data = {
