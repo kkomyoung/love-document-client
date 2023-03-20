@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import CategoryLabel from '../category/CategoryLabel'
 import QuestionBox from './QuestionBox'
 
-function QuestionContainer({ category, questions }) {
+function QuestionContainer({ category, questions, offset }) {
   return (
     <StyledContainer>
       <CategoryLabel category={category} />
@@ -12,7 +12,7 @@ function QuestionContainer({ category, questions }) {
         <QuestionBox
           key={index}
           category={category}
-          questionNumber={index + 1}
+          questionNumber={offset + index + 1}
           question={question}
         />
       ))}
