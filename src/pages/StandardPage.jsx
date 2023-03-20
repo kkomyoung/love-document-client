@@ -124,12 +124,11 @@ const StyledMain = styled.main`
   padding-bottom: 4.8rem;
 `
 
-const StyledAirticle = styled.article`
-  padding: 0 2.4rem;
-`
+const StyledAirticle = styled.article``
 
 const StyledSectionQuestion = styled.section`
   margin-top: 2.8rem;
+  padding: 0 2.4rem;
 
   & > div + div {
     margin-top: 2.8rem;

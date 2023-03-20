@@ -20,6 +20,8 @@ function QuestionBox({ category, questionNumber, question }) {
         </StyledQuestionTitle>
       </StyledQuestionTitleArea>
 
+      {question.type === 'INPUT' && <div></div>}
+
       {question.type === 'MULTIPLE-CHOCIE' && (
         <MultipleChoice
           name={category + question.id}
