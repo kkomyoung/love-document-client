@@ -1,10 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
-import { Link } from 'react-router-dom'
 import { TextArea, TextDesc, Title } from '../components/texts/Texts'
+import { ReactComponent as IconLetter } from '../assets/icon_letter.svg'
+import DefaultInfo from '../components/question/DefaultInfo'
 import QuestionContainer from '../components/question/QuestionContainer'
-import { RoundButton, ButtonArea } from '../components/buttons/Buttons'
+import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 
 const data = {
   외모: {
@@ -12,12 +13,12 @@ const data = {
     questions: [
       {
         id: 24,
-        title: '키는 어느정도를 선호하세요?',
-        type: 'RANGE',
+        title: '키가 어떻게 되시나요?',
+        type: 'INPUT',
       },
       {
         id: 105,
-        title: '타투 어때요?',
+        title: '타투가 있으신가요?',
         type: 'YES-OR-NO',
         examples: [
           { id: 1, text: '괜찮아요' },
@@ -26,7 +27,7 @@ const data = {
       },
       {
         id: 36,
-        title: '어떤 종교가 있었으면 하나요?',
+        title: '어떤 종교가 있으신가요?',
         type: 'MULTIPLE-CHOCIE',
         isMultiChoice: true,
         examples: [
@@ -87,21 +88,26 @@ const data = {
   },
 }
 
-function StandardPage() {
+function AnswerPage() {
   return (
     <StyledMain>
-      <Header title="내 기준 작성하기" btnBack />
+      <Header title="답변하기" btnBack />
       <StyledAirticle>
         <TextArea>
-          <Title>내 기준 작성하기</Title>
+          <Title>
+            <i aria-hidden="true">
+              <IconLetter />
+            </i>
+            답변하기
+          </Title>
           <TextDesc>
-            <span>내 애인후보.. 이것만큼은.. 절대 지켜!!</span>
-            <br />
-            <span>상대방에게 바라는 조건을 작성해주세요</span>
+            <span>솔직한 답변으로 나와 잘 맞는 사람을 찾아봐요</span>
           </TextDesc>
         </TextArea>
 
         <StyledSectionQuestion>
+          <DefaultInfo />
+
           {data &&
             Object.keys(data).map((category) => (
               <QuestionContainer
@@ -114,17 +120,14 @@ function StandardPage() {
         </StyledSectionQuestion>
 
         <ButtonArea margin="10rem 0rem 0rem 0rem">
-          <RoundButton
-            as={Link}
-            to="/research/standard/complete"
-            size="large"
-            text="확인"
-          />
+          <RoundButton size="large" text="확인" />
         </ButtonArea>
       </StyledAirticle>
     </StyledMain>
   )
 }
+
+export default AnswerPage
 
 const StyledMain = styled.main`
   padding-bottom: 4.8rem;
@@ -140,5 +143,3 @@ const StyledSectionQuestion = styled.section`
     margin-top: 2.8rem;
   }
 `
-
-export default StandardPage

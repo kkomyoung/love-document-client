@@ -20,9 +20,26 @@ const TextArea = ({ children }) => {
 const SubTextArea = ({ children }) => {
   return <StyledSubTextArea>{children}</StyledSubTextArea>
 }
+
 const StyledTitle = styled.h1`
+  display: flex;
+  align-items: center;
   ${(props) => props.theme.fontSize.h1}
   color: ${(props) => props.theme.gray900};
+
+  i {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 4.8rem;
+    height: 4.8rem;
+    margin-right: 0.4rem;
+
+    svg {
+      width: 4rem;
+      height: 4rem;
+    }
+  }
 `
 
 const StyledSubTitle = styled.h2`
