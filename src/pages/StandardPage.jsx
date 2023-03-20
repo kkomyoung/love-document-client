@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
+import { Link } from 'react-router-dom'
 import { TextArea, TextDesc, Title } from '../components/texts/Texts'
 import QuestionContainer from '../components/question/QuestionContainer'
 import { RoundButton, ButtonArea } from '../components/buttons/Buttons'
@@ -113,7 +114,12 @@ function StandardPage() {
         </StyledSectionQuestion>
 
         <ButtonArea margin="10rem 0rem 0rem 0rem">
-          <RoundButton size="large" text="확인" />
+          <RoundButton
+            as={Link}
+            to="/research/standard/complete"
+            size="large"
+            text="확인"
+          />
         </ButtonArea>
       </StyledAirticle>
     </StyledMain>

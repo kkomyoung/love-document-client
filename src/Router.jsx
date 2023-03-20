@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import Landing from './pages/Landing'
 import Onboarding from './pages/Onboarding'
 import Login from './pages/Login'
@@ -12,7 +12,7 @@ import StandardPage from './pages/StandardPage'
 
 function Router() {
   return (
-    <BrowserRouter>
+    <>
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/onboarding" element={<Onboarding />} />
@@ -30,7 +30,7 @@ function Router() {
           element={<AnswerComplete />}
         />
       </Routes>
-    </BrowserRouter>
+    </>
   )
 }
 

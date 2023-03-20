@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import { RoundButton } from '../buttons/Buttons'
 
 const Modal = ({ setOpenModal, title, text, btnConfirm, btnCancle }) => {
@@ -9,6 +10,7 @@ const Modal = ({ setOpenModal, title, text, btnConfirm, btnCancle }) => {
   const closeModal = () => {
     setOpenModal(false)
     document.body.style.overflow = ''
+    window.scrollTo(0, 0)
   }
 
   return (
@@ -25,7 +27,12 @@ const Modal = ({ setOpenModal, title, text, btnConfirm, btnCancle }) => {
             ></RoundButton>
           )}
           {btnConfirm && (
-            <RoundButton text={btnConfirm} onClick={closeModal}></RoundButton>
+            <RoundButton
+              as={Link}
+              to="/research/ready"
+              text={btnConfirm}
+              onClick={closeModal}
+            ></RoundButton>
           )}
         </StyledButtonWrap>
       </div>

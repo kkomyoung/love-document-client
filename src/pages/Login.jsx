@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
+import { Link } from 'react-router-dom'
 import {
   ButtonArea,
   RoundButton,
@@ -10,9 +11,9 @@ import { Title } from '../components/texts/Texts'
 import { ReactComponent as ImgHeartLock } from '../assets/img_heart_lock.svg'
 import LoginForm from '../components/form/LoginForm'
 
-const LoginHandler = () => {
-  console.log('로그인')
-}
+// const LoginHandler = () => {
+//   console.log('로그인')
+// }
 const sendEmail = () => {
   console.log('이메일 문의')
 }
@@ -37,7 +38,8 @@ const Login = () => {
           />
         </ButtonArea>
         <ButtonArea margin="4rem 0 0 0">
-          <RoundButton size="large" text="다음" onClick={LoginHandler} />
+          <RoundButton as={Link} to="/research" size="large" text="다음" />
+          {/* <RoundButton size="large" text="다음" onClick={LoginHandler} /> */}
         </ButtonArea>
       </StyledAirticle>
     </StyledMain>

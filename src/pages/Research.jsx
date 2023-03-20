@@ -79,10 +79,8 @@ function Research() {
       </article>
       {openModal && (
         <Modal
-          title="뒤로 가기"
-          text="질문지 작성 페이지로 돌아갈까요?"
-          btnConfirm="닫기"
-          btnCancle="아니요"
+          text="질문지 닉네임과 비밀번호를 꼭 기억해주세요"
+          btnConfirm="확인"
           setOpenModal={setOpenModal}
         />
       )}

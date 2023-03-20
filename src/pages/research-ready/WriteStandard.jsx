@@ -22,7 +22,7 @@ function WriteStandard() {
         <ButtonArea full margin="2.4rem 0 0 0">
           <RoundButton
             as={Link}
-            to="/"
+            to="/research/standard"
             text="내 기준 작성하기"
             color="pink"
             arrowIcon
