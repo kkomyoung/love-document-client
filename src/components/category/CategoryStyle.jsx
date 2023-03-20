@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import IconHeart from '../../assets/icon_heart.svg'
+import IconHeart from '../../assets/icon_heart_pink.svg'
 import IconPlus from '../../assets/icon_plus.svg'
 
 const Item = styled.li`
