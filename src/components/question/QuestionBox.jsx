@@ -4,6 +4,7 @@ import MultipleChoice from './MultipleChoice'
 import Score from './Score'
 import YesOrNo from './YesOrNo'
 import Range from './Range'
+import Input from '../form/Input'
 
 function QuestionBox({ category, questionNumber, question }) {
   return (
@@ -20,7 +21,7 @@ function QuestionBox({ category, questionNumber, question }) {
         </StyledQuestionTitle>
       </StyledQuestionTitleArea>
 
-      {question.type === 'INPUT' && <div></div>}
+      {question.type === 'INPUT' && <Input />}
 
       {question.type === 'MULTIPLE-CHOCIE' && (
         <MultipleChoice
