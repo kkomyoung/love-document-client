@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import MultipleChoice from './MultipleChoice'
 import Score from './Score'
 import YesOrNo from './YesOrNo'
+import Range from './Range'
 
 function QuestionBox({ category, questionNumber, question }) {
   return (
@@ -38,6 +39,8 @@ function QuestionBox({ category, questionNumber, question }) {
           negativeText={question.negativeText}
         />
       )}
+
+      {question.type === 'RANGE' && <Range />}
     </StyledBox>
   )
 }

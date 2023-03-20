@@ -76,6 +76,13 @@ const GlobalStyle = createGlobalStyle`
     border-spacing: 0;
   }
 
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+  }
+
   @font-face {
     font-family: 'Pretendard';
     font-weight: 300;
