@@ -120,7 +120,7 @@ function AnswerPage() {
         </StyledSectionQuestion>
 
         <ButtonArea margin="10rem 0rem 0rem 0rem">
-          <RoundButton size="large" text="확인" />
+          <RoundButton size="large" text="저장" />
         </ButtonArea>
       </StyledAirticle>
     </StyledMain>
