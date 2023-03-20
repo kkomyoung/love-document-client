@@ -1,3 +1,15 @@
+const a11yHidden = `
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0); /* 구형 브라우저를 위해 사용 */
+  clip-path: polygon(0 0, 0 0, 0 0); /* inset(50%) 와 동일한 표현 */
+  border: 0;
+`
+
 const fontWeight = {
   medium: 'font-weight: 500',
   semibold: 'font-weight: 600',
@@ -17,8 +29,8 @@ const fontSize = {
   label_l: 'font-size: 1.8rem; line-height: 1;',
   label_m_m: `font-size: 1.6rem; line-height: 1; ${fontWeight.medium};`,
   label_m_sb: `font-size: 1.6rem; line-height: 1; ${fontWeight.semibold};`,
-  // label_s_m: `font-size: 1.4rem; line-height: 1; ${fontWeight.medium};`,
-  // label_s_sb: `font-size: 1.4rem; line-height: 1; ${fontWeight.semibold};`,
+  label_s_m: `font-size: 1.4rem; line-height: 1; ${fontWeight.medium};`,
+  label_s_sb: `font-size: 1.4rem; line-height: 1; ${fontWeight.semibold};`,
 
   // body
   b1: 'font-size: 1.6rem; line-height: 1.6;',
@@ -28,7 +40,7 @@ const fontSize = {
 const theme = {
   fontWeight,
   fontSize,
-
+  a11yHidden,
   // color
   white: '#FFFFFF',
   bgColor: '#FFFFFF',

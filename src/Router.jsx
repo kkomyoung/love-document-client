@@ -5,9 +5,10 @@ import Onboarding from './pages/Onboarding'
 import Login from './pages/Login'
 import Home from './pages/Home'
 import Research from './pages/Research'
-import ResearchReadyPage from './pages/research-ready/ResearchReadyPage'
+import ResearchReadyPage from './pages/research-ready'
 import StandardComplete from './pages/StandardComplete'
 import AnswerComplete from './pages/AnswerComplete'
+import StandardPage from './pages/StandardPage'
 
 function Router() {
   return (
@@ -19,6 +20,7 @@ function Router() {
         <Route path="/home" element={<Home />} />
         <Route path="/research" element={<Research />} />
         <Route path="/research/ready" element={<ResearchReadyPage />} />
+        <Route path="/research/standard" element={<StandardPage />} />
         <Route
           path="/research/standard/complete"
           element={<StandardComplete />}
