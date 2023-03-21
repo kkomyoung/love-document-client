@@ -35,22 +35,23 @@ function ResearchReady() {
   console.log()
   return (
     <Container>
-      <Header btnBack btnClose="/home" />
-      <TextArea>
-        <Title>질문지 준비 완료</Title>
-        <TextDesc>
-          상대에게 질문지를 보낼 준비가 완료되었어요
-          <br />
-          링크를 공유하고 답변을 요청해보세요
-        </TextDesc>
-      </TextArea>
-      <ShareResearch {...member} />
+      <Header title="질문지 준비 완료" btnBack btnClose="/home" />
+      <article>
+        <TextArea>
+          <Title>질문지 준비 완료</Title>
+          <TextDesc>
+            상대에게 질문지를 보낼 준비가 완료되었어요
+            <br />
+            링크를 공유하고 답변을 요청해보세요
+          </TextDesc>
+        </TextArea>
+        <ShareResearch {...member} />
 
-      <WriteStandard />
+        <WriteStandard />
 
-      <Answers answers={answers} />
+        <Answers answers={answers} />
 
-      {/* <AnswerContainer>
+        {/* <AnswerContainer>
         <TextArea>
           <Title3MIocn icon={LoveLetterIcon}>도착한 답변</Title3MIocn>
         </TextArea>
@@ -62,11 +63,12 @@ function ResearchReady() {
         </AnswersBox>
       </AnswerContainer>{' '}
       */}
+      </article>
     </Container>
   )
 }
 
-const Container = styled.div`
+const Container = styled.main`
   padding-bottom: 2rem;
 `
 
