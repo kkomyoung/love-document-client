@@ -9,11 +9,12 @@ import {
 } from '../components/buttons/Buttons'
 
 const Container = styled.main`
-  display: flex;
-  flex-direction: column;
-  /* height: 100vh; */
   background-color: ${(props) => props.theme.blue500};
-  padding-bottom: 7.6rem;
+  padding: 5rem 0 7.6rem;
+
+  @media (max-width: 499px) {
+    min-height: calc(100vh - 12.6rem);
+  }
 `
 
 const Subtitle = styled.span`
@@ -42,7 +43,7 @@ const Description = styled.p`
 function Landing() {
   return (
     <Container>
-      <Lottie data="main" margin="3.8rem 0 0.8rem" />
+      <Lottie data="main" />
       <Title>
         <Subtitle>두근 - 두근</Subtitle>
         연애서류합

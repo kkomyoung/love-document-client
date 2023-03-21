@@ -43,11 +43,10 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 400;
     line-height: 1;
     color: ${(props) => props.theme.gray800};
-    background: #e1e1e1;
+    background: #ffffff;
   }
 
   #wrap {
-    background: #fff;
     max-width: 768px;
     width: 100%;
     margin: 0 auto;
@@ -65,6 +64,7 @@ const GlobalStyle = createGlobalStyle`
     color:inherit;
     border: none;
     background: none;
+    cursor: pointer;
   }
 
   ol, ul, li {
@@ -126,6 +126,58 @@ const GlobalStyle = createGlobalStyle`
     src: local('Pretendard Bold'),
         url('../fonts/Pretendard-Bold.woff2') format('woff2'),
         url('../fonts/Pretendard-Bold.woff') format('woff');
+  }
+
+  .pageHead {
+    display:none;
+  }
+
+  @media (min-width: 500px) {
+    
+    .pageHead {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      width: 100%;
+      height: 60px;
+      background: #fff;
+      text-align: center;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2.4rem;
+      color: #8f8f99;
+      font-weight: 700;
+      border-bottom: 1px solid #F0EEF6;
+    }
+
+    body {
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #root {
+      width: 100%;
+      height: 100%;
+    }
+    
+    #wrap {
+      position: relative;
+      width: 360px;
+      max-height: 77.93vh;
+      margin-top: calc(60px + 6.9477vh);
+      overflow-y: scroll;
+      border-radius: 8px;
+      -ms-overflow-style: none; /* 인터넷 익스플로러 */
+      scrollbar-width: none; /* 파이어폭스 */
+      border: 1px solid #ddd;
+      
+    }
+
+    #wrap::-webkit-scrollbar {
+      display: none; /* 크롬, 사파리, 오페라, 엣지 */
+    }
   }
 
   

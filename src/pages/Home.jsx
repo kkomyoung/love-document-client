@@ -38,10 +38,12 @@ function Home() {
 }
 
 const StyledMain = styled.main`
-  padding-bottom: 4.8rem;
+  padding: 1rem 0 4.8rem;
   background: #79c7ff;
-  padding-top: 1rem;
-  min-height: 100vh;
+
+  @media (max-width: 499px) {
+    min-height: calc(100vh - 5.8rem);
+  }
 
   header {
     position: absolute;
@@ -51,7 +53,7 @@ const StyledMain = styled.main`
 `
 
 const StyledAirticle = styled.article`
-  padding: 0 2.4rem;
+  padding: 0 2.4rem !important;
 `
 
 const StyledTitleArea = styled.h1`

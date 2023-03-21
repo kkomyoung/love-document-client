@@ -8,6 +8,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
+      <p className="pageHead">두근-두근 연애서류합</p>
       <div id="wrap">
         <Router />
       </div>
