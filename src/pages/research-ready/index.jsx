@@ -35,7 +35,7 @@ function ResearchReady() {
   console.log()
   return (
     <Container>
-      <Header title="질문지 준비 완료" btnBack btnClose="/home" />
+      <Header title="질문지 준비 완료" btnBack btnHome />
       <article>
         <TextArea>
           <Title>질문지 준비 완료</Title>

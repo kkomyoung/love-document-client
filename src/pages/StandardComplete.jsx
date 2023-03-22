@@ -9,7 +9,7 @@ import Lottie from '../components/lotties/Lottie'
 const StandardComplete = () => {
   return (
     <StyledMain>
-      <Header btnClose="/" />
+      <Header btnHome />
       <StyledAirticle>
         <Lottie data="heart" margin="0 -2.4rem 4.6rem" />
         <Title>내 기준 작성완료</Title>

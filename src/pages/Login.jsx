@@ -9,7 +9,7 @@ import {
 } from '../components/buttons/Buttons'
 import { Title } from '../components/texts/Texts'
 import { ReactComponent as ImgHeartLock } from '../assets/img_heart_lock.svg'
-import LoginForm from '../components/form/LoginForm'
+import { LoginForm } from '../components/form/LoginForm'
 
 // const LoginHandler = () => {
 //   console.log('로그인')

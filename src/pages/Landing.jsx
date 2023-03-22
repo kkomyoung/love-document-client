@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import changeBgColor from '../utils/changeBgColor'
 import Lottie from '../components/lotties/Lottie'
 import { Link } from 'react-router-dom'
 import {
@@ -8,39 +9,8 @@ import {
   TextButton,
 } from '../components/buttons/Buttons'
 
-const Container = styled.main`
-  background-color: ${(props) => props.theme.blue500};
-  padding: 5rem 0 7.6rem;
-
-  @media (max-width: 499px) {
-    min-height: calc(100vh - 12.6rem);
-  }
-`
-
-const Subtitle = styled.span`
-  display: block;
-  font-weight: 400;
-  font-size: 4.5rem;
-  color: ${(props) => props.theme.gray100};
-  margin: 0 0 0.5rem 0.5rem;
-`
-
-const Title = styled.h1`
-  font-weight: 700;
-  font-size: 7.5rem;
-  color: ${(props) => props.theme.gray100};
-  margin: 0.5rem 0 0 2.1rem;
-`
-
-const Description = styled.p`
-  font-weight: 500;
-  font-size: 1.6rem;
-  color: ${(props) => props.theme.gray100};
-  margin: 2.1rem 2.8rem 0 2.1rem;
-  line-height: 1.4;
-`
-
-function Landing() {
+const Landing = () => {
+  changeBgColor('#79c7ff')
   return (
     <Container>
       <Lottie data="main" />
@@ -68,4 +38,36 @@ function Landing() {
   )
 }
 
+const Container = styled.main`
+  background-color: ${(props) => props.theme.blue500};
+  padding: 5rem 0 7.6rem;
+
+  @media (max-width: 499px) {
+    min-height: calc(100vh - 12.6rem);
+  }
+`
+
+const Subtitle = styled.span`
+  display: block;
+  font-weight: 400;
+  font-size: 4.5rem;
+  color: ${(props) => props.theme.gray100};
+  margin: 0 0 0.5rem 0.5rem;
+`
+
+const Title = styled.h1`
+  font-weight: 700;
+  font-size: 7.5rem;
+  color: ${(props) => props.theme.gray100};
+  margin: 2.1rem;
+  letter-spacing: -0.03em;
+`
+
+const Description = styled.p`
+  font-weight: 500;
+  font-size: 1.6rem;
+  color: ${(props) => props.theme.gray100};
+  margin: 2.1rem 2.8rem 0 2.1rem;
+  line-height: 1.4;
+`
 export default Landing

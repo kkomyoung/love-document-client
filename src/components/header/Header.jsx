@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Link, useNavigate } from 'react-router-dom'
 import { CircleButton } from '../buttons/Buttons'
 
-const Header = ({ title, btnBack, btnClose, btnDelete, btnSetting }) => {
+const Header = ({ title, btnBack, btnHome, btnDelete, btnSetting }) => {
   const navigate = useNavigate()
   const [isScrolled, setIsScrolled] = useState(false)
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 500)
@@ -42,22 +42,11 @@ const Header = ({ title, btnBack, btnClose, btnDelete, btnSetting }) => {
   return (
     <StyledHeader className={isScrolled ? 'on' : ''}>
       {btnBack && (
-        <CircleButton
-          as="a"
-          onClick={handleGoBack}
-          feature="back"
-          className="left"
-        />
+        <CircleButton onClick={handleGoBack} feature="back" className="left" />
       )}
       {title && <p>{title}</p>}
-      {btnClose && (
-        <CircleButton
-          as={typeof btnClose === 'string' ? Link : undefined}
-          to={typeof btnClose === 'string' ? btnClose : undefined}
-          onClick={typeof btnClose === 'function' ? btnClose : undefined}
-          feature="close"
-          className="right"
-        />
+      {btnHome && (
+        <CircleButton as={Link} to="/home" feature="home" className="right" />
       )}
       {btnDelete && (
         <CircleButton

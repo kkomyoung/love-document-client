@@ -165,7 +165,8 @@ const GlobalStyle = createGlobalStyle`
     #wrap {
       position: relative;
       width: 360px;
-      max-height: 77.93vh;
+      /* max-height: 77.93vh; */
+      height: 77.93vh;
       margin-top: calc(60px + 6.9477vh);
       overflow-y: scroll;
       border-radius: 8px;

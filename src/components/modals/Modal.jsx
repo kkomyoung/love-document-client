@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
 import { RoundButton } from '../buttons/Buttons'
 
 const Modal = ({ setOpenModal, title, text, btnConfirm, btnCancle }) => {
@@ -28,12 +27,7 @@ const Modal = ({ setOpenModal, title, text, btnConfirm, btnCancle }) => {
               ></RoundButton>
             )}
             {btnConfirm && (
-              <RoundButton
-                as={Link}
-                to="/research/ready"
-                text={btnConfirm}
-                onClick={closeModal}
-              ></RoundButton>
+              <RoundButton text={btnConfirm} onClick={closeModal}></RoundButton>
             )}
           </StyledButtonWrap>
         </div>

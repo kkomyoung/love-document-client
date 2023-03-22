@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import IconArrowNext from '../../assets/icon_arrow_next.svg'
 import { ReactComponent as IconKakaoLogo } from '../../assets/icon_logo_kakao.svg'
 import { ReactComponent as IconArrowPrev } from '../../assets/icon_arrow_prev.svg'
-import { ReactComponent as IconClose } from '../../assets/icon_close.svg'
+import { ReactComponent as IconHome } from '../../assets/icon_home.svg'
 import { ReactComponent as IconDelete } from '../../assets/icon_delete.svg'
 import { ReactComponent as IconSetting } from '../../assets/icon_setting.svg'
 
@@ -11,7 +11,7 @@ const CircleButton = ({ as, to, onClick, feature, className }) => {
   return (
     <StyledCircleButton as={as} to={to} onClick={onClick} className={className}>
       {feature === 'back' && <IconArrowPrev />}
-      {feature === 'close' && <IconClose />}
+      {feature === 'home' && <IconHome />}
       {feature === 'delete' && <IconDelete />}
       {feature === 'setting' && <IconSetting />}
     </StyledCircleButton>
@@ -80,6 +80,7 @@ const RoundButton = ({
   onClick,
   size,
   color,
+  border,
   text,
   arrowIcon,
   children,
@@ -92,6 +93,7 @@ const RoundButton = ({
       onClick={onClick}
       size={size}
       color={color}
+      border={border}
       className="btn"
       disabled={disabled}
     >
@@ -185,6 +187,15 @@ const StyledRoundButton = styled.button`
         &:hover {
           background-color: ${props.theme.gray800};
         }
+      `
+    }
+  }}
+
+  // border 유무
+  ${(props) => {
+    if (props.border) {
+      return `
+        border: 1px solid ${props.theme.gray300};
       `
     }
   }}
