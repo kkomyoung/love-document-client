@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
+import { useQuery } from 'react-query'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
 import CategoryBoxList from '../components/category/Category'
 import LoginForm from '../components/form/LoginForm'
 import { Modal } from '../components/modals/Modal'
-
 import { ReactComponent as IconAirplane } from '../assets/icon_airplane.svg'
-
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import {
   TextArea,
@@ -36,14 +35,28 @@ const dummy = [
 function Research() {
   const [openModal, setOpenModal] = useState(false)
 
+  const { isLoading, error, data } = useQuery(['todos'], () =>
+    fetch('https://jsonplaceholder.typicode.com/todos').then((res) =>
+      res.json()
+    )
+  )
+
+  if (isLoading) return 'Loading...'
+
+  if (error) return `An error has occurred: ${error.message}`
+
   const showModal = () => {
     setOpenModal(true)
   }
-
   return (
     <StyledMain>
       <Header title="질문지 만들기" btnBack />
       <article>
+        <div>
+          {data.map((todo) => (
+            <div key={todo.id}>{todo.title}</div>
+          ))}
+        </div>
         <TextArea>
           <Title>질문지 만들기</Title>
           <TextDesc>
