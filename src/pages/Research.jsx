@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
 import CategoryBoxList from '../components/category/Category'
-import LoginForm from '../components/form/LoginForm'
+import { LoginForm } from '../components/form/LoginForm'
 import { Modal } from '../components/modals/Modal'
 
 import { ReactComponent as IconAirplane } from '../assets/icon_airplane.svg'

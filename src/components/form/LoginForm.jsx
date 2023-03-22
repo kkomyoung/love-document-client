@@ -85,4 +85,4 @@ const StyledLoginInput = styled.div`
   }
 `
 
-export default LoginForm
+export { LoginInput, LoginForm }
