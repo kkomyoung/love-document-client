@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
-import { Link } from 'react-router-dom'
 import {
   ButtonArea,
   RoundButton,
@@ -11,14 +10,67 @@ import { Title } from '../components/texts/Texts'
 import { ReactComponent as ImgHeartLock } from '../assets/img_heart_lock.svg'
 import { LoginForm } from '../components/form/LoginForm'
 
-// const LoginHandler = () => {
-//   console.log('로그인')
-// }
 const sendEmail = () => {
   console.log('이메일 문의')
 }
 
 const Login = () => {
+  const [valueNickname, setValueNickname] = useState('')
+  const [valuePassword, setValuePassword] = useState('')
+  const [errorNickname, setErrorNickname] = useState(false)
+  const [errorPassword, setErrorPassword] = useState(false)
+  const [errorMessageNickname, setErrorMessageNickname] = useState('')
+  const [errorMessagePassword, setErrorMessagePassword] = useState('')
+
+  const handlerLogin = () => {
+    const isValid = validateInputs()
+
+    if (isValid) {
+      console.log('로그인')
+    }
+  }
+
+  const validateInputs = () => {
+    let error = false
+
+    // 닉네임
+    if (valueNickname === '') {
+      setErrorNickname(true)
+      setErrorMessageNickname('닉네임을 입력해주세요')
+      error = true
+    } else if (valueNickname.length > 10) {
+      setErrorNickname(true)
+      setErrorMessageNickname('1~10자 이내로 입력해주세요')
+      error = true
+    } else {
+      setErrorNickname(false)
+      setErrorMessageNickname('')
+    }
+
+    // 비밀번호
+    if (valuePassword === '') {
+      setErrorPassword(true)
+      setErrorMessagePassword('비밀번호를 입력해주세요')
+      error = true
+    } else if (valuePassword.length < 4 || valuePassword.length > 20) {
+      setErrorPassword(true)
+      setErrorMessagePassword('4~20자 이내로 입력해주세요')
+      error = true
+    } else {
+      setErrorPassword(false)
+      setErrorMessagePassword('')
+    }
+
+    return !error
+  }
+
+  const handleNicknameChange = (e) => {
+    setValueNickname(e.target.value)
+  }
+  const handlePasswordChange = (e) => {
+    setValuePassword(e.target.value)
+  }
+
   return (
     <StyledMain>
       <Header btnBack />
@@ -28,7 +80,16 @@ const Login = () => {
         </StyledImgWrap>
         <Title>로그인</Title>
         <StyledLoginFormArea>
-          <LoginForm />
+          <LoginForm
+            valueNickname={valueNickname}
+            valuePassword={valuePassword}
+            errorNickname={errorNickname}
+            errorPassword={errorPassword}
+            errorMessageNickname={errorMessageNickname}
+            errorMessagePassword={errorMessagePassword}
+            handleNicknameChange={handleNicknameChange}
+            handlePasswordChange={handlePasswordChange}
+          />
         </StyledLoginFormArea>
         <ButtonArea margin="1.6rem 0 0 0">
           <TextButton
@@ -38,8 +99,7 @@ const Login = () => {
           />
         </ButtonArea>
         <ButtonArea margin="4rem 0 0 0">
-          <RoundButton as={Link} to="/research" size="large" text="다음" />
-          {/* <RoundButton size="large" text="다음" onClick={LoginHandler} /> */}
+          <RoundButton size="large" text="다음" onClick={handlerLogin} />
         </ButtonArea>
       </StyledAirticle>
     </StyledMain>

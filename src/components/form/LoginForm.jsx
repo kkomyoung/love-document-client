@@ -5,34 +5,70 @@ import { ReactComponent as IconUser } from '../../assets/icon_user.svg'
 import { ReactComponent as IconLock } from '../../assets/icon_lock.svg'
 import { ReactComponent as IconWarning } from '../../assets/icon_warning.svg'
 
-const LoginInput = ({ type, placeholder, error }) => {
+const LoginInput = ({
+  className,
+  placeholder,
+  error,
+  errorMessage,
+  inputValue,
+  handleInputChange,
+}) => {
   const iconColor = error ? theme.pink700 : theme.gray500
 
   return (
-    <StyledLoginInput type={type} error={error}>
+    <StyledLoginInput error={error}>
       <div className="input-box">
         <i aria-hidden="true">
-          {type === 'user' && <IconUser fill={iconColor} />}
-          {type === 'password' && <IconLock fill={iconColor} />}
+          {className === 'nickname' && <IconUser fill={iconColor} />}
+          {className === 'password' && <IconLock fill={iconColor} />}
         </i>
-        <input type="text" placeholder={placeholder} />
+        <input
+          className={className}
+          type="text"
+          placeholder={placeholder}
+          value={inputValue}
+          onChange={handleInputChange}
+        />
         {error && (
           <i aria-hidden="true">
             <IconWarning />
           </i>
         )}
       </div>
-      {error && <span className="message">error message</span>}
+      {error && <span className="message">{errorMessage}</span>}
     </StyledLoginInput>
   )
 }
 
-const LoginForm = () => {
+const LoginForm = ({
+  valueNickname,
+  valuePassword,
+  errorNickname,
+  errorPassword,
+  errorMessageNickname,
+  errorMessagePassword,
+  handleNicknameChange,
+  handlePasswordChange,
+}) => {
   return (
-    <form action="">
-      <LoginInput type="user" placeholder="닉네임 (최대 10자)" />
-      <LoginInput error type="password" placeholder="비밀번호 (최소 8자)" />
-    </form>
+    <>
+      <LoginInput
+        inputValue={valueNickname}
+        error={errorNickname}
+        errorMessage={errorMessageNickname}
+        className="nickname"
+        handleInputChange={handleNicknameChange}
+        placeholder="닉네임 (최소 1자, 최대 10자)"
+      />
+      <LoginInput
+        inputValue={valuePassword}
+        error={errorPassword}
+        errorMessage={errorMessagePassword}
+        className="password"
+        handleInputChange={handlePasswordChange}
+        placeholder="비밀번호 (최소 4자, 최대 20자)"
+      />
+    </>
   )
 }
 
