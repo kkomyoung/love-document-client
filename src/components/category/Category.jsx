@@ -1,37 +1,27 @@
 import React from 'react'
 import { Item, ItemList, Box } from './CategoryStyle'
 
-const CategoryItem = ({ items, index, category }) => {
+const CategoryItem = ({ item, id }) => {
   return (
     <Item>
-      <input
-        type="checkbox"
-        name={category.title}
-        id={'check' + category.id + '_' + index}
-      />
-      <label htmlFor={'check' + category.id + '_' + index}>
+      <input type="checkbox" name={item.title} id={`check${id}_${item.id}`} />
+      <label htmlFor={`check${id}_${item.id}`}>
         <i aria-hidden="true"></i>
-        <span>{items}</span>
+        <span>{item.title}</span>
       </label>
     </Item>
   )
 }
 
-const CategoryItemList = ({ category }) => {
+const CategoryItemList = ({ itemList, id }) => {
   return (
     <ItemList>
-      {category.items.map((item, index) => (
-        <CategoryItem
-          key={index}
-          items={item}
-          index={index}
-          category={category}
-        ></CategoryItem>
+      {itemList.map((item, index) => (
+        <CategoryItem key={item.id} id={id} item={item}></CategoryItem>
       ))}
     </ItemList>
   )
 }
-
 const CategoryBox = ({ category }) => {
   return (
     <Box>
@@ -39,16 +29,20 @@ const CategoryBox = ({ category }) => {
         <i aria-hidden="true">👀</i>
         {category.title}
       </strong>
-      <CategoryItemList category={category}></CategoryItemList>
+      <CategoryItemList
+        itemList={category.categoryItemList}
+        id={category.id}
+      ></CategoryItemList>
     </Box>
   )
 }
 
 const CategoryBoxList = ({ data }) => {
+  console.log(data)
   return (
     <form action="">
       {data.map((category) => (
-        <CategoryBox key={category.id} category={category} />
+        <CategoryBox key={category.id} category={category}></CategoryBox>
       ))}
     </form>
   )

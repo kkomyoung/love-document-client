@@ -1,12 +1,11 @@
 import React, { useState } from 'react'
+import { useQuery } from 'react-query'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
 import CategoryBoxList from '../components/category/Category'
 import { LoginForm } from '../components/form/LoginForm'
 import { Modal } from '../components/modals/Modal'
-
 import { ReactComponent as IconAirplane } from '../assets/icon_airplane.svg'
-
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import {
   TextArea,
@@ -16,30 +15,22 @@ import {
   TextDesc,
 } from '../components/texts/Texts'
 
-const dummy = [
-  {
-    id: 1,
-    title: '외모',
-    items: ['키', '체형', '쌍커풀', '피부', '안경', '타투'],
-  },
-  {
-    id: 2,
-    title: '가치관',
-    items: ['종교', '결혼관', '자녀관', '정치성향', '술', '흡연'],
-  },
-  {
-    id: 3,
-    title: '연애스타일',
-    items: ['연애리스크', '만남 빈도', '연락 빈도', '스킨십', '표현'],
-  },
-]
 function Research() {
   const [openModal, setOpenModal] = useState(false)
+
+  const { isLoading, error, data } = useQuery(['categories'], () =>
+    fetch('http://api-dev.love-document.com/categories').then((res) =>
+      res.json()
+    )
+  )
+
+  if (isLoading) return 'Loading...'
+
+  if (error) return console.log(error.message)
 
   const showModal = () => {
     setOpenModal(true)
   }
-
   return (
     <StyledMain>
       <Header title="질문지 만들기" btnBack />
@@ -53,7 +44,7 @@ function Research() {
           </TextDesc>
         </TextArea>
         <StyledSectionCategory>
-          <CategoryBoxList data={dummy}></CategoryBoxList>
+          <CategoryBoxList data={data}></CategoryBoxList>
         </StyledSectionCategory>
         <StyledSectionLogin>
           <SubTextArea>
