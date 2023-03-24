@@ -31,7 +31,13 @@ function Setting() {
                 border="true"
               />
               <RoundButton text="이메일 문의" color="white" border="true" />
-              <RoundButton text="회원 탈퇴" color="white" border="true" />
+              <RoundButton
+                as={Link}
+                to="/setting/unregister"
+                text="회원 탈퇴"
+                color="white"
+                border="true"
+              />
               <RoundButton
                 text="로그아웃"
                 color="white"

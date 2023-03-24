@@ -24,8 +24,8 @@ function Router() {
         <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/unregister" element={<Unregister />} />
         <Route path="/setting" element={<Setting />} />
+        <Route path="/setting/unregister" element={<Unregister />} />
         <Route path="/setting/modify" element={<Modify />} />
         <Route path="/setting/modify/username" element={<ModifyUsername />} />
         <Route path="/setting/modify/password" element={<ModifyPassword />} />
