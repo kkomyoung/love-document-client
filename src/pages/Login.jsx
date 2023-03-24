@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useMutation } from 'react-query'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
 import {
@@ -13,7 +14,6 @@ import { LoginForm } from '../components/form/LoginForm'
 const sendEmail = () => {
   console.log('이메일 문의')
 }
-
 const Login = () => {
   const [valueNickname, setValueNickname] = useState('')
   const [valuePassword, setValuePassword] = useState('')
@@ -22,11 +22,25 @@ const Login = () => {
   const [errorMessageNickname, setErrorMessageNickname] = useState('')
   const [errorMessagePassword, setErrorMessagePassword] = useState('')
 
-  const handlerLogin = () => {
+  const loginMutation = useMutation((body) => {
+    return fetch('http://api-dev.love-document.com/users/login', {
+      method: 'POST',
+      body: JSON.stringify(body),
+    }).then((res) => res.json())
+  })
+
+  const handlerLogin = (e) => {
+    e.preventDefault()
     const isValid = validateInputs()
 
     if (isValid) {
-      console.log('로그인')
+      loginMutation.mutate({ nickname: valueNickname, password: valuePassword })
+
+      if (loginMutation.isLoading) return 'Loading...'
+
+      if (loginMutation.isError) return console.log(loginMutation.error.message)
+
+      console.log(loginMutation.data)
     }
   }
 
