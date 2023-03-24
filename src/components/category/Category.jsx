@@ -36,7 +36,6 @@ const CategoryBox = ({ category }) => {
 }
 
 const CategoryBoxList = ({ data }) => {
-  console.log(data)
   return (
     <form action="">
       {data.map((category) => (

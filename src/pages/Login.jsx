@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useMutation } from 'react-query'
+// import { useMutation } from 'react-query'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
 import {
@@ -9,7 +9,8 @@ import {
 } from '../components/buttons/Buttons'
 import { Title } from '../components/texts/Texts'
 import { ReactComponent as ImgHeartLock } from '../assets/img_heart_lock.svg'
-import { LoginForm } from '../components/form/LoginForm'
+import LoginForm from '../components/form/LoginForm'
+import validateLogin from '../utils/validateLogin'
 
 const sendEmail = () => {
   console.log('이메일 문의')
@@ -22,60 +23,48 @@ const Login = () => {
   const [errorMessageNickname, setErrorMessageNickname] = useState('')
   const [errorMessagePassword, setErrorMessagePassword] = useState('')
 
-  const loginMutation = useMutation((body) => {
-    return fetch('http://api-dev.love-document.com/users/login', {
-      method: 'POST',
-      body: JSON.stringify(body),
-    }).then((res) => res.json())
-  })
+  // const login = (info) => {
+  //   fetch('http://api-dev.love-document.com/users/login', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(info),
+  //   }).then((res) => res.json())
+  // }
+
+  // const { mutate } = useMutation(login, {
+  //   onMutate: (variables) => {
+  //     console.log('onMutate', variables)
+  //   },
+  //   onSuccess: (data) => {
+  //     console.log('응답 값:', data)
+  //   },
+  //   onError: (error) => {
+  //     // 요청에 에러가 발생된 경우
+  //     console.log('onError', error)
+  //   },
+  //   onSettled: () => {
+  //     // 요청이 성공하든, 에러가 발생되든 실행하고 싶은 경우
+  //     console.log('onSettled')
+  //   },
+  // })
 
   const handlerLogin = (e) => {
     e.preventDefault()
-    const isValid = validateInputs()
+    const isValid = validateLogin(
+      valueNickname,
+      valuePassword,
+      setErrorNickname,
+      setErrorPassword,
+      setErrorMessageNickname,
+      setErrorMessagePassword
+    )
 
     if (isValid) {
-      loginMutation.mutate({ nickname: valueNickname, password: valuePassword })
-
-      if (loginMutation.isLoading) return 'Loading...'
-
-      if (loginMutation.isError) return console.log(loginMutation.error.message)
-
-      console.log(loginMutation.data)
+      console.log('로그인')
+      // mutate({ nickname: valueNickname, password: valuePassword })
     }
-  }
-
-  const validateInputs = () => {
-    let error = false
-
-    // 닉네임
-    if (valueNickname === '') {
-      setErrorNickname(true)
-      setErrorMessageNickname('닉네임을 입력해주세요')
-      error = true
-    } else if (valueNickname.length > 10) {
-      setErrorNickname(true)
-      setErrorMessageNickname('1~10자 이내로 입력해주세요')
-      error = true
-    } else {
-      setErrorNickname(false)
-      setErrorMessageNickname('')
-    }
-
-    // 비밀번호
-    if (valuePassword === '') {
-      setErrorPassword(true)
-      setErrorMessagePassword('비밀번호를 입력해주세요')
-      error = true
-    } else if (valuePassword.length < 4 || valuePassword.length > 20) {
-      setErrorPassword(true)
-      setErrorMessagePassword('4~20자 이내로 입력해주세요')
-      error = true
-    } else {
-      setErrorPassword(false)
-      setErrorMessagePassword('')
-    }
-
-    return !error
   }
 
   const handleNicknameChange = (e) => {
