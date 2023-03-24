@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Header from '../components/header/Header'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import { TextArea, Title, TextDesc } from '../components/texts/Texts'
-import { LoginInput } from '../components/form/LoginForm'
+import LoginInput from '../components/form/LoginInput'
 
 function ModifyPassword() {
   return (

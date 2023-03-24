@@ -1,5 +1,6 @@
 import React from 'react'
 import { Item, ItemList, Box } from './CategoryStyle'
+import CategoryLabel from './CategoryLabel'
 
 const CategoryItem = ({ item, id }) => {
   return (
@@ -25,10 +26,7 @@ const CategoryItemList = ({ itemList, id }) => {
 const CategoryBox = ({ category }) => {
   return (
     <Box>
-      <strong>
-        <i aria-hidden="true">👀</i>
-        {category.title}
-      </strong>
+      <CategoryLabel category={category.title} />
       <CategoryItemList
         itemList={category.categoryItemList}
         id={category.id}
@@ -38,7 +36,6 @@ const CategoryBox = ({ category }) => {
 }
 
 const CategoryBoxList = ({ data }) => {
-  console.log(data)
   return (
     <form action="">
       {data.map((category) => (
