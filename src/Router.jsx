@@ -11,6 +11,7 @@ import AnswerComplete from './pages/AnswerComplete'
 import StandardPage from './pages/StandardPage'
 import AnswerPage from './pages/AnswerPage'
 import Setting from './pages/Setting'
+import Unregister from './pages/Unregister'
 import Modify from './pages/Modify'
 import ModifyUsername from './pages/ModifyUsername'
 import ModifyPassword from './pages/ModifyPassword'
@@ -23,6 +24,7 @@ function Router() {
         <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/unregister" element={<Unregister />} />
         <Route path="/setting" element={<Setting />} />
         <Route path="/setting/modify" element={<Modify />} />
         <Route path="/setting/modify/username" element={<ModifyUsername />} />
