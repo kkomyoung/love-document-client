@@ -1,10 +1,10 @@
 import React from 'react'
-// import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
-// import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
+import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import { TextArea, Title, TextDesc } from '../components/texts/Texts'
-import Input from '../components/form/Input'
+import InputText from '../components/form/InputText'
+import ExampleButton from '../components/question/ExampleButton'
 
 function Unregister() {
   return (
@@ -17,25 +17,84 @@ function Unregister() {
         </TextArea>
         <StyledMenuWrap>
           <div className="inner">
-            <Input />
+            <StyledQuestionTitle>
+              <span>Q</span>탈퇴 사유를 알려주세요
+            </StyledQuestionTitle>
+            <StyledBox>
+              <ExampleButton
+                name="unregister"
+                isMultiChoice="checkbox"
+                id="unregister_01"
+                text="생각했던 서비스가 아니에요"
+              />
+              <ExampleButton
+                name="unregister"
+                isMultiChoice="checkbox"
+                id="unregister_02"
+                text="삭제하고 싶은 내용이 있어요"
+              />
+              <ExampleButton
+                name="unregister"
+                isMultiChoice="checkbox"
+                id="unregister_03"
+                text="더 이상 사용하지 않아요"
+              />
+            </StyledBox>
+            <InputText type="text" placeholder="기타 사유를 알려주세요" />
           </div>
         </StyledMenuWrap>
+        <ButtonArea margin="10rem 0 0 0">
+          <RoundButton size="large" text="탈퇴하기" />
+        </ButtonArea>
       </article>
     </StyledMain>
   )
 }
 
 const StyledMain = styled.main`
-  padding-bottom: 9rem;
+  padding-bottom: 3rem;
 `
 const StyledMenuWrap = styled.section`
   margin-top: 2.8rem;
   padding: 0 2rem;
 
   .inner {
-    padding: 0 2rem 2rem;
+    padding: 2.5rem 2rem 2rem;
     border-radius: 0.8rem;
     background: ${(props) => props.theme.gray100};
+  }
+`
+
+const StyledQuestionTitle = styled.h4`
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: ${(props) => props.theme.gray800};
+
+  span {
+    color: ${(props) => props.theme.blue500};
+    margin-right: 0.8rem;
+  }
+
+  p {
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: ${(props) => props.theme.gray800};
+  }
+`
+
+const StyledBox = styled.ul`
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0 0.8rem;
+
+  li > label {
+    width: 100%;
+  }
+
+  li + li {
+    margin-top: 0.8rem;
   }
 `
 export default Unregister

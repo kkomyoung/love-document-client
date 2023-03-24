@@ -34,6 +34,7 @@ const StyledButton = styled.li`
     width: 13.6rem;
     height: 5.2rem;
     cursor: pointer;
+    border: 1px solid ${(props) => props.theme.gray300};
   }
 
   input:checked + label {

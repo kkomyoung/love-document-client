@@ -1,15 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
 
-function Input() {
+function InputText({ type, placeholder }) {
   return (
     <StyledInputBox>
-      <input type="number" placeholder="18" />
+      <input type={type} placeholder={placeholder} />
     </StyledInputBox>
   )
 }
 
-export default Input
+export default InputText
 
 const StyledInputBox = styled.div`
   display: flex;
@@ -18,9 +18,10 @@ const StyledInputBox = styled.div`
   border-radius: 0.8rem;
   overflow: hidden;
   height: 4.8rem;
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
 
   input {
+    font-size: 1.6rem;
     flex-grow: 1;
     height: 100%;
     border: none;
