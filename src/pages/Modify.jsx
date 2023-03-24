@@ -26,14 +26,14 @@ function Modify() {
                 to="/setting/modify/username"
                 text="닉네임 변경"
                 color="white"
-                border
+                border="true"
               />
               <RoundButton
                 as={Link}
                 to="/setting/modify/password"
                 text="비밀번호 변경"
                 color="white"
-                border
+                border="true"
               />
             </ButtonArea>
           </div>

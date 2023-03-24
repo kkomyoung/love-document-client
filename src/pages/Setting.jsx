@@ -28,14 +28,14 @@ function Setting() {
                 to="/setting/modify"
                 text="내 정보 수정"
                 color="white"
-                border
+                border="true"
               />
-              <RoundButton text="이메일 문의" color="white" border />
-              <RoundButton text="회원 탈퇴" color="white" border />
+              <RoundButton text="이메일 문의" color="white" border="true" />
+              <RoundButton text="회원 탈퇴" color="white" border="true" />
               <RoundButton
                 text="로그아웃"
                 color="white"
-                border
+                border="true"
                 onClick={showModal}
               />
             </ButtonArea>
