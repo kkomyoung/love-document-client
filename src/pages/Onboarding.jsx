@@ -9,7 +9,7 @@ import Lottie from '../components/lotties/Lottie'
 function Onboarding() {
   return (
     <StyledMain>
-      <Header btnBack btnHome />
+      <Header btnBack />
       <StyledAirticle>
         <Lottie data="puzzle" margin="0 -2.4rem 4.6rem" />
         <Title>연애서류합이란?</Title>
