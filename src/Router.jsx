@@ -9,6 +9,7 @@ import ResearchReadyPage from './pages/research-ready'
 import StandardComplete from './pages/StandardComplete'
 import AnswerComplete from './pages/AnswerComplete'
 import StandardPage from './pages/StandardPage'
+import AnswerLanding from './pages/AnswerLanding'
 import AnswerPage from './pages/AnswerPage'
 import Setting from './pages/Setting'
 import Unregister from './pages/Unregister'
@@ -32,6 +33,7 @@ function Router() {
         <Route path="/research" element={<Research />} />
         <Route path="/research/ready" element={<ResearchReadyPage />} />
         <Route path="/research/standard" element={<StandardPage />} />
+        <Route path="/research/:questionId" element={<AnswerLanding />} />
         <Route path="/research/:questionId/answer" element={<AnswerPage />} />
         <Route
           path="/research/standard/complete"

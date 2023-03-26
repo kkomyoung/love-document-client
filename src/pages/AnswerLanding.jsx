@@ -1,37 +1,32 @@
 import React from 'react'
 import styled from 'styled-components'
 import changeBgColor from '../utils/changeBgColor'
-import Lottie from '../components/lotties/Lottie'
 import { Link } from 'react-router-dom'
-import {
-  ButtonArea,
-  RoundButton,
-  TextButton,
-} from '../components/buttons/Buttons'
+import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
+import { ReactComponent as IconLetter } from '../assets/img_letter.svg'
 
-const Landing = () => {
+const AnswerLanding = () => {
   changeBgColor('#79c7ff')
   return (
     <StyledMain>
-      <Lottie data="main" />
+      <StyledImgWrap>
+        <IconLetter />
+      </StyledImgWrap>
       <StyledTitle>
         <StyledSubTitle>두근 - 두근</StyledSubTitle>
         연애서류합
       </StyledTitle>
       <StyledDescription>
-        <span>소개팅 상대가 내 기준에 얼마나 부합할까?</span>
+        <span>소개팅 상대방 망고님이 보낸</span>
         <br />
-        <span>내 연애 서류를 만들고 답변을 받아봐요</span>
+        <span>질문에 답변해보세요 🤩</span>
       </StyledDescription>
       <ButtonArea margin="3.1rem 0 0 0">
-        <RoundButton as={Link} to="/onboarding" color="white" text="시작하기" />
-      </ButtonArea>
-      <ButtonArea margin="2.1rem 0 0 0">
-        <TextButton
+        <RoundButton
           as={Link}
-          to="/login"
-          type="underline"
-          text="이미 질문지를 만들었다면? 로그인"
+          to="/research/:questionId/answer"
+          color="white"
+          text="답변하기"
         />
       </ButtonArea>
     </StyledMain>
@@ -44,6 +39,13 @@ const StyledMain = styled.main`
 
   @media (max-width: 499px) {
     min-height: calc(100vh - 12.6rem);
+  }
+`
+
+const StyledImgWrap = styled.figure`
+  padding: 0 3.3rem;
+  svg {
+    width: 100%;
   }
 `
 
@@ -82,4 +84,4 @@ const StyledDescription = styled.p`
     font-size: 5vw;
   }
 `
-export default Landing
+export default AnswerLanding
