@@ -128,6 +128,10 @@ const GlobalStyle = createGlobalStyle`
         url('../fonts/Pretendard-Bold.woff') format('woff');
   }
 
+  //숨김텍스트
+  .hide-txt {
+    ${(props) => props.theme.a11yHidden}
+  }
   .pageHead {
     display:none;
   }
