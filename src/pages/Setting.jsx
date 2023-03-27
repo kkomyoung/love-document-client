@@ -1,17 +1,17 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
-import { Modal } from '../components/modals/Modal'
+// import { Modal } from '../components/modals/Modal'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import { TextArea, Title } from '../components/texts/Texts'
 
 function Setting() {
-  const [openModal, setOpenModal] = useState(false)
+  // const [openModal, setOpenModal] = useState(false)
 
-  const showModal = () => {
-    setOpenModal(true)
-  }
+  // const showModal = () => {
+  //   setOpenModal(true)
+  // }
 
   return (
     <StyledMain>
@@ -42,13 +42,13 @@ function Setting() {
                 text="로그아웃"
                 color="white"
                 border="true"
-                onClick={showModal}
+                // onClick={}
               />
             </ButtonArea>
           </ul>
         </StyledMenuWrap>
       </article>
-      {openModal && (
+      {/* {openModal && (
         <Modal
           title="로그아웃"
           text="정말 로그아웃하실 건가요?"
@@ -56,7 +56,7 @@ function Setting() {
           btnConfirm="네"
           setOpenModal={setOpenModal}
         />
-      )}
+      )} */}
     </StyledMain>
   )
 }
