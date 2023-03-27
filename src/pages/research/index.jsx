@@ -6,30 +6,27 @@ import Register from './Register'
 import { ButtonArea, RoundButton } from '../../components/buttons/Buttons'
 import { TextArea, Title, TextDesc } from '../../components/texts/Texts'
 import validateRegister from '../../utils/validateRegister'
-// import useModal from '../../hooks/useModal'
-// import { useNavigate } from 'react-router-dom'
+import useModal from '../../hooks/useModal'
+import { useNavigate } from 'react-router-dom'
 
 function Research() {
-  // const navigate = useNavigate()
-  // const { Modal, open } = useModal()
-  // const modalData = {
-  //   type: 'alert',
-  //   title: '탈퇴하기',
-  //   desc: '정말 탈퇴하실 건가요?',
-  //   btnCancel: {
-  //     text: '아니요',
-  //     fn: () => {
-  //       console.log(11)
-  //       navigate('/home')
-  //     },
-  //   },
-  //   btnConfirm: {
-  //     text: '예',
-  //     fn: () => {
-  //       console.log(22)
-  //     },
-  //   },
-  // }
+  const navigate = useNavigate()
+  const { Modal, open } = useModal()
+
+  const modalData = {
+    type: 'alert',
+    title: '질문지 닉네임과 비밀번호를 꼭 기억해주세요',
+    btnCancel: {
+      text: '다시 보러갈래요',
+    },
+    btnConfirm: {
+      text: '알겠어요',
+      fn: () => {
+        console.log('로그인 api 호출')
+        navigate('/research/ready')
+      },
+    },
+  }
 
   const [valueNickname, setValueNickname] = useState('')
   const [valuePassword, setValuePassword] = useState('')
@@ -50,7 +47,7 @@ function Research() {
     )
 
     if (isValid) {
-      console.log('로그인')
+      open(modalData)
     }
   }
 
@@ -60,7 +57,6 @@ function Research() {
   const handlePasswordChange = (e) => {
     setValuePassword(e.target.value)
   }
-
   return (
     <StyledMain>
       <Header title="질문지 만들기" btnBack />
@@ -88,7 +84,7 @@ function Research() {
           <RoundButton size="large" text="완료" onClick={handlerLogin} />
         </ButtonArea>
       </article>
-      {/* <Modal /> */}
+      <Modal />
     </StyledMain>
   )
 }
