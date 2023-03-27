@@ -1,32 +1,16 @@
 import React, { useState } from 'react'
+// import { useMutation } from 'react-query'
 import styled from 'styled-components'
 import Header from '../../components/header/Header'
 import SelectCategory from './SelectCategory'
 import Register from './Register'
+// import { Modal } from '../../components/modals/Modal'
 import { ButtonArea, RoundButton } from '../../components/buttons/Buttons'
 import { TextArea, Title, TextDesc } from '../../components/texts/Texts'
 import validateRegister from '../../utils/validateRegister'
-import useModal from '../../hooks/useModal'
-import { useNavigate } from 'react-router-dom'
 
 function Research() {
-  const navigate = useNavigate()
-  const { Modal, open } = useModal()
-
-  const modalData = {
-    type: 'alert',
-    title: '질문지 닉네임과 비밀번호를 꼭 기억해주세요',
-    btnCancel: {
-      text: '다시 보러갈래요',
-    },
-    btnConfirm: {
-      text: '알겠어요',
-      fn: () => {
-        console.log('로그인 api 호출')
-        navigate('/research/ready')
-      },
-    },
-  }
+  // const [openModal, setOpenModal] = useState(false)
 
   const [valueNickname, setValueNickname] = useState('')
   const [valuePassword, setValuePassword] = useState('')
@@ -34,6 +18,13 @@ function Research() {
   const [errorPassword, setErrorPassword] = useState(false)
   const [errorMessageNickname, setErrorMessageNickname] = useState('')
   const [errorMessagePassword, setErrorMessagePassword] = useState('')
+
+  // const loginMutation = useMutation((body) => {
+  //   return fetch('http://api-dev.love-document.com/users/login', {
+  //     method: 'POST',
+  //     body: JSON.stringify(body),
+  //   }).then((res) => res.json())
+  // })
 
   const handlerLogin = (e) => {
     e.preventDefault()
@@ -47,7 +38,11 @@ function Research() {
     )
 
     if (isValid) {
-      open(modalData)
+      console.log('로그인')
+      // loginMutation.mutate({ nickname: valueNickname, password: valuePassword })
+      // if (loginMutation.isLoading) return 'Loading...'
+      // if (loginMutation.isError) return console.log(loginMutation.error.message)
+      // console.log(loginMutation.data)
     }
   }
 
@@ -57,6 +52,11 @@ function Research() {
   const handlePasswordChange = (e) => {
     setValuePassword(e.target.value)
   }
+
+  // const showModal = () => {
+  //   setOpenModal(true)
+  // }
+
   return (
     <StyledMain>
       <Header title="질문지 만들기" btnBack />
@@ -84,7 +84,13 @@ function Research() {
           <RoundButton size="large" text="완료" onClick={handlerLogin} />
         </ButtonArea>
       </article>
-      <Modal />
+      {/* {openModal && (
+        <Modal
+          text="질문지 닉네임과 비밀번호를 꼭 기억해주세요"
+          btnConfirm="확인"
+          setOpenModal={setOpenModal}
+        />
+      )} */}
     </StyledMain>
   )
 }

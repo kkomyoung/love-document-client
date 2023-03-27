@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components'
 import theme from './styles/theme'
 import Router from './Router'
 import { QueryClient, QueryClientProvider } from 'react-query'
-
+import { ReactQueryDevtools } from 'react-query/devtools'
 const queryClient = new QueryClient()
 
 function App() {
@@ -17,6 +17,7 @@ function App() {
           <Router />
         </div>
       </ThemeProvider>
+      <ReactQueryDevtools initialIsOpen={true} />
     </QueryClientProvider>
   )
 }

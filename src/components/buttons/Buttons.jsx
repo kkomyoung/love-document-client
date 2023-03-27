@@ -104,9 +104,9 @@ const RoundButton = ({
   )
 }
 
-const KakaoButton = ({ text, onClick }) => {
+const KakaoButton = ({ text }) => {
   return (
-    <RoundButton color="kakao" onClick={onClick}>
+    <RoundButton color="kakao">
       <i aria-hidden="true">
         <IconKakaoLogo />
       </i>
