@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Header from '../components/header/Header'
 import { TextArea, Title } from '../components/texts/Texts'
 import { ReactComponent as IconLetter } from '../assets/icon_letter.svg'
-import Answer from '../components/Answer'
+import AnswerItem from '../components/AnswerItem'
 
 const answers = [
   {
@@ -23,6 +23,7 @@ const answers = [
     date: '2월 8일',
   },
 ]
+
 function AnswersPage() {
   return (
     <StyledMain>
@@ -38,11 +39,11 @@ function AnswersPage() {
         </TextArea>
 
         <StyledAnswersSection>
-          <AnswersContainer>
+          <AnswerList>
             {answers.map((answer) => (
-              <Answer key={answer.id} {...answer} />
+              <AnswerItem key={answer.id} {...answer} />
             ))}
-          </AnswersContainer>
+          </AnswerList>
         </StyledAnswersSection>
       </StyledAirticle>
     </StyledMain>
@@ -59,10 +60,11 @@ const StyledAirticle = styled.article``
 
 const StyledAnswersSection = styled.section``
 
-const AnswersContainer = styled.div`
+const AnswerList = styled.ul`
   margin-top: 2.8rem;
+  padding: 0px 2rem;
 
-  & > div + div {
+  & > li + li {
     margin-top: 1.6rem;
   }
 `

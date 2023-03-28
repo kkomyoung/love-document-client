@@ -44,7 +44,7 @@ function Router() {
           path="/research/question/answer/complete"
           element={<AnswerComplete />}
         />
-        <Route path='/home/answers' element={<AnswersPage />}
+        <Route path="/home/answers" element={<AnswersPage />} />
       </Routes>
     </>
   )

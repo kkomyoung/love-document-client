@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { SubTitle, TextDesc } from '../../components/texts/Texts'
 import { ReactComponent as LoveLetterIcon } from '../../assets/icon_love_letter_36.svg'
-import Answer from '../../components/Answer'
+import AnswerItem from '../../components/AnswerItem'
 
 function Answers({ answers }) {
   return (
@@ -19,7 +19,7 @@ function Answers({ answers }) {
 
       <Box>
         {answers.map((answer) => (
-          <Answer key={answer.id} {...answer} />
+          <AnswerItem key={answer.id} {...answer} />
         ))}
       </Box>
     </Container>
