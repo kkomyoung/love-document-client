@@ -16,6 +16,7 @@ import Unregister from './pages/Unregister'
 import Modify from './pages/Modify'
 import ModifyUsername from './pages/ModifyUsername'
 import ModifyPassword from './pages/ModifyPassword'
+import AnswersPage from './pages/AnswersPage'
 
 function Router() {
   return (
@@ -43,6 +44,7 @@ function Router() {
           path="/research/question/answer/complete"
           element={<AnswerComplete />}
         />
+        <Route path='/home/answers' element={<AnswersPage />}
       </Routes>
     </>
   )
