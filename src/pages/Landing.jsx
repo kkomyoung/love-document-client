@@ -13,7 +13,7 @@ import { useQuery } from 'react-query'
 import { login } from '../apis'
 
 const Landing = () => {
-  const { refetch, data: categories } = useQuery(
+  const { refetch, data } = useQuery(
     'categories',
     () => login({ nickname: '보니', password: '1234' }),
     {
@@ -21,7 +21,7 @@ const Landing = () => {
     }
   )
 
-  console.log(categories)
+  console.log(data)
 
   // const { data, error } = useQuery('categoris', getCategories)
 
