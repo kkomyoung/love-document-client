@@ -19,7 +19,6 @@ export const fetchRegister = async ({ nickname, password }) => {
   })
   return data
 }
-
 export const useRegisterMutation = () => {
   return useMutation(fetchRegister)
 }

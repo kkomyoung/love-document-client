@@ -1,4 +1,4 @@
-import { getCategories } from './category'
+import { useGetCategoriesQuery, usePostQuestionsMutation } from './category'
 import { useLoginMutation, useRegisterMutation } from './user'
 
 export {
@@ -7,5 +7,6 @@ export {
   useRegisterMutation,
 
   // Category
-  getCategories,
+  useGetCategoriesQuery,
+  usePostQuestionsMutation,
 }

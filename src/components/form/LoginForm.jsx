@@ -8,8 +8,8 @@ const LoginForm = ({
   errorPassword,
   errorMessageNickname,
   errorMessagePassword,
-  handleNicknameChange,
-  handlePasswordChange,
+  handlerNicknameChange,
+  handlerPasswordChange,
 }) => {
   return (
     <>
@@ -17,7 +17,7 @@ const LoginForm = ({
         inputValue={valueNickname}
         error={errorNickname}
         errorMessage={errorMessageNickname}
-        handleInputChange={handleNicknameChange}
+        handlerInputChange={handlerNicknameChange}
         name="nickname"
         placeholder="닉네임"
       />
@@ -25,7 +25,7 @@ const LoginForm = ({
         inputValue={valuePassword}
         error={errorPassword}
         errorMessage={errorMessagePassword}
-        handleInputChange={handlePasswordChange}
+        handlerInputChange={handlerPasswordChange}
         type="password"
         name="password"
         pattern="[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]+"

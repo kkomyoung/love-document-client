@@ -1,21 +1,12 @@
 import React from 'react'
-import { useQuery } from 'react-query'
 import styled from 'styled-components'
 import CategoryBoxList from '../../components/category/Category'
-
-function SelectCategory() {
-  const { isLoading, error, data } = useQuery(['categories'], () =>
-    fetch('http://api-dev.love-document.com/categories').then((res) =>
-      res.json()
-    )
-  )
-
-  if (isLoading) return 'Loading...'
-  if (error) return console.log(error.message)
-
+function SelectCategory({ formRef, data, onChange }) {
   return (
     <StyledSectionCategory>
-      <CategoryBoxList data={data}></CategoryBoxList>
+      <form ref={formRef} onChange={onChange}>
+        <CategoryBoxList data={data}></CategoryBoxList>
+      </form>
     </StyledSectionCategory>
   )
 }

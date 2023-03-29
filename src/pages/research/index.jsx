@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import styled from 'styled-components'
 import Header from '../../components/header/Header'
 import SelectCategory from './SelectCategory'
@@ -7,37 +7,26 @@ import { ButtonArea, RoundButton } from '../../components/buttons/Buttons'
 import { TextArea, Title, TextDesc } from '../../components/texts/Texts'
 import validateRegister from '../../utils/validateRegister'
 import useModal from '../../hooks/useModal'
+import useToastPopup from '../../hooks/useToastPopup'
 import { useNavigate } from 'react-router-dom'
-import { useRegisterMutation } from '../../apis'
+import { useRegisterMutation, usePostQuestionsMutation } from '../../apis'
+import { useGetCategoriesQuery } from '../../apis/category'
 
 function Research() {
   const navigate = useNavigate()
   const { Modal, open } = useModal()
-  const { mutate, isLoading, error } = useRegisterMutation()
-  const [msg, setMsg] = useState('')
+  const { ToastPopup, openToastPopup } = useToastPopup()
+  const { mutate: register } = useRegisterMutation()
+  const { data: categoriesData } = useGetCategoriesQuery()
+  const { mutate: postQuestions } = usePostQuestionsMutation()
   const [valueNickname, setValueNickname] = useState('')
   const [valuePassword, setValuePassword] = useState('')
   const [errorNickname, setErrorNickname] = useState(false)
   const [errorPassword, setErrorPassword] = useState(false)
   const [errorMessageNickname, setErrorMessageNickname] = useState('')
   const [errorMessagePassword, setErrorMessagePassword] = useState('')
-
-  const register = () => {
-    mutate(
-      { nickname: valueNickname, password: valuePassword },
-      {
-        onSuccess: () => {
-          console.log('회원가입 성공!!!!')
-          navigate('/research/ready')
-        },
-        onError: (err) => {
-          if (err.request.status === 409) {
-            setMsg('중복된 아이디 입니다.')
-          }
-        },
-      }
-    )
-  }
+  const [resultOptions, setResultOptions] = useState([])
+  const formRef = useRef()
 
   const modalData = {
     type: 'alert',
@@ -48,11 +37,32 @@ function Research() {
     btnConfirm: {
       text: '알겠어요',
       fn: () => {
-        register()
+        handlerRegister()
       },
     },
   }
-  const handlerLogin = (e) => {
+
+  const handlerRegister = () => {
+    register(
+      { nickname: valueNickname, password: valuePassword },
+      {
+        onSuccess: (data) => {
+          localStorage.setItem('nickname', data.nickname)
+          localStorage.setItem('token', data.token)
+          postQuestions(resultOptions, {
+            onSuccess: () => navigate('/research/ready'),
+          })
+        },
+        onError: (err) => {
+          if (err.request.status === 409) {
+            openToastPopup('중복된 닉네임이에요')
+          }
+        },
+      }
+    )
+  }
+
+  const handlerValidate = (e) => {
     e.preventDefault()
     const isValid = validateRegister(
       valueNickname,
@@ -62,18 +72,32 @@ function Research() {
       setErrorMessageNickname,
       setErrorMessagePassword
     )
+    if (resultOptions.length < 1) {
+      openToastPopup('1개 이상의 항목을 선택해주세요')
+      return
+    }
 
     if (isValid) {
       open(modalData)
     }
   }
 
-  const handleNicknameChange = (e) => {
+  const handlerNicknameChange = (e) => {
     setValueNickname(e.target.value)
   }
-  const handlePasswordChange = (e) => {
+  const handlerPasswordChange = (e) => {
     setValuePassword(e.target.value)
   }
+
+  const submitForm = () => {
+    const checkedOptions = Array.from(
+      formRef.current.querySelectorAll('input[type="checkbox"]')
+    )
+      .filter((checkbox) => checkbox.checked)
+      .map((checkbox) => ({ id: checkbox.id }))
+    setResultOptions(checkedOptions)
+  }
+
   return (
     <StyledMain>
       <Header title="질문지 만들기" btnBack />
@@ -86,7 +110,13 @@ function Research() {
             <span>상대방에 대해 알고싶은 카테고리를 선택해주세요</span>
           </TextDesc>
         </TextArea>
-        <SelectCategory />
+        {categoriesData && (
+          <SelectCategory
+            formRef={formRef}
+            data={categoriesData}
+            onChange={submitForm}
+          />
+        )}
         <Register
           valueNickname={valueNickname}
           valuePassword={valuePassword}
@@ -94,19 +124,15 @@ function Research() {
           errorPassword={errorPassword}
           errorMessageNickname={errorMessageNickname}
           errorMessagePassword={errorMessagePassword}
-          handleNicknameChange={handleNicknameChange}
-          handlePasswordChange={handlePasswordChange}
+          handlerNicknameChange={handlerNicknameChange}
+          handlerPasswordChange={handlerPasswordChange}
         />
-        {error && <Title>{msg}</Title>}
         <ButtonArea margin="8.3rem 0 0">
-          <RoundButton
-            size="large"
-            text={isLoading ? 'Loding...' : '완료'}
-            onClick={handlerLogin}
-          />
+          <RoundButton size="large" text="완료" onClick={handlerValidate} />
         </ButtonArea>
       </article>
       <Modal />
+      <ToastPopup />
     </StyledMain>
   )
 }
