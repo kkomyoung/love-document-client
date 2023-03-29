@@ -9,22 +9,7 @@ import {
   TextButton,
 } from '../components/buttons/Buttons'
 
-import { useQuery } from 'react-query'
-import { login } from '../apis'
-
 const Landing = () => {
-  const { refetch, data } = useQuery(
-    'categories',
-    () => login({ nickname: '보니', password: '1234' }),
-    {
-      enabled: false,
-    }
-  )
-
-  console.log(data)
-
-  // const { data, error } = useQuery('categoris', getCategories)
-
   changeBgColor('#79c7ff')
   return (
     <StyledMain>
@@ -39,13 +24,7 @@ const Landing = () => {
         <span>내 연애 서류를 만들고 답변을 받아봐요</span>
       </StyledDescription>
       <ButtonArea margin="3.1rem 0 0 0">
-        <RoundButton
-          as={Link}
-          to="/onboarding"
-          color="white"
-          text="시작하기"
-          onClick={refetch}
-        />
+        <RoundButton as={Link} to="/onboarding" color="white" text="시작하기" />
       </ButtonArea>
       <ButtonArea margin="2.1rem 0 0 0">
         <TextButton

@@ -4,7 +4,8 @@ const BASE_URL = 'http://api-dev.love-document.com'
 
 export function getToken() {
   if (typeof window !== 'undefined') {
-    return localStorage.getItem('token')
+    const token = localStorage.getItem('token')
+    return token ? `Bearer ${token}` : ''
   }
   return ''
 }

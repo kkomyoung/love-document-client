@@ -36,16 +36,18 @@ function Register({
             inputValue={valueNickname}
             error={errorNickname}
             errorMessage={errorMessageNickname}
-            className="nickname"
             handleInputChange={handleNicknameChange}
+            name="nickname"
             placeholder="닉네임 (1~10자, 특수문자 제외)"
           />
           <LoginInput
             inputValue={valuePassword}
             error={errorPassword}
             errorMessage={errorMessagePassword}
-            className="password"
             handleInputChange={handlePasswordChange}
+            type="password"
+            name="password"
+            pattern="[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]+"
             placeholder="비밀번호 (4~20자)"
           />
         </>
