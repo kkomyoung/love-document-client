@@ -13,7 +13,7 @@ const LoginInput = ({
   error,
   errorMessage,
   inputValue,
-  handleInputChange,
+  handlerInputChange,
 }) => {
   const iconColor = error ? theme.pink700 : theme.gray500
 
@@ -30,7 +30,7 @@ const LoginInput = ({
           pattern={pattern}
           placeholder={placeholder}
           value={inputValue}
-          onChange={handleInputChange}
+          onChange={handlerInputChange}
           autoComplete="off"
         />
         {error && (

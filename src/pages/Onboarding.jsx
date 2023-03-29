@@ -18,7 +18,7 @@ function Onboarding() {
           서비스 입니다. 질문지를 만들고 상대에게 공유해 확인해 보세요 😍
         </TextDesc>
         <ButtonArea margin="11rem 0 0 0">
-          <RoundButton as={Link} to="/login" size="large" text="다음" />
+          <RoundButton as={Link} to="/research" size="large" text="다음" />
         </ButtonArea>
       </StyledAirticle>
     </StyledMain>

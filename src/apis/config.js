@@ -5,7 +5,7 @@ const BASE_URL = 'http://api-dev.love-document.com'
 export function getToken() {
   if (typeof window !== 'undefined') {
     const token = localStorage.getItem('token')
-    return token ? `Bearer ${token}` : ''
+    return token ? `bearer ${token}` : ''
   }
   return ''
 }
@@ -19,3 +19,13 @@ export const instance = axios.create({
     Authorization: getToken(),
   },
 })
+
+instance.interceptors.request.use(
+  (config) => {
+    config.headers.Authorization = getToken()
+    return config
+  },
+  (error) => {
+    return Promise.reject(error)
+  }
+)

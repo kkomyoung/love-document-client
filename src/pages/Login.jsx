@@ -12,11 +12,13 @@ import LoginForm from '../components/form/LoginForm'
 import validateLogin from '../utils/validateLogin'
 import { useNavigate } from 'react-router-dom'
 import { useLoginMutation } from '../apis/user'
+import useToastPopup from '../hooks/useToastPopup'
 
 const sendEmail = () => {
   console.log('이메일 문의')
 }
 const Login = () => {
+  const { ToastPopup, openToastPopup } = useToastPopup()
   const navigate = useNavigate()
   const [valueNickname, setValueNickname] = useState('')
   const [valuePassword, setValuePassword] = useState('')
@@ -24,9 +26,8 @@ const Login = () => {
   const [errorPassword, setErrorPassword] = useState(false)
   const [errorMessageNickname, setErrorMessageNickname] = useState('')
   const [errorMessagePassword, setErrorMessagePassword] = useState('')
-  const [msg, setMsg] = useState('')
 
-  const { mutate, isLoading, error } = useLoginMutation()
+  const { mutate } = useLoginMutation()
 
   const handlerLogin = (e) => {
     e.preventDefault()
@@ -49,17 +50,17 @@ const Login = () => {
             navigate('/home')
           },
           onError: () => {
-            setMsg('닉네임이나 비밀번호를 잘못 입력했습니다')
+            openToastPopup('닉네임이나 비밀번호를 잘못 입력했습니다')
           },
         }
       )
     }
   }
 
-  const handleNicknameChange = (e) => {
+  const handlerNicknameChange = (e) => {
     setValueNickname(e.target.value)
   }
-  const handlePasswordChange = (e) => {
+  const handlerPasswordChange = (e) => {
     setValuePassword(e.target.value)
   }
 
@@ -79,11 +80,10 @@ const Login = () => {
             errorPassword={errorPassword}
             errorMessageNickname={errorMessageNickname}
             errorMessagePassword={errorMessagePassword}
-            handleNicknameChange={handleNicknameChange}
-            handlePasswordChange={handlePasswordChange}
+            handlerNicknameChange={handlerNicknameChange}
+            handlerPasswordChange={handlerPasswordChange}
           />
         </StyledLoginFormArea>
-        {error && <Title>{msg}</Title>}
         <ButtonArea margin="1.6rem 0 0 0">
           <TextButton
             type="underline"
@@ -92,13 +92,10 @@ const Login = () => {
           />
         </ButtonArea>
         <ButtonArea margin="4rem 0 0 0">
-          <RoundButton
-            size="large"
-            text={isLoading ? 'Loading...' : '다음'}
-            onClick={handlerLogin}
-          />
+          <RoundButton size="large" text="다음" onClick={handlerLogin} />
         </ButtonArea>
       </StyledAirticle>
+      <ToastPopup />
     </StyledMain>
   )
 }
