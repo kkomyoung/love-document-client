@@ -1,9 +1,10 @@
 import { getCategories } from './category'
-import { login } from './user'
+import { useLoginMutation, useRegisterMutation } from './user'
 
 export {
   // User
-  login,
+  useLoginMutation,
+  useRegisterMutation,
 
   // Category
   getCategories,

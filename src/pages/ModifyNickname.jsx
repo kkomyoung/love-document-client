@@ -6,7 +6,7 @@ import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import { TextArea, Title, TextDesc } from '../components/texts/Texts'
 import LoginInput from '../components/form/LoginInput'
 
-function ModifyUsername() {
+function ModifyNickname() {
   return (
     <StyledMain>
       <Header title="닉네임 변경" btnBack />
@@ -16,7 +16,11 @@ function ModifyUsername() {
           <TextDesc>질문지 확인용 닉네임 변경</TextDesc>
         </TextArea>
         <StyledInputWrap>
-          <LoginInput type="user" placeholder="새 닉네임 입력" />
+          <LoginInput
+            type="text"
+            name="nickname"
+            placeholder="새 닉네임 입력"
+          />
         </StyledInputWrap>
         <StyledFixedArea>
           <ButtonArea margin="11rem 0 0 0">
@@ -49,4 +53,4 @@ const StyledFixedArea = styled.div`
   bottom: 4.8rem;
   transform: translateX(-50%);
 `
-export default ModifyUsername
+export default ModifyNickname

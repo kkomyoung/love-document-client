@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-// import { useMutation } from 'react-query'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
 import {
@@ -11,44 +10,23 @@ import { Title } from '../components/texts/Texts'
 import { ReactComponent as ImgHeartLock } from '../assets/img_heart_lock.svg'
 import LoginForm from '../components/form/LoginForm'
 import validateLogin from '../utils/validateLogin'
+import { useNavigate } from 'react-router-dom'
+import { useLoginMutation } from '../apis/user'
 
 const sendEmail = () => {
   console.log('이메일 문의')
 }
 const Login = () => {
+  const navigate = useNavigate()
   const [valueNickname, setValueNickname] = useState('')
   const [valuePassword, setValuePassword] = useState('')
   const [errorNickname, setErrorNickname] = useState(false)
   const [errorPassword, setErrorPassword] = useState(false)
   const [errorMessageNickname, setErrorMessageNickname] = useState('')
   const [errorMessagePassword, setErrorMessagePassword] = useState('')
+  const [msg, setMsg] = useState('')
 
-  // const login = (info) => {
-  //   fetch('http://api-dev.love-document.com/users/login', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify(info),
-  //   }).then((res) => res.json())
-  // }
-
-  // const { mutate } = useMutation(login, {
-  //   onMutate: (variables) => {
-  //     console.log('onMutate', variables)
-  //   },
-  //   onSuccess: (data) => {
-  //     console.log('응답 값:', data)
-  //   },
-  //   onError: (error) => {
-  //     // 요청에 에러가 발생된 경우
-  //     console.log('onError', error)
-  //   },
-  //   onSettled: () => {
-  //     // 요청이 성공하든, 에러가 발생되든 실행하고 싶은 경우
-  //     console.log('onSettled')
-  //   },
-  // })
+  const { mutate, isLoading, error } = useLoginMutation()
 
   const handlerLogin = (e) => {
     e.preventDefault()
@@ -62,8 +40,19 @@ const Login = () => {
     )
 
     if (isValid) {
-      console.log('로그인')
-      // mutate({ nickname: valueNickname, password: valuePassword })
+      mutate(
+        { nickname: valueNickname, password: valuePassword },
+        {
+          onSuccess: (data) => {
+            localStorage.setItem('nickname', data.nickname)
+            localStorage.setItem('token', data.token)
+            navigate('/home')
+          },
+          onError: () => {
+            setMsg('닉네임이나 비밀번호를 잘못 입력했습니다')
+          },
+        }
+      )
     }
   }
 
@@ -94,6 +83,7 @@ const Login = () => {
             handlePasswordChange={handlePasswordChange}
           />
         </StyledLoginFormArea>
+        {error && <Title>{msg}</Title>}
         <ButtonArea margin="1.6rem 0 0 0">
           <TextButton
             type="underline"
@@ -102,7 +92,11 @@ const Login = () => {
           />
         </ButtonArea>
         <ButtonArea margin="4rem 0 0 0">
-          <RoundButton size="large" text="다음" onClick={handlerLogin} />
+          <RoundButton
+            size="large"
+            text={isLoading ? 'Loading...' : '다음'}
+            onClick={handlerLogin}
+          />
         </ButtonArea>
       </StyledAirticle>
     </StyledMain>

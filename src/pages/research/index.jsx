@@ -1,19 +1,43 @@
 import React, { useState } from 'react'
-// import { useMutation } from 'react-query'
 import styled from 'styled-components'
 import Header from '../../components/header/Header'
 import SelectCategory from './SelectCategory'
 import Register from './Register'
-// import { Modal } from '../../components/modals/Modal'
 import { ButtonArea, RoundButton } from '../../components/buttons/Buttons'
 import { TextArea, Title, TextDesc } from '../../components/texts/Texts'
 import validateRegister from '../../utils/validateRegister'
 import useModal from '../../hooks/useModal'
 import { useNavigate } from 'react-router-dom'
+import { useRegisterMutation } from '../../apis'
 
 function Research() {
   const navigate = useNavigate()
   const { Modal, open } = useModal()
+  const { mutate, isLoading, error } = useRegisterMutation()
+  const [msg, setMsg] = useState('')
+  const [valueNickname, setValueNickname] = useState('')
+  const [valuePassword, setValuePassword] = useState('')
+  const [errorNickname, setErrorNickname] = useState(false)
+  const [errorPassword, setErrorPassword] = useState(false)
+  const [errorMessageNickname, setErrorMessageNickname] = useState('')
+  const [errorMessagePassword, setErrorMessagePassword] = useState('')
+
+  const register = () => {
+    mutate(
+      { nickname: valueNickname, password: valuePassword },
+      {
+        onSuccess: () => {
+          console.log('회원가입 성공!!!!')
+          navigate('/research/ready')
+        },
+        onError: (err) => {
+          if (err.request.status === 409) {
+            setMsg('중복된 아이디 입니다.')
+          }
+        },
+      }
+    )
+  }
 
   const modalData = {
     type: 'alert',
@@ -24,26 +48,10 @@ function Research() {
     btnConfirm: {
       text: '알겠어요',
       fn: () => {
-        console.log('로그인 api 호출')
-        navigate('/research/ready')
+        register()
       },
     },
   }
-
-  const [valueNickname, setValueNickname] = useState('')
-  const [valuePassword, setValuePassword] = useState('')
-  const [errorNickname, setErrorNickname] = useState(false)
-  const [errorPassword, setErrorPassword] = useState(false)
-  const [errorMessageNickname, setErrorMessageNickname] = useState('')
-  const [errorMessagePassword, setErrorMessagePassword] = useState('')
-
-  // const loginMutation = useMutation((body) => {
-  //   return fetch('http://api-dev.love-document.com/users/login', {
-  //     method: 'POST',
-  //     body: JSON.stringify(body),
-  //   }).then((res) => res.json())
-  // })
-
   const handlerLogin = (e) => {
     e.preventDefault()
     const isValid = validateRegister(
@@ -89,8 +97,13 @@ function Research() {
           handleNicknameChange={handleNicknameChange}
           handlePasswordChange={handlePasswordChange}
         />
+        {error && <Title>{msg}</Title>}
         <ButtonArea margin="8.3rem 0 0">
-          <RoundButton size="large" text="완료" onClick={handlerLogin} />
+          <RoundButton
+            size="large"
+            text={isLoading ? 'Loding...' : '완료'}
+            onClick={handlerLogin}
+          />
         </ButtonArea>
       </article>
       <Modal />

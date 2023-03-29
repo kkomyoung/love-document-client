@@ -11,13 +11,14 @@ import Lottie from '../components/lotties/Lottie'
 import { ReactComponent as IconLetter } from '../assets/icon_letter.svg'
 import { ReactComponent as IconAirplane } from '../assets/icon_airplane.svg'
 const Home = () => {
+  const name = localStorage.getItem('nickname')
   changeBgColor('#79c7ff')
 
   return (
     <StyledMain>
       <StyledHeader>
         <StyledTitleArea>
-          <span>망고님의</span>
+          <span>{name}님의</span>
           연애서류합
         </StyledTitleArea>
         <CircleButton as={Link} to="/setting" feature="setting" />

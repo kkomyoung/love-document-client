@@ -6,7 +6,9 @@ import { ReactComponent as IconLock } from '../../assets/icon_lock.svg'
 import { ReactComponent as IconWarning } from '../../assets/icon_warning.svg'
 
 const LoginInput = ({
-  className,
+  type,
+  name,
+  pattern,
   placeholder,
   error,
   errorMessage,
@@ -19,15 +21,17 @@ const LoginInput = ({
     <StyledLoginInput error={error}>
       <div className="input-box">
         <i aria-hidden="true">
-          {className === 'nickname' && <IconUser fill={iconColor} />}
-          {className === 'password' && <IconLock fill={iconColor} />}
+          {name === 'nickname' && <IconUser fill={iconColor} />}
+          {name === 'password' && <IconLock fill={iconColor} />}
         </i>
         <input
-          className={className}
-          type="text"
+          type={type}
+          name={name}
+          pattern={pattern}
           placeholder={placeholder}
           value={inputValue}
           onChange={handleInputChange}
+          autoComplete="off"
         />
         {error && (
           <i aria-hidden="true">
@@ -40,7 +44,7 @@ const LoginInput = ({
   )
 }
 
-const StyledLoginInput = styled.div`
+const StyledLoginInput = styled.form`
   & + & {
     margin-top: 1.6rem;
   }

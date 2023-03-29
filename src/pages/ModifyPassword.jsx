@@ -15,9 +15,21 @@ function ModifyPassword() {
           <TextDesc>질문지 확인용 비밀번호를 변경</TextDesc>
         </TextArea>
         <StyledInputWrap>
-          <LoginInput type="password" placeholder="현재 비밀번호 입력" />
-          <LoginInput type="password" placeholder="새 비밀번호 입력" />
-          <LoginInput type="password" placeholder="새 비밀번호 확인" />
+          <LoginInput
+            type="password"
+            name="password"
+            placeholder="현재 비밀번호 입력"
+          />
+          <LoginInput
+            type="password"
+            name="password"
+            placeholder="새 비밀번호 입력"
+          />
+          <LoginInput
+            type="password"
+            name="password"
+            placeholder="새 비밀번호 확인"
+          />
         </StyledInputWrap>
         <StyledFixedArea>
           <ButtonArea margin="11rem 0 0 0">
