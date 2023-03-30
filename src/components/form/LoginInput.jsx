@@ -72,13 +72,12 @@ const StyledLoginInput = styled.form`
     align-items: center;
     justify-content: center;
     width: 4.8rem;
-    height: 100%;
+    /* height: 100%; */
   }
 
   input {
     flex-grow: 1;
-    height: 100%;
-    padding-right: 1.2rem;
+    padding: 0 1.2rem 0 0;
     border: none;
     font-size: 1.6rem;
     color: ${(props) => props.theme.gray900};
