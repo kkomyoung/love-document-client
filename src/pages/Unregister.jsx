@@ -5,8 +5,29 @@ import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import { TextArea, Title, TextDesc } from '../components/texts/Texts'
 import InputText from '../components/form/InputText'
 import ExampleButton from '../components/question/ExampleButton'
+import { useNavigate } from 'react-router-dom'
+import useModal from '../hooks/useModal'
 
-function Unregister() {
+const Unregister = () => {
+  const navigate = useNavigate()
+  const { Modal, openModal } = useModal()
+
+  const modalData = {
+    type: 'alert',
+    title: '탈퇴하기',
+    desc: '정말 탈퇴하실 건가요?',
+    btnCancel: {
+      text: '계속 쓸게요',
+    },
+    btnConfirm: {
+      text: '네, 탈퇴할게요',
+      fn: () => {
+        console.log('탈퇴')
+        navigate('/')
+      },
+    },
+  }
+
   return (
     <StyledMain>
       <Header title="회원 탈퇴" btnBack />
@@ -44,9 +65,14 @@ function Unregister() {
           </div>
         </StyledMenuWrap>
         <ButtonArea margin="10rem 0 0 0">
-          <RoundButton size="large" text="탈퇴하기" />
+          <RoundButton
+            size="large"
+            text="탈퇴하기"
+            onClick={() => openModal(modalData)}
+          />
         </ButtonArea>
       </article>
+      <Modal />
     </StyledMain>
   )
 }

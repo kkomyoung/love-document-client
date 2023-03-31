@@ -23,7 +23,7 @@ function Modify() {
             <ButtonArea full>
               <RoundButton
                 as={Link}
-                to="/setting/modify/username"
+                to="/setting/modify/nickname"
                 text="닉네임 변경"
                 color="white"
                 border="true"

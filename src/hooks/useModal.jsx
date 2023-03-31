@@ -6,14 +6,14 @@ const useModal = () => {
   const [modalData, setModalData] = useState(null)
 
   // 모달 열기
-  const open = useCallback((data) => {
+  const openModal = useCallback((data) => {
     document.body.style.overflow = 'hidden'
     setModalData(data)
     setIsOpen(() => true)
   }, [])
 
   // 모달 닫기
-  const close = useCallback((callback = null) => {
+  const closeModal = useCallback((callback = null) => {
     document.body.style.overflow = ''
     if (typeof callback === 'function') {
       callback()
@@ -23,10 +23,10 @@ const useModal = () => {
 
   return {
     Modal: isOpen
-      ? () => <Modal modalData={modalData} close={close} />
+      ? () => <Modal modalData={modalData} close={closeModal} />
       : () => null,
-    open,
-    close,
+    openModal,
+    closeModal,
   }
 }
 

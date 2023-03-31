@@ -1,17 +1,30 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
-// import { Modal } from '../components/modals/Modal'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import { TextArea, Title } from '../components/texts/Texts'
+import useModal from '../hooks/useModal'
 
-function Setting() {
-  // const [openModal, setOpenModal] = useState(false)
+const Setting = () => {
+  const navigate = useNavigate()
+  const { Modal, openModal } = useModal()
 
-  // const showModal = () => {
-  //   setOpenModal(true)
-  // }
+  const modalData = {
+    type: 'alert',
+    title: '로그아웃',
+    desc: '정말 로그아웃하실 건가요?',
+    btnCancel: {
+      text: '아니요',
+    },
+    btnConfirm: {
+      text: '네',
+      fn: () => {
+        console.log('로그아웃')
+        navigate('/')
+      },
+    },
+  }
 
   return (
     <StyledMain>
@@ -42,21 +55,13 @@ function Setting() {
                 text="로그아웃"
                 color="white"
                 border="true"
-                // onClick={}
+                onClick={() => openModal(modalData)}
               />
             </ButtonArea>
           </ul>
         </StyledMenuWrap>
       </article>
-      {/* {openModal && (
-        <Modal
-          title="로그아웃"
-          text="정말 로그아웃하실 건가요?"
-          btnCancle="아니요"
-          btnConfirm="네"
-          setOpenModal={setOpenModal}
-        />
-      )} */}
+      <Modal />
     </StyledMain>
   )
 }

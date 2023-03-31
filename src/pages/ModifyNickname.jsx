@@ -1,12 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 // import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import { TextArea, Title, TextDesc } from '../components/texts/Texts'
 import LoginInput from '../components/form/LoginInput'
+import { validateNickname } from '../utils/validate'
 
-function ModifyNickname() {
+const ModifyNickname = () => {
+  const [nickname, setNickname] = useState(localStorage.getItem('nickname'))
+  const [error, setError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+
+  const handlerModify = () => {
+    validateNickname(nickname, setError, setErrorMessage)
+  }
+
   return (
     <StyledMain>
       <Header title="닉네임 변경" btnBack />
@@ -20,11 +29,15 @@ function ModifyNickname() {
             type="text"
             name="nickname"
             placeholder="새 닉네임 입력"
+            value={nickname}
+            error={error}
+            errorMessage={errorMessage}
+            onChange={(e) => setNickname(e.target.value)}
           />
         </StyledInputWrap>
         <StyledFixedArea>
           <ButtonArea margin="11rem 0 0 0">
-            <RoundButton size="large" text="저장" />
+            <RoundButton size="large" text="저장" onClick={handlerModify} />
           </ButtonArea>
         </StyledFixedArea>
       </article>

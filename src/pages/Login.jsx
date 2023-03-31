@@ -9,7 +9,7 @@ import {
 import { Title } from '../components/texts/Texts'
 import { ReactComponent as ImgHeartLock } from '../assets/img_heart_lock.svg'
 import LoginForm from '../components/form/LoginForm'
-import validateLogin from '../utils/validateLogin'
+import { validateLogin } from '../utils/validate'
 import { useNavigate } from 'react-router-dom'
 import { useLoginMutation } from '../apis/user'
 import useToastPopup from '../hooks/useToastPopup'

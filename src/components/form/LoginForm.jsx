@@ -14,18 +14,18 @@ const LoginForm = ({
   return (
     <>
       <LoginInput
-        inputValue={valueNickname}
+        value={valueNickname}
         error={errorNickname}
         errorMessage={errorMessageNickname}
-        handlerInputChange={handlerNicknameChange}
+        onChange={handlerNicknameChange}
         name="nickname"
         placeholder="닉네임"
       />
       <LoginInput
-        inputValue={valuePassword}
+        value={valuePassword}
         error={errorPassword}
         errorMessage={errorMessagePassword}
-        handlerInputChange={handlerPasswordChange}
+        onChange={handlerPasswordChange}
         type="password"
         name="password"
         pattern="[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]+"

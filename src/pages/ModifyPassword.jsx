@@ -5,7 +5,7 @@ import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import { TextArea, Title, TextDesc } from '../components/texts/Texts'
 import LoginInput from '../components/form/LoginInput'
 
-function ModifyPassword() {
+const ModifyPassword = () => {
   return (
     <StyledMain>
       <Header title="비밀번호 변경" btnBack />

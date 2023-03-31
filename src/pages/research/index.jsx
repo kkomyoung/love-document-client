@@ -5,14 +5,15 @@ import SelectCategory from './SelectCategory'
 import Register from './Register'
 import { ButtonArea, RoundButton } from '../../components/buttons/Buttons'
 import { TextArea, Title, TextDesc } from '../../components/texts/Texts'
-import validateRegister from '../../utils/validateRegister'
+import { validateRegister } from '../../utils/validate'
 import useModal from '../../hooks/useModal'
 import useToastPopup from '../../hooks/useToastPopup'
 import { useNavigate } from 'react-router-dom'
 import { useRegisterMutation, usePostQuestionsMutation } from '../../apis'
-function Research() {
+
+const Research = () => {
   const navigate = useNavigate()
-  const { Modal, open } = useModal()
+  const { Modal, openModal } = useModal()
   const { ToastPopup, openToastPopup } = useToastPopup()
   const { mutate: register } = useRegisterMutation()
   const { mutate: postQuestions } = usePostQuestionsMutation()
@@ -75,15 +76,8 @@ function Research() {
     }
 
     if (isValid) {
-      open(modalData)
+      openModal(modalData)
     }
-  }
-
-  const handlerNicknameChange = (e) => {
-    setValueNickname(e.target.value)
-  }
-  const handlerPasswordChange = (e) => {
-    setValuePassword(e.target.value)
   }
 
   const submitForm = () => {
@@ -94,7 +88,6 @@ function Research() {
       .map((checkbox) => ({ id: checkbox.id }))
     setResultOptions(checkedOptions)
   }
-
   return (
     <StyledMain>
       <Header title="질문지 만들기" btnBack />
@@ -115,8 +108,8 @@ function Research() {
           errorPassword={errorPassword}
           errorMessageNickname={errorMessageNickname}
           errorMessagePassword={errorMessagePassword}
-          handlerNicknameChange={handlerNicknameChange}
-          handlerPasswordChange={handlerPasswordChange}
+          handlerNicknameChange={(e) => setValueNickname(e.target.value)}
+          handlerPasswordChange={(e) => setValuePassword(e.target.value)}
         />
         <ButtonArea margin="8.3rem 0 0">
           <RoundButton size="large" text="완료" onClick={handlerValidate} />
