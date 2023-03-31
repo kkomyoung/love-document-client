@@ -1,13 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const ToastPopup = ({ message, className }) => {
+const ToastPopup = ({ isOpen, message }) => {
   return (
-    <StyledToastPopup className={className}>
-      <div className="inner">
-        <p>{message}</p>
-      </div>
-    </StyledToastPopup>
+    <>
+      {isOpen && (
+        <StyledToastPopup className="fadeIn">
+          <div className="inner">
+            <p>{message}</p>
+          </div>
+        </StyledToastPopup>
+      )}
+    </>
   )
 }
 

@@ -10,14 +10,11 @@ import useModal from '../../hooks/useModal'
 import useToastPopup from '../../hooks/useToastPopup'
 import { useNavigate } from 'react-router-dom'
 import { useRegisterMutation, usePostQuestionsMutation } from '../../apis'
-import { useGetCategoriesQuery } from '../../apis/category'
-
 function Research() {
   const navigate = useNavigate()
   const { Modal, open } = useModal()
   const { ToastPopup, openToastPopup } = useToastPopup()
   const { mutate: register } = useRegisterMutation()
-  const { data: categoriesData } = useGetCategoriesQuery()
   const { mutate: postQuestions } = usePostQuestionsMutation()
   const [valueNickname, setValueNickname] = useState('')
   const [valuePassword, setValuePassword] = useState('')
@@ -110,13 +107,7 @@ function Research() {
             <span>상대방에 대해 알고싶은 카테고리를 선택해주세요</span>
           </TextDesc>
         </TextArea>
-        {categoriesData && (
-          <SelectCategory
-            formRef={formRef}
-            data={categoriesData}
-            onChange={submitForm}
-          />
-        )}
+        <SelectCategory formRef={formRef} onChange={submitForm} />
         <Register
           valueNickname={valueNickname}
           valuePassword={valuePassword}
@@ -138,7 +129,7 @@ function Research() {
 }
 
 const StyledMain = styled.main`
-  padding-bottom: 4.8rem;
+  padding-bottom: 10rem;
 `
 
 export default Research

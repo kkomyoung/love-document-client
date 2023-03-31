@@ -1,27 +1,35 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useRef } from 'react'
 import ToastPopup from '../components/toast-popup/ToastPopup'
 
 const useToastPopup = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [message, setMessage] = useState('')
-  const [animation, setAnimation] = useState('')
+  const timeoutRef = useRef(null)
 
-  const openToastPopup = useCallback((message) => {
-    setMessage(message)
-    setIsOpen(true)
-    setAnimation('fadeIn')
+  const openToastPopup = useCallback(
+    (message) => {
+      setMessage(message)
+      setIsOpen(true)
 
-    setTimeout(() => {
-      setAnimation('fadeOut')
-      setTimeout(() => setIsOpen(false), 500)
-    }, 3000)
-  }, [])
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+
+      timeoutRef.current = setTimeout(() => {
+        setIsOpen(false)
+      }, 3000)
+    },
+    [isOpen]
+  )
 
   return {
-    ToastPopup: isOpen
-      ? () => <ToastPopup message={message} className={animation} />
-      : () => null,
+    message,
+    isOpen,
     openToastPopup,
+    ToastPopup: useCallback(
+      () => <ToastPopup isOpen={isOpen} message={message} />,
+      [message, isOpen]
+    ),
   }
 }
 

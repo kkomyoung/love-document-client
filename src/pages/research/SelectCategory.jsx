@@ -1,13 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
 import CategoryBoxList from '../../components/category/Category'
-function SelectCategory({ formRef, data, onChange }) {
+import { useGetCategoriesQuery } from '../../apis/category'
+
+function SelectCategory({ formRef, onChange }) {
+  const { data } = useGetCategoriesQuery()
   return (
-    <StyledSectionCategory>
-      <form ref={formRef} onChange={onChange}>
-        <CategoryBoxList data={data}></CategoryBoxList>
-      </form>
-    </StyledSectionCategory>
+    <>
+      {data && (
+        <StyledSectionCategory>
+          <form ref={formRef} onChange={onChange}>
+            <CategoryBoxList data={data}></CategoryBoxList>
+          </form>
+        </StyledSectionCategory>
+      )}
+    </>
   )
 }
 
