@@ -101,7 +101,8 @@ const Login = () => {
 }
 
 const StyledMain = styled.main`
-  padding-bottom: 4.8rem;
+  /* padding-bottom: 4.8rem; */
+  padding-bottom: 10rem;
 `
 
 const StyledAirticle = styled.article`

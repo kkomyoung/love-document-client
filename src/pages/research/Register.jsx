@@ -45,7 +45,6 @@ function Register({
             error={errorPassword}
             errorMessage={errorMessagePassword}
             handlerInputChange={handlerPasswordChange}
-            type="password"
             name="password"
             pattern="[a-zA-Z0-9ㄱ-ㅎㅏ-ㅣ가-힣]+"
             placeholder="비밀번호 (4~20자)"
