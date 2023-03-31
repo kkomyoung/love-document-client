@@ -1,9 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
+import PopupPortal from '../../portal'
 
 const ToastPopup = ({ isOpen, message }) => {
   return (
-    <>
+    <PopupPortal>
       {isOpen && (
         <StyledToastPopup className="fadeIn">
           <div className="inner">
@@ -11,7 +12,7 @@ const ToastPopup = ({ isOpen, message }) => {
           </div>
         </StyledToastPopup>
       )}
-    </>
+    </PopupPortal>
   )
 }
 
