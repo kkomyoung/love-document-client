@@ -28,7 +28,7 @@ const HomeRearch = () => {
 
 const StyledMain = styled.main`
   padding-bottom: 4.8rem;
-  padding-bottom: 2rem;
+  padding-bottom: 10rem;
 `
 
 export default HomeRearch
