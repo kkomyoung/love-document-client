@@ -1,12 +1,16 @@
 import React from 'react'
 import Header from '../../components/header/Header'
-import { TextArea, TextDesc, Title } from '../../components/texts/Texts'
+import {
+  SubTitle,
+  TextArea,
+  TextDesc,
+  Title,
+} from '../../components/texts/Texts'
 import styled from 'styled-components'
-// import { CircleButton } from '../../components/buttons/Buttons'
+import { ReactComponent as IconLoveLetter } from '../../assets/icon_love_letter_36.svg'
 import ShareResearch from './ShareResearch'
+import AnswerItem from '../../components/answer/AnswerItem'
 import WriteStandard from './WriteStandard'
-import Answers from './Answers'
-
 const member = {
   name: '연서합',
   researchCnt: 4,
@@ -32,11 +36,14 @@ const answers = [
 ]
 
 function ResearchReady() {
-  console.log()
+  const onDelete = (id) => {
+    console.log(id)
+  }
+
   return (
-    <Container>
+    <StyledMain>
       <Header title="질문지 준비 완료" btnBack btnHome />
-      <article>
+      <StyledAirticle>
         <TextArea>
           <Title>질문지 준비 완료</Title>
           <TextDesc>
@@ -49,77 +56,43 @@ function ResearchReady() {
 
         <WriteStandard />
 
-        <Answers answers={answers} />
+        <StyledAnswersSection>
+          <TextArea>
+            <SubTitle>
+              <i aria-hidden="true">
+                <IconLoveLetter />
+              </i>
+              <span>도착한 답변</span>
+            </SubTitle>
+            <TextDesc>아직 도착한 답변이 없어요 :(</TextDesc>
+          </TextArea>
 
-        {/* <AnswerContainer>
-        <TextArea>
-          <Title3MIocn icon={LoveLetterIcon}>도착한 답변</Title3MIocn>
-        </TextArea>
-
-        <AnswersBox>
-          {answers.map((answer) => (
-            <Answer key={answer.id} {...answer} />
-          ))}
-        </AnswersBox>
-      </AnswerContainer>{' '}
-      */}
-      </article>
-    </Container>
+          <AnswerList>
+            {answers.map((answer) => (
+              <AnswerItem key={answer.id} {...answer} onDelete={onDelete} />
+            ))}
+          </AnswerList>
+        </StyledAnswersSection>
+      </StyledAirticle>
+    </StyledMain>
   )
 }
 
-const Container = styled.main`
+const StyledMain = styled.main`
+  padding-bottom: 4.8rem;
   padding-bottom: 2rem;
 `
 
-// const StandardBox = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   background-color: ${(props) => props.theme.pink300};
-//   border-radius: 8px;
-//   border: 0px;
-//   padding: 2.4rem;
-// `
+const StyledAirticle = styled.article``
+const StyledAnswersSection = styled.section``
 
-// const StandardTop = styled.div`
-//   display: flex;
-// `
+const AnswerList = styled.ul`
+  margin-top: 2.8rem;
+  padding: 0px 2rem;
 
-// const HeartPuzzleImg = styled.img`
-//   width: 100px;
-//   margin-right: 0.2rem;
-// `
-
-// const StandardTitleBox = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   gap: 0.8rem;
-// `
-
-// const WriteStandardBtn = styled.button`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   height: 5.2rem;
-//   background-color: ${(props) => props.theme.pink700};
-//   border-radius: 53px;
-//   border: 0px;
-//   margin-top: 2.4rem;
-// `
-
-// const AnswerContainer = styled.section`
-//   display: flex;
-//   flex-direction: column;
-//   margin-top: 4.8rem;
-// `
-
-// const AnswersBox = styled.div`
-//   padding: 0 2rem;
-//   margin-top: 2.8rem;
-
-//   & > div + div {
-//     margin-top: 1.6rem;
-//   }
-// `
+  & > li + li {
+    margin-top: 1.6rem;
+  }
+`
 
 export default ResearchReady
