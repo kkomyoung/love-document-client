@@ -17,6 +17,7 @@ import Modify from './pages/Modify'
 import ModifyNickname from './pages/ModifyNickname'
 import ModifyPassword from './pages/ModifyPassword'
 import AnswersPage from './pages/AnswersPage'
+import HomeRearch from './pages/home-research'
 
 function Router() {
   return (
@@ -45,6 +46,7 @@ function Router() {
           element={<AnswerComplete />}
         />
         <Route path="/home/answers" element={<AnswersPage />} />
+        <Route path="/home/research" element={<HomeRearch />} />
       </Routes>
     </>
   )

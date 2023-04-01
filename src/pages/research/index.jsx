@@ -49,7 +49,7 @@ const Research = () => {
     )
       .filter((checkbox) => checkbox.checked)
       .map((checkbox) => checkbox.id)
-    setResultOptions({ idList: [...checkedOptions] })
+    setResultOptions({ categoryItems: [...checkedOptions] })
   }
 
   const handlerValidate = (e) => {
