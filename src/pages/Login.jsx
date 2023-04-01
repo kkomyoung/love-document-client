@@ -11,12 +11,10 @@ import { ReactComponent as ImgHeartLock } from '../assets/img_heart_lock.svg'
 import LoginForm from '../components/form/LoginForm'
 import { validateLogin } from '../utils/validate'
 import { useNavigate } from 'react-router-dom'
-import { useLoginMutation } from '../apis/user'
+import { login } from '../apis/user'
 import useToastPopup from '../hooks/useToastPopup'
+import { useMutation } from 'react-query'
 
-const sendEmail = () => {
-  console.log('이메일 문의')
-}
 const Login = () => {
   const { ToastPopup, openToastPopup } = useToastPopup()
   const navigate = useNavigate()
@@ -27,7 +25,16 @@ const Login = () => {
   const [errorMessageNickname, setErrorMessageNickname] = useState('')
   const [errorMessagePassword, setErrorMessagePassword] = useState('')
 
-  const { mutate } = useLoginMutation()
+  const { mutate: loginMutate } = useMutation(login, {
+    onSuccess: (data) => {
+      localStorage.setItem('nickname', data.nickname)
+      localStorage.setItem('token', data.token)
+      navigate('/home')
+    },
+    onError: () => {
+      openToastPopup('닉네임이나 비밀번호를 잘못 입력했습니다')
+    },
+  })
 
   const handlerLogin = (e) => {
     e.preventDefault()
@@ -41,19 +48,7 @@ const Login = () => {
     )
 
     if (isValid) {
-      mutate(
-        { nickname: valueNickname, password: valuePassword },
-        {
-          onSuccess: (data) => {
-            localStorage.setItem('nickname', data.nickname)
-            localStorage.setItem('token', data.token)
-            navigate('/home')
-          },
-          onError: () => {
-            openToastPopup('닉네임이나 비밀번호를 잘못 입력했습니다')
-          },
-        }
-      )
+      loginMutate({ nickname: valueNickname, password: valuePassword })
     }
   }
 
@@ -88,7 +83,6 @@ const Login = () => {
           <TextButton
             type="underline"
             text="로그인 정보를 잊었다면? 문의하기"
-            onClick={sendEmail}
           />
         </ButtonArea>
         <ButtonArea margin="4rem 0 0 0">

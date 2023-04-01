@@ -1,10 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import CategoryBoxList from '../../components/category/Category'
-import { useGetCategoriesQuery } from '../../apis/category'
+import { getCategories } from '../../apis/category'
+import { useQuery } from 'react-query'
 
 function SelectCategory({ formRef, onChange }) {
-  const { data } = useGetCategoriesQuery()
+  const { data } = useQuery('categories', getCategories)
+
   return (
     <>
       {data && (
