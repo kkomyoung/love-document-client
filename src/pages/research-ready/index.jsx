@@ -9,9 +9,8 @@ import {
 import styled from 'styled-components'
 import { ReactComponent as IconLoveLetter } from '../../assets/icon_love_letter_36.svg'
 import ShareResearch from './ShareResearch'
-import WriteStandard from './WriteStandard'
 import AnswerItem from '../../components/answer/AnswerItem'
-
+import WriteStandard from './WriteStandard'
 const member = {
   name: '연서합',
   researchCnt: 4,
