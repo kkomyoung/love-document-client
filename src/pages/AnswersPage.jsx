@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Header from '../components/header/Header'
 import { TextArea, Title } from '../components/texts/Texts'
 import { ReactComponent as IconLetter } from '../assets/icon_letter.svg'
-import AnswerItem from '../components/AnswerItem'
+import AnswerItem from '../components/answer/AnswerItem'
 
 const answers = [
   {
@@ -25,6 +25,8 @@ const answers = [
 ]
 
 function AnswersPage() {
+  const onDelete = (id) => {}
+
   return (
     <StyledMain>
       <Header title="도착한 답변" btnBack></Header>
@@ -41,7 +43,7 @@ function AnswersPage() {
         <StyledAnswersSection>
           <AnswerList>
             {answers.map((answer) => (
-              <AnswerItem key={answer.id} {...answer} />
+              <AnswerItem key={answer.id} {...answer} onDelete={onDelete} />
             ))}
           </AnswerList>
         </StyledAnswersSection>
@@ -57,7 +59,6 @@ const StyledMain = styled.main`
 `
 
 const StyledAirticle = styled.article``
-
 const StyledAnswersSection = styled.section``
 
 const AnswerList = styled.ul`

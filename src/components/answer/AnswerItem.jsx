@@ -1,7 +1,8 @@
 import React, { useRef } from 'react'
 import styled from 'styled-components'
+import { ReactComponent as IconTrashCan } from '../../assets/icon_trash_can.svg'
 
-function AnswerItem({ nickname, age, address, match, date }) {
+function AnswerItem({ id, nickname, age, address, match, date, onDelete }) {
   const ref = useRef()
   let downX
 
@@ -9,7 +10,7 @@ function AnswerItem({ nickname, age, address, match, date }) {
     const newX = e.clientX
 
     if (newX - downX < -30) {
-      ref.current.style.transform = 'translate(-55px)'
+      ref.current.style.transform = 'translate(-80px)'
       setTimeout(() => {
         if (ref.current) ref.current.style.transform = 'translate(0px)'
       }, 5000)
@@ -44,7 +45,9 @@ function AnswerItem({ nickname, age, address, match, date }) {
           <InfoText>{date}</InfoText>
         </Col>
       </Box>
-      <DeleteButton>D</DeleteButton>
+      <DeleteButton onClick={() => onDelete(id)}>
+        <IconTrashCan />
+      </DeleteButton>
     </Item>
   )
 }
@@ -54,9 +57,6 @@ export default AnswerItem
 const Item = styled.li`
   display: flex;
   position: relative;
-
-  div {
-  }
 `
 
 const Box = styled.div`
@@ -75,6 +75,9 @@ const Box = styled.div`
 `
 
 const DeleteButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   right: 0;
   height: 99%;
