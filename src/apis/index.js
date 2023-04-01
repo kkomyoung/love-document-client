@@ -1,12 +1,12 @@
-import { useGetCategoriesQuery, usePostQuestionsMutation } from './category'
-import { useLoginMutation, useRegisterMutation } from './user'
+import { getCategories, postQuestions } from './category'
+import { login, register } from './user'
 
 export {
   // User
-  useLoginMutation,
-  useRegisterMutation,
+  login,
+  register,
 
   // Category
-  useGetCategoriesQuery,
-  usePostQuestionsMutation,
+  getCategories,
+  postQuestions,
 }

@@ -9,55 +9,47 @@ import { validateRegister } from '../../utils/validate'
 import useModal from '../../hooks/useModal'
 import useToastPopup from '../../hooks/useToastPopup'
 import { useNavigate } from 'react-router-dom'
-import { useRegisterMutation, usePostQuestionsMutation } from '../../apis'
+import { register, postQuestions } from '../../apis'
+import { useMutation } from 'react-query'
 
 const Research = () => {
   const navigate = useNavigate()
   const { Modal, openModal } = useModal()
   const { ToastPopup, openToastPopup } = useToastPopup()
-  const { mutate: register } = useRegisterMutation()
-  const { mutate: postQuestions } = usePostQuestionsMutation()
   const [valueNickname, setValueNickname] = useState('')
   const [valuePassword, setValuePassword] = useState('')
   const [errorNickname, setErrorNickname] = useState(false)
   const [errorPassword, setErrorPassword] = useState(false)
   const [errorMessageNickname, setErrorMessageNickname] = useState('')
   const [errorMessagePassword, setErrorMessagePassword] = useState('')
-  const [resultOptions, setResultOptions] = useState([])
+  const [resultOptions, setResultOptions] = useState({})
   const formRef = useRef()
+  // 카테고리 목록
+  const { mutate: postQuestionsMutate } = useMutation(postQuestions, {
+    onSuccess: () => navigate('/research/ready'),
+  })
 
-  const modalData = {
-    type: 'alert',
-    title: '질문지 닉네임과 비밀번호를 꼭 기억해주세요',
-    btnCancel: {
-      text: '다시 보러갈래요',
+  // 회원가입
+  const { mutate: registerMutate } = useMutation(register, {
+    onSuccess: (data) => {
+      localStorage.setItem('nickname', data.nickname)
+      localStorage.setItem('token', data.token)
+      postQuestionsMutate(resultOptions)
     },
-    btnConfirm: {
-      text: '알겠어요',
-      fn: () => {
-        handlerRegister()
-      },
-    },
-  }
-
-  const handlerRegister = () => {
-    register(
-      { nickname: valueNickname, password: valuePassword },
-      {
-        onSuccess: (data) => {
-          localStorage.setItem('nickname', data.nickname)
-          localStorage.setItem('token', data.token)
-          postQuestions(resultOptions, {
-            onSuccess: () => navigate('/research/ready'),
-          })
-        },
-        onError: (err) => {
-          if (err.request.status === 409) {
-            openToastPopup('중복된 닉네임이에요')
-          }
-        },
+    onError: (err) => {
+      if (err.response.status === 409) {
+        openToastPopup('중복된 닉네임이에요')
       }
+    },
+  })
+
+  const submitForm = () => {
+    const checkedOptions = Array.from(
+      formRef.current.querySelectorAll('input[type="checkbox"]')
     )
+      .filter((checkbox) => checkbox.checked)
+      .map((checkbox) => checkbox.id)
+    setResultOptions({ idList: [...checkedOptions] })
   }
 
   const handlerValidate = (e) => {
@@ -76,18 +68,22 @@ const Research = () => {
     }
 
     if (isValid) {
-      openModal(modalData)
+      openModal({
+        type: 'alert',
+        title: '질문지 닉네임과 비밀번호를 꼭 기억해주세요',
+        btnCancel: {
+          text: '다시 보러갈래요',
+        },
+        btnConfirm: {
+          text: '알겠어요',
+          fn: () => {
+            registerMutate({ nickname: valueNickname, password: valuePassword })
+          },
+        },
+      })
     }
   }
 
-  const submitForm = () => {
-    const checkedOptions = Array.from(
-      formRef.current.querySelectorAll('input[type="checkbox"]')
-    )
-      .filter((checkbox) => checkbox.checked)
-      .map((checkbox) => ({ id: checkbox.id }))
-    setResultOptions(checkedOptions)
-  }
   return (
     <StyledMain>
       <Header title="질문지 만들기" btnBack />
