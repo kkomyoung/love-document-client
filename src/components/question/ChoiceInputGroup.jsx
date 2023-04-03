@@ -2,36 +2,33 @@ import React from 'react'
 import styled from 'styled-components'
 import ExampleButton from './ExampleButton'
 
-function YesOrNo({ name, examples }) {
+function Choice({ name, multiple, examples }) {
   return (
-    <StyledBox>
+    <Box>
       {examples.map((example) => (
         <ExampleButton
           key={example.id}
           name={name}
-          isMultiChoice={false}
+          multiple={multiple}
           id={example.id}
-          text={example.text}
+          content={example.content}
         />
       ))}
-    </StyledBox>
+    </Box>
   )
 }
 
-const StyledBox = styled.ul`
+const Box = styled.div`
   display: flex;
+  flex-direction: column;
 
-  li {
-    flex: 1;
-  }
-
-  li > label {
+  button > label {
     width: 100%;
   }
 
-  li + li {
-    margin-left: 0.8rem;
+  button + button {
+    margin-top: 0.8rem;
   }
 `
 
-export default YesOrNo
+export default Choice

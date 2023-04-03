@@ -2,75 +2,79 @@ import React from 'react'
 import styled from 'styled-components'
 import { ReactComponent as IconHeart } from '../../assets/icon_heart.svg'
 
-function Score({ name, positiveText, negativeText }) {
+function ScoreInputGroup({ name, positiveLabel, negativeLabel }) {
   return (
-    <StyledBox>
-      <StyledScoreBox>
-        <StyledButton>
-          <input type="radio" name={name} id={`${name}_1`} />
+    <Box>
+      <ScoreButtonBox>
+        <ScoreButton>
+          <input type="radio" name={name} value={1} id={`${name}_1`} />
           <label htmlFor={`${name}_1`} />
           <IconHeart fill="white" />
-        </StyledButton>
-        <StyledButton>
-          <input type="radio" name={name} id={`${name}_2`} />
+        </ScoreButton>
+
+        <ScoreButton>
+          <input type="radio" name={name} value={2} id={`${name}_2`} />
           <label htmlFor={`${name}_2`} />
           <IconHeart fill="white" />
-        </StyledButton>
-        <StyledButton>
-          <input type="radio" name={name} id={`${name}_3`} />
+        </ScoreButton>
+
+        <ScoreButton>
+          <input type="radio" name={name} value={3} id={`${name}_3`} />
           <label htmlFor={`${name}_3`} />
           <IconHeart fill="white" />
-        </StyledButton>
-        <StyledButton>
-          <input type="radio" name={name} id={`${name}_4`} />
+        </ScoreButton>
+
+        <ScoreButton>
+          <input type="radio" name={name} value={4} id={`${name}_4`} />
           <label htmlFor={`${name}_4`} />
           <IconHeart fill="white" />
-        </StyledButton>
-        <StyledButton>
-          <input type="radio" name={name} id={`${name}_5`} />
+        </ScoreButton>
+
+        <ScoreButton>
+          <input type="radio" name={name} value={5} id={`${name}_5`} />
           <label htmlFor={`${name}_5`} />
           <IconHeart fill="white" />
-        </StyledButton>
-      </StyledScoreBox>
-      <StyledExampleBox>
-        <StyledExampleText>{negativeText}</StyledExampleText>
-        <StyledExampleText>{positiveText}</StyledExampleText>
-      </StyledExampleBox>
-    </StyledBox>
+        </ScoreButton>
+      </ScoreButtonBox>
+      <ExampleTextBox>
+        <ExampleText>{negativeLabel}</ExampleText>
+        <ExampleText>{positiveLabel}</ExampleText>
+      </ExampleTextBox>
+    </Box>
   )
 }
 
-export default Score
+export default ScoreInputGroup
 
-const StyledBox = styled.div`
+const Box = styled.div`
   display: flex;
   flex-direction: column;
 `
 
-const StyledScoreBox = styled.ul`
+const ScoreButtonBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
 
-  li + li {
+  button + button {
     margin-left: 0.8rem;
   }
 
-  li:nth-child(odd) label {
+  button:nth-child(odd) label {
     width: 4.8rem;
     height: 4.8rem;
   }
-  li:nth-child(even) label {
+  button:nth-child(even) label {
     width: 4rem;
     height: 4rem;
   }
-  li:nth-child(3) label {
+  button:nth-child(3) label {
     width: 3.2rem;
     height: 3.2rem;
   }
 `
 
-const StyledButton = styled.li`
+const ScoreButton = styled.button`
   display: inline-flex;
   position: relative;
 
@@ -116,7 +120,7 @@ const StyledButton = styled.li`
   }
 `
 
-const StyledExampleBox = styled.div`
+const ExampleTextBox = styled.div`
   margin-top: 0.8rem;
 
   & span:nth-child(1) {
@@ -127,7 +131,7 @@ const StyledExampleBox = styled.div`
   }
 `
 
-const StyledExampleText = styled.span`
+const ExampleText = styled.span`
   ${(props) => props.theme.fontSize.label_s_m};
   color: ${(props) => props.theme.gray700};
   padding: 0.8rem 1.2rem;

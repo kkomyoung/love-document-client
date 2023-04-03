@@ -2,29 +2,29 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
 
-function Range() {
+function RangeInputGroup() {
   const { register, handleSubmit } = useForm()
   const onValid = (data) => {}
 
   return (
-    <StyledForm onSubmit={handleSubmit(onValid)}>
-      <StyledInput
+    <Form onSubmit={handleSubmit(onValid)}>
+      <Input
         type="number"
         {...register('minimum', { required: true, maxLength: 3, minLength: 3 })}
       />
       <span>이상</span>
-      <StyledInput
+      <Input
         type="number"
         {...register('maximum', { required: true, maxLength: 3, minLength: 3 })}
       />
       <span>이하</span>
-    </StyledForm>
+    </Form>
   )
 }
 
-export default Range
+export default RangeInputGroup
 
-const StyledForm = styled.form`
+const Form = styled.form`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,7 +40,7 @@ const StyledForm = styled.form`
   }
 `
 
-const StyledInput = styled.input`
+const Input = styled.input`
   display: flex;
   width: 8rem;
   height: 4.8rem;

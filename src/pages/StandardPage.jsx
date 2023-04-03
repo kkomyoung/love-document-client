@@ -3,91 +3,14 @@ import styled from 'styled-components'
 import Header from '../components/header/Header'
 import { Link } from 'react-router-dom'
 import { TextArea, TextDesc, Title } from '../components/texts/Texts'
-import QuestionContainer from '../components/question/QuestionContainer'
+import QuestionsContainer from '../components/question/QuestionsContainer'
 import { RoundButton, ButtonArea } from '../components/buttons/Buttons'
-
-const data = {
-  외모: {
-    offset: 0,
-    questions: [
-      {
-        id: 24,
-        title: '키는 어느정도를 선호하세요?',
-        type: 'RANGE',
-      },
-      {
-        id: 105,
-        title: '타투 어때요?',
-        type: 'YES-OR-NO',
-        examples: [
-          { id: 1, text: '괜찮아요' },
-          { id: 2, text: '안돼요' },
-        ],
-      },
-      {
-        id: 36,
-        title: '어떤 종교가 있었으면 하나요?',
-        type: 'MULTIPLE-CHOCIE',
-        isMultiChoice: true,
-        examples: [
-          { id: 22, text: '무교' },
-          { id: 23, text: '기독교' },
-          { id: 24, text: '천주교' },
-          { id: 25, text: '불교' },
-          { id: 26, text: '기타' },
-        ],
-      },
-      {
-        id: 24,
-        title: '스킨십 선호가 어땠으면 하나요?',
-        type: 'SCORE',
-        positiveText: '스킨십 좋아해요',
-        negativeText: '좋아하지 않아요',
-      },
-    ],
-  },
-  가치관: {
-    offset: 4,
-    questions: [
-      {
-        id: 24,
-        title: '키는 어느정도를 선호하세요?',
-        type: 'RANGE',
-      },
-      {
-        id: 105,
-        title: '타투 어때요?',
-        type: 'YES-OR-NO',
-        examples: [
-          { id: 1, text: '괜찮아요' },
-          { id: 2, text: '안돼요' },
-        ],
-      },
-      {
-        id: 36,
-        title: '어떤 종교가 있었으면 하나요?',
-        type: 'MULTIPLE-CHOCIE',
-        isMultiChoice: true,
-        examples: [
-          { id: 22, text: '무교' },
-          { id: 23, text: '기독교' },
-          { id: 24, text: '천주교' },
-          { id: 25, text: '불교' },
-          { id: 26, text: '기타' },
-        ],
-      },
-      {
-        id: 24,
-        title: '스킨십 선호가 어땠으면 하나요?',
-        type: 'SCORE',
-        positiveText: '스킨십 좋아해요',
-        negativeText: '좋아하지 않아요',
-      },
-    ],
-  },
-}
+import { useQuery } from 'react-query'
+import { getQuestions } from '../apis/question'
 
 function StandardPage() {
+  const { data: categoryQuestions } = useQuery('questions', getQuestions)
+
   return (
     <StyledMain>
       <Header title="내 기준 작성하기" btnBack />
@@ -102,15 +25,21 @@ function StandardPage() {
         </TextArea>
 
         <StyledSectionQuestion>
-          {data &&
-            Object.keys(data).map((category) => (
-              <QuestionContainer
-                key={category}
-                category={category}
-                questions={data[category].questions}
-                offset={data[category].offset}
-              />
-            ))}
+          <CategoryQuestionList>
+            {categoryQuestions &&
+              categoryQuestions.map((item, index) => (
+                <QuestionsContainer
+                  key={index}
+                  category={item.categoryTitle}
+                  questions={item.categoryItemInfoList}
+                  offset={
+                    index === 0
+                      ? 0
+                      : categoryQuestions[index - 1].categoryItemInfoList.length
+                  }
+                />
+              ))}
+          </CategoryQuestionList>
         </StyledSectionQuestion>
 
         <ButtonArea margin="10rem 0rem 0rem 0rem">
@@ -135,8 +64,10 @@ const StyledAirticle = styled.article``
 const StyledSectionQuestion = styled.section`
   margin-top: 2.8rem;
   padding: 0 2.4rem;
+`
 
-  & > div + div {
+const CategoryQuestionList = styled.ul`
+  & > li + li {
     margin-top: 2.8rem;
   }
 `
