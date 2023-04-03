@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import ExampleButton from './ExampleButton'
 
-function YesOrNo({ name, positiveLabel, negativeLabel }) {
+function YesOrNoInputGroup({ name, positiveLabel, negativeLabel }) {
   return (
     <StyledBox>
       <ExampleButton name={name} id={negativeLabel} content={negativeLabel} />
@@ -10,6 +10,8 @@ function YesOrNo({ name, positiveLabel, negativeLabel }) {
     </StyledBox>
   )
 }
+
+export default YesOrNoInputGroup
 
 const StyledBox = styled.ul`
   display: flex;
@@ -26,5 +28,3 @@ const StyledBox = styled.ul`
     margin-left: 0.8rem;
   }
 `
-
-export default YesOrNo

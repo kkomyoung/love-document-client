@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { ReactComponent as IconHeart } from '../../assets/icon_heart.svg'
 
-function Score({ name, positiveLabel, negativeLabel }) {
+function ScoreInputGroup({ name, positiveLabel, negativeLabel }) {
   return (
     <StyledBox>
       <StyledScoreBox>
@@ -40,7 +40,7 @@ function Score({ name, positiveLabel, negativeLabel }) {
   )
 }
 
-export default Score
+export default ScoreInputGroup
 
 const StyledBox = styled.div`
   display: flex;

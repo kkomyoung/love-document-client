@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import Choice from './Choice'
-import Score from './Score'
-import YesOrNo from './YesOrNo'
-import Range from './Range'
+import ChoiceInputGroup from './ChoiceInputGroup'
+import ScoreInputGroup from './ScoreInputGroup'
+import YesOrNoInputGroup from './YesOrNoInputGroup'
+import RangeInputGroup from './RangeInputGroup'
 import InputText from '../form/InputText'
 import { Q_TYPE } from '../../utils/constants'
 
@@ -123,23 +123,27 @@ function QuestionItem({ category, questionNumber, question }) {
   return (
     <Item>
       <TitleBox>
-        <StyledQuestionTitle>
+        <QuestionText>
           <span>Q{questionNumber}</span>
-        </StyledQuestionTitle>
-        <StyledQuestionTitle>
+        </QuestionText>
+        <QuestionText>
           {title}
           {type === Q_TYPE.CHOICE && multiple === 'Y' && <p>복수 선택 가능</p>}
-        </StyledQuestionTitle>
+        </QuestionText>
       </TitleBox>
 
       {type === 'INPUT' && <InputText type="number" placeholder="18" />}
 
       {type === Q_TYPE.CHOICE && (
-        <Choice name={category + id} multiple={multiple} examples={examples} />
+        <ChoiceInputGroup
+          name={category + id}
+          multiple={multiple}
+          examples={examples}
+        />
       )}
 
       {type === Q_TYPE.YN && (
-        <YesOrNo
+        <YesOrNoInputGroup
           name={category + id}
           positiveLabel={positiveLabel}
           negativeLabel={negativeLabel}
@@ -147,14 +151,14 @@ function QuestionItem({ category, questionNumber, question }) {
       )}
 
       {type === Q_TYPE.SCORE && (
-        <Score
+        <ScoreInputGroup
           name={category + id}
           positiveLabel={positiveLabel}
           negativeLabel={negativeLabel}
         />
       )}
 
-      {question.type === Q_TYPE.RANGE && <Range />}
+      {question.type === Q_TYPE.RANGE && <RangeInputGroup />}
     </Item>
   )
 }
@@ -168,7 +172,7 @@ const TitleBox = styled.div`
   margin-bottom: 2rem;
 `
 
-const StyledQuestionTitle = styled.h4`
+const QuestionText = styled.h4`
   font-size: 1.8rem;
   font-weight: 600;
   line-height: 1.2;

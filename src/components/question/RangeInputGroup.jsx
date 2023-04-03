@@ -2,7 +2,7 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
 
-function Range() {
+function RangeInputGroup() {
   const { register, handleSubmit } = useForm()
   const onValid = (data) => {}
 
@@ -22,7 +22,7 @@ function Range() {
   )
 }
 
-export default Range
+export default RangeInputGroup
 
 const StyledForm = styled.form`
   display: flex;

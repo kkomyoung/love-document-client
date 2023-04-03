@@ -4,7 +4,7 @@ import ExampleButton from './ExampleButton'
 
 function Choice({ name, multiple, examples }) {
   return (
-    <StyledBox>
+    <Box>
       {examples.map((example) => (
         <ExampleButton
           key={example.id}
@@ -14,19 +14,19 @@ function Choice({ name, multiple, examples }) {
           content={example.content}
         />
       ))}
-    </StyledBox>
+    </Box>
   )
 }
 
-const StyledBox = styled.ul`
+const Box = styled.div`
   display: flex;
   flex-direction: column;
 
-  li > label {
+  button > label {
     width: 100%;
   }
 
-  li + li {
+  & > button + button {
     margin-top: 0.8rem;
   }
 `

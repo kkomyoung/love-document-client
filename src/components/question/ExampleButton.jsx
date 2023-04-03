@@ -14,7 +14,7 @@ function ExampleButton({ id, name, multiple = 'N', content }) {
   )
 }
 
-const StyledButton = styled.li`
+const StyledButton = styled.button`
   display: inline-flex;
 
   input {
