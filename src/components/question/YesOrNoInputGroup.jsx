@@ -4,27 +4,27 @@ import ExampleButton from './ExampleButton'
 
 function YesOrNoInputGroup({ name, positiveLabel, negativeLabel }) {
   return (
-    <StyledBox>
+    <Box>
       <ExampleButton name={name} id={negativeLabel} content={negativeLabel} />
       <ExampleButton name={name} id={positiveLabel} content={positiveLabel} />
-    </StyledBox>
+    </Box>
   )
 }
 
 export default YesOrNoInputGroup
 
-const StyledBox = styled.ul`
+const Box = styled.div`
   display: flex;
 
-  li {
+  button {
     flex: 1;
   }
 
-  li > label {
+  button > label {
     width: 100%;
   }
 
-  li + li {
+  button + button {
     margin-left: 0.8rem;
   }
 `

@@ -26,7 +26,7 @@ const Box = styled.div`
     width: 100%;
   }
 
-  & > button + button {
+  button + button {
     margin-top: 0.8rem;
   }
 `
