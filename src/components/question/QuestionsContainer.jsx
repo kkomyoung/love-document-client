@@ -5,7 +5,7 @@ import QuestionItem from './QuestionItem'
 
 function QuestionsContainer({ category, questions, offset }) {
   return (
-    <Box>
+    <Item>
       <CategoryLabel category={category} />
 
       <List>
@@ -18,13 +18,13 @@ function QuestionsContainer({ category, questions, offset }) {
           />
         ))}
       </List>
-    </Box>
+    </Item>
   )
 }
 
 export default QuestionsContainer
 
-const Box = styled.div`
+const Item = styled.li`
   background-color: ${(props) => props.theme.gray100};
   border-radius: 8px;
   border: none;

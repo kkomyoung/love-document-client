@@ -331,19 +331,21 @@ function StandardPage() {
         </TextArea>
 
         <StyledSectionQuestion>
-          {categoryQuestions &&
-            categoryQuestions.map((item, index) => (
-              <QuestionsContainer
-                key={index}
-                category={item.categoryTitle}
-                questions={item.categoryItemInfoList}
-                offset={
-                  index === 0
-                    ? 0
-                    : categoryQuestions[index - 1].categoryItemInfoList.length
-                }
-              />
-            ))}
+          <CategoryQuestionList>
+            {categoryQuestions &&
+              categoryQuestions.map((item, index) => (
+                <QuestionsContainer
+                  key={index}
+                  category={item.categoryTitle}
+                  questions={item.categoryItemInfoList}
+                  offset={
+                    index === 0
+                      ? 0
+                      : categoryQuestions[index - 1].categoryItemInfoList.length
+                  }
+                />
+              ))}
+          </CategoryQuestionList>
         </StyledSectionQuestion>
 
         <ButtonArea margin="10rem 0rem 0rem 0rem">
@@ -368,8 +370,10 @@ const StyledAirticle = styled.article``
 const StyledSectionQuestion = styled.section`
   margin-top: 2.8rem;
   padding: 0 2.4rem;
+`
 
-  & > div + div {
+const CategoryQuestionList = styled.ul`
+  & > li + li {
     margin-top: 2.8rem;
   }
 `
