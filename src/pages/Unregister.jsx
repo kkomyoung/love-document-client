@@ -44,21 +44,21 @@ const Unregister = () => {
             <StyledBox>
               <ExampleButton
                 name="unregister"
-                isMultiChoice="checkbox"
+                multiChoice="N"
                 id="unregister_01"
-                text="생각했던 서비스가 아니에요"
+                content="생각했던 서비스가 아니에요"
               />
               <ExampleButton
                 name="unregister"
-                isMultiChoice="checkbox"
+                multiChoice="N"
                 id="unregister_02"
-                text="삭제하고 싶은 내용이 있어요"
+                content="삭제하고 싶은 내용이 있어요"
               />
               <ExampleButton
                 name="unregister"
-                isMultiChoice="checkbox"
+                multiChoice="N"
                 id="unregister_03"
-                text="더 이상 사용하지 않아요"
+                content="더 이상 사용하지 않아요"
               />
             </StyledBox>
             <InputText type="text" placeholder="기타 사유를 알려주세요" />
@@ -115,11 +115,11 @@ const StyledBox = styled.ul`
   flex-direction: column;
   margin: 2rem 0 0.8rem;
 
-  li > label {
+  button > label {
     width: 100%;
   }
 
-  li + li {
+  button + button {
     margin-top: 0.8rem;
   }
 `
