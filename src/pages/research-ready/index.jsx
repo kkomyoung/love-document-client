@@ -8,13 +8,9 @@ import {
 } from '../../components/texts/Texts'
 import styled from 'styled-components'
 import { ReactComponent as IconLoveLetter } from '../../assets/icon_love_letter_36.svg'
-import ShareResearch from './ShareResearch'
+import ShareResearchBox from './ShareResearchBox'
 import AnswerItem from '../../components/answer/AnswerItem'
 import WriteStandard from './WriteStandard'
-const member = {
-  name: '연서합',
-  researchCnt: 4,
-}
 
 const answers = [
   {
@@ -52,7 +48,10 @@ function ResearchReady() {
             링크를 공유하고 답변을 요청해보세요
           </TextDesc>
         </TextArea>
-        <ShareResearch {...member} />
+
+        <StyledShareResearchSection>
+          <ShareResearchBox />
+        </StyledShareResearchSection>
 
         <WriteStandard />
 
@@ -84,6 +83,15 @@ const StyledMain = styled.main`
 `
 
 const StyledAirticle = styled.article``
+const StyledShareResearchSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  padding: 2.8rem 2rem;
+
+  & > div + div {
+    margin-top: 3.3rem;
+  }
+`
 const StyledAnswersSection = styled.section``
 
 const AnswerList = styled.ul`
