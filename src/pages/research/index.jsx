@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import styled from 'styled-components'
 import Header from '../../components/header/Header'
 import SelectCategory from './SelectCategory'
@@ -24,6 +24,12 @@ const Research = () => {
   const [errorMessagePassword, setErrorMessagePassword] = useState('')
   const [resultOptions, setResultOptions] = useState({ categoryItems: [] })
   const formRef = useRef()
+
+  useEffect(() => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('nickname')
+  }, [])
+
   // 카테고리 목록
   const { mutate: postQuestionsMutate } = useMutation(postQuestions, {
     onSuccess: () => navigate('/research/ready'),
