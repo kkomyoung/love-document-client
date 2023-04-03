@@ -5,8 +5,23 @@ import { ReactComponent as IconAirplane } from '../../assets/icon_airplane.svg'
 import styled from 'styled-components'
 import MyCategories from './MyCategories'
 import MyStandards from './MyStandards'
+import ShareResearchBox from '../../components/research/ShareResearchBox'
+import useToastPopup from '../../hooks/useToastPopup'
 
 const HomeRearch = () => {
+  const { openToastPopup, ToastPopup } = useToastPopup()
+
+  const onCopyLink = () => {
+    // TODO 링크 API로 받은 데이터로 변경해야 함. 아래는 예시용 링크
+    navigator.clipboard
+      .writeText(
+        'https://emart.ssg.com/item/itemView.ssg?itemId=1000026477087&siteNo=6001&salestrNo=6005'
+      )
+      .then(() => {
+        openToastPopup('설문지링크가 복사되었습니다.')
+      })
+  }
+
   return (
     <StyledMain>
       <Header title="질문지 준비 완료" btnBack btnHome />
@@ -19,9 +34,14 @@ const HomeRearch = () => {
             내 질문지
           </Title>
         </TextArea>
+        <StyledResearchBoxSection>
+          <ShareResearchBox onCopyLink={onCopyLink} />
+        </StyledResearchBoxSection>
+
         <MyCategories />
         <MyStandards />
       </article>
+      <ToastPopup />
     </StyledMain>
   )
 }
@@ -29,6 +49,11 @@ const HomeRearch = () => {
 const StyledMain = styled.main`
   padding-bottom: 4.8rem;
   padding-bottom: 10rem;
+`
+
+const StyledResearchBoxSection = styled.section`
+  padding: 0 2rem;
+  margin-top: 2.4rem;
 `
 
 export default HomeRearch

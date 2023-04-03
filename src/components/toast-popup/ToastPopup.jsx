@@ -21,6 +21,7 @@ const StyledToastPopup = styled.div`
   left: 2rem;
   right: 2rem;
   bottom: 3rem;
+  z-index: 90;
 
   .inner {
     background: ${(props) => props.theme.gray900};
