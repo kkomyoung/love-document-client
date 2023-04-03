@@ -29,10 +29,10 @@ const Item = styled.li`
   border-radius: 8px;
   border: none;
   padding: 2rem;
+`
 
-  & > div + div {
+const List = styled.ul`
+  & > li + li {
     margin-top: 5.2rem;
   }
 `
-
-const List = styled.ul``
