@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import ExampleButton from './ExampleButton'
 
-function MultipleChoice({ name, multiple, examples }) {
+function Choice({ name, multiple, examples }) {
   return (
     <StyledBox>
       {examples.map((example) => (
@@ -31,4 +31,4 @@ const StyledBox = styled.ul`
   }
 `
 
-export default MultipleChoice
+export default Choice

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-function ExampleButton({ id, name, multiple, content }) {
+function ExampleButton({ id, name, multiple = 'N', content }) {
   return (
     <StyledButton>
       <input

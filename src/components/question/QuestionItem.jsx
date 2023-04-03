@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import MultipleChoice from './MultipleChoice'
+import Choice from './Choice'
 import Score from './Score'
 import YesOrNo from './YesOrNo'
 import Range from './Range'
@@ -122,7 +122,7 @@ function QuestionItem({ category, questionNumber, question }) {
 
   return (
     <Item>
-      <TitleBox key={question.id}>
+      <TitleBox>
         <StyledQuestionTitle>
           <span>Q{questionNumber}</span>
         </StyledQuestionTitle>
@@ -135,11 +135,7 @@ function QuestionItem({ category, questionNumber, question }) {
       {type === 'INPUT' && <InputText type="number" placeholder="18" />}
 
       {type === Q_TYPE.CHOICE && (
-        <MultipleChoice
-          name={category + id}
-          multiple={multiple}
-          examples={examples}
-        />
+        <Choice name={category + id} multiple={multiple} examples={examples} />
       )}
 
       {type === Q_TYPE.YN && (

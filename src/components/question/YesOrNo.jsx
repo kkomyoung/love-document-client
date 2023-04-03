@@ -3,23 +3,10 @@ import styled from 'styled-components'
 import ExampleButton from './ExampleButton'
 
 function YesOrNo({ name, positiveLabel, negativeLabel }) {
-  const randomId = Math.random()
-
   return (
     <StyledBox>
-      <ExampleButton
-        name={name}
-        isMultiChoice={false}
-        id={randomId}
-        content={negativeLabel}
-      />
-
-      <ExampleButton
-        name={name}
-        isMultiChoice={false}
-        id={randomId}
-        content={positiveLabel}
-      />
+      <ExampleButton name={name} id={negativeLabel} content={negativeLabel} />
+      <ExampleButton name={name} id={positiveLabel} content={positiveLabel} />
     </StyledBox>
   )
 }
