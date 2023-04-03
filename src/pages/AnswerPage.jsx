@@ -4,7 +4,7 @@ import Header from '../components/header/Header'
 import { TextArea, TextDesc, Title } from '../components/texts/Texts'
 import { ReactComponent as IconLetter } from '../assets/icon_letter.svg'
 import DefaultInfo from '../components/question/DefaultInfo'
-import QuestionContainer from '../components/question/QuestionContainer'
+import QuestionsContainer from '../components/question/QuestionsContainer'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 
 const data = {
@@ -110,7 +110,7 @@ function AnswerPage() {
 
           {data &&
             Object.keys(data).map((category) => (
-              <QuestionContainer
+              <QuestionsContainer
                 key={category}
                 category={category}
                 questions={data[category].questions}

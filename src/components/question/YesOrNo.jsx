@@ -2,18 +2,24 @@ import React from 'react'
 import styled from 'styled-components'
 import ExampleButton from './ExampleButton'
 
-function YesOrNo({ name, examples }) {
+function YesOrNo({ name, positiveLabel, negativeLabel }) {
+  const randomId = Math.random()
+
   return (
     <StyledBox>
-      {examples.map((example) => (
-        <ExampleButton
-          key={example.id}
-          name={name}
-          isMultiChoice={false}
-          id={example.id}
-          text={example.text}
-        />
-      ))}
+      <ExampleButton
+        name={name}
+        isMultiChoice={false}
+        id={randomId}
+        content={negativeLabel}
+      />
+
+      <ExampleButton
+        name={name}
+        isMultiChoice={false}
+        id={randomId}
+        content={positiveLabel}
+      />
     </StyledBox>
   )
 }

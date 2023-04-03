@@ -1,15 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
 
-function ExampleButton({ name, isMultiChoice, id, text }) {
+function ExampleButton({ id, name, multiple, content }) {
   return (
     <StyledButton>
       <input
-        type={isMultiChoice ? 'checkbox' : 'radio'}
+        type={multiple === 'Y' ? 'checkbox' : 'radio'}
         name={name}
         id={`${name}_${id}`}
       />
-      <label htmlFor={`${name}_${id}`}>{text}</label>
+      <label htmlFor={`${name}_${id}`}>{content}</label>
     </StyledButton>
   )
 }

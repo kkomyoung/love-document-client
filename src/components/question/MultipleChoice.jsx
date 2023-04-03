@@ -2,16 +2,16 @@ import React from 'react'
 import styled from 'styled-components'
 import ExampleButton from './ExampleButton'
 
-function MultipleChoice({ name, isMultiChoice, examples }) {
+function MultipleChoice({ name, multiple, examples }) {
   return (
     <StyledBox>
       {examples.map((example) => (
         <ExampleButton
           key={example.id}
           name={name}
-          isMultiChoice={isMultiChoice}
+          multiple={multiple}
           id={example.id}
-          text={example.text}
+          content={example.content}
         />
       ))}
     </StyledBox>

@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { ReactComponent as IconHeart } from '../../assets/icon_heart.svg'
 
-function Score({ name, positiveText, negativeText }) {
+function Score({ name, positiveLabel, negativeLabel }) {
   return (
     <StyledBox>
       <StyledScoreBox>
@@ -33,8 +33,8 @@ function Score({ name, positiveText, negativeText }) {
         </StyledButton>
       </StyledScoreBox>
       <StyledExampleBox>
-        <StyledExampleText>{negativeText}</StyledExampleText>
-        <StyledExampleText>{positiveText}</StyledExampleText>
+        <StyledExampleText>{negativeLabel}</StyledExampleText>
+        <StyledExampleText>{positiveLabel}</StyledExampleText>
       </StyledExampleBox>
     </StyledBox>
   )
