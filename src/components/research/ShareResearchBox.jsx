@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { ReactComponent as ImgDocument } from '../../assets/img_document.svg'
 import { ButtonArea, KakaoButton, RoundButton } from '../buttons/Buttons'
 
-function ShareResearchBox() {
+function ShareResearchBox({ onCopyLink }) {
   const [userInfo, setUserInfo] = useState({
     nickname: '',
     questionCnt: 0,
@@ -14,19 +14,8 @@ function ShareResearchBox() {
     const nickname = localStorage.getItem('nickname')
     setUserInfo((prev) => ({ ...prev, nickname }))
 
-    // 질문 개수와 링크를 받아오는 API 처리
+    // TODO 질문 개수와 링크를 받아오는 API 처리
   }, [userInfo])
-
-  const onClickCopyLink = () => {
-    // 링크 API로 받은 데이터로 변경해야 함. 아래는 예시용 링크
-    navigator.clipboard
-      .writeText(
-        'https://emart.ssg.com/item/itemView.ssg?itemId=1000026477087&siteNo=6001&salestrNo=6005'
-      )
-      .then(() => {
-        alert('설문지링크가 복사되었습니다.')
-      })
-  }
 
   return (
     <Box>
@@ -43,7 +32,7 @@ function ShareResearchBox() {
       </ImgDocumentBox>
 
       <ButtonArea flex full>
-        <RoundButton onClick={onClickCopyLink} text="링크복사" />
+        <RoundButton onClick={onCopyLink} text="링크복사" />
         <KakaoButton text="카톡공유" />
       </ButtonArea>
     </Box>

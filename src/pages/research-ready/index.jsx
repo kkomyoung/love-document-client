@@ -11,6 +11,7 @@ import { ReactComponent as IconLoveLetter } from '../../assets/icon_love_letter_
 import ShareResearchBox from '../../components/research/ShareResearchBox'
 import AnswerItem from '../../components/answer/AnswerItem'
 import WriteStandard from './WriteStandard'
+import useToastPopup from '../../hooks/useToastPopup'
 
 const answers = [
   {
@@ -32,8 +33,20 @@ const answers = [
 ]
 
 function ResearchReady() {
+  const { ToastPopup, openToastPopup } = useToastPopup()
   const onDelete = (id) => {
     console.log(id)
+  }
+
+  const onCopyLink = () => {
+    // TODO 링크 API로 받은 데이터로 변경해야 함. 아래는 예시용 링크
+    navigator.clipboard
+      .writeText(
+        'https://emart.ssg.com/item/itemView.ssg?itemId=1000026477087&siteNo=6001&salestrNo=6005'
+      )
+      .then(() => {
+        openToastPopup('설문지링크가 복사되었습니다.')
+      })
   }
 
   return (
@@ -50,7 +63,7 @@ function ResearchReady() {
         </TextArea>
 
         <StyledShareResearchSection>
-          <ShareResearchBox />
+          <ShareResearchBox onCopyLink={onCopyLink} />
         </StyledShareResearchSection>
 
         <WriteStandard />
@@ -73,6 +86,7 @@ function ResearchReady() {
           </AnswerList>
         </StyledAnswersSection>
       </StyledAirticle>
+      <ToastPopup />
     </StyledMain>
   )
 }
