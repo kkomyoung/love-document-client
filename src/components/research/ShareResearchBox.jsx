@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import CopyToClipboard from 'react-copy-to-clipboard'
 import styled from 'styled-components'
 import { ReactComponent as ImgDocument } from '../../assets/img_document.svg'
 import { ButtonArea, KakaoButton, RoundButton } from '../buttons/Buttons'
@@ -7,7 +8,7 @@ function ShareResearchBox({ onCopyLink }) {
   const [userInfo, setUserInfo] = useState({
     nickname: '',
     questionCnt: 0,
-    researchLink: '',
+    researchLink: 'https://www.seoul.co.kr/news/newsView.php?id=20210917500111',
   })
 
   useEffect(() => {
@@ -15,7 +16,7 @@ function ShareResearchBox({ onCopyLink }) {
     setUserInfo((prev) => ({ ...prev, nickname }))
 
     // TODO 질문 개수와 링크를 받아오는 API 처리
-  }, [userInfo])
+  }, [])
 
   return (
     <Box>
@@ -32,7 +33,10 @@ function ShareResearchBox({ onCopyLink }) {
       </ImgDocumentBox>
 
       <ButtonArea flex full>
-        <RoundButton onClick={onCopyLink} text="링크복사" />
+        <CopyToClipboard text={userInfo.researchLink} onCopy={onCopyLink}>
+          <RoundButton text="링크복사" />
+        </CopyToClipboard>
+
         <KakaoButton text="카톡공유" />
       </ButtonArea>
     </Box>

@@ -40,13 +40,7 @@ function ResearchReady() {
 
   const onCopyLink = () => {
     // TODO 링크 API로 받은 데이터로 변경해야 함. 아래는 예시용 링크
-    navigator.clipboard
-      .writeText(
-        'https://emart.ssg.com/item/itemView.ssg?itemId=1000026477087&siteNo=6001&salestrNo=6005'
-      )
-      .then(() => {
-        openToastPopup('설문지링크가 복사되었습니다.')
-      })
+    openToastPopup('설문지링크가 복사되었습니다.')
   }
 
   return (
