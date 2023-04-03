@@ -8,7 +8,7 @@ import {
 } from '../../components/texts/Texts'
 import styled from 'styled-components'
 import { ReactComponent as IconLoveLetter } from '../../assets/icon_love_letter_36.svg'
-import ShareResearchBox from './ShareResearchBox'
+import ShareResearchBox from '../../components/research/ShareResearchBox'
 import AnswerItem from '../../components/answer/AnswerItem'
 import WriteStandard from './WriteStandard'
 

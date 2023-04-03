@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { ReactComponent as ImgDocument } from '../../assets/img_document.svg'
-import {
-  ButtonArea,
-  KakaoButton,
-  RoundButton,
-} from '../../components/buttons/Buttons'
+import { ButtonArea, KakaoButton, RoundButton } from '../buttons/Buttons'
 
 function ShareResearchBox() {
   const [userInfo, setUserInfo] = useState({
@@ -22,6 +18,7 @@ function ShareResearchBox() {
   }, [userInfo])
 
   const onClickCopyLink = () => {
+    // 링크 API로 받은 데이터로 변경해야 함. 아래는 예시용 링크
     navigator.clipboard
       .writeText(
         'https://emart.ssg.com/item/itemView.ssg?itemId=1000026477087&siteNo=6001&salestrNo=6005'
