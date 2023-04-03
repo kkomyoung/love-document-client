@@ -22,7 +22,7 @@ const Research = () => {
   const [errorPassword, setErrorPassword] = useState(false)
   const [errorMessageNickname, setErrorMessageNickname] = useState('')
   const [errorMessagePassword, setErrorMessagePassword] = useState('')
-  const [resultOptions, setResultOptions] = useState({})
+  const [resultOptions, setResultOptions] = useState({ categoryItems: [] })
   const formRef = useRef()
   // 카테고리 목록
   const { mutate: postQuestionsMutate } = useMutation(postQuestions, {
@@ -62,7 +62,7 @@ const Research = () => {
       setErrorMessageNickname,
       setErrorMessagePassword
     )
-    if (resultOptions.length < 1) {
+    if (resultOptions.categoryItems.length < 1) {
       openToastPopup('1개 이상의 항목을 선택해주세요')
       return
     }
