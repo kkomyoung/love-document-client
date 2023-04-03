@@ -8,13 +8,10 @@ import {
 } from '../../components/texts/Texts'
 import styled from 'styled-components'
 import { ReactComponent as IconLoveLetter } from '../../assets/icon_love_letter_36.svg'
-import ShareResearch from './ShareResearch'
+import ShareResearchBox from '../../components/research/ShareResearchBox'
 import AnswerItem from '../../components/answer/AnswerItem'
 import WriteStandard from './WriteStandard'
-const member = {
-  name: '연서합',
-  researchCnt: 4,
-}
+import useToastPopup from '../../hooks/useToastPopup'
 
 const answers = [
   {
@@ -36,8 +33,20 @@ const answers = [
 ]
 
 function ResearchReady() {
+  const { ToastPopup, openToastPopup } = useToastPopup()
   const onDelete = (id) => {
     console.log(id)
+  }
+
+  const onCopyLink = () => {
+    // TODO 링크 API로 받은 데이터로 변경해야 함. 아래는 예시용 링크
+    navigator.clipboard
+      .writeText(
+        'https://emart.ssg.com/item/itemView.ssg?itemId=1000026477087&siteNo=6001&salestrNo=6005'
+      )
+      .then(() => {
+        openToastPopup('설문지링크가 복사되었습니다.')
+      })
   }
 
   return (
@@ -52,7 +61,10 @@ function ResearchReady() {
             링크를 공유하고 답변을 요청해보세요
           </TextDesc>
         </TextArea>
-        <ShareResearch {...member} />
+
+        <StyledShareResearchSection>
+          <ShareResearchBox onCopyLink={onCopyLink} />
+        </StyledShareResearchSection>
 
         <WriteStandard />
 
@@ -74,6 +86,7 @@ function ResearchReady() {
           </AnswerList>
         </StyledAnswersSection>
       </StyledAirticle>
+      <ToastPopup />
     </StyledMain>
   )
 }
@@ -84,6 +97,15 @@ const StyledMain = styled.main`
 `
 
 const StyledAirticle = styled.article``
+const StyledShareResearchSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  padding: 2.8rem 2rem;
+
+  & > div + div {
+    margin-top: 3.3rem;
+  }
+`
 const StyledAnswersSection = styled.section``
 
 const AnswerList = styled.ul`
