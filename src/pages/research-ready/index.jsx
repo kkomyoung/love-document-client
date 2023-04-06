@@ -12,6 +12,8 @@ import ShareResearchBox from '../../components/research/ShareResearchBox'
 import AnswerItem from '../../components/answer/AnswerItem'
 import WriteStandard from './WriteStandard'
 import useToastPopup from '../../hooks/useToastPopup'
+import useModal from '../../hooks/useModal'
+import { useNavigate } from 'react-router-dom'
 
 const answers = [
   {
@@ -33,6 +35,8 @@ const answers = [
 ]
 
 function ResearchReady() {
+  const navigate = useNavigate()
+  const { Modal, openModal } = useModal()
   const { ToastPopup, openToastPopup } = useToastPopup()
   const onDelete = (id) => {
     console.log(id)
@@ -45,7 +49,42 @@ function ResearchReady() {
 
   return (
     <StyledMain>
-      <Header title="질문지 준비 완료" btnBack btnHome />
+      <Header
+        title="질문지 준비 완료"
+        btnBack={() =>
+          openModal({
+            type: 'alert',
+            title: '뒤로 가기',
+            desc: '질문지 작성 페이지로 돌아갈까요?',
+            btnCancel: {
+              text: '아니요',
+            },
+            btnConfirm: {
+              text: '네',
+              fn: () => {
+                // TODO 회원가입 정보 리셋해야 함
+                navigate('/research')
+              },
+            },
+          })
+        }
+        btnHome={() =>
+          openModal({
+            type: 'alert',
+            title: '홈으로 가기',
+            desc: '시작 화면으로 갈까요?',
+            btnCancel: {
+              text: '아니요',
+            },
+            btnConfirm: {
+              text: '네',
+              fn: () => {
+                navigate('/home')
+              },
+            },
+          })
+        }
+      />
       <StyledAirticle>
         <TextArea>
           <Title>질문지 준비 완료</Title>
@@ -81,6 +120,7 @@ function ResearchReady() {
         </StyledAnswersSection>
       </StyledAirticle>
       <ToastPopup />
+      <Modal />
     </StyledMain>
   )
 }

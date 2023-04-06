@@ -8,12 +8,6 @@ const Header = ({ title, btnBack, btnHome, btnDelete, btnSetting }) => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 500)
   const [scrollTarget, setScrollTarget] = useState(window)
-
-  // 페이지 뒤로가기
-  const handleGoBack = () => {
-    navigate(-1)
-  }
-
   const handleResize = () => {
     setIsDesktop(window.innerWidth >= 500)
     setScrollTarget(isDesktop ? document.querySelector('#wrap') : window)
@@ -42,11 +36,21 @@ const Header = ({ title, btnBack, btnHome, btnDelete, btnSetting }) => {
   return (
     <StyledHeader className={isScrolled ? 'on' : ''}>
       {btnBack && (
-        <CircleButton onClick={handleGoBack} feature="back" className="left" />
+        <CircleButton
+          onClick={typeof btnBack === 'function' ? btnBack : () => navigate(-1)}
+          feature="back"
+          className="left"
+        />
       )}
       {title && <p>{title}</p>}
       {btnHome && (
-        <CircleButton as={Link} to="/home" feature="home" className="right" />
+        <CircleButton
+          as={typeof btnHome === 'boolean' ? Link : undefined}
+          to={typeof btnHome === 'boolean' ? '/home' : undefined}
+          onClick={typeof btnHome === 'function' ? btnHome : undefined}
+          feature="home"
+          className="right"
+        />
       )}
       {btnDelete && (
         <CircleButton
