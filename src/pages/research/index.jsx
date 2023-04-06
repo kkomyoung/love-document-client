@@ -11,6 +11,7 @@ import useToastPopup from '../../hooks/useToastPopup'
 import { useNavigate } from 'react-router-dom'
 import { register, postQuestions } from '../../apis'
 import { useMutation } from 'react-query'
+import Loading from '../../components/loading/Loading'
 
 const Research = () => {
   const navigate = useNavigate()
@@ -36,18 +37,21 @@ const Research = () => {
   })
 
   // 회원가입
-  const { mutate: registerMutate } = useMutation(register, {
-    onSuccess: (data) => {
-      localStorage.setItem('nickname', data.nickname)
-      localStorage.setItem('token', data.token)
-      postQuestionsMutate(resultOptions)
-    },
-    onError: (err) => {
-      if (err.response.status === 409) {
-        openToastPopup('중복된 닉네임이에요')
-      }
-    },
-  })
+  const { mutate: registerMutate, isLoading: registerIsLoading } = useMutation(
+    register,
+    {
+      onSuccess: (data) => {
+        localStorage.setItem('nickname', data.nickname)
+        localStorage.setItem('token', data.token)
+        postQuestionsMutate(resultOptions)
+      },
+      onError: (err) => {
+        if (err.response.status === 409) {
+          openToastPopup('중복된 닉네임이에요')
+        }
+      },
+    }
+  )
 
   const submitForm = () => {
     const checkedOptions = Array.from(
@@ -92,6 +96,7 @@ const Research = () => {
 
   return (
     <StyledMain>
+      {registerIsLoading && <Loading text="질문지 저장중" />}
       <Header title="질문지 만들기" btnBack />
       <article>
         <TextArea>

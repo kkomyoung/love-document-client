@@ -38,7 +38,6 @@ const Lottie = ({ margin, data }) => {
 const StyledLottieArea = styled.figure`
   margin: ${(props) => props.margin};
 
-  // json은 나중에 삭제
   svg + svg {
     display: none;
   }

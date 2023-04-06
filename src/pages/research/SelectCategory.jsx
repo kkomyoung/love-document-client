@@ -3,12 +3,14 @@ import styled from 'styled-components'
 import CategoryBoxList from '../../components/category/Category'
 import { getCategories } from '../../apis/category'
 import { useQuery } from 'react-query'
+import Loading from '../../components/loading/Loading'
 
 function SelectCategory({ formRef, onChange }) {
-  const { data } = useQuery('categories', getCategories)
+  const { data, isLoading } = useQuery('categories', getCategories)
 
   return (
     <>
+      {isLoading && <Loading />}
       {data && (
         <StyledSectionCategory>
           <form ref={formRef} onChange={onChange}>

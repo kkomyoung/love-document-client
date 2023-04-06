@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom'
 import { login } from '../apis/user'
 import useToastPopup from '../hooks/useToastPopup'
 import { useMutation } from 'react-query'
+import Loading from '../components/loading/Loading'
 
 const Login = () => {
   const { ToastPopup, openToastPopup } = useToastPopup()
@@ -25,16 +26,19 @@ const Login = () => {
   const [errorMessageNickname, setErrorMessageNickname] = useState('')
   const [errorMessagePassword, setErrorMessagePassword] = useState('')
 
-  const { mutate: loginMutate } = useMutation(login, {
-    onSuccess: (data) => {
-      localStorage.setItem('nickname', data.nickname)
-      localStorage.setItem('token', data.token)
-      navigate('/home')
-    },
-    onError: () => {
-      openToastPopup('닉네임이나 비밀번호를 잘못 입력했습니다')
-    },
-  })
+  const { mutate: loginMutate, isLoading: loginIsLoading } = useMutation(
+    login,
+    {
+      onSuccess: (data) => {
+        localStorage.setItem('nickname', data.nickname)
+        localStorage.setItem('token', data.token)
+        navigate('/home')
+      },
+      onError: () => {
+        openToastPopup('닉네임이나 비밀번호를 잘못 입력했습니다')
+      },
+    }
+  )
 
   const handlerLogin = (e) => {
     e.preventDefault()
@@ -61,6 +65,7 @@ const Login = () => {
 
   return (
     <StyledMain>
+      {loginIsLoading && <Loading />}
       <Header btnBack />
       <StyledAirticle>
         <StyledImgWrap>
