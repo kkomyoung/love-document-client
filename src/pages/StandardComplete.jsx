@@ -11,14 +11,14 @@ const StandardComplete = () => {
     <StyledMain>
       <Header btnHome />
       <StyledAirticle>
-        <Lottie data="heart" margin="0 -2.4rem 4.6rem" />
+        <Lottie data="heart" margin="0 -2.4rem 3.2rem" />
         <Title>내 기준 작성완료</Title>
         <TextDesc>
           <span>내 기준이 저장되었어요 😍</span>
           <br />
           <span>상대방의 답변을 받은 후 내 기준과 비교해드릴게요</span>
         </TextDesc>
-        <ButtonArea margin="11rem 0 0 0">
+        <ButtonArea margin="6.2rem 0 0 0">
           <RoundButton as={Link} to="/home" size="large" text="확인" />
         </ButtonArea>
       </StyledAirticle>

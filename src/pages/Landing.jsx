@@ -23,7 +23,7 @@ const Landing = () => {
         <br />
         <span>내 연애 서류를 만들고 답변을 받아봐요</span>
       </StyledDescription>
-      <ButtonArea margin="3.1rem 0 0 0">
+      <ButtonArea margin="2.4rem 0 0 0">
         <RoundButton as={Link} to="/onboarding" color="white" text="시작하기" />
       </ButtonArea>
       <ButtonArea margin="2.1rem 0 0 0">
@@ -40,18 +40,18 @@ const Landing = () => {
 
 const StyledMain = styled.main`
   background-color: ${(props) => props.theme.blue500};
-  padding: 5rem 0 7.6rem;
+  padding: 3rem 0 3rem;
 
   @media (max-width: 499px) {
-    min-height: calc(100vh - 12.6rem);
+    min-height: calc(100vh - 6rem);
   }
 `
 
 const StyledTitle = styled.h1`
   font-weight: 700;
-  font-size: 7.5rem;
+  font-size: 5.4rem;
   color: ${(props) => props.theme.gray100};
-  margin: 2.1rem;
+  margin: 2.1rem 2.1rem 0;
   letter-spacing: -0.03em;
 
   @media (max-width: 360px) {
@@ -62,7 +62,7 @@ const StyledTitle = styled.h1`
 const StyledSubTitle = styled.span`
   display: block;
   font-weight: 400;
-  font-size: 4.5rem;
+  font-size: 3.2rem;
   color: ${(props) => props.theme.gray100};
   margin: 0 0 0.5rem 0.5rem;
 
@@ -75,7 +75,7 @@ const StyledDescription = styled.p`
   font-weight: 500;
   font-size: 1.6rem;
   color: ${(props) => props.theme.gray100};
-  margin: 2.1rem 2.8rem 0 2.1rem;
+  margin: 1.2rem 2.8rem 0 2.1rem;
   line-height: 1.4;
 
   @media (max-width: 360px) {

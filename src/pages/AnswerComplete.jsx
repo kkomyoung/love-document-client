@@ -22,7 +22,7 @@ const AnswerComplete = () => {
           <br />
           <span>{name}님도 질문지를 만들어 상대에게 전달해보세요 😍</span>
         </TextDesc>
-        <ButtonArea margin="13.2rem 0 0 0">
+        <ButtonArea margin="6.2rem 0 0 0">
           <RoundButton
             as={Link}
             to="/research"
@@ -44,7 +44,7 @@ const StyledAirticle = styled.article`
 `
 
 const StyledImgWrap = styled.figure`
-  margin: 0 -2.4rem 4.3rem;
+  margin: 0 -2.4rem 3.2rem;
 
   svg {
     display: block;
