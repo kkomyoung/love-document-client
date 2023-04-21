@@ -1,19 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import styled from 'styled-components'
 import { ReactComponent as ImgDocument } from '../../assets/img_document.svg'
-import { ButtonArea, KakaoButton, RoundButton } from '../buttons/Buttons'
+import { ButtonArea, KakaoShareButton, RoundButton } from '../buttons/Buttons'
 import useUser from '../../hooks/useUser'
 
 function ShareResearchBox({ onCopyLink }) {
   const { user, isLoading } = useUser()
 
-  // useEffect(() => {
-  //   const nickname = localStorage.getItem('nickname')
-  //   setUserInfo((prev) => ({ ...prev, nickname }))
-
-  //   // TODO 질문 개수와 링크를 받아오는 API 처리
-  // }, [])
+  useEffect(() => {
+    const script = document.createElement('script')
+    script.src = 'https://developers.kakao.com/sdk/js/kakao.js'
+    script.async = true
+    document.body.appendChild(script)
+    return () => document.body.removeChild(script)
+  }, [])
 
   return (
     <Box>
@@ -39,7 +40,9 @@ function ShareResearchBox({ onCopyLink }) {
               <RoundButton text="링크복사" />
             </CopyToClipboard>
 
-            <KakaoButton text="카톡공유" />
+            <KakaoShareButton
+              questionLink={`http://www.love-document.com/research/${user.linkId}/answer`}
+            />
           </ButtonArea>
         </>
       )}
