@@ -4,3 +4,6 @@ export const Q_TYPE = {
   CHOICE: 'CHOICE',
   YN: 'YN',
 }
+export const ERR_CODE = {
+  U001: 'U001',
+}
