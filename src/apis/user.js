@@ -14,3 +14,8 @@ export const register = async ({ nickname, password }) => {
   })
   return data
 }
+
+export const getUserInfo = async () => {
+  const { data } = await instance.get('/users')
+  return data
+}

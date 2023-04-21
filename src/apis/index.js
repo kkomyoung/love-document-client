@@ -1,10 +1,11 @@
+import { login, register, getUserInfo } from './user'
 import { getCategories, postQuestions } from './category'
-import { login, register } from './user'
 
 export {
   // User
   login,
   register,
+  getUserInfo,
 
   // Category
   getCategories,

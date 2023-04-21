@@ -1,9 +1,10 @@
 import React from 'react'
-import { RoundButton, KakaoButton } from '../buttons/Buttons'
+import { RoundButton, KakaoShareButton } from '../buttons/Buttons'
 import { StyledButtonWrap, StyledCloseButton } from './ModalStyle'
 import { ReactComponent as IconClose } from '../../assets/icon_close.svg'
 
 // 닫기 버튼이 있는 모달
+// TODO KAKAO SDK 로드해야 사용 가능 : 수정 필요 (ShareResearchBox 참고)
 const ModalShare = ({ close, modalData: { title, desc } }) => {
   return (
     <div className="inner">
@@ -14,10 +15,7 @@ const ModalShare = ({ close, modalData: { title, desc } }) => {
           text="내용 복사"
           onClick={() => console.log('내용복사!!!')}
         ></RoundButton>
-        <KakaoButton
-          text="카톡공유"
-          onClick={() => console.log('카톡공유!!!')}
-        ></KakaoButton>
+        <KakaoShareButton questionLink={'흠냐 링크'}></KakaoShareButton>
       </StyledButtonWrap>
       <StyledCloseButton onClick={close}>
         <IconClose></IconClose>

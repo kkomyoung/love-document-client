@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import IconArrowNext from '../../assets/icon_arrow_next.svg'
-import { ReactComponent as IconKakaoLogo } from '../../assets/icon_logo_kakao.svg'
 import { ReactComponent as IconArrowPrev } from '../../assets/icon_arrow_prev.svg'
 import { ReactComponent as IconHome } from '../../assets/icon_home.svg'
 import { ReactComponent as IconDelete } from '../../assets/icon_delete.svg'
 import { ReactComponent as IconSetting } from '../../assets/icon_setting.svg'
+import KakaoShareButton from './KakaoShareButton'
 
 const CircleButton = ({ as, to, onClick, feature, className }) => {
   return (
@@ -101,17 +101,6 @@ const RoundButton = ({
       {children}
       {arrowIcon && <img src={IconArrowNext} />}
     </StyledRoundButton>
-  )
-}
-
-const KakaoButton = ({ text, onClick }) => {
-  return (
-    <RoundButton color="kakao" onClick={onClick}>
-      <i aria-hidden="true">
-        <IconKakaoLogo />
-      </i>
-      <span>{text}</span>
-    </RoundButton>
   )
 }
 
@@ -246,4 +235,4 @@ const StyledButtonArea = styled.div`
     }
   }}
 `
-export { CircleButton, TextButton, RoundButton, KakaoButton, ButtonArea }
+export { CircleButton, TextButton, RoundButton, KakaoShareButton, ButtonArea }
