@@ -8,7 +8,7 @@ const KakaoShareButton = ({ questionLink }) => {
     if (window.Kakao) {
       const kakao = window.Kakao
       if (!kakao.isInitialized()) {
-        kakao.init(process.env.REACT_APP_KAKAO_SHARE_LINK_API_KEY)
+        kakao.init(process.env.REACT_APP_KAKAO_API_KEY)
       }
 
       kakao.Link.sendDefault({
