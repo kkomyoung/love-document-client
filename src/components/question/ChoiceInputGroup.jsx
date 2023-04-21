@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import ExampleButton from './ExampleButton'
 
-function Choice({ name, multiple, examples }) {
+function ChoiceInputGroup({ name, multiple, examples }) {
   return (
     <Box>
       {examples.map((example) => (
@@ -31,4 +31,4 @@ const Box = styled.div`
   }
 `
 
-export default Choice
+export default ChoiceInputGroup

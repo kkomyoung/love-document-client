@@ -6,35 +6,18 @@ function ScoreInputGroup({ name, positiveLabel, negativeLabel }) {
   return (
     <Box>
       <ScoreButtonBox>
-        <ScoreButton>
-          <input type="radio" name={name} value={1} id={`${name}_1`} />
-          <label htmlFor={`${name}_1`} />
-          <IconHeart fill="white" />
-        </ScoreButton>
-
-        <ScoreButton>
-          <input type="radio" name={name} value={2} id={`${name}_2`} />
-          <label htmlFor={`${name}_2`} />
-          <IconHeart fill="white" />
-        </ScoreButton>
-
-        <ScoreButton>
-          <input type="radio" name={name} value={3} id={`${name}_3`} />
-          <label htmlFor={`${name}_3`} />
-          <IconHeart fill="white" />
-        </ScoreButton>
-
-        <ScoreButton>
-          <input type="radio" name={name} value={4} id={`${name}_4`} />
-          <label htmlFor={`${name}_4`} />
-          <IconHeart fill="white" />
-        </ScoreButton>
-
-        <ScoreButton>
-          <input type="radio" name={name} value={5} id={`${name}_5`} />
-          <label htmlFor={`${name}_5`} />
-          <IconHeart fill="white" />
-        </ScoreButton>
+        {[1, 2, 3, 4, 5].map((number) => (
+          <ScoreButton key={number}>
+            <input
+              type="radio"
+              name={name}
+              value={number}
+              id={`${name}_${number}`}
+            />
+            <label htmlFor={`${name}_${number}`} />
+            <IconHeart fill="white" />
+          </ScoreButton>
+        ))}
       </ScoreButtonBox>
       <ExampleTextBox>
         <ExampleText>{negativeLabel}</ExampleText>
