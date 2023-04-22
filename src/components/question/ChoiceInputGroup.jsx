@@ -2,15 +2,15 @@ import React from 'react'
 import styled from 'styled-components'
 import ExampleButton from './ExampleButton'
 
-function ChoiceInputGroup({ name, multiple, examples }) {
+function ChoiceInputGroup({ questionId, questionType, multiple, examples }) {
   return (
     <Box>
       {examples.map((example) => (
         <ExampleButton
           key={example.id}
-          name={name}
+          exampleId={example.id}
+          name={`${questionType}#${questionId}`}
           multiple={multiple}
-          id={example.id}
           content={example.content}
         />
       ))}

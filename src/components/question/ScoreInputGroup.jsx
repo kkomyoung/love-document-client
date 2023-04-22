@@ -1,20 +1,36 @@
 import React from 'react'
 import styled from 'styled-components'
 import { ReactComponent as IconHeart } from '../../assets/icon_heart.svg'
+import { useRecoilValue } from 'recoil'
+import { answersAtom } from '../../utils/atoms'
 
-function ScoreInputGroup({ name, positiveLabel, negativeLabel }) {
+function ScoreInputGroup({
+  questionId,
+  questionType,
+  positiveLabel,
+  negativeLabel,
+}) {
+  // const [answers, setAnswers] = useRecoilState(answersAtom)
+  const answers = useRecoilValue(answersAtom)
+
+  const onScoreButtonClick = (score) => {
+    console.log(name)
+    console.log(answers)
+    console.log(score)
+  }
+
   return (
     <Box>
       <ScoreButtonBox>
-        {[1, 2, 3, 4, 5].map((number) => (
-          <ScoreButton key={number}>
+        {[1, 2, 3, 4, 5].map((score) => (
+          <ScoreButton key={score} onClick={() => onScoreButtonClick(score)}>
             <input
               type="radio"
-              name={name}
-              value={number}
-              id={`${name}_${number}`}
+              name={`${questionType}#${questionId}`}
+              value={score}
+              id={`${questionType}#${questionId}_${score}`}
             />
-            <label htmlFor={`${name}_${number}`} />
+            <label htmlFor={`${questionType}#${questionId}_${score}`} />
             <IconHeart fill="white" />
           </ScoreButton>
         ))}

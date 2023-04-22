@@ -2,11 +2,24 @@ import React from 'react'
 import styled from 'styled-components'
 import ExampleButton from './ExampleButton'
 
-function YesOrNoInputGroup({ name, positiveLabel, negativeLabel }) {
+function YesOrNoInputGroup({
+  questionId,
+  questionType,
+  positiveLabel,
+  negativeLabel,
+}) {
   return (
     <Box>
-      <ExampleButton name={name} id={negativeLabel} content={negativeLabel} />
-      <ExampleButton name={name} id={positiveLabel} content={positiveLabel} />
+      <ExampleButton
+        name={`${questionType}#${questionId}`}
+        exampleId={negativeLabel}
+        content={negativeLabel}
+      />
+      <ExampleButton
+        name={`${questionType}#${questionId}`}
+        exampleId={positiveLabel}
+        content={positiveLabel}
+      />
     </Box>
   )
 }

@@ -1,4 +1,4 @@
-export const Q_TYPE = {
+export const QUESTION_TYPE = {
   RANGE: 'RANGE',
   SCORE: 'SCORE',
   CHOICE: 'CHOICE',

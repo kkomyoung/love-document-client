@@ -9,7 +9,11 @@ import { useQuery } from 'react-query'
 import { getQuestions } from '../apis/question'
 
 function StandardPage() {
-  const { data: categoryQuestions } = useQuery('questions', getQuestions)
+  const { data: categoryQuestions } = useQuery('questions', getQuestions, {
+    refetchOnWindowFocus: false,
+  })
+
+  console.log(categoryQuestions)
 
   return (
     <StyledMain>
