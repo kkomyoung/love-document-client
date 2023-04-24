@@ -12,6 +12,7 @@ import { answersAtom } from '../utils/atoms'
 
 function StandardPage() {
   const answers = useRecoilValue(answersAtom)
+  let offset = 1
 
   const { data: categoryQuestions } = useQuery('questions', getQuestions, {
     refetchOnWindowFocus: false,
@@ -19,6 +20,11 @@ function StandardPage() {
 
   const onConfirmButtonClick = () => {
     console.log(answers)
+  }
+
+  const getOffset = (questionLength) => {
+    offset += questionLength // 카테고리별로 question list 의 길이를 저장. 다음 카테고리 question 시작번호에 쓰임
+    return offset - questionLength // 현재 카테고리의 question 시작 번호 반환
   }
 
   return (
@@ -42,11 +48,7 @@ function StandardPage() {
                   key={index}
                   category={item.categoryTitle}
                   questions={item.categoryItemInfoList}
-                  offset={
-                    index === 0
-                      ? 0
-                      : categoryQuestions[index - 1].categoryItemInfoList.length
-                  }
+                  offset={getOffset(item.categoryItemInfoList.length)}
                 />
               ))}
           </CategoryQuestionList>

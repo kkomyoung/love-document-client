@@ -13,7 +13,7 @@ function QuestionsContainer({ category, questions, offset }) {
           <QuestionItem
             key={index}
             category={category}
-            questionNumber={offset + index + 1}
+            questionNumber={offset + index}
             question={question}
           />
         ))}
