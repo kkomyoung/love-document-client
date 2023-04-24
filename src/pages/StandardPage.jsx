@@ -9,22 +9,29 @@ import { useQuery } from 'react-query'
 import { getQuestions } from '../apis/question'
 import { useRecoilValue } from 'recoil'
 import { answersAtom } from '../utils/atoms'
+import useToastPopup from '../hooks/useToastPopup'
 
 function StandardPage() {
-  const answers = useRecoilValue(answersAtom)
-  let offset = 1
-
   const { data: categoryQuestions } = useQuery('questions', getQuestions, {
     refetchOnWindowFocus: false,
   })
+  let totalQuestionLength = 0
+  const answers = useRecoilValue(answersAtom)
+  const { openToastPopup, ToastPopup } = useToastPopup()
 
   const onConfirmButtonClick = () => {
+    if (!categoryQuestions && !answers) return
+
+    if (totalQuestionLength !== answers.length) {
+      openToastPopup('답하지 않은 질문이 있어요.')
+    }
+
     console.log(answers)
   }
 
-  const getOffset = (questionLength) => {
-    offset += questionLength // 카테고리별로 question list 의 길이를 저장. 다음 카테고리 question 시작번호에 쓰임
-    return offset - questionLength // 현재 카테고리의 question 시작 번호 반환
+  const getQuestionNumberOffset = (curQuestionLength) => {
+    totalQuestionLength += curQuestionLength // 카테고리별로 question list 의 길이를 저장. 다음 카테고리 question 시작번호에 쓰임
+    return totalQuestionLength - curQuestionLength // 현재 카테고리의 question 시작 번호 반환
   }
 
   return (
@@ -48,7 +55,9 @@ function StandardPage() {
                   key={index}
                   category={item.categoryTitle}
                   questions={item.categoryItemInfoList}
-                  offset={getOffset(item.categoryItemInfoList.length)}
+                  offset={getQuestionNumberOffset(
+                    item.categoryItemInfoList.length
+                  )}
                 />
               ))}
           </CategoryQuestionList>
@@ -63,6 +72,7 @@ function StandardPage() {
           />
         </ButtonArea>
       </StyledAirticle>
+      <ToastPopup />
     </StyledMain>
   )
 }
