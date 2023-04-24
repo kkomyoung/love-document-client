@@ -42,8 +42,13 @@ const validateNickname = async (
     error = false
   } catch (err) {
     error = true
-    if (err.response.status === 409) {
-      openToastPopup(err.response.data.message)
+    if (err.response.status === 409 && prevValue !== value) {
+      if (openToastPopup) {
+        openToastPopup('중복된 닉네임이에요')
+      } else {
+        setError(true)
+        setErrorMessage('중복된 닉네임이에요')
+      }
     }
   }
 
