@@ -7,13 +7,19 @@ import QuestionsContainer from '../components/question/QuestionsContainer'
 import { RoundButton, ButtonArea } from '../components/buttons/Buttons'
 import { useQuery } from 'react-query'
 import { getQuestions } from '../apis/question'
+import { useRecoilValue } from 'recoil'
+import { answersAtom } from '../utils/atoms'
 
 function StandardPage() {
+  const answers = useRecoilValue(answersAtom)
+
   const { data: categoryQuestions } = useQuery('questions', getQuestions, {
     refetchOnWindowFocus: false,
   })
 
-  console.log(categoryQuestions)
+  const onConfirmButtonClick = () => {
+    console.log(answers)
+  }
 
   return (
     <StyledMain>
@@ -49,9 +55,9 @@ function StandardPage() {
         <ButtonArea margin="10rem 0rem 0rem 0rem">
           <RoundButton
             as={Link}
-            to="/research/standard/complete"
             size="large"
             text="확인"
+            onClick={onConfirmButtonClick}
           />
         </ButtonArea>
       </StyledAirticle>

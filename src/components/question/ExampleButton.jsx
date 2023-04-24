@@ -10,11 +10,12 @@ function ExampleButton({
   onClick,
 }) {
   return (
-    <Button onClick={() => onClick(answer)}>
+    <Button>
       <input
+        id={`${name}_${exampleId}`}
         type={multiple === 'Y' ? 'checkbox' : 'radio'}
         name={name}
-        id={`${name}_${exampleId}`}
+        onClick={() => onClick(answer)}
       />
       <label htmlFor={`${name}_${exampleId}`}>{content}</label>
     </Button>

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { ReactComponent as IconHeart } from '../../assets/icon_heart.svg'
-import { useSetRecoilState, useRecoilValue } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 import { answersAtom } from '../../utils/atoms'
 
 function ScoreInputGroup({
@@ -11,8 +11,6 @@ function ScoreInputGroup({
   negativeLabel,
 }) {
   const setAnswers = useSetRecoilState(answersAtom)
-  const answers = useRecoilValue(answersAtom)
-
   const onScoreButtonClick = (score) => {
     // 이전 선택한 답변 객체를 삭제하고(처음 선택한 경우여도 없기 때문에 상관 없음) 새로 답변 추가
     setAnswers((prev) => [
@@ -26,20 +24,19 @@ function ScoreInputGroup({
         yn: null,
       },
     ])
-
-    console.log(answers)
   }
 
   return (
     <Box>
       <ScoreButtonBox>
         {[1, 2, 3, 4, 5].map((score) => (
-          <ScoreButton key={score} onClick={() => onScoreButtonClick(score)}>
+          <ScoreButton key={score}>
             <input
+              id={`${questionType}#${questionId}_${score}`}
               type="radio"
               name={`${questionType}#${questionId}`}
               value={score}
-              id={`${questionType}#${questionId}_${score}`}
+              onClick={() => onScoreButtonClick(score)}
             />
             <label htmlFor={`${questionType}#${questionId}_${score}`} />
             <IconHeart fill="white" />
