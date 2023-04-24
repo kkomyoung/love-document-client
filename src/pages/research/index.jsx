@@ -5,7 +5,7 @@ import SelectCategory from './SelectCategory'
 import Register from './Register'
 import { ButtonArea, RoundButton } from '../../components/buttons/Buttons'
 import { TextArea, Title, TextDesc } from '../../components/texts/Texts'
-import { validateRegister } from '../../utils/validate'
+import { validateNickname, validatePassword } from '../../utils/validate'
 import useModal from '../../hooks/useModal'
 import useToastPopup from '../../hooks/useToastPopup'
 import { useNavigate } from 'react-router-dom'
@@ -45,11 +45,6 @@ const Research = () => {
         localStorage.setItem('token', data.token)
         postQuestionsMutate(resultOptions)
       },
-      onError: (err) => {
-        if (err.response.status === 409) {
-          openToastPopup('중복된 닉네임이에요')
-        }
-      },
     }
   )
 
@@ -62,22 +57,28 @@ const Research = () => {
     setResultOptions({ categoryItems: [...checkedOptions] })
   }
 
-  const handlerValidate = (e) => {
+  const handlerValidate = async (e) => {
     e.preventDefault()
-    const isValid = validateRegister(
+
+    const nicknameValid = await validateNickname(
       valueNickname,
-      valuePassword,
       setErrorNickname,
-      setErrorPassword,
       setErrorMessageNickname,
+      openToastPopup
+    )
+
+    const passwordValid = validatePassword(
+      valuePassword,
+      setErrorPassword,
       setErrorMessagePassword
     )
+
     if (resultOptions.categoryItems.length < 1) {
       openToastPopup('1개 이상의 항목을 선택해주세요')
       return
     }
 
-    if (isValid) {
+    if (nicknameValid && passwordValid) {
       openModal({
         type: 'alert',
         title: '질문지 닉네임과 비밀번호를 꼭 기억해주세요',
@@ -87,7 +88,10 @@ const Research = () => {
         btnConfirm: {
           text: '알겠어요',
           fn: () => {
-            registerMutate({ nickname: valueNickname, password: valuePassword })
+            registerMutate({
+              nickname: valueNickname,
+              password: valuePassword,
+            })
           },
         },
       })
