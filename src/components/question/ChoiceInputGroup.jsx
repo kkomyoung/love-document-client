@@ -7,16 +7,21 @@ import { answersAtom } from '../../utils/atoms'
 function ChoiceInputGroup({ questionId, questionType, multiple, examples }) {
   const [answers, setAnswers] = useRecoilState(answersAtom)
   const onChoiceButtonClick = (exampleId) => {
-    const answer = answers.find(
-      (answer) => answer.categoryItemId === questionId
-    )
+    let choices = [exampleId]
 
-    const choices = answer ? [...answer.choiceIdList] : []
-    const choiceIndex = choices.indexOf(exampleId)
-    if (choiceIndex < 0) {
-      choices.push(exampleId)
-    } else {
-      choices.splice(choiceIndex, 1)
+    // 복수선택일 때만 로직 실행
+    if (multiple === 'Y') {
+      const answer = answers.find(
+        (answer) => answer.categoryItemId === questionId
+      )
+
+      choices = answer ? [...answer.choiceIdList] : []
+      const choiceIndex = choices.indexOf(exampleId)
+      if (choiceIndex < 0) {
+        choices.push(exampleId)
+      } else {
+        choices.splice(choiceIndex, 1)
+      }
     }
 
     setAnswers((prev) => [
