@@ -1,40 +1,47 @@
 import React from 'react'
 import styled from 'styled-components'
 import { ReactComponent as IconHeart } from '../../assets/icon_heart.svg'
+import { useSetRecoilState } from 'recoil'
+import { answersAtom } from '../../utils/atoms'
 
-function ScoreInputGroup({ name, positiveLabel, negativeLabel }) {
+function ScoreInputGroup({
+  questionId,
+  questionType,
+  positiveLabel,
+  negativeLabel,
+}) {
+  const setAnswers = useSetRecoilState(answersAtom)
+  const onScoreButtonClick = (score) => {
+    // 이전 선택한 답변 객체를 삭제하고(처음 선택한 경우여도 없기 때문에 상관 없음) 새로 답변 추가
+    setAnswers((prev) => [
+      ...prev.filter((answer) => answer.categoryItemId !== questionId),
+      {
+        categoryItemId: questionId,
+        questionType,
+        score,
+        choiceIdList: null,
+        rangeList: null,
+        yn: null,
+      },
+    ])
+  }
+
   return (
     <Box>
       <ScoreButtonBox>
-        <ScoreButton>
-          <input type="radio" name={name} value={1} id={`${name}_1`} />
-          <label htmlFor={`${name}_1`} />
-          <IconHeart fill="white" />
-        </ScoreButton>
-
-        <ScoreButton>
-          <input type="radio" name={name} value={2} id={`${name}_2`} />
-          <label htmlFor={`${name}_2`} />
-          <IconHeart fill="white" />
-        </ScoreButton>
-
-        <ScoreButton>
-          <input type="radio" name={name} value={3} id={`${name}_3`} />
-          <label htmlFor={`${name}_3`} />
-          <IconHeart fill="white" />
-        </ScoreButton>
-
-        <ScoreButton>
-          <input type="radio" name={name} value={4} id={`${name}_4`} />
-          <label htmlFor={`${name}_4`} />
-          <IconHeart fill="white" />
-        </ScoreButton>
-
-        <ScoreButton>
-          <input type="radio" name={name} value={5} id={`${name}_5`} />
-          <label htmlFor={`${name}_5`} />
-          <IconHeart fill="white" />
-        </ScoreButton>
+        {[1, 2, 3, 4, 5].map((score) => (
+          <ScoreButton key={score}>
+            <input
+              id={`${questionType}#${questionId}_${score}`}
+              type="radio"
+              name={`${questionType}#${questionId}`}
+              value={score}
+              onClick={() => onScoreButtonClick(score)}
+            />
+            <label htmlFor={`${questionType}#${questionId}_${score}`} />
+            <IconHeart fill="white" />
+          </ScoreButton>
+        ))}
       </ScoreButtonBox>
       <ExampleTextBox>
         <ExampleText>{negativeLabel}</ExampleText>

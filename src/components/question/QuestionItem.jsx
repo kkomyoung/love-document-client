@@ -5,7 +5,7 @@ import ScoreInputGroup from './ScoreInputGroup'
 import YesOrNoInputGroup from './YesOrNoInputGroup'
 import RangeInputGroup from './RangeInputGroup'
 import InputText from '../form/InputText'
-import { Q_TYPE } from '../../utils/constants'
+import { QUESTION_TYPE } from '../../utils/constants'
 
 // eslint-disable-next-line no-unused-vars
 const categoryItemInfoList = [
@@ -128,37 +128,44 @@ function QuestionItem({ category, questionNumber, question }) {
         </QuestionText>
         <QuestionText>
           {title}
-          {type === Q_TYPE.CHOICE && multiple === 'Y' && <p>복수 선택 가능</p>}
+          {type === QUESTION_TYPE.CHOICE && multiple === 'Y' && (
+            <p>복수 선택 가능</p>
+          )}
         </QuestionText>
       </TitleBox>
 
       {type === 'INPUT' && <InputText type="number" placeholder="18" />}
 
-      {type === Q_TYPE.CHOICE && (
+      {type === QUESTION_TYPE.CHOICE && (
         <ChoiceInputGroup
-          name={category + id}
+          questionId={id}
+          questionType={type}
           multiple={multiple}
           examples={examples}
         />
       )}
 
-      {type === Q_TYPE.YN && (
+      {type === QUESTION_TYPE.YN && (
         <YesOrNoInputGroup
-          name={category + id}
+          questionId={id}
+          questionType={type}
           positiveLabel={positiveLabel}
           negativeLabel={negativeLabel}
         />
       )}
 
-      {type === Q_TYPE.SCORE && (
+      {type === QUESTION_TYPE.SCORE && (
         <ScoreInputGroup
-          name={category + id}
+          questionId={id}
+          questionType={type}
           positiveLabel={positiveLabel}
           negativeLabel={negativeLabel}
         />
       )}
 
-      {question.type === Q_TYPE.RANGE && <RangeInputGroup />}
+      {question.type === QUESTION_TYPE.RANGE && (
+        <RangeInputGroup questionId={id} questionType={type} />
+      )}
     </Item>
   )
 }
