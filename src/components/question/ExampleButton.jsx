@@ -1,20 +1,27 @@
 import React from 'react'
 import styled from 'styled-components'
 
-function ExampleButton({ exampleId, name, multiple = 'N', content }) {
+function ExampleButton({
+  name,
+  exampleId,
+  multiple = 'N',
+  content,
+  answer,
+  onClick,
+}) {
   return (
-    <StyledButton>
+    <Button onClick={() => onClick(answer)}>
       <input
         type={multiple === 'Y' ? 'checkbox' : 'radio'}
         name={name}
         id={`${name}_${exampleId}`}
       />
       <label htmlFor={`${name}_${exampleId}`}>{content}</label>
-    </StyledButton>
+    </Button>
   )
 }
 
-const StyledButton = styled.button`
+const Button = styled.button`
   display: inline-flex;
 
   input {
