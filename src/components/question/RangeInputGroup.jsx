@@ -1,20 +1,50 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
+import { useSetRecoilState } from 'recoil'
+import { answersAtom } from '../../utils/atoms'
 
-function RangeInputGroup() {
-  const { register, handleSubmit } = useForm()
-  const onValid = (data) => {}
+function RangeInputGroup({ questionId, questionType }) {
+  const { register, watch } = useForm()
+  const setAnswers = useSetRecoilState(answersAtom)
+  const minimum = watch('minimum')
+  const maximum = watch('maximum')
+
+  const handleInput = (e) => {
+    if (e.target.value.length > e.target.maxLength) {
+      e.target.value = e.target.value.slice(0, e.target.maxLength)
+    }
+  }
+
+  useEffect(() => {
+    if (minimum && minimum.length > 0 && maximum && maximum.length > 0) {
+      setAnswers((prev) => [
+        ...prev.filter((answer) => answer.categoryItemId !== questionId),
+        {
+          categoryItemId: questionId,
+          questionType,
+          rangeList: [+minimum, +maximum],
+          yn: null,
+          score: null,
+          choiceIdList: null,
+        },
+      ])
+    }
+  }, [minimum, maximum])
 
   return (
-    <Form onSubmit={handleSubmit(onValid)}>
+    <Form>
       <Input
         type="number"
+        onInput={handleInput}
+        maxLength={3}
         {...register('minimum', { required: true, maxLength: 3, minLength: 3 })}
       />
       <span>이상</span>
       <Input
         type="number"
+        onInput={handleInput}
+        maxLength={3}
         {...register('maximum', { required: true, maxLength: 3, minLength: 3 })}
       />
       <span>이하</span>

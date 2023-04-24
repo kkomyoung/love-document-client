@@ -163,7 +163,9 @@ function QuestionItem({ category, questionNumber, question }) {
         />
       )}
 
-      {question.type === QUESTION_TYPE.RANGE && <RangeInputGroup />}
+      {question.type === QUESTION_TYPE.RANGE && (
+        <RangeInputGroup questionId={id} questionType={type} />
+      )}
     </Item>
   )
 }
