@@ -1,15 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { TextArea, TextDesc, Title } from '../components/texts/Texts'
 import QuestionsContainer from '../components/question/QuestionsContainer'
 import { RoundButton, ButtonArea } from '../components/buttons/Buttons'
-import { useQuery } from 'react-query'
+import { useQuery, useMutation } from 'react-query'
 import { getQuestions } from '../apis/question'
 import { useRecoilValue } from 'recoil'
 import { answersAtom } from '../utils/atoms'
 import useToastPopup from '../hooks/useToastPopup'
+import { postIdeals } from '../apis'
 
 function StandardPage() {
   const { data: categoryQuestions } = useQuery('questions', getQuestions, {
@@ -18,15 +19,28 @@ function StandardPage() {
   let totalQuestionLength = 0
   const answers = useRecoilValue(answersAtom)
   const { openToastPopup, ToastPopup } = useToastPopup()
+  const navigate = useNavigate()
+
+  const { mutate: writeIdeals, isLoading } = useMutation(postIdeals, {
+    onSuccess: (data) => {
+      console.log(data)
+      navigate('/research/standard/complete')
+    },
+    onError: () => {
+      openToastPopup('')
+    },
+  })
 
   const onConfirmButtonClick = () => {
+    if (isLoading) return
     if (!categoryQuestions && !answers) return
 
     if (totalQuestionLength !== answers.length) {
-      openToastPopup('답하지 않은 질문이 있어요.')
+      openToastPopup('아직 응답하지 않은 항목이 있어요.')
     }
 
     console.log(answers)
+    writeIdeals({ idealList: answers })
   }
 
   const getQuestionNumberOffset = (curQuestionLength) => {
