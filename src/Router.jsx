@@ -18,6 +18,7 @@ import ModifyNickname from './pages/ModifyNickname'
 import ModifyPassword from './pages/ModifyPassword'
 import AnswersPage from './pages/AnswersPage'
 import HomeRearch from './pages/home-research'
+import StandardEditPage from './pages/StandardEditPage'
 
 function Router() {
   return (
@@ -47,6 +48,8 @@ function Router() {
         />
         <Route path="/home/answers" element={<AnswersPage />} />
         <Route path="/home/research" element={<HomeRearch />} />
+
+        <Route path="/home/standard" element={<StandardEditPage />} />
       </Routes>
     </>
   )

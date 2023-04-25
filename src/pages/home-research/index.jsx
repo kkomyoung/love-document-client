@@ -12,7 +12,6 @@ const HomeRearch = () => {
   const { openToastPopup, ToastPopup } = useToastPopup()
 
   const onCopyLink = () => {
-    // TODO 링크 API로 받은 데이터로 변경해야 함. 아래는 예시용 링크
     openToastPopup('설문지링크가 복사되었습니다.')
   }
 

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { ReactComponent as IconEdit } from '../../assets/icon_edit.svg'
 import CategoryLabel from '../../components/category/CategoryLabel'
 import CategoryStandards from '../../components/category/CategoryStandards'
+import { Link } from 'react-router-dom'
 
 const data = [
   {
@@ -77,12 +78,15 @@ const MyStandards = () => {
       <div className="innerBox">
         <div className="boxHead">
           <h4>내 기준</h4>
-          <button>
-            <i aria-hidden="true">
-              <IconEdit></IconEdit>
-            </i>
-            <span>편집</span>
-          </button>
+
+          <Link to={'/home/standard'}>
+            <button>
+              <i aria-hidden="true">
+                <IconEdit></IconEdit>
+              </i>
+              <span>편집</span>
+            </button>
+          </Link>
         </div>
         {data.map((categories) => (
           <StyledCategoryList key={categories.id}>
