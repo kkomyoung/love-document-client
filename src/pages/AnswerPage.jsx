@@ -3,10 +3,12 @@ import styled from 'styled-components'
 import Header from '../components/header/Header'
 import { TextArea, TextDesc, Title } from '../components/texts/Texts'
 import { ReactComponent as IconLetter } from '../assets/icon_letter.svg'
-import DefaultInfo from '../components/question/DefaultInfo'
 import QuestionsContainer from '../components/question/QuestionsContainer'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
+import { getQuestions } from '../apis/question'
+import { useQuery } from 'react-query'
 
+// eslint-disable-next-line no-unused-vars
 const data = {
   외모: {
     offset: 0,
@@ -89,6 +91,16 @@ const data = {
 }
 
 function AnswerPage() {
+  const { data: categoryQuestions } = useQuery('questions', getQuestions, {
+    refetchOnWindowFocus: false,
+  })
+  let totalQuestionLength = 0
+
+  const getQuestionNumberOffset = (curQuestionLength) => {
+    totalQuestionLength += curQuestionLength // 카테고리별로 question list 의 길이를 저장. 다음 카테고리 question 시작번호에 쓰임
+    return totalQuestionLength - curQuestionLength // 현재 카테고리의 question 시작 번호 반환
+  }
+
   return (
     <StyledMain>
       <Header title="답변하기" btnBack />
@@ -106,17 +118,21 @@ function AnswerPage() {
         </TextArea>
 
         <StyledSectionQuestion>
-          <DefaultInfo />
+          {/* <DefaultInfo /> */}
 
-          {data &&
-            Object.keys(data).map((category) => (
-              <QuestionsContainer
-                key={category}
-                category={category}
-                questions={data[category].questions}
-                offset={data[category].offset}
-              />
-            ))}
+          <CategoryQuestionList>
+            {categoryQuestions &&
+              categoryQuestions.map((item, index) => (
+                <QuestionsContainer
+                  key={index}
+                  category={item.categoryTitle}
+                  questions={item.categoryItemInfoList}
+                  offset={getQuestionNumberOffset(
+                    item.categoryItemInfoList.length
+                  )}
+                />
+              ))}
+          </CategoryQuestionList>
         </StyledSectionQuestion>
 
         <ButtonArea margin="10rem 0rem 0rem 0rem">
@@ -138,8 +154,10 @@ const StyledAirticle = styled.article``
 const StyledSectionQuestion = styled.section`
   margin-top: 2.8rem;
   padding: 0 2.4rem;
+`
 
-  & > div + div {
+const CategoryQuestionList = styled.ul`
+  & > li + li {
     margin-top: 2.8rem;
   }
 `
