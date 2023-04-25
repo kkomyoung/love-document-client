@@ -4,7 +4,7 @@ import ChoiceInputGroup from './ChoiceInputGroup'
 import ScoreInputGroup from './ScoreInputGroup'
 import YesOrNoInputGroup from './YesOrNoInputGroup'
 import RangeInputGroup from './RangeInputGroup'
-import InputText from '../form/InputText'
+import QuestionInput from '../form/QuestionInput'
 import { QUESTION_TYPE } from '../../utils/constants'
 
 // eslint-disable-next-line no-unused-vars
@@ -109,7 +109,7 @@ const categoryItemInfoList = [
     ynBoolList: [],
   },
 ]
-function QuestionItem({ category, questionNumber, question }) {
+function QuestionItem({ questionNumber, question }) {
   const {
     id,
     question: title,
@@ -118,6 +118,7 @@ function QuestionItem({ category, questionNumber, question }) {
     multiple,
     positiveLabel,
     negativeLabel,
+    placeholder,
   } = question
 
   return (
@@ -134,7 +135,9 @@ function QuestionItem({ category, questionNumber, question }) {
         </QuestionText>
       </TitleBox>
 
-      {type === 'INPUT' && <InputText type="number" placeholder="18" />}
+      {type === 'INPUT' && (
+        <QuestionInput type="text" placeholder={placeholder} />
+      )}
 
       {type === QUESTION_TYPE.CHOICE && (
         <ChoiceInputGroup
