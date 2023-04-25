@@ -1,11 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 import changeBgColor from '../utils/changeBgColor'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import { ReactComponent as IconLetter } from '../assets/img_letter.svg'
 
 const AnswerLanding = () => {
+  const params = useParams()
+
   changeBgColor('#79c7ff')
   return (
     <StyledMain>
@@ -24,7 +26,7 @@ const AnswerLanding = () => {
       <ButtonArea margin="3.1rem 0 0 0">
         <RoundButton
           as={Link}
-          to="/research/:questionId/answer"
+          to={`/research/${params.questionId}/answer`}
           color="white"
           text="답변하기"
         />
