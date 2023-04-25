@@ -7,6 +7,7 @@ import QuestionsContainer from '../components/question/QuestionsContainer'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import { getQuestions } from '../apis/question'
 import { useQuery } from 'react-query'
+import useQuestionNumber from '../hooks/useQuestionNumber'
 
 // eslint-disable-next-line no-unused-vars
 const data = {
@@ -94,12 +95,7 @@ function AnswerPage() {
   const { data: categoryQuestions } = useQuery('questions', getQuestions, {
     refetchOnWindowFocus: false,
   })
-  let totalQuestionLength = 0
-
-  const getQuestionNumberOffset = (curQuestionLength) => {
-    totalQuestionLength += curQuestionLength // 카테고리별로 question list 의 길이를 저장. 다음 카테고리 question 시작번호에 쓰임
-    return totalQuestionLength - curQuestionLength // 현재 카테고리의 question 시작 번호 반환
-  }
+  const { getQuestionNumberOffset } = useQuestionNumber(0)
 
   return (
     <StyledMain>
