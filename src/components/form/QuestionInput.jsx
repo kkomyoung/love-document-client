@@ -1,17 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
+import { ReactComponent as IconUser } from '../../assets/icon_user.svg'
 
-function InputText({ type, placeholder }) {
+function QuestionInput({ type, placeholder }) {
   return (
-    <StyledInputBox>
+    <Box>
+      {placeholder === '닉네임' && (
+        <i aria-hidden="true">
+          <IconUser />
+        </i>
+      )}
       <input type={type} placeholder={placeholder} />
-    </StyledInputBox>
+    </Box>
   )
 }
 
-export default InputText
+export default QuestionInput
 
-const StyledInputBox = styled.div`
+const Box = styled.div`
   display: flex;
   border: 1px solid
     ${(props) => (props.error ? props.theme.pink700 : props.theme.gray500)};

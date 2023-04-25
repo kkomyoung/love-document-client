@@ -11,12 +11,13 @@ import { useRecoilValue } from 'recoil'
 import { answersAtom } from '../utils/atoms'
 import useToastPopup from '../hooks/useToastPopup'
 import { postIdeals } from '../apis'
+import useQuestionNumber from '../hooks/useQuestionNumber'
 
 function StandardPage() {
   const { data: categoryQuestions } = useQuery('questions', getQuestions, {
     refetchOnWindowFocus: false,
   })
-  let totalQuestionLength = 0
+  const { totalQuestionLength, getQuestionNumberOffset } = useQuestionNumber(0)
   const answers = useRecoilValue(answersAtom)
   const { openToastPopup, ToastPopup } = useToastPopup()
   const navigate = useNavigate()
@@ -41,11 +42,6 @@ function StandardPage() {
 
     console.log(answers)
     writeIdeals({ idealList: answers })
-  }
-
-  const getQuestionNumberOffset = (curQuestionLength) => {
-    totalQuestionLength += curQuestionLength // 카테고리별로 question list 의 길이를 저장. 다음 카테고리 question 시작번호에 쓰임
-    return totalQuestionLength - curQuestionLength // 현재 카테고리의 question 시작 번호 반환
   }
 
   return (

@@ -34,14 +34,14 @@ function ShareResearchBox({ onCopyLink }) {
 
           <ButtonArea flex full>
             <CopyToClipboard
-              text={`http://www.love-document.com/research/${user.linkId}/answer`}
+              text={`http://www.love-document.com/research/${user.linkId}`}
               onCopy={onCopyLink}
             >
               <RoundButton text="링크복사" />
             </CopyToClipboard>
 
             <KakaoShareButton
-              questionLink={`http://www.love-document.com/research/${user.linkId}/answer`}
+              questionLink={`http://www.love-document.com/research/${user.linkId}`}
             />
           </ButtonArea>
         </>

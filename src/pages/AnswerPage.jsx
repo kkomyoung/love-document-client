@@ -3,92 +3,49 @@ import styled from 'styled-components'
 import Header from '../components/header/Header'
 import { TextArea, TextDesc, Title } from '../components/texts/Texts'
 import { ReactComponent as IconLetter } from '../assets/icon_letter.svg'
-import DefaultInfo from '../components/question/DefaultInfo'
 import QuestionsContainer from '../components/question/QuestionsContainer'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
+import { getQuestions } from '../apis/question'
+import { useQuery } from 'react-query'
+import useQuestionNumber from '../hooks/useQuestionNumber'
+import { QUESTION_TYPE } from '../utils/constants'
 
-const data = {
-  외모: {
-    offset: 0,
-    questions: [
-      {
-        id: 24,
-        title: '키가 어떻게 되시나요?',
-        type: 'INPUT',
-      },
-      {
-        id: 105,
-        title: '타투가 있으신가요?',
-        type: 'YES-OR-NO',
-        examples: [
-          { id: 1, text: '괜찮아요' },
-          { id: 2, text: '안돼요' },
-        ],
-      },
-      {
-        id: 36,
-        title: '어떤 종교가 있으신가요?',
-        type: 'MULTIPLE-CHOCIE',
-        isMultiChoice: true,
-        examples: [
-          { id: 22, text: '무교' },
-          { id: 23, text: '기독교' },
-          { id: 24, text: '천주교' },
-          { id: 25, text: '불교' },
-          { id: 26, text: '기타' },
-        ],
-      },
-      {
-        id: 24,
-        title: '스킨십 선호가 어땠으면 하나요?',
-        type: 'SCORE',
-        positiveText: '스킨십 좋아해요',
-        negativeText: '좋아하지 않아요',
-      },
-    ],
-  },
-  가치관: {
-    offset: 4,
-    questions: [
-      {
-        id: 24,
-        title: '키는 어느정도를 선호하세요?',
-        type: 'RANGE',
-      },
-      {
-        id: 105,
-        title: '타투 어때요?',
-        type: 'YES-OR-NO',
-        examples: [
-          { id: 1, text: '괜찮아요' },
-          { id: 2, text: '안돼요' },
-        ],
-      },
-      {
-        id: 36,
-        title: '어떤 종교가 있었으면 하나요?',
-        type: 'MULTIPLE-CHOCIE',
-        isMultiChoice: true,
-        examples: [
-          { id: 22, text: '무교' },
-          { id: 23, text: '기독교' },
-          { id: 24, text: '천주교' },
-          { id: 25, text: '불교' },
-          { id: 26, text: '기타' },
-        ],
-      },
-      {
-        id: 24,
-        title: '스킨십 선호가 어땠으면 하나요?',
-        type: 'SCORE',
-        positiveText: '스킨십 좋아해요',
-        negativeText: '좋아하지 않아요',
-      },
-    ],
-  },
+const defaultCategoryQuestions = {
+  categoryTitle: '기본 정보',
+  categoryItemInfoList: [
+    {
+      id: 0,
+      type: QUESTION_TYPE.INPUT,
+      question: '닉네임을 입력해주세요',
+      placeholder: '닉네임',
+    },
+    {
+      id: 0,
+      type: QUESTION_TYPE.INPUT,
+      question: '나이가 어떻게 되시나요?',
+      placeholder: '18',
+    },
+    {
+      id: 0,
+      type: QUESTION_TYPE.INPUT,
+      question: '어느 지역에 사시나요?',
+      placeholder: 'ex. 서울 성동구',
+    },
+    {
+      id: 0,
+      type: QUESTION_TYPE.INPUT,
+      question: '무슨 일을 하시나요?',
+      placeholder: 'ex. 시각디자인과 대학생',
+    },
+  ],
 }
 
 function AnswerPage() {
+  const { data: categoryQuestions } = useQuery('questions', getQuestions, {
+    refetchOnWindowFocus: false,
+  })
+  const { getQuestionNumberOffset } = useQuestionNumber(0)
+
   return (
     <StyledMain>
       <Header title="답변하기" btnBack />
@@ -106,17 +63,28 @@ function AnswerPage() {
         </TextArea>
 
         <StyledSectionQuestion>
-          <DefaultInfo />
+          <CategoryQuestionList>
+            <QuestionsContainer
+              key={0}
+              category={defaultCategoryQuestions.categoryTitle}
+              questions={defaultCategoryQuestions.categoryItemInfoList}
+              offset={getQuestionNumberOffset(
+                defaultCategoryQuestions.categoryItemInfoList.length
+              )}
+            />
 
-          {data &&
-            Object.keys(data).map((category) => (
-              <QuestionsContainer
-                key={category}
-                category={category}
-                questions={data[category].questions}
-                offset={data[category].offset}
-              />
-            ))}
+            {categoryQuestions &&
+              categoryQuestions.map((item, index) => (
+                <QuestionsContainer
+                  key={index}
+                  category={item.categoryTitle}
+                  questions={item.categoryItemInfoList}
+                  offset={getQuestionNumberOffset(
+                    item.categoryItemInfoList.length
+                  )}
+                />
+              ))}
+          </CategoryQuestionList>
         </StyledSectionQuestion>
 
         <ButtonArea margin="10rem 0rem 0rem 0rem">
@@ -138,8 +106,10 @@ const StyledAirticle = styled.article``
 const StyledSectionQuestion = styled.section`
   margin-top: 2.8rem;
   padding: 0 2.4rem;
+`
 
-  & > div + div {
+const CategoryQuestionList = styled.ul`
+  & > li + li {
     margin-top: 2.8rem;
   }
 `
