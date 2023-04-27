@@ -6,10 +6,12 @@ import { TextArea, Title } from '../components/texts/Texts'
 const AnswerDetailPage = () => {
   return (
     <StyledMain>
-      <Header title="질문지 준비 완료" btnBack btnHome />
+      <Header title="질문지 준비 완료" btnBack btnDelete />
       <StyledAirticle>
         <TextArea>
-          <Title>키위님의 답변</Title>
+          <Title>
+            <span>키위</span>님의 답변
+          </Title>
         </TextArea>
       </StyledAirticle>
     </StyledMain>
@@ -23,6 +25,10 @@ const StyledMain = styled.main`
 
 const StyledAirticle = styled.article`
   padding: 0 2.4rem;
+
+  h1 > span {
+    color: ${(props) => props.theme.blue500};
+  }
 `
 
 export default AnswerDetailPage
