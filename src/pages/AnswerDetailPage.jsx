@@ -4,6 +4,7 @@ import Header from '../components/header/Header'
 import { TextArea, Title } from '../components/texts/Texts'
 import Lottie from '../components/lotties/Lottie'
 import { ReactComponent as HeartPuzzleImg } from '../assets/img_heart_puzzle.svg'
+import CategoryLabel from '../components/category/CategoryLabel'
 // import { ReactComponent as HeartPuzzleIcon } from '../assets/icon_heart_puzzle.svg'
 
 const AnswerDetailPage = () => {
@@ -61,6 +62,34 @@ const AnswerDetailPage = () => {
             </PercentageRow>
           </PercentageBox>
         </PercentageSection>
+
+        <AnswerResultSection>
+          <AnswerResultContainerList>
+            <AnswerResultContainerItem>
+              <CategoryLabel category={'외모'} />
+              <AnswerResultList>
+                <AnswerResultItem>
+                  제 키는 <span>183cm</span> 이에요
+                </AnswerResultItem>
+                <AnswerResultItem isDiff={true}>
+                  제 키는 <span>183cm</span> 이에요
+                </AnswerResultItem>
+              </AnswerResultList>
+            </AnswerResultContainerItem>
+
+            <AnswerResultContainerItem>
+              <CategoryLabel category={'외모'} />
+              <AnswerResultList>
+                <AnswerResultItem>
+                  제 키는 <span>183cm</span> 이에요
+                </AnswerResultItem>
+                <AnswerResultItem>
+                  제 키는 <span>183cm</span> 이에요
+                </AnswerResultItem>
+              </AnswerResultList>
+            </AnswerResultContainerItem>
+          </AnswerResultContainerList>
+        </AnswerResultSection>
       </StyledAirticle>
     </StyledMain>
   )
@@ -158,6 +187,40 @@ const CategoryItemItem = styled.li`
   border-radius: 2.6rem;
   padding: 0.8rem 1.75rem;
   ${(props) => props.theme.fontSize.label_s_m}
-  color: ${(props) => props.theme.white}
+  color: ${(props) => props.theme.white};
 `
+
+const AnswerResultSection = styled.section`
+  margin-top: 4.5rem;
+`
+
+const AnswerResultContainerList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+`
+
+const AnswerResultContainerItem = styled.li``
+
+const AnswerResultList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  margin-top: 1.6rem;
+  gap: 0.8rem;
+`
+
+const AnswerResultItem = styled.li`
+  background-color: ${(props) => props.theme.gray100};
+  border-radius: 0.8rem;
+  border: ${(props) => props.isDiff && `0.2rem solid ${props.theme.pink700}`};
+  padding: 2rem;
+
+  ${(props) => props.theme.fontSize.b1}
+  color: ${(props) => props.theme.gray700};
+
+  span {
+    ${(props) => props.theme.fontWeight.bold}
+  }
+`
+
 export default AnswerDetailPage

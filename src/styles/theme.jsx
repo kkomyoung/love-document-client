@@ -11,9 +11,9 @@ const a11yHidden = `
 `
 
 const fontWeight = {
-  medium: 'font-weight: 500',
-  semibold: 'font-weight: 600',
-  bold: 'font-weight: 700',
+  medium: 'font-weight: 500;',
+  semibold: 'font-weight: 600;',
+  bold: 'font-weight: 700;',
 }
 
 const fontSize = {
