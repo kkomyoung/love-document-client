@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import Header from '../components/header/Header'
 import { TextArea, Title } from '../components/texts/Texts'
 import Lottie from '../components/lotties/Lottie'
+import { ReactComponent as HeartPuzzleImg } from '../assets/img_heart_puzzle.svg'
+// import { ReactComponent as HeartPuzzleIcon } from '../assets/icon_heart_puzzle.svg'
 
 const AnswerDetailPage = () => {
   return (
@@ -15,22 +17,50 @@ const AnswerDetailPage = () => {
           </Title>
 
           <AnswererBox>
-            <InfoBox>
+            <AnswererRow>
               <InfoText>1996년생</InfoText>
               <VerticalLine />
               <InfoText>서울강남구</InfoText>
-            </InfoBox>
+            </AnswererRow>
 
-            <InfoBox>
+            <AnswererRow>
               <InfoText>시각디자인과 대학생</InfoText>
               <InfoText>
                 <span>오후 3:43</span>
               </InfoText>
-            </InfoBox>
+            </AnswererRow>
           </AnswererBox>
         </TextArea>
 
         <Lottie data="magnifier" />
+
+        <PercentageSection>
+          <PercentageBox>
+            <PercentageRow>
+              <HeartPuzzleImg />
+              <PercentageCol>
+                <PercentageTitleText>
+                  100% 일치 <span>(10/10)</span>
+                </PercentageTitleText>
+
+                <PercentageSubtitleText>
+                  축! 연애서류 합격이에요!
+                </PercentageSubtitleText>
+              </PercentageCol>
+            </PercentageRow>
+
+            <PercentageRow>
+              <CategoryItemList>
+                <CategoryItemItem>키</CategoryItemItem>
+                <CategoryItemItem>타투</CategoryItemItem>
+                <CategoryItemItem>안경</CategoryItemItem>
+                <CategoryItemItem>안경</CategoryItemItem>
+                <CategoryItemItem>안경</CategoryItemItem>
+                <CategoryItemItem>안경</CategoryItemItem>
+              </CategoryItemList>
+            </PercentageRow>
+          </PercentageBox>
+        </PercentageSection>
       </StyledAirticle>
     </StyledMain>
   )
@@ -53,7 +83,7 @@ const AnswererBox = styled.div`
   margin-top: 1.1rem;
 `
 
-const InfoBox = styled.div`
+const AnswererRow = styled.div`
   display: flex;
   align-items: center;
   gap: 0.8rem;
@@ -74,4 +104,60 @@ const VerticalLine = styled.span`
   border-left: 1px solid ${(props) => props.theme.gray400};
 `
 
+const PercentageSection = styled.section`
+  display: flex;
+  background-color: ${(props) => props.theme.pink300};
+  border-radius: 0.8rem;
+  padding: 1.2rem;
+`
+
+const PercentageBox = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+
+const PercentageRow = styled.div`
+  display: flex;
+  flex-direction: row;
+`
+
+const PercentageCol = styled.div``
+
+const PercentageTitleText = styled.h3`
+  display: flex;
+  align-items: center;
+  ${(props) => props.theme.fontSize.h3_m}
+  color: ${(props) => props.theme.gray900};
+  margin-top: 1rem;
+
+  span {
+    ${(props) => props.theme.fontSize.b2}
+    color: ${(props) => props.theme.gray600};
+    margin-left: 0.8rem;
+  }
+`
+
+const PercentageSubtitleText = styled.h4`
+  ${(props) => props.theme.fontSize.b2}
+  color: ${(props) => props.theme.gray800};
+  margin-top: 0.5rem;
+`
+
+const CategoryItemList = styled.ul`
+  margin-top: 1.8rem;
+
+  li + li {
+    margin-left: 0.6rem;
+    margin-top: 0.2rem;
+  }
+`
+
+const CategoryItemItem = styled.li`
+  display: inline-flex;
+  background-color: ${(props) => props.theme.pink700};
+  border-radius: 2.6rem;
+  padding: 0.8rem 1.75rem;
+  ${(props) => props.theme.fontSize.label_s_m}
+  color: ${(props) => props.theme.white}
+`
 export default AnswerDetailPage
