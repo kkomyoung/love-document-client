@@ -12,6 +12,21 @@ const AnswerDetailPage = () => {
           <Title>
             <span>키위</span>님의 답변
           </Title>
+
+          <AnswererBox>
+            <InfoBox>
+              <InfoText>1996년생</InfoText>
+              <VerticalLine />
+              <InfoText>서울강남구</InfoText>
+            </InfoBox>
+
+            <InfoBox>
+              <InfoText>시각디자인과 대학생</InfoText>
+              <InfoText>
+                <span>오후 3:43</span>
+              </InfoText>
+            </InfoBox>
+          </AnswererBox>
         </TextArea>
       </StyledAirticle>
     </StyledMain>
@@ -29,6 +44,31 @@ const StyledAirticle = styled.article`
   h1 > span {
     color: ${(props) => props.theme.blue500};
   }
+`
+
+const AnswererBox = styled.div`
+  margin-top: 1.1rem;
+`
+
+const InfoBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+`
+
+const InfoText = styled.span`
+  vertical-align: middle;
+  ${(props) => props.theme.fontSize.b2}
+  color: ${(props) => props.theme.gray800};
+
+  span {
+    color: ${(props) => props.theme.gray600};
+  }
+`
+
+const VerticalLine = styled.span`
+  height: 0.8rem;
+  border-left: 1px solid ${(props) => props.theme.gray400};
 `
 
 export default AnswerDetailPage
