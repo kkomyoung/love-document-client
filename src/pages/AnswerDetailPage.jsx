@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
 import { TextArea, Title } from '../components/texts/Texts'
+import Lottie from '../components/lotties/Lottie'
 
 const AnswerDetailPage = () => {
   return (
@@ -28,6 +29,8 @@ const AnswerDetailPage = () => {
             </InfoBox>
           </AnswererBox>
         </TextArea>
+
+        <Lottie data="magnifier" />
       </StyledAirticle>
     </StyledMain>
   )
