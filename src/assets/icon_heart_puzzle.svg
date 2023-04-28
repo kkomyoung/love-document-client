@@ -4,11 +4,11 @@
 <path d="M5.85186 3.08838L10.2023 4.99171L14.009 4.4479L17 7.71076V11.7893L12.6495 16.4117L10.2023 16.1398L3.67662 10.9736L3.13281 6.35124L5.85186 3.08838Z" fill="#D9D9D9"/>
 </mask>
 <g mask="url(#mask0_414_10763)">
-<rect x="3.40466" y="2.8165" width="13.5952" height="15.2267" fill="url(#pattern0)"/>
+<rect x="3.40466" y="2.8165" width="13.5952" height="15.2267" fill="url(#heart_puzzle)"/>
 </g>
 </g>
 <defs>
-<pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+<pattern id="heart_puzzle" patternContentUnits="objectBoundingBox" width="1" height="1">
 <use xlink:href="#image0_414_10763" transform="matrix(0.00258528 0 0 0.00230828 -0.24 -0.0170557)"/>
 </pattern>
 <clipPath id="clip0_414_10763">

@@ -1,13 +1,27 @@
 import React from 'react'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
-import { TextArea, Title } from '../components/texts/Texts'
+import { SubTitle, TextArea, TextDesc, Title } from '../components/texts/Texts'
 import Lottie from '../components/lotties/Lottie'
 import { ReactComponent as HeartPuzzleImg } from '../assets/img_heart_puzzle.svg'
+import { ReactComponent as HeartTokenIcon } from '../assets/icon_heart_token.svg'
 import CategoryLabel from '../components/category/CategoryLabel'
+import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 // import { ReactComponent as HeartPuzzleIcon } from '../assets/icon_heart_puzzle.svg'
+import useUser from '../hooks/useUser'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
+import KakaoShareButton from '../components/buttons/KakaoShareButton'
+import useToastPopup from '../hooks/useToastPopup'
 
 const AnswerDetailPage = () => {
+  const { user } = useUser()
+
+  const { openToastPopup, ToastPopup } = useToastPopup()
+
+  const onCopyLink = () => {
+    openToastPopup('설문지링크가 복사되었습니다.')
+  }
+
   return (
     <StyledMain>
       <Header title="질문지 준비 완료" btnBack btnDelete />
@@ -90,7 +104,46 @@ const AnswerDetailPage = () => {
             </AnswerResultContainerItem>
           </AnswerResultContainerList>
         </AnswerResultSection>
+
+        <InformSection>
+          <SubTitle>
+            <i aria-hidden="true">
+              <HeartTokenIcon />
+            </i>
+            <span>주선자에게 알리기</span>
+          </SubTitle>
+          <TextDesc>
+            주선자에게 링크를 공유해 의사를 밝혀주세요 일치율과 답변 내용은
+            공개되지 않아요
+          </TextDesc>
+
+          <ButtonArea full margin="2rem 0 0 0">
+            <RoundButton
+              text="다른 좋은 인연이 있겠죠"
+              color="white"
+              border="true"
+            />
+
+            <RoundButton text="소개팅 할게요" color="pink" border="true" />
+          </ButtonArea>
+
+          {user && (
+            <ButtonArea flex full margin="4rem 0 0 0">
+              <CopyToClipboard
+                text={`http://www.love-document.com/research/${user.linkId}`}
+                onCopy={onCopyLink}
+              >
+                <RoundButton text="링크복사" />
+              </CopyToClipboard>
+
+              <KakaoShareButton
+                questionLink={`http://www.love-document.com/research/${user.linkId}`}
+              />
+            </ButtonArea>
+          )}
+        </InformSection>
       </StyledAirticle>
+      <ToastPopup />
     </StyledMain>
   )
 }
@@ -223,4 +276,7 @@ const AnswerResultItem = styled.li`
   }
 `
 
+const InformSection = styled.section`
+  margin-top: 4.8rem;
+`
 export default AnswerDetailPage
