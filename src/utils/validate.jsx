@@ -1,4 +1,11 @@
-const validateNickname = (value, setError, setErrorMessage) => {
+import { postUserOverlap } from '../apis'
+
+const validateNickname = async (
+  value,
+  setError,
+  setErrorMessage,
+  openToastPopup
+) => {
   const prevValue = localStorage.nickname
     ? localStorage.getItem('nickname')
     : false
@@ -29,6 +36,22 @@ const validateNickname = (value, setError, setErrorMessage) => {
     setErrorMessage('')
   }
 
+  // 중복 닉네임 확인
+  try {
+    await postUserOverlap({ nickname: value })
+    error = false
+  } catch (err) {
+    error = true
+    if (err.response.status === 409 && prevValue !== value) {
+      if (openToastPopup) {
+        openToastPopup('중복된 닉네임이에요')
+      } else {
+        setError(true)
+        setErrorMessage('중복된 닉네임이에요')
+      }
+    }
+  }
+
   return !error
 }
 
@@ -49,29 +72,6 @@ const validatePassword = (value, setError, setErrorMessage) => {
   }
 
   return !error
-}
-
-// 회원가입
-const validateRegister = (
-  valueNickname,
-  valuePassword,
-  setErrorNickname,
-  setErrorPassword,
-  setErrorMessageNickname,
-  setErrorMessagePassword
-) => {
-  const checkNickname = validateNickname(
-    valueNickname,
-    setErrorNickname,
-    setErrorMessageNickname
-  )
-  const checkPassword = validatePassword(
-    valuePassword,
-    setErrorPassword,
-    setErrorMessagePassword
-  )
-  const isValid = checkNickname && checkPassword
-  return isValid
 }
 
 // 로그인
@@ -108,4 +108,4 @@ const validateLogin = (
   return !error
 }
 
-export { validateNickname, validatePassword, validateRegister, validateLogin }
+export { validateNickname, validatePassword, validateLogin }

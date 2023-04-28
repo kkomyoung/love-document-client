@@ -15,7 +15,16 @@ export const register = async ({ nickname, password }) => {
   return data
 }
 
+// 유저 정보조회
 export const getUserInfo = async () => {
   const { data } = await instance.get('/users')
+  return data
+}
+
+// 닉네임 중복 확인
+export const postUserOverlap = async ({ nickname }) => {
+  const { data } = await instance.post('/users/nickname', {
+    nickname,
+  })
   return data
 }

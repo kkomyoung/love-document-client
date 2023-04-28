@@ -1,4 +1,4 @@
-import { login, register, getUserInfo } from './user'
+import { login, register, getUserInfo, postUserOverlap } from './user'
 import { getCategories, postQuestions } from './category'
 import { postIdeals } from './ideal'
 
@@ -7,6 +7,7 @@ export {
   login,
   register,
   getUserInfo,
+  postUserOverlap,
 
   // Category
   getCategories,

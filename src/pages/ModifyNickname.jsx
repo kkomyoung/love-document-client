@@ -12,8 +12,8 @@ const ModifyNickname = () => {
   const [error, setError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
 
-  const handlerModify = () => {
-    validateNickname(nickname, setError, setErrorMessage)
+  const handlerModify = async () => {
+    await validateNickname(nickname, setError, setErrorMessage)
   }
 
   return (
