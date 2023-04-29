@@ -6,7 +6,7 @@ import { TextArea, TextDesc, Title } from '../components/texts/Texts'
 import QuestionsContainer from '../components/question/QuestionsContainer'
 import { RoundButton, ButtonArea } from '../components/buttons/Buttons'
 import { useQuery, useMutation } from 'react-query'
-import { getQuestions } from '../apis/question'
+import { getQuestionsOfQuestioner } from '../apis/question'
 import { useRecoilValue } from 'recoil'
 import { answersAtom } from '../utils/atoms'
 import useToastPopup from '../hooks/useToastPopup'
@@ -14,9 +14,13 @@ import { postIdeals } from '../apis'
 import useQuestionNumber from '../hooks/useQuestionNumber'
 
 function StandardPage() {
-  const { data: categoryQuestions } = useQuery('questions', getQuestions, {
-    refetchOnWindowFocus: false,
-  })
+  const { data: categoryQuestions } = useQuery(
+    'questions',
+    getQuestionsOfQuestioner,
+    {
+      refetchOnWindowFocus: false,
+    }
+  )
   const { totalQuestionLength, getQuestionNumberOffset } = useQuestionNumber(0)
   const answers = useRecoilValue(answersAtom)
   const { openToastPopup, ToastPopup } = useToastPopup()

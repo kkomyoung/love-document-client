@@ -5,7 +5,7 @@ import { TextArea, TextDesc, Title } from '../components/texts/Texts'
 import { ReactComponent as IconLetter } from '../assets/icon_letter.svg'
 import QuestionsContainer from '../components/question/QuestionsContainer'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
-import { getQuestions } from '../apis/question'
+import { getQuestionsOfAnswerer } from '../apis/question'
 import { useQuery } from 'react-query'
 import useQuestionNumber from '../hooks/useQuestionNumber'
 import { QUESTION_TYPE } from '../utils/constants'
@@ -41,9 +41,13 @@ const defaultCategoryQuestions = {
 }
 
 function AnswerPage() {
-  const { data: categoryQuestions } = useQuery('questions', getQuestions, {
-    refetchOnWindowFocus: false,
-  })
+  const { data: categoryQuestions } = useQuery(
+    'questions',
+    getQuestionsOfAnswerer,
+    {
+      refetchOnWindowFocus: false,
+    }
+  )
   const { getQuestionNumberOffset } = useQuestionNumber(0)
 
   return (
