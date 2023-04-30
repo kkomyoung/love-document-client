@@ -61,7 +61,7 @@ function QuestionInput({ questionId, name, type, placeholder }) {
 
   return (
     <Box>
-      {placeholder === '닉네임' && (
+      {name === 'nickname' && (
         <i aria-hidden="true">
           <IconUser />
         </i>

@@ -4,8 +4,8 @@ import ChoiceInputGroup from './ChoiceInputGroup'
 import ScoreInputGroup from './ScoreInputGroup'
 import YesOrNoInputGroup from './YesOrNoInputGroup'
 import RangeInputGroup from './RangeInputGroup'
-import QuestionInput from '../form/QuestionInput'
 import { QUESTION_TYPE } from '../../utils/constants'
+import QuestionInput from './QuestionInput'
 
 // eslint-disable-next-line no-unused-vars
 const categoryItemInfoList = [
