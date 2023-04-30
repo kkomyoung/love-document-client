@@ -39,7 +39,7 @@ function ResearchReady() {
   const { Modal, openModal } = useModal()
   const { ToastPopup, openToastPopup } = useToastPopup()
   const onDelete = (id) => {
-    console.log(id)
+    // console.log(id)
   }
 
   const onCopyLink = () => {

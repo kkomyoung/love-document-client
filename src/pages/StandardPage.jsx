@@ -6,25 +6,28 @@ import { TextArea, TextDesc, Title } from '../components/texts/Texts'
 import QuestionsContainer from '../components/question/QuestionsContainer'
 import { RoundButton, ButtonArea } from '../components/buttons/Buttons'
 import { useQuery, useMutation } from 'react-query'
-import { getQuestions } from '../apis/question'
+import { getQuestionsOfQuestioner } from '../apis/question'
 import { useRecoilValue } from 'recoil'
-import { answersAtom } from '../utils/atoms'
+import { answerAtom } from '../utils/atoms'
 import useToastPopup from '../hooks/useToastPopup'
-import { postIdeals } from '../apis'
-import useQuestionNumber from '../hooks/useQuestionNumber'
+import { postIdeal } from '../apis'
+import useQuestion from '../hooks/useQuestion'
 
 function StandardPage() {
-  const { data: categoryQuestions } = useQuery('questions', getQuestions, {
-    refetchOnWindowFocus: false,
-  })
-  const { totalQuestionLength, getQuestionNumberOffset } = useQuestionNumber(0)
-  const answers = useRecoilValue(answersAtom)
+  const { data: categoryQuestions } = useQuery(
+    'questions',
+    getQuestionsOfQuestioner,
+    {
+      refetchOnWindowFocus: false,
+    }
+  )
+  const { getQuestionNumberOffset, isNotAllAnswered } = useQuestion(0)
+  const answer = useRecoilValue(answerAtom)
   const { openToastPopup, ToastPopup } = useToastPopup()
   const navigate = useNavigate()
 
-  const { mutate: writeIdeals, isLoading } = useMutation(postIdeals, {
+  const { mutate: writeIdeal, isLoading } = useMutation(postIdeal, {
     onSuccess: (data) => {
-      console.log(data)
       navigate('/research/standard/complete')
     },
     onError: () => {
@@ -34,14 +37,13 @@ function StandardPage() {
 
   const onConfirmButtonClick = () => {
     if (isLoading) return
-    if (!categoryQuestions && !answers) return
+    if (!categoryQuestions && !answer) return
 
-    if (totalQuestionLength !== answers.length) {
+    if (isNotAllAnswered('ideal', answer)) {
       openToastPopup('아직 응답하지 않은 항목이 있어요.')
+      return
     }
-
-    console.log(answers)
-    writeIdeals({ idealList: answers })
+    writeIdeal({ idealList: answer.answerList })
   }
 
   return (
