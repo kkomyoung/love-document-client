@@ -14,9 +14,11 @@ const KakaoShareButton = ({ questionLink }) => {
       kakao.Link.sendDefault({
         objectType: 'feed',
         content: {
-          title: '연애서류합',
-          description: '설명',
-          imageUrl: '이미지 url',
+          title: '두근-두근, 연애서류합',
+          description:
+            '소개팅 상대가 내 기준에 얼마나 부합할까? 내 연애 서류를 만들고 답변을 받아봐요',
+          imageUrl:
+            'https://firebasestorage.googleapis.com/v0/b/love-document.appspot.com/o/love-document-accept.png?alt=media&token=7c6e16e4-b7b2-4b7b-8793-f07751f6d60e',
           link: {
             mobileWebUrl: questionLink,
             webUrl: questionLink,
