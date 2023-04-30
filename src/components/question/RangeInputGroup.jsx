@@ -34,6 +34,15 @@ function RangeInputGroup({ questionId, questionType }) {
           },
         ],
       }))
+    } else {
+      setAnswer((prev) => ({
+        ...prev,
+        answerList: [
+          ...prev.answerList.filter(
+            (answer) => answer.categoryItemId !== questionId
+          ),
+        ],
+      }))
     }
   }, [minimum, maximum])
 
