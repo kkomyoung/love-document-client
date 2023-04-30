@@ -1,15 +1,16 @@
 {
   "files": {
-    "main.js": "/static/js/main.541f0802.js",
+    "main.js": "/static/js/main.836222ae.js",
     "static/media/icon_airplane.svg": "/static/media/icon_airplane.8e1a9c7883c1647d4e7e0634f5be4b55.svg",
     "static/media/img_heart_lock.svg": "/static/media/img_heart_lock.27a3f916dc31a0bb5dd62e4a988c6008.svg",
     "static/media/img_heart_lock02.svg": "/static/media/img_heart_lock02.1eac83e08b0c2a4b469d0eaeb7a55b00.svg",
     "static/media/img_document.svg": "/static/media/img_document.bcf589d08095cc5d5625b81e8a39a7ac.svg",
+    "static/media/icon_heart_token.svg": "/static/media/icon_heart_token.c6e47235af62bc47ea47c508dc167a78.svg",
     "static/media/icon_love_letter_36.svg": "/static/media/icon_love_letter_36.93fa2de9cafcdb72ff6e897ad9b44c19.svg",
     "static/media/icon_letter.svg": "/static/media/icon_letter.ee6805ca4d11f0f9f44ddd090fdb6f3b.svg",
     "static/media/img_letter.svg": "/static/media/img_letter.571489ff45b76dea9294e72cc4061c7f.svg",
     "static/media/img_heart_wing.svg": "/static/media/img_heart_wing.b9de103822dfbad492a5406a69ff0016.svg",
-    "static/media/img_heart_puzzle.svg": "/static/media/img_heart_puzzle.525f282d0bb1758aa9647e226ab907d9.svg",
+    "static/media/img_heart_puzzle.svg": "/static/media/img_heart_puzzle.73c989d8529f8e3e3a98fe22f7969c33.svg",
     "static/media/icon_setting.svg": "/static/media/icon_setting.8b0b479aaa428f99bd7b2bb5fad455dd.svg",
     "static/media/icon_lock.svg": "/static/media/icon_lock.596733d6464d905b56bbe4d10f3ac76c.svg",
     "static/media/icon_user.svg": "/static/media/icon_user.6ed3feee4e9cbdca447989b8eab72d46.svg",
@@ -26,9 +27,9 @@
     "static/media/icon_plus.svg": "/static/media/icon_plus.b34accc313c6c376b642208f03426281.svg",
     "static/media/icon_warning.svg": "/static/media/icon_warning.150f220a6233b1abb0ad433e06fd03b0.svg",
     "static/media/icon_arrow_prev.svg": "/static/media/icon_arrow_prev.b674bbf63c6f30a9ef917613f8d9d163.svg",
-    "main.541f0802.js.map": "/static/js/main.541f0802.js.map"
+    "main.836222ae.js.map": "/static/js/main.836222ae.js.map"
   },
   "entrypoints": [
-    "static/js/main.541f0802.js"
+    "static/js/main.836222ae.js"
   ]
 }
