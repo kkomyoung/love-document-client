@@ -1,11 +1,12 @@
 import React from 'react'
 import { RoundButton } from './Buttons'
 import { ReactComponent as IconKakaoLogo } from '../../assets/icon_logo_kakao.svg'
+import { THUMBNAIL_URL } from '../../utils/constants'
 
 // TODO 주요 기능들 완성시켜놓고, 메타데이터 다듬기 (일단 링크 공유 기능만 완성)
 const KakaoShareButton = ({
   researchURL,
-  thumbnailURL = 'https://firebasestorage.googleapis.com/v0/b/love-document.appspot.com/o/love-document.png?alt=media&token=a9922bcf-1c8a-46d4-a054-2e0e07e4a296',
+  thumbnailURL = THUMBNAIL_URL.BASIC,
 }) => {
   const shareQuestion = () => {
     if (window.Kakao) {

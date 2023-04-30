@@ -12,20 +12,19 @@ import useUser from '../hooks/useUser'
 import useToastPopup from '../hooks/useToastPopup'
 import useModal from '../hooks/useModal'
 
+import { THUMBNAIL_URL } from '../utils/constants'
+
 const AnswerDetailPage = () => {
   const { user } = useUser()
   const { openToastPopup, ToastPopup } = useToastPopup()
   const { Modal, openModal, closeModal } = useModal()
-
   const createModalData = (isAccept) => {
     const modelData = {
       type: 'share',
       title: isAccept ? '소개팅 할게요!' : '다른 좋은 인연이 있겠죠',
       desc: '주선자에게 의사를 전달해보세요',
       researchURL: `http://www.love-document.com/research/${user.linkId}`,
-      thumbnailURL: isAccept
-        ? 'https://firebasestorage.googleapis.com/v0/b/love-document.appspot.com/o/love-document-accept.png?alt=media&token=7c6e16e4-b7b2-4b7b-8793-f07751f6d60e'
-        : 'https://firebasestorage.googleapis.com/v0/b/love-document.appspot.com/o/love-document-reject.png?alt=media&token=847386bd-25fd-4c16-b5e6-f08257b546f2',
+      thumbnailURL: isAccept ? THUMBNAIL_URL.ACCEPT : THUMBNAIL_URL.REJECT,
       btnCancel: {
         fn: () => {
           openToastPopup('설문지 링크가 복사되었어요')
