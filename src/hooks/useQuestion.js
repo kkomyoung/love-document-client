@@ -15,7 +15,7 @@ export default function useQuestionNumber(initLength) {
         return true
       }
     } else if (type === 'ideal') {
-      if (totalQuestionLength !== answer.answerList) {
+      if (totalQuestionLength !== answer.answerList.length) {
         return true
       }
     }

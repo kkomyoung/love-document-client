@@ -1,20 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import CopyToClipboard from 'react-copy-to-clipboard'
 import styled from 'styled-components'
 import { ReactComponent as ImgDocument } from '../../assets/img_document.svg'
 import { ButtonArea, KakaoShareButton, RoundButton } from '../buttons/Buttons'
 import useUser from '../../hooks/useUser'
 
-function ShareResearchBox({ onCopyLink }) {
+function ShareResearchBox({ onCopyURL }) {
   const { user, isLoading } = useUser()
-
-  useEffect(() => {
-    const script = document.createElement('script')
-    script.src = 'https://developers.kakao.com/sdk/js/kakao.js'
-    script.async = true
-    document.body.appendChild(script)
-    return () => document.body.removeChild(script)
-  }, [])
 
   return (
     <Box>
@@ -35,13 +27,13 @@ function ShareResearchBox({ onCopyLink }) {
           <ButtonArea flex full>
             <CopyToClipboard
               text={`http://www.love-document.com/research/${user.linkId}`}
-              onCopy={onCopyLink}
+              onCopy={onCopyURL}
             >
               <RoundButton text="링크복사" />
             </CopyToClipboard>
 
             <KakaoShareButton
-              questionLink={`http://www.love-document.com/research/${user.linkId}`}
+              researchURL={`http://www.love-document.com/research/${user.linkId}`}
             />
           </ButtonArea>
         </>

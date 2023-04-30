@@ -26,7 +26,7 @@ function ResearchReady() {
     // console.log(id)
   }
 
-  const onCopyLink = () => {
+  const onCopyURL = () => {
     openToastPopup('설문지링크가 복사되었습니다.')
   }
 
@@ -82,7 +82,7 @@ function ResearchReady() {
         </TextArea>
 
         <StyledShareResearchSection>
-          <ShareResearchBox onCopyLink={onCopyLink} />
+          <ShareResearchBox onCopyURL={onCopyURL} />
         </StyledShareResearchSection>
 
         <WriteStandard />

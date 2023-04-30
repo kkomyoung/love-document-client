@@ -9,17 +9,30 @@ import CategoryLabel from '../components/category/CategoryLabel'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 // import { ReactComponent as HeartPuzzleIcon } from '../assets/icon_heart_puzzle.svg'
 import useUser from '../hooks/useUser'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
-import KakaoShareButton from '../components/buttons/KakaoShareButton'
 import useToastPopup from '../hooks/useToastPopup'
+import useModal from '../hooks/useModal'
+
+import { THUMBNAIL_URL } from '../utils/constants'
 
 const AnswerDetailPage = () => {
   const { user } = useUser()
-
   const { openToastPopup, ToastPopup } = useToastPopup()
-
-  const onCopyLink = () => {
-    openToastPopup('설문지링크가 복사되었습니다.')
+  const { Modal, openModal, closeModal } = useModal()
+  const createModalData = (isAccept) => {
+    const modelData = {
+      type: 'share',
+      title: isAccept ? '소개팅 할게요!' : '다른 좋은 인연이 있겠죠',
+      desc: '주선자에게 의사를 전달해보세요',
+      researchURL: `http://www.love-document.com/research/${user.linkId}`,
+      thumbnailURL: isAccept ? THUMBNAIL_URL.ACCEPT : THUMBNAIL_URL.REJECT,
+      btnCancel: {
+        fn: () => {
+          openToastPopup('설문지 링크가 복사되었어요')
+          closeModal()
+        },
+      },
+    }
+    return modelData
   }
 
   return (
@@ -122,28 +135,20 @@ const AnswerDetailPage = () => {
               text="다른 좋은 인연이 있겠죠"
               color="white"
               border="true"
+              onClick={() => openModal(createModalData(false))}
             />
 
-            <RoundButton text="소개팅 할게요" color="pink" border="true" />
+            <RoundButton
+              text="소개팅 할게요!"
+              color="white"
+              border="true"
+              onClick={() => openModal(createModalData(true))}
+            />
           </ButtonArea>
-
-          {user && (
-            <ButtonArea flex full margin="4rem 0 0 0">
-              <CopyToClipboard
-                text={`http://www.love-document.com/research/${user.linkId}`}
-                onCopy={onCopyLink}
-              >
-                <RoundButton text="링크복사" />
-              </CopyToClipboard>
-
-              <KakaoShareButton
-                questionLink={`http://www.love-document.com/research/${user.linkId}`}
-              />
-            </ButtonArea>
-          )}
         </InformSection>
       </StyledAirticle>
       <ToastPopup />
+      <Modal />
     </StyledMain>
   )
 }
