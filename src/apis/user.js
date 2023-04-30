@@ -28,3 +28,9 @@ export const postUserOverlap = async ({ nickname }) => {
   })
   return data
 }
+
+// 답변 목록 조회
+export const getUsersAnswers = async () => {
+  const { data } = await instance.get('/users/answers')
+  return data
+}

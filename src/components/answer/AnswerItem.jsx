@@ -1,8 +1,20 @@
 import React, { useRef } from 'react'
 import styled from 'styled-components'
 import { ReactComponent as IconTrashCan } from '../../assets/icon_trash_can.svg'
+import { ReactComponent as IconHeartMatch } from '../../assets/icon_heart_match.svg'
+import { ReactComponent as IconHeartNotMatch } from '../../assets/icon_heart_notmatch.svg'
+import { Link } from 'react-router-dom'
 
-function AnswerItem({ id, nickname, age, address, match, date, onDelete }) {
+function AnswerItem({
+  answerId,
+  nickname,
+  age,
+  live,
+  show,
+  percentage,
+  dateTime,
+  onDelete,
+}) {
   const ref = useRef()
   let downX
 
@@ -28,24 +40,29 @@ function AnswerItem({ id, nickname, age, address, match, date, onDelete }) {
   return (
     <Item>
       <Box onPointerDown={onPointerDown} onPointerUp={onPointerUp} ref={ref}>
-        <Col>
+        <Col as={Link} to={`/home/answers/${answerId}`}>
           <NicknameText>
             <NicknamePinkText>{nickname}</NicknamePinkText>님의 답변
+            <i aria-hidden="true">
+              {show === 'Y' && percentage === 100 && <IconHeartMatch />}
+              {show === 'Y' && percentage !== 100 && <IconHeartNotMatch />}
+            </i>
           </NicknameText>
 
           <InfoParagraph>
             <InfoText>{age}세</InfoText>
             <VerticalLine />
-            <InfoText>{address}</InfoText>
+            <InfoText>{live}</InfoText>
           </InfoParagraph>
         </Col>
-
         <Col alignRight>
-          <MatchText>{match === null ? '??' : match}% 일치</MatchText>
-          <InfoText>{date}</InfoText>
+          <MatchText>{show === 'N' ? '??' : percentage}% 일치</MatchText>
+          <InfoText>
+            {dateTime.substr(5, 2)}월 {dateTime.substr(8, 2)}일
+          </InfoText>
         </Col>
       </Box>
-      <DeleteButton onClick={() => onDelete(id)}>
+      <DeleteButton onClick={() => onDelete(answerId)}>
         <IconTrashCan />
       </DeleteButton>
     </Item>
@@ -53,25 +70,33 @@ function AnswerItem({ id, nickname, age, address, match, date, onDelete }) {
 }
 
 export default AnswerItem
-
 const Item = styled.li`
   display: flex;
   position: relative;
+  background-color: ${(props) => props.theme.pink700};
+  border-radius: 8px;
 `
 
 const Box = styled.div`
-  display: flex;
   width: 100%;
   z-index: 10;
-  justify-content: space-between;
-  align-items: center;
   background-color: ${(props) => props.theme.gray100};
   border: 1px solid ${(props) => props.theme.gray300};
   border-radius: 8px;
-  padding: 2.4rem 2rem;
   user-select: none;
   transition: transform 800ms;
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2.4rem 2rem;
+
+  /* & > a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.4rem 2rem;
+  } */
 `
 
 const DeleteButton = styled.button`
@@ -82,12 +107,9 @@ const DeleteButton = styled.button`
   right: 0;
   height: 99%;
   margin: 0.5px 1px 0.5px 0px;
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
-  background-color: ${(props) => props.theme.pink700};
   border: none;
   min-width: 80px;
-  cursor: pointer;
+  cursor: pointer;/
 `
 
 const Col = styled.div`
@@ -100,6 +122,15 @@ const Col = styled.div`
 
 const NicknameText = styled.span`
   ${(props) => props.theme.fontSize.h4_m}
+
+  i {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 2rem;
+    height: 2rem;
+    margin-left: 0.5rem;
+  }
 `
 
 const NicknamePinkText = styled.span`

@@ -1,30 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
-import { TextArea, Title } from '../components/texts/Texts'
+import { TextArea, Title, TextDesc } from '../components/texts/Texts'
 import { ReactComponent as IconLetter } from '../assets/icon_letter.svg'
 import AnswerItem from '../components/answer/AnswerItem'
-
-const answers = [
-  {
-    id: 1,
-    nickname: '영애',
-    age: 26,
-    address: '서울 강남구',
-    match: 70,
-    date: '2월 7일',
-  },
-  {
-    id: 2,
-    nickname: '본휘',
-    age: 29,
-    address: '서울 강남구',
-    match: null,
-    date: '2월 8일',
-  },
-]
+import NoDataAnswerItem from '../components/answer/NoDataAnswerItem'
+import { useQuery } from 'react-query'
+import { getUsersAnswers } from '../apis'
 
 function AnswersPage() {
+  const { data } = useQuery('usersAnswersList', getUsersAnswers)
+  const dataLength = data?.length || 0
+
   const onDelete = (id) => {}
 
   return (
@@ -38,13 +25,22 @@ function AnswersPage() {
             </i>
             도착한 답변
           </Title>
+          {dataLength === 0 && (
+            <TextDesc>아직 도착한 답변이 없어요 :(</TextDesc>
+          )}
         </TextArea>
 
         <StyledAnswersSection>
           <AnswerList>
-            {answers.map((answer) => (
-              <AnswerItem key={answer.id} {...answer} onDelete={onDelete} />
-            ))}
+            {dataLength === 0 && <NoDataAnswerItem />}
+            {data &&
+              data.map((answer) => (
+                <AnswerItem
+                  key={answer.answerId}
+                  {...answer}
+                  onDelete={onDelete}
+                />
+              ))}
           </AnswerList>
         </StyledAnswersSection>
       </StyledAirticle>

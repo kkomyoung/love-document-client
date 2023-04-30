@@ -14,25 +14,9 @@ import WriteStandard from './WriteStandard'
 import useToastPopup from '../../hooks/useToastPopup'
 import useModal from '../../hooks/useModal'
 import { useNavigate } from 'react-router-dom'
-
-const answers = [
-  {
-    id: 1,
-    nickname: '영애',
-    age: 26,
-    address: '서울 강남구',
-    match: 70,
-    date: '2월 7일',
-  },
-  {
-    id: 2,
-    nickname: '본휘',
-    age: 29,
-    address: '서울 강남구',
-    match: null,
-    date: '2월 8일',
-  },
-]
+import { useQuery } from 'react-query'
+import { getUsersAnswers } from '../../apis'
+import NoDataAnswerItem from '../../components/answer/NoDataAnswerItem'
 
 function ResearchReady() {
   const navigate = useNavigate()
@@ -43,9 +27,11 @@ function ResearchReady() {
   }
 
   const onCopyLink = () => {
-    // TODO 링크 API로 받은 데이터로 변경해야 함. 아래는 예시용 링크
     openToastPopup('설문지링크가 복사되었습니다.')
   }
+
+  const { data } = useQuery('usersAnswersList', getUsersAnswers)
+  const dataLength = data?.length || 0
 
   return (
     <StyledMain>
@@ -109,14 +95,22 @@ function ResearchReady() {
               </i>
               <span>도착한 답변</span>
             </SubTitle>
-            <TextDesc>아직 도착한 답변이 없어요 :(</TextDesc>
+            {dataLength === 0 && (
+              <TextDesc>아직 도착한 답변이 없어요 :(</TextDesc>
+            )}
           </TextArea>
 
-          <AnswerList>
-            {answers.map((answer) => (
-              <AnswerItem key={answer.id} {...answer} onDelete={onDelete} />
-            ))}
-          </AnswerList>
+          <StyledAnswerList>
+            {dataLength === 0 && <NoDataAnswerItem />}
+            {data &&
+              data.map((answer) => (
+                <AnswerItem
+                  key={answer.answerId}
+                  {...answer}
+                  onDelete={onDelete}
+                />
+              ))}
+          </StyledAnswerList>
         </StyledAnswersSection>
       </StyledAirticle>
       <ToastPopup />
@@ -127,7 +121,7 @@ function ResearchReady() {
 
 const StyledMain = styled.main`
   padding-bottom: 4.8rem;
-  padding-bottom: 2rem;
+  padding-bottom: 10rem;
 `
 
 const StyledAirticle = styled.article``
@@ -142,7 +136,7 @@ const StyledShareResearchSection = styled.section`
 `
 const StyledAnswersSection = styled.section``
 
-const AnswerList = styled.ul`
+const StyledAnswerList = styled.ul`
   margin-top: 2.8rem;
   padding: 0px 2rem;
 
