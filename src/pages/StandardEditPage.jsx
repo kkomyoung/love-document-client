@@ -11,7 +11,7 @@ import { useRecoilValue } from 'recoil'
 import { answerAtom } from '../utils/atoms'
 import useToastPopup from '../hooks/useToastPopup'
 import { postIdeal } from '../apis'
-import useQuestionNumber from '../hooks/useQuestionNumber'
+import useQuestion from '../hooks/useQuestion'
 
 function StandardEditPage() {
   const { data: categoryQuestions } = useQuery(
@@ -21,7 +21,7 @@ function StandardEditPage() {
       refetchOnWindowFocus: false,
     }
   )
-  const { totalQuestionLength, getQuestionNumberOffset } = useQuestionNumber(0)
+  const { getQuestionNumberOffset, isNotAllAnswered } = useQuestion(0)
   const answer = useRecoilValue(answerAtom)
   const { openToastPopup, ToastPopup } = useToastPopup()
   const navigate = useNavigate()
@@ -40,8 +40,9 @@ function StandardEditPage() {
     if (isLoading) return
     if (!categoryQuestions && !answer) return
 
-    if (totalQuestionLength !== answer.answerList.length) {
+    if (isNotAllAnswered('ideal', answer)) {
       openToastPopup('아직 응답하지 않은 항목이 있어요.')
+      return
     }
 
     console.log(answer)
