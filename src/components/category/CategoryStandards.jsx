@@ -5,11 +5,11 @@ const CategoryStandards = ({ items }) => {
   return (
     <StyledItems>
       {items.map((item) => (
-        <li key={item.id}>
+        <li key={item.categoryTitle}>
           <StyledItemLabel>
-            <span>{item.title}</span>
+            <span>{item.categoryTitle}</span>
           </StyledItemLabel>
-          <p>170 이상 180 이하를 원해요</p>
+          <p>{item.ideal}</p>
         </li>
       ))}
     </StyledItems>

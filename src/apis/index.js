@@ -1,6 +1,6 @@
 import { login, register, getUserInfo, postUserOverlap } from './user'
-import { getCategories, postQuestions } from './category'
-import { postIdeals } from './ideal'
+import { getCategories, postQuestions, getUsersCategories } from './category'
+import { postIdeals, getIdeals } from './ideal'
 
 export {
   // User
@@ -12,7 +12,9 @@ export {
   // Category
   getCategories,
   postQuestions,
+  getUsersCategories,
 
   // Ideal
   postIdeals,
+  getIdeals,
 }

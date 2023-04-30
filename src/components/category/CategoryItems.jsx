@@ -5,8 +5,8 @@ const CategoryItems = ({ items }) => {
   return (
     <StyledItems>
       {items.map((item) => (
-        <li key={item.id}>
-          <span>{item.title}</span>
+        <li key={item}>
+          <span>{item}</span>
         </li>
       ))}
     </StyledItems>

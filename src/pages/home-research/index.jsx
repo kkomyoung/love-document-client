@@ -11,10 +11,6 @@ import useToastPopup from '../../hooks/useToastPopup'
 const HomeRearch = () => {
   const { openToastPopup, ToastPopup } = useToastPopup()
 
-  const onCopyLink = () => {
-    openToastPopup('설문지링크가 복사되었습니다.')
-  }
-
   return (
     <StyledMain>
       <Header title="질문지 준비 완료" btnBack btnHome />
@@ -28,11 +24,13 @@ const HomeRearch = () => {
           </Title>
         </TextArea>
         <StyledResearchBoxSection>
-          <ShareResearchBox onCopyLink={onCopyLink} />
+          <ShareResearchBox
+            onCopyLink={() => openToastPopup('설문지링크가 복사되었습니다.')}
+          />
         </StyledResearchBoxSection>
 
-        <MyCategories />
-        <MyStandards />
+        <MyCategories openToastPopup={openToastPopup} />
+        <MyStandards openToastPopup={openToastPopup} />
       </article>
       <ToastPopup />
     </StyledMain>
