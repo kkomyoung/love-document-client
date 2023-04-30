@@ -20,7 +20,7 @@ const Setting = () => {
     btnConfirm: {
       text: '네',
       fn: () => {
-        console.log('로그아웃')
+        // console.log('로그아웃')
         navigate('/')
       },
     },

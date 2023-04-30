@@ -44,7 +44,7 @@ function Router() {
           element={<StandardComplete />}
         />
         <Route
-          path="/research/question/answer/complete"
+          path="/research/:questionId/answer/complete"
           element={<AnswerComplete />}
         />
         <Route path="/home/answers" element={<AnswersPage />} />

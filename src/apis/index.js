@@ -25,3 +25,4 @@ export {
   postIdeals,
   getIdeals,
 }
+
