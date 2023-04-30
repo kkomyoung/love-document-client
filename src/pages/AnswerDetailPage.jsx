@@ -9,33 +9,31 @@ import CategoryLabel from '../components/category/CategoryLabel'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 // import { ReactComponent as HeartPuzzleIcon } from '../assets/icon_heart_puzzle.svg'
 import useUser from '../hooks/useUser'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
-import KakaoShareButton from '../components/buttons/KakaoShareButton'
 import useToastPopup from '../hooks/useToastPopup'
 import useModal from '../hooks/useModal'
 
 const AnswerDetailPage = () => {
   const { user } = useUser()
   const { openToastPopup, ToastPopup } = useToastPopup()
-  const { Modal, openModal } = useModal()
+  const { Modal, openModal, closeModal } = useModal()
 
   const createModalData = (isAccept) => {
-    return {
+    const modelData = {
       type: 'share',
-      title: isAccept ? '소개팅 할게요' : '탈퇴하기',
+      title: isAccept ? '소개팅 할게요!' : '다른 좋은 인연이 있겠죠',
       desc: '주선자에게 의사를 전달해보세요',
+      researchURL: `http://www.love-document.com/research/${user.linkId}`,
+      thumbnailURL: isAccept
+        ? 'https://firebasestorage.googleapis.com/v0/b/love-document.appspot.com/o/love-document-accept.png?alt=media&token=7c6e16e4-b7b2-4b7b-8793-f07751f6d60e'
+        : 'https://firebasestorage.googleapis.com/v0/b/love-document.appspot.com/o/love-document-reject.png?alt=media&token=847386bd-25fd-4c16-b5e6-f08257b546f2',
       btnCancel: {
-        text: '내용 복사',
-      },
-      btnConfirm: {
-        text: '카톡공유',
-        fn: () => {},
+        fn: () => {
+          openToastPopup('설문지 링크가 복사되었어요')
+          closeModal()
+        },
       },
     }
-  }
-
-  const onCopyLink = () => {
-    openToastPopup('설문지링크가 복사되었습니다.')
+    return modelData
   }
 
   return (
@@ -142,27 +140,12 @@ const AnswerDetailPage = () => {
             />
 
             <RoundButton
-              text="소개팅 할게요"
-              color="pink"
+              text="소개팅 할게요!"
+              color="white"
               border="true"
               onClick={() => openModal(createModalData(true))}
             />
           </ButtonArea>
-
-          {user && (
-            <ButtonArea flex full margin="4rem 0 0 0">
-              <CopyToClipboard
-                text={`http://www.love-document.com/research/${user.linkId}`}
-                onCopy={onCopyLink}
-              >
-                <RoundButton text="링크복사" />
-              </CopyToClipboard>
-
-              <KakaoShareButton
-                questionLink={`http://www.love-document.com/research/${user.linkId}`}
-              />
-            </ButtonArea>
-          )}
         </InformSection>
       </StyledAirticle>
       <ToastPopup />
