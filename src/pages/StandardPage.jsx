@@ -26,9 +26,8 @@ function StandardPage() {
   const { openToastPopup, ToastPopup } = useToastPopup()
   const navigate = useNavigate()
 
-  const { mutate: writeIdeals, isLoading } = useMutation(postIdeal, {
+  const { mutate: writeIdeal, isLoading } = useMutation(postIdeal, {
     onSuccess: (data) => {
-      console.log(data)
       navigate('/research/standard/complete')
     },
     onError: () => {
@@ -44,8 +43,7 @@ function StandardPage() {
       openToastPopup('아직 응답하지 않은 항목이 있어요.')
       return
     }
-
-    writeIdeals({ idealList: answer.answerList })
+    writeIdeal({ idealList: answer.answerList })
   }
 
   return (

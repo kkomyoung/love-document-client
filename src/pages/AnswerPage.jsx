@@ -62,11 +62,8 @@ function AnswerPage() {
       refetchOnWindowFocus: false,
     }
   )
-
-  // eslint-disable-next-line no-unused-vars
   const { mutate: writeAnswer, isLoading } = useMutation(postAnswer, {
     onSuccess: (data) => {
-      console.log(data)
       navigate(`/research/${params.questionId}/answer/complete`)
     },
     onError: () => {
@@ -75,14 +72,13 @@ function AnswerPage() {
   })
 
   const onSaveButtonClick = () => {
-    console.log(answer)
     if (isLoading) return
     if (!params.questionId && !categoryQuestions && !answer) return
     if (isNotAllAnswered('answer', answer)) {
       openToastPopup('아직 응답하지 않은 항목이 있어요.')
-      // return
+      return
     }
-    // writeAnswer({ ...answer, questionId: +params.questionId })
+    writeAnswer({ ...answer, questionId: +params.questionId })
   }
 
   return (
