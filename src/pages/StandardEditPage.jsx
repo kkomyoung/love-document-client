@@ -10,7 +10,7 @@ import { getQuestionsOfQuestioner } from '../apis/question'
 import { useRecoilValue } from 'recoil'
 import { answerAtom } from '../utils/atoms'
 import useToastPopup from '../hooks/useToastPopup'
-import { postIdeals } from '../apis'
+import { postIdeal } from '../apis'
 import useQuestionNumber from '../hooks/useQuestionNumber'
 
 function StandardEditPage() {
@@ -26,7 +26,7 @@ function StandardEditPage() {
   const { openToastPopup, ToastPopup } = useToastPopup()
   const navigate = useNavigate()
 
-  const { mutate: writeIdeals, isLoading } = useMutation(postIdeals, {
+  const { mutate: writeIdeals, isLoading } = useMutation(postIdeal, {
     onSuccess: (data) => {
       console.log(data)
       navigate('/research/standard/complete')
