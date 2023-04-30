@@ -9,7 +9,7 @@ import { useQuery } from 'react-query'
 
 const MyStandards = ({ openToastPopup }) => {
   const { data } = useQuery('userIdeals', getIdeals)
-  console.log(data)
+  // console.log(data)
 
   return (
     <>
