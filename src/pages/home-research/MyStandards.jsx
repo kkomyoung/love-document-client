@@ -6,13 +6,18 @@ import CategoryStandards from '../../components/category/CategoryStandards'
 // import { Link } from 'react-router-dom'
 import { getIdeals } from '../../apis'
 import { useQuery } from 'react-query'
+import WriteStandard from '../research-ready/WriteStandard'
 
 const MyStandards = ({ openToastPopup }) => {
   const { data } = useQuery('userIdeals', getIdeals)
-  console.log(data)
 
   return (
     <>
+      {!data && (
+        <StyledWriteSection>
+          <WriteStandard />
+        </StyledWriteSection>
+      )}
       {data && (
         <StyledSection>
           <div className="innerBox">
@@ -44,6 +49,10 @@ const MyStandards = ({ openToastPopup }) => {
   )
 }
 
+const StyledWriteSection = styled.section`
+  margin-top: 2.8rem;
+`
+
 const StyledSection = styled.section`
   padding: 0 2rem;
   margin-top: 2.8rem;
@@ -52,27 +61,27 @@ const StyledSection = styled.section`
     padding: 2rem 2rem 1rem;
     border-radius: 0.8rem;
     background: ${(props) => props.theme.gray100};
-  }
 
-  .boxHead {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2.3rem;
-  }
+    .boxHead {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2.3rem;
+    }
 
-  h4 {
-    ${(props) => props.theme.fontSize.h4_sb};
-  }
+    h4 {
+      ${(props) => props.theme.fontSize.h4_sb};
+    }
 
-  a,
-  button {
-    padding: 0.7rem;
-    ${(props) => props.theme.fontSize.label_s_m};
-    color: ${(props) => props.theme.gray700};
+    a,
+    button {
+      padding: 0.7rem;
+      ${(props) => props.theme.fontSize.label_s_m};
+      color: ${(props) => props.theme.gray700};
 
-    i {
-      margin-right: 0.6rem;
+      i {
+        margin-right: 0.6rem;
+      }
     }
   }
 `
