@@ -5,8 +5,10 @@ import {
   postUserOverlap,
   getUsersAnswers,
 } from './user'
+import { postAnswer } from './answer'
+import { getQuestionsOfQuestioner, getQuestionsOfAnswerer } from './question'
 import { getCategories, postQuestions, getUsersCategories } from './category'
-import { postIdeals, getIdeals } from './ideal'
+import { postIdeal, getIdeals } from './ideal'
 
 export {
   // User
@@ -21,8 +23,14 @@ export {
   postQuestions,
   getUsersCategories,
 
-  // Ideal
-  postIdeals,
-  getIdeals,
-}
+  // Question
+  getQuestionsOfQuestioner,
+  getQuestionsOfAnswerer,
 
+  // Ideal
+  postIdeal,
+  getIdeals,
+
+  // Answer,
+  postAnswer,
+}
