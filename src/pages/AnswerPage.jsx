@@ -55,7 +55,6 @@ function AnswerPage() {
   const answer = useRecoilValue(answerAtom)
   const { openToastPopup, ToastPopup } = useToastPopup()
   const { getQuestionNumberOffset, isNotAllAnswered } = useQuestion(0)
-
   const { data: categoryQuestions } = useQuery(
     'questions',
     () => getQuestionsOfAnswerer(params.questionId),
