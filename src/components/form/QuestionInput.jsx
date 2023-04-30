@@ -4,24 +4,60 @@ import { ReactComponent as IconUser } from '../../assets/icon_user.svg'
 import { useForm } from 'react-hook-form'
 import { useSetRecoilState } from 'recoil'
 import { answerAtom } from '../../utils/atoms'
+import { QUESTION_TYPE } from '../../utils/constants'
 
-function QuestionInput({ name, type, placeholder }) {
+function QuestionInput({ questionId, name, type, placeholder }) {
   const { register, watch } = useForm()
   const setAnswer = useSetRecoilState(answerAtom)
-  const textWatcher = watch(name)
+  const inputWatcher = watch(name)
 
   useEffect(() => {
-    if (textWatcher && textWatcher.length > 0) {
+    if (inputWatcher && inputWatcher.length > 0) {
       if (
         name === 'nickname' ||
         name === 'age' ||
         name === 'live' ||
         name === 'work'
       ) {
-        setAnswer((prev) => ({ ...prev, [name]: textWatcher }))
+        setAnswer((prev) => ({ ...prev, [name]: inputWatcher }))
+      } else {
+        setAnswer((prev) => ({
+          ...prev,
+          answerList: [
+            ...prev.answerList.filter(
+              (answer) => answer.categoryItemId !== questionId
+            ),
+            {
+              categoryItemId: questionId,
+              questionType: QUESTION_TYPE.INPUT,
+              rangeList: [+inputWatcher],
+              yn: null,
+              score: null,
+              choiceIdList: null,
+            },
+          ],
+        }))
+      }
+    } else {
+      if (
+        name === 'nickname' ||
+        name === 'age' ||
+        name === 'live' ||
+        name === 'work'
+      ) {
+        setAnswer((prev) => ({ ...prev, [name]: null }))
+      } else {
+        setAnswer((prev) => ({
+          ...prev,
+          answerList: [
+            ...prev.answerList.filter(
+              (answer) => answer.categoryItemId !== questionId
+            ),
+          ],
+        }))
       }
     }
-  }, [textWatcher])
+  }, [inputWatcher])
 
   return (
     <Box>

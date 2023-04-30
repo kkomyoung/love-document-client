@@ -137,7 +137,12 @@ function QuestionItem({ questionNumber, question }) {
       </TitleBox>
 
       {type === 'INPUT' && (
-        <QuestionInput name={name} type="text" placeholder={placeholder} />
+        <QuestionInput
+          questionId={id}
+          name={name || `input${id}`}
+          type="text"
+          placeholder={placeholder}
+        />
       )}
 
       {type === QUESTION_TYPE.CHOICE && (
