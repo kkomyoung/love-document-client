@@ -12,11 +12,27 @@ import useUser from '../hooks/useUser'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import KakaoShareButton from '../components/buttons/KakaoShareButton'
 import useToastPopup from '../hooks/useToastPopup'
+import useModal from '../hooks/useModal'
 
 const AnswerDetailPage = () => {
   const { user } = useUser()
-
   const { openToastPopup, ToastPopup } = useToastPopup()
+  const { Modal, openModal } = useModal()
+
+  const createModalData = (isAccept) => {
+    return {
+      type: 'share',
+      title: isAccept ? '소개팅 할게요' : '탈퇴하기',
+      desc: '주선자에게 의사를 전달해보세요',
+      btnCancel: {
+        text: '내용 복사',
+      },
+      btnConfirm: {
+        text: '카톡공유',
+        fn: () => {},
+      },
+    }
+  }
 
   const onCopyLink = () => {
     openToastPopup('설문지링크가 복사되었습니다.')
@@ -122,9 +138,15 @@ const AnswerDetailPage = () => {
               text="다른 좋은 인연이 있겠죠"
               color="white"
               border="true"
+              onClick={() => openModal(createModalData(false))}
             />
 
-            <RoundButton text="소개팅 할게요" color="pink" border="true" />
+            <RoundButton
+              text="소개팅 할게요"
+              color="pink"
+              border="true"
+              onClick={() => openModal(createModalData(true))}
+            />
           </ButtonArea>
 
           {user && (
@@ -144,6 +166,7 @@ const AnswerDetailPage = () => {
         </InformSection>
       </StyledAirticle>
       <ToastPopup />
+      <Modal />
     </StyledMain>
   )
 }

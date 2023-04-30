@@ -3,7 +3,10 @@ import { RoundButton } from './Buttons'
 import { ReactComponent as IconKakaoLogo } from '../../assets/icon_logo_kakao.svg'
 
 // TODO 주요 기능들 완성시켜놓고, 메타데이터 다듬기 (일단 링크 공유 기능만 완성)
-const KakaoShareButton = ({ questionLink }) => {
+const KakaoShareButton = ({
+  researchURL,
+  thumbnailURL = 'https://firebasestorage.googleapis.com/v0/b/love-document.appspot.com/o/love-document.png?alt=media&token=a9922bcf-1c8a-46d4-a054-2e0e07e4a296',
+}) => {
   const shareQuestion = () => {
     if (window.Kakao) {
       const kakao = window.Kakao
@@ -17,16 +20,15 @@ const KakaoShareButton = ({ questionLink }) => {
           title: '두근-두근, 연애서류합',
           description:
             '소개팅 상대가 내 기준에 얼마나 부합할까? 내 연애 서류를 만들고 답변을 받아봐요',
-          imageUrl:
-            'https://firebasestorage.googleapis.com/v0/b/love-document.appspot.com/o/love-document-accept.png?alt=media&token=7c6e16e4-b7b2-4b7b-8793-f07751f6d60e',
+          imageUrl: thumbnailURL,
           link: {
-            mobileWebUrl: questionLink,
-            webUrl: questionLink,
+            mobileWebUrl: researchURL,
+            webUrl: researchURL,
           },
         },
       })
     } else {
-      console.err('Kakao SDK is not loaded')
+      console.error('Kakao SDK is not loaded')
     }
   }
 

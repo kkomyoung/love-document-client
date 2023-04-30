@@ -36,6 +36,7 @@ function StandardPage() {
   })
 
   const onConfirmButtonClick = () => {
+    console.log(answer)
     if (isLoading) return
     if (!categoryQuestions && !answer) return
 
