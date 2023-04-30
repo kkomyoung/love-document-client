@@ -1,6 +1,13 @@
 import { atom } from 'recoil'
 
-export const answersAtom = atom({
-  key: 'answers',
-  default: [],
+export const answerAtom = atom({
+  key: 'answer',
+  default: {
+    questionId: null,
+    nickname: null,
+    age: null,
+    work: null,
+    live: null,
+    answerList: [],
+  },
 })

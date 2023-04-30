@@ -2,11 +2,11 @@ import React, { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
 import { useSetRecoilState } from 'recoil'
-import { answersAtom } from '../../utils/atoms'
+import { answerAtom } from '../../utils/atoms'
 
 function RangeInputGroup({ questionId, questionType }) {
   const { register, watch } = useForm()
-  const setAnswers = useSetRecoilState(answersAtom)
+  const setAnswer = useSetRecoilState(answerAtom)
   const minimum = watch('minimum')
   const maximum = watch('maximum')
 
@@ -18,17 +18,22 @@ function RangeInputGroup({ questionId, questionType }) {
 
   useEffect(() => {
     if (minimum && minimum.length > 0 && maximum && maximum.length > 0) {
-      setAnswers((prev) => [
-        ...prev.filter((answer) => answer.categoryItemId !== questionId),
-        {
-          categoryItemId: questionId,
-          questionType,
-          rangeList: [+minimum, +maximum],
-          yn: null,
-          score: null,
-          choiceIdList: null,
-        },
-      ])
+      setAnswer((prev) => ({
+        ...prev,
+        answerList: [
+          ...prev.answerList.filter(
+            (answer) => answer.categoryItemId !== questionId
+          ),
+          {
+            categoryItemId: questionId,
+            questionType,
+            rangeList: [+minimum, +maximum],
+            yn: null,
+            score: null,
+            choiceIdList: null,
+          },
+        ],
+      }))
     }
   }, [minimum, maximum])
 

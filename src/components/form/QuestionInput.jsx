@@ -1,8 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { ReactComponent as IconUser } from '../../assets/icon_user.svg'
+import { useForm } from 'react-hook-form'
+import { useSetRecoilState } from 'recoil'
+import { answerAtom } from '../../utils/atoms'
 
-function QuestionInput({ type, placeholder }) {
+function QuestionInput({ name, type, placeholder }) {
+  const { register, watch } = useForm()
+  const setAnswer = useSetRecoilState(answerAtom)
+  const textWatcher = watch(name)
+
+  useEffect(() => {
+    if (textWatcher && textWatcher.length > 0) {
+      if (
+        name === 'nickname' ||
+        name === 'age' ||
+        name === 'live' ||
+        name === 'work'
+      ) {
+        setAnswer((prev) => ({ ...prev, [name]: textWatcher }))
+      }
+    }
+  }, [textWatcher])
+
   return (
     <Box>
       {placeholder === '닉네임' && (
@@ -10,7 +30,7 @@ function QuestionInput({ type, placeholder }) {
           <IconUser />
         </i>
       )}
-      <input type={type} placeholder={placeholder} />
+      <input {...register(name)} type={type} placeholder={placeholder} />
     </Box>
   )
 }

@@ -2,20 +2,20 @@ import React from 'react'
 import styled from 'styled-components'
 import ExampleButton from './ExampleButton'
 import { useRecoilState } from 'recoil'
-import { answersAtom } from '../../utils/atoms'
+import { answerAtom } from '../../utils/atoms'
 
 function ChoiceInputGroup({ questionId, questionType, multiple, examples }) {
-  const [answers, setAnswers] = useRecoilState(answersAtom)
+  const [answer, setAnswer] = useRecoilState(answerAtom)
   const onChoiceButtonClick = (exampleId) => {
     let choices = [exampleId]
 
     // 복수선택일 때만 로직 실행
     if (multiple === 'Y') {
-      const answer = answers.find(
+      const existAnswer = answer.answerList.find(
         (answer) => answer.categoryItemId === questionId
       )
 
-      choices = answer ? [...answer.choiceIdList] : []
+      choices = existAnswer ? [...existAnswer.choiceIdList] : []
       const choiceIndex = choices.indexOf(exampleId)
       if (choiceIndex < 0) {
         choices.push(exampleId)
@@ -24,17 +24,22 @@ function ChoiceInputGroup({ questionId, questionType, multiple, examples }) {
       }
     }
 
-    setAnswers((prev) => [
-      ...prev.filter((answer) => answer.categoryItemId !== questionId),
-      {
-        categoryItemId: questionId,
-        questionType,
-        choiceIdList: choices,
-        score: null,
-        rangeList: null,
-        yn: null,
-      },
-    ])
+    setAnswer((prev) => ({
+      ...prev,
+      answerList: [
+        ...prev.answerList.filter(
+          (answer) => answer.categoryItemId !== questionId
+        ),
+        {
+          categoryItemId: questionId,
+          questionType,
+          choiceIdList: choices,
+          score: null,
+          rangeList: null,
+          yn: null,
+        },
+      ],
+    }))
   }
 
   return (

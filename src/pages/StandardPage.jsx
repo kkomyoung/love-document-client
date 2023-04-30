@@ -8,7 +8,7 @@ import { RoundButton, ButtonArea } from '../components/buttons/Buttons'
 import { useQuery, useMutation } from 'react-query'
 import { getQuestionsOfQuestioner } from '../apis/question'
 import { useRecoilValue } from 'recoil'
-import { answersAtom } from '../utils/atoms'
+import { answerAtom } from '../utils/atoms'
 import useToastPopup from '../hooks/useToastPopup'
 import { postIdeals } from '../apis'
 import useQuestionNumber from '../hooks/useQuestionNumber'
@@ -22,7 +22,7 @@ function StandardPage() {
     }
   )
   const { totalQuestionLength, getQuestionNumberOffset } = useQuestionNumber(0)
-  const answers = useRecoilValue(answersAtom)
+  const answer = useRecoilValue(answerAtom)
   const { openToastPopup, ToastPopup } = useToastPopup()
   const navigate = useNavigate()
 
@@ -38,14 +38,13 @@ function StandardPage() {
 
   const onConfirmButtonClick = () => {
     if (isLoading) return
-    if (!categoryQuestions && !answers) return
+    if (!categoryQuestions && !answer) return
 
-    if (totalQuestionLength !== answers.length) {
+    if (totalQuestionLength !== answer.answerList.length) {
       openToastPopup('아직 응답하지 않은 항목이 있어요.')
     }
 
-    console.log(answers)
-    writeIdeals({ idealList: answers })
+    writeIdeals({ idealList: answer.answerList })
   }
 
   return (

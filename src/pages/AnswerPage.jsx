@@ -9,30 +9,37 @@ import { getQuestionsOfAnswerer } from '../apis/question'
 import { useQuery } from 'react-query'
 import useQuestionNumber from '../hooks/useQuestionNumber'
 import { QUESTION_TYPE } from '../utils/constants'
+import { useParams } from 'react-router-dom'
+import { useRecoilValue } from 'recoil'
+import { answerAtom } from '../utils/atoms'
 
 const defaultCategoryQuestions = {
   categoryTitle: '기본 정보',
   categoryItemInfoList: [
     {
       id: 0,
+      name: 'nickname',
       type: QUESTION_TYPE.INPUT,
       question: '닉네임을 입력해주세요',
       placeholder: '닉네임',
     },
     {
       id: 0,
+      name: 'age',
       type: QUESTION_TYPE.INPUT,
       question: '나이가 어떻게 되시나요?',
       placeholder: '18',
     },
     {
       id: 0,
+      name: 'live',
       type: QUESTION_TYPE.INPUT,
       question: '어느 지역에 사시나요?',
       placeholder: 'ex. 서울 성동구',
     },
     {
       id: 0,
+      name: 'work',
       type: QUESTION_TYPE.INPUT,
       question: '무슨 일을 하시나요?',
       placeholder: 'ex. 시각디자인과 대학생',
@@ -41,14 +48,20 @@ const defaultCategoryQuestions = {
 }
 
 function AnswerPage() {
+  const params = useParams()
+  const answer = useRecoilValue(answerAtom)
   const { data: categoryQuestions } = useQuery(
     'questions',
-    getQuestionsOfAnswerer,
+    () => getQuestionsOfAnswerer(params.questionId),
     {
       refetchOnWindowFocus: false,
     }
   )
   const { getQuestionNumberOffset } = useQuestionNumber(0)
+
+  const onSaveButtonClick = () => {
+    console.log(answer)
+  }
 
   return (
     <StyledMain>
@@ -92,7 +105,7 @@ function AnswerPage() {
         </StyledSectionQuestion>
 
         <ButtonArea margin="10rem 0rem 0rem 0rem">
-          <RoundButton size="large" text="저장" />
+          <RoundButton size="large" text="저장" onClick={onSaveButtonClick} />
         </ButtonArea>
       </StyledAirticle>
     </StyledMain>

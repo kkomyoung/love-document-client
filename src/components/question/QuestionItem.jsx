@@ -112,6 +112,7 @@ const categoryItemInfoList = [
 function QuestionItem({ questionNumber, question }) {
   const {
     id,
+    name,
     question: title,
     exampleList: examples,
     type,
@@ -136,7 +137,7 @@ function QuestionItem({ questionNumber, question }) {
       </TitleBox>
 
       {type === 'INPUT' && (
-        <QuestionInput type="text" placeholder={placeholder} />
+        <QuestionInput name={name} type="text" placeholder={placeholder} />
       )}
 
       {type === QUESTION_TYPE.CHOICE && (

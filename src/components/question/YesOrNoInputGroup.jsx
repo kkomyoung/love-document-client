@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import ExampleButton from './ExampleButton'
 import { useSetRecoilState } from 'recoil'
-import { answersAtom } from '../../utils/atoms'
+import { answerAtom } from '../../utils/atoms'
 
 function YesOrNoInputGroup({
   questionId,
@@ -10,19 +10,24 @@ function YesOrNoInputGroup({
   positiveLabel,
   negativeLabel,
 }) {
-  const setAnswers = useSetRecoilState(answersAtom)
+  const setAnswer = useSetRecoilState(answerAtom)
   const onYesOrNotButtonClick = (yn) => {
-    setAnswers((prev) => [
-      ...prev.filter((answer) => answer.categoryItemId !== questionId),
-      {
-        categoryItemId: questionId,
-        questionType,
-        yn,
-        score: null,
-        choiceIdList: null,
-        rangeList: null,
-      },
-    ])
+    setAnswer((prev) => ({
+      ...prev,
+      answerList: [
+        ...prev.answerList.filter(
+          (answer) => answer.categoryItemId !== questionId
+        ),
+        {
+          categoryItemId: questionId,
+          questionType,
+          yn,
+          score: null,
+          choiceIdList: null,
+          rangeList: null,
+        },
+      ],
+    }))
   }
 
   return (
