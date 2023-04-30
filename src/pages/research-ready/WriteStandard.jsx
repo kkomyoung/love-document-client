@@ -36,7 +36,7 @@ function WriteStandard() {
 export default WriteStandard
 
 const Container = styled.section`
-  padding: 0.5rem 2rem 2.4rem 2rem;
+  padding: 0 2rem 2.4rem 2rem;
 `
 
 const Box = styled.div`

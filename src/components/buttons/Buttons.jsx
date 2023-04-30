@@ -77,6 +77,8 @@ const StyledTextButton = styled.button`
 const RoundButton = ({
   as,
   to,
+  href,
+  target,
   onClick,
   size,
   color,
@@ -90,6 +92,8 @@ const RoundButton = ({
     <StyledRoundButton
       as={as}
       to={to}
+      href={href}
+      target={target}
       onClick={onClick}
       size={size}
       color={color}

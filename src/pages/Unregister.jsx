@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Header from '../components/header/Header'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import { TextArea, Title, TextDesc } from '../components/texts/Texts'
-import InputText from '../components/question/QuestionInput'
+import QuestionInput from '../components/question/QuestionInput'
 import ExampleButton from '../components/question/ExampleButton'
 import { useNavigate } from 'react-router-dom'
 import useModal from '../hooks/useModal'
@@ -44,24 +44,26 @@ const Unregister = () => {
             <StyledBox>
               <ExampleButton
                 name="unregister"
-                multiChoice="N"
-                id="unregister_01"
+                exampleId="unregister_01"
                 content="생각했던 서비스가 아니에요"
               />
               <ExampleButton
                 name="unregister"
-                multiChoice="N"
-                id="unregister_02"
+                exampleId="unregister_02"
                 content="삭제하고 싶은 내용이 있어요"
               />
               <ExampleButton
                 name="unregister"
-                multiChoice="N"
-                id="unregister_03"
+                exampleId="unregister_03"
                 content="더 이상 사용하지 않아요"
               />
             </StyledBox>
-            <InputText type="text" placeholder="기타 사유를 알려주세요" />
+            <QuestionInput
+              questionId="unregisterQ"
+              name="기타 사유"
+              type="text"
+              placeholder="기타 사유를 알려주세요"
+            />
           </div>
         </StyledMenuWrap>
         <ButtonArea margin="10rem 0 0 0">

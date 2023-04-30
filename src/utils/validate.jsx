@@ -58,6 +58,10 @@ const validateNickname = async (
 const validatePassword = (value, setError, setErrorMessage) => {
   let error = false
 
+  // 특수문자와 공백 제외
+  // eslint-disable-next-line no-useless-escape
+  const regExp = /\s/g
+
   if (value === '') {
     setError(true)
     setErrorMessage('비밀번호를 입력해주세요')
@@ -65,6 +69,10 @@ const validatePassword = (value, setError, setErrorMessage) => {
   } else if (value.length < 4 || value.length > 20) {
     setError(true)
     setErrorMessage('1~10자 이내로 입력해주세요')
+    error = true
+  } else if (regExp.test(value)) {
+    setError(true)
+    setErrorMessage('공백을 제거해주세요')
     error = true
   } else {
     setError(false)
