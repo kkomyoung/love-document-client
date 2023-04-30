@@ -19,7 +19,7 @@ function NoDataAnswerItem() {
 
         <Col alignRight>
           <MatchText>??% 일치</MatchText>
-          <InfoText>2월 7일</InfoText>
+          <InfoText>2월 9일</InfoText>
         </Col>
       </Box>
     </Item>
