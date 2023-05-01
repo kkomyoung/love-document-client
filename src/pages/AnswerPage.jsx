@@ -14,6 +14,7 @@ import { useRecoilValue } from 'recoil'
 import { answerAtom } from '../utils/atoms'
 import { postAnswer } from '../apis'
 import useToastPopup from '../hooks/useToastPopup'
+import Loading from '../components/loading/Loading'
 
 const defaultCategoryQuestions = {
   categoryTitle: '기본 정보',
@@ -55,24 +56,24 @@ function AnswerPage() {
   const answer = useRecoilValue(answerAtom)
   const { openToastPopup, ToastPopup } = useToastPopup()
   const { getQuestionNumberOffset, isNotAllAnswered } = useQuestion(0)
-  const { data: categoryQuestions } = useQuery(
-    'questions',
-    () => getQuestionsOfAnswerer(params.questionId),
-    {
+  const { data: categoryQuestions, isLoading: isGetQuestionsLoading } =
+    useQuery('questions', () => getQuestionsOfAnswerer(params.questionId), {
       refetchOnWindowFocus: false,
+    })
+  const { mutate: writeAnswer, isLoading: isWriteAnswerLoading } = useMutation(
+    postAnswer,
+    {
+      onSuccess: (data) => {
+        navigate(`/research/${params.questionId}/answer/complete`)
+      },
+      onError: () => {
+        openToastPopup('답변하기에 실패했어요.')
+      },
     }
   )
-  const { mutate: writeAnswer, isLoading } = useMutation(postAnswer, {
-    onSuccess: (data) => {
-      navigate(`/research/${params.questionId}/answer/complete`)
-    },
-    onError: () => {
-      openToastPopup('답변하기에 실패했어요.')
-    },
-  })
 
   const onSaveButtonClick = () => {
-    if (isLoading) return
+    if (isWriteAnswerLoading) return
     if (!params.questionId && !categoryQuestions && !answer) return
     if (isNotAllAnswered('answer', answer)) {
       openToastPopup('아직 응답하지 않은 항목이 있어요.')
@@ -83,6 +84,11 @@ function AnswerPage() {
 
   return (
     <StyledMain>
+      {(isWriteAnswerLoading || isGetQuestionsLoading) && (
+        <Loading
+          text={isGetQuestionsLoading ? '질문지 불러오는 중' : '답변 저장 중'}
+        />
+      )}
       <Header title="답변하기" btnBack />
       <StyledAirticle>
         <TextArea>
