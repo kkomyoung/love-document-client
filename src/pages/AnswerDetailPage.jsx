@@ -51,7 +51,7 @@ const AnswerDetailPage = () => {
   const removeAnswerModalData = {
     type: 'alert',
     title: '답변 삭제',
-    desc: `${data.nickname}남의 답변을 삭제하시겠어요?`,
+    desc: '답변을 삭제하시겠어요?',
     btnCancel: {
       text: '아니요',
       fn: () => {
