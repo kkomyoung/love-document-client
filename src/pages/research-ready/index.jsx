@@ -22,9 +22,10 @@ import Loading from '../../components/loading/Loading'
 function ResearchReady() {
   const navigate = useNavigate()
   const { Modal, openModal } = useModal()
+  const { openToastPopup, ToastPopup } = useToastPopup()
+
   const { data, refetch } = useQuery('usersAnswersList', getUsersAnswers)
   const dataLength = data?.length || 0
-  const { openToastPopup, ToastPopup } = useToastPopup()
 
   const { mutate: removeAnswer, isLoading } = useMutation(deleteAnswer, {
     onSuccess: (data) => {
@@ -40,6 +41,7 @@ function ResearchReady() {
   const onCopyURL = () => {
     openToastPopup('설문지링크가 복사되었습니다.')
   }
+
   return (
     <StyledMain>
       {isLoading && <Loading text="답변 삭제 중" />}

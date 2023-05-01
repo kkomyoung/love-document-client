@@ -13,14 +13,15 @@ import useUser from '../hooks/useUser'
 import useToastPopup from '../hooks/useToastPopup'
 import useModal from '../hooks/useModal'
 import { THUMBNAIL_URL } from '../utils/constants'
-import { useQuery } from 'react-query'
-import { getAnswerDetail } from '../apis'
-import { useParams } from 'react-router-dom'
+import { useMutation, useQuery } from 'react-query'
+import { deleteAnswer, getAnswerDetail } from '../apis'
+import { useNavigate, useParams } from 'react-router-dom'
 import Loading from '../components/loading/Loading'
 
 const AnswerDetailPage = () => {
   const params = useParams()
-  const { data, isLoading } = useQuery(
+  const navigate = useNavigate()
+  const { data, isLoading: isGetAnswerDetailLoading } = useQuery(
     'answer-detail',
     () => getAnswerDetail(params.answerId),
     {
@@ -47,12 +48,32 @@ const AnswerDetailPage = () => {
     return modelData
   }
 
+  const { mutate: removeAnswer, isLoading: isRemoveAnswerLoading } =
+    useMutation(deleteAnswer, {
+      onSuccess: (data) => {
+        navigate(-1)
+      },
+      onError: () => {
+        openToastPopup('답변삭제를 실패했어요')
+      },
+    })
+
+  const onDelete = (id) => removeAnswer(id)
+
   return (
     <StyledMain>
-      {isLoading && <Loading text="답변 불러오는 중" />}
-      <Header title="질문지 준비 완료" btnBack btnDelete />
+      {(isGetAnswerDetailLoading || isRemoveAnswerLoading) && (
+        <Loading
+          text={isGetAnswerDetailLoading ? '답변 불러오는 중' : '답변 삭제 중'}
+        />
+      )}
+      <Header
+        title="질문지 준비 완료"
+        btnBack
+        btnDelete={() => onDelete(params.answerId)}
+      />
       <StyledAirticle>
-        {!isLoading ? (
+        {!isGetAnswerDetailLoading ? (
           <>
             <TextArea>
               <Title>
