@@ -14,27 +14,37 @@ import WriteStandard from './WriteStandard'
 import useToastPopup from '../../hooks/useToastPopup'
 import useModal from '../../hooks/useModal'
 import { useNavigate } from 'react-router-dom'
-import { useQuery } from 'react-query'
-import { getUsersAnswers } from '../../apis'
+import { useMutation, useQuery } from 'react-query'
+import { deleteAnswer, getUsersAnswers } from '../../apis'
 import NoDataAnswerItem from '../../components/answer/NoDataAnswerItem'
+import Loading from '../../components/loading/Loading'
 
 function ResearchReady() {
   const navigate = useNavigate()
   const { Modal, openModal } = useModal()
-  const { ToastPopup, openToastPopup } = useToastPopup()
-  const onDelete = (id) => {
-    // console.log(id)
-  }
+  const { openToastPopup, ToastPopup } = useToastPopup()
+
+  const { data, refetch } = useQuery('usersAnswersList', getUsersAnswers)
+  const dataLength = data?.length || 0
+
+  const { mutate: removeAnswer, isLoading } = useMutation(deleteAnswer, {
+    onSuccess: (data) => {
+      refetch()
+    },
+    onError: () => {
+      openToastPopup('답변삭제를 실패했어요')
+    },
+  })
+
+  const onDelete = (id) => removeAnswer(id)
 
   const onCopyURL = () => {
     openToastPopup('설문지링크가 복사되었습니다.')
   }
 
-  const { data } = useQuery('usersAnswersList', getUsersAnswers)
-  const dataLength = data?.length || 0
-
   return (
     <StyledMain>
+      {isLoading && <Loading text="답변 삭제 중" />}
       <Header
         title="질문지 준비 완료"
         btnBack={() =>

@@ -5,8 +5,12 @@ import {
   postUserOverlap,
   getUsersAnswers,
 } from './user'
-import { postAnswer } from './answer'
-import { getQuestionsOfQuestioner, getQuestionsOfAnswerer } from './question'
+import { postAnswer, getAnswerDetail, deleteAnswer } from './answer'
+import {
+  getQuestionsOfQuestioner,
+  getQuestionsOfAnswerer,
+  getQuetionerNickname,
+} from './question'
 import { getCategories, postQuestions, getUsersCategories } from './category'
 import { postIdeal, getIdeals } from './ideal'
 
@@ -26,6 +30,7 @@ export {
   // Question
   getQuestionsOfQuestioner,
   getQuestionsOfAnswerer,
+  getQuetionerNickname,
 
   // Ideal
   postIdeal,
@@ -33,4 +38,6 @@ export {
 
   // Answer,
   postAnswer,
+  getAnswerDetail,
+  deleteAnswer,
 }

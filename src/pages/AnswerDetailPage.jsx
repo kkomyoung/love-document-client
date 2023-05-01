@@ -1,20 +1,33 @@
+/* eslint-disable multiline-ternary */
 import React from 'react'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
 import { SubTitle, TextArea, TextDesc, Title } from '../components/texts/Texts'
 import Lottie from '../components/lotties/Lottie'
 import { ReactComponent as HeartPuzzleImg } from '../assets/img_heart_puzzle.svg'
+import { ReactComponent as BrokenHeartPuzzleImg } from '../assets/img_broken_heart_puzzle.svg'
 import { ReactComponent as HeartTokenIcon } from '../assets/icon_heart_token.svg'
 import CategoryLabel from '../components/category/CategoryLabel'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
-// import { ReactComponent as HeartPuzzleIcon } from '../assets/icon_heart_puzzle.svg'
 import useUser from '../hooks/useUser'
 import useToastPopup from '../hooks/useToastPopup'
 import useModal from '../hooks/useModal'
-
 import { THUMBNAIL_URL } from '../utils/constants'
+import { useMutation, useQuery } from 'react-query'
+import { deleteAnswer, getAnswerDetail } from '../apis'
+import { useNavigate, useParams } from 'react-router-dom'
+import Loading from '../components/loading/Loading'
 
 const AnswerDetailPage = () => {
+  const params = useParams()
+  const navigate = useNavigate()
+  const { data, isLoading: isGetAnswerDetailLoading } = useQuery(
+    'answer-detail',
+    () => getAnswerDetail(params.answerId),
+    {
+      refetchOnWindowFocus: false,
+    }
+  )
   const { user } = useUser()
   const { openToastPopup, ToastPopup } = useToastPopup()
   const { Modal, openModal, closeModal } = useModal()
@@ -35,117 +48,164 @@ const AnswerDetailPage = () => {
     return modelData
   }
 
+  const { mutate: removeAnswer, isLoading: isRemoveAnswerLoading } =
+    useMutation(deleteAnswer, {
+      onSuccess: (data) => {
+        navigate(-1)
+      },
+      onError: () => {
+        openToastPopup('답변삭제를 실패했어요')
+      },
+    })
+
+  const onDelete = (id) => removeAnswer(id)
+
   return (
     <StyledMain>
-      <Header title="질문지 준비 완료" btnBack btnDelete />
+      {(isGetAnswerDetailLoading || isRemoveAnswerLoading) && (
+        <Loading
+          text={isGetAnswerDetailLoading ? '답변 불러오는 중' : '답변 삭제 중'}
+        />
+      )}
+      <Header
+        title="질문지 준비 완료"
+        btnBack
+        btnDelete={() => onDelete(params.answerId)}
+      />
       <StyledAirticle>
-        <TextArea>
-          <Title>
-            <span>키위</span>님의 답변
-          </Title>
+        {!isGetAnswerDetailLoading ? (
+          <>
+            <TextArea>
+              <Title>
+                <span>{data.nickname}</span>님의 답변
+              </Title>
 
-          <AnswererBox>
-            <AnswererRow>
-              <InfoText>1996년생</InfoText>
-              <VerticalLine />
-              <InfoText>서울강남구</InfoText>
-            </AnswererRow>
+              <AnswererBox>
+                <AnswererRow>
+                  <InfoText>{data.age}세</InfoText>
+                  <VerticalLine />
+                  <InfoText>{data.live}</InfoText>
+                </AnswererRow>
 
-            <AnswererRow>
-              <InfoText>시각디자인과 대학생</InfoText>
-              <InfoText>
-                <span>오후 3:43</span>
-              </InfoText>
-            </AnswererRow>
-          </AnswererBox>
-        </TextArea>
+                <AnswererRow>
+                  <InfoText>{data.work}</InfoText>
+                  <InfoText>
+                    <span>
+                      {data.dateTime.substr(5, 2)}월{' '}
+                      {data.dateTime.substr(8, 2)}일
+                    </span>
+                  </InfoText>
+                </AnswererRow>
+              </AnswererBox>
+            </TextArea>
 
-        <Lottie data="magnifier" />
+            <Lottie data="magnifier" />
 
-        <PercentageSection>
-          <PercentageBox>
-            <PercentageRow>
-              <HeartPuzzleImg />
-              <PercentageCol>
-                <PercentageTitleText>
-                  100% 일치 <span>(10/10)</span>
-                </PercentageTitleText>
+            <PercentageSection>
+              <PercentageBox>
+                <PercentageRow>
+                  {data.percentage === 100 ? (
+                    <HeartPuzzleImg />
+                  ) : (
+                    <BrokenHeartPuzzleImg />
+                  )}
+                  <PercentageCol>
+                    <PercentageTitleText>
+                      {data.percentage}% 일치
+                      <span>
+                        {data.matchCnt}/{data.totalCnt}
+                      </span>
+                    </PercentageTitleText>
 
-                <PercentageSubtitleText>
-                  축! 연애서류 합격이에요!
-                </PercentageSubtitleText>
-              </PercentageCol>
-            </PercentageRow>
+                    <PercentageSubtitleText>
+                      {data.percentage === 100 ? (
+                        '축! 연애서류 합격이에요!'
+                      ) : (
+                        <>
+                          <span>{`${data.totalCnt - data.matchCnt}개 `}</span>
+                          항목에서 어긋났어요
+                        </>
+                      )}
+                    </PercentageSubtitleText>
+                  </PercentageCol>
+                </PercentageRow>
 
-            <PercentageRow>
-              <CategoryItemList>
-                <CategoryItemItem>키</CategoryItemItem>
-                <CategoryItemItem>타투</CategoryItemItem>
-                <CategoryItemItem>안경</CategoryItemItem>
-                <CategoryItemItem>안경</CategoryItemItem>
-                <CategoryItemItem>안경</CategoryItemItem>
-                <CategoryItemItem>안경</CategoryItemItem>
-              </CategoryItemList>
-            </PercentageRow>
-          </PercentageBox>
-        </PercentageSection>
+                <PercentageRow>
+                  <CategoryItemList>
+                    {data.nonMatchTitleList &&
+                      data.nonMatchTitleList.map((title, index) => (
+                        <CategoryItemItem key={index}>{title}</CategoryItemItem>
+                      ))}
+                  </CategoryItemList>
+                </PercentageRow>
+              </PercentageBox>
+            </PercentageSection>
 
-        <AnswerResultSection>
-          <AnswerResultContainerList>
-            <AnswerResultContainerItem>
-              <CategoryLabel category={'외모'} />
-              <AnswerResultList>
-                <AnswerResultItem>
-                  제 키는 <span>183cm</span> 이에요
-                </AnswerResultItem>
-                <AnswerResultItem isDiff={true}>
-                  제 키는 <span>183cm</span> 이에요
-                </AnswerResultItem>
-              </AnswerResultList>
-            </AnswerResultContainerItem>
+            <AnswerResultSection>
+              <AnswerResultContainerList>
+                {data.categoryInfoList &&
+                  data.categoryInfoList.map((info, index) => (
+                    <AnswerResultContainerItem key={index}>
+                      <CategoryLabel category={info.title} />
+                      <AnswerResultList>
+                        {info.itemList.map((item, index) => (
+                          <AnswerResultItem
+                            key={index}
+                            isNotMatch={item.ideal !== null}
+                          >
+                            <AnswerText isNotMatch={item.ideal !== null}>
+                              {item.answerInfo.location === 1 ? (
+                                <span>{item.answerInfo.answer}</span>
+                              ) : null}
+                              {item.answerInfo.start}
+                              {item.answerInfo.location === 2 ? (
+                                <span>{item.answerInfo.answer}</span>
+                              ) : null}
+                              {item.answerInfo.mid}
+                              {item.answerInfo.location === 3 ? (
+                                <span>{item.answerInfo.answer}</span>
+                              ) : null}
+                              {item.answerInfo.end}
+                            </AnswerText>
+                            {item.ideal && <IdealText>{item.ideal}</IdealText>}
+                          </AnswerResultItem>
+                        ))}
+                      </AnswerResultList>
+                    </AnswerResultContainerItem>
+                  ))}
+              </AnswerResultContainerList>
+            </AnswerResultSection>
 
-            <AnswerResultContainerItem>
-              <CategoryLabel category={'외모'} />
-              <AnswerResultList>
-                <AnswerResultItem>
-                  제 키는 <span>183cm</span> 이에요
-                </AnswerResultItem>
-                <AnswerResultItem>
-                  제 키는 <span>183cm</span> 이에요
-                </AnswerResultItem>
-              </AnswerResultList>
-            </AnswerResultContainerItem>
-          </AnswerResultContainerList>
-        </AnswerResultSection>
+            <InformSection>
+              <SubTitle>
+                <i aria-hidden="true">
+                  <HeartTokenIcon />
+                </i>
+                <span>주선자에게 알리기</span>
+              </SubTitle>
+              <TextDesc>
+                주선자에게 링크를 공유해 의사를 밝혀주세요 일치율과 답변 내용은
+                공개되지 않아요
+              </TextDesc>
 
-        <InformSection>
-          <SubTitle>
-            <i aria-hidden="true">
-              <HeartTokenIcon />
-            </i>
-            <span>주선자에게 알리기</span>
-          </SubTitle>
-          <TextDesc>
-            주선자에게 링크를 공유해 의사를 밝혀주세요 일치율과 답변 내용은
-            공개되지 않아요
-          </TextDesc>
+              <ButtonArea full margin="2rem 0 0 0">
+                <RoundButton
+                  text="다른 좋은 인연이 있겠죠"
+                  color="white"
+                  border="true"
+                  onClick={() => openModal(createModalData(false))}
+                />
 
-          <ButtonArea full margin="2rem 0 0 0">
-            <RoundButton
-              text="다른 좋은 인연이 있겠죠"
-              color="white"
-              border="true"
-              onClick={() => openModal(createModalData(false))}
-            />
-
-            <RoundButton
-              text="소개팅 할게요!"
-              color="white"
-              border="true"
-              onClick={() => openModal(createModalData(true))}
-            />
-          </ButtonArea>
-        </InformSection>
+                <RoundButton
+                  text="소개팅 할게요!"
+                  color="white"
+                  border="true"
+                  onClick={() => openModal(createModalData(true))}
+                />
+              </ButtonArea>
+            </InformSection>
+          </>
+        ) : null}
       </StyledAirticle>
       <ToastPopup />
       <Modal />
@@ -215,7 +275,7 @@ const PercentageTitleText = styled.h3`
   align-items: center;
   ${(props) => props.theme.fontSize.h3_m}
   color: ${(props) => props.theme.gray900};
-  margin-top: 1rem;
+  margin-top: 0.6rem;
 
   span {
     ${(props) => props.theme.fontSize.b2}
@@ -228,6 +288,10 @@ const PercentageSubtitleText = styled.h4`
   ${(props) => props.theme.fontSize.b2}
   color: ${(props) => props.theme.gray800};
   margin-top: 0.5rem;
+
+  span {
+    color: ${(props) => props.theme.pink700};
+  }
 `
 
 const CategoryItemList = styled.ul`
@@ -235,15 +299,20 @@ const CategoryItemList = styled.ul`
 
   li + li {
     margin-left: 0.6rem;
-    margin-top: 0.2rem;
+    margin-top: 0.5rem;
   }
 `
 
 const CategoryItemItem = styled.li`
-  display: inline-flex;
-  background-color: ${(props) => props.theme.pink700};
+  padding: 0 1rem;
+  min-width: 3.6rem;
+  height: 3rem;
   border-radius: 2.6rem;
-  padding: 0.8rem 1.75rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${(props) => props.theme.pink700};
+  margin-left: 0.4rem;
   ${(props) => props.theme.fontSize.label_s_m}
   color: ${(props) => props.theme.white};
 `
@@ -263,22 +332,32 @@ const AnswerResultContainerItem = styled.li``
 const AnswerResultList = styled.ul`
   display: flex;
   flex-direction: column;
-  margin-top: 1.6rem;
   gap: 0.8rem;
 `
 
 const AnswerResultItem = styled.li`
   background-color: ${(props) => props.theme.gray100};
   border-radius: 0.8rem;
-  border: ${(props) => props.isDiff && `0.2rem solid ${props.theme.pink700}`};
+  border: ${(props) =>
+    props.isNotMatch && `0.2rem solid ${props.theme.pink700}`};
   padding: 2rem;
+`
 
+const AnswerText = styled.p`
   ${(props) => props.theme.fontSize.b1}
   color: ${(props) => props.theme.gray700};
 
   span {
     ${(props) => props.theme.fontWeight.bold}
+    color: ${(props) =>
+      props.isNotMatch ? props.theme.pink700 : props.theme.gray700}
   }
+`
+
+const IdealText = styled.p`
+  ${(props) => props.theme.fontSize.label_s_m}
+  color: ${(props) => props.theme.gray700};
+  margin-top: 1.2rem;
 `
 
 const InformSection = styled.section`

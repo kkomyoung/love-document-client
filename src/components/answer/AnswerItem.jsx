@@ -109,7 +109,7 @@ const DeleteButton = styled.button`
   margin: 0.5px 1px 0.5px 0px;
   border: none;
   min-width: 80px;
-  cursor: pointer;/
+  cursor: pointer;
 `
 
 const Col = styled.div`

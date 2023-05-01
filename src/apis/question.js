@@ -11,3 +11,9 @@ export const getQuestionsOfAnswerer = async (questionId) => {
   const { data } = await instance.get(`/questions/${questionId}`)
   return data
 }
+
+// 질문자 닉네임 조회하기 API
+export const getQuetionerNickname = async (questionId) => {
+  const { data } = await instance.get(`/questions/${questionId}/nickname`)
+  return data
+}

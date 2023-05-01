@@ -12,31 +12,32 @@ import { answerAtom } from '../utils/atoms'
 import useToastPopup from '../hooks/useToastPopup'
 import { postIdeal } from '../apis'
 import useQuestion from '../hooks/useQuestion'
+import Loading from '../components/loading/Loading'
 
 function StandardEditPage() {
-  const { data: categoryQuestions } = useQuery(
-    'questions',
-    getQuestionsOfQuestioner,
-    {
+  const { data: categoryQuestions, isLoading: isGetQuestionsLoading } =
+    useQuery('quetioner-questions-edit', getQuestionsOfQuestioner, {
       refetchOnWindowFocus: false,
-    }
-  )
+    })
   const { getQuestionNumberOffset, isNotAllAnswered } = useQuestion(0)
   const answer = useRecoilValue(answerAtom)
   const { openToastPopup, ToastPopup } = useToastPopup()
   const navigate = useNavigate()
 
-  const { mutate: writeIdeal, isLoading } = useMutation(postIdeal, {
-    onSuccess: (data) => {
-      navigate('/research/standard/complete')
-    },
-    onError: () => {
-      openToastPopup('')
-    },
-  })
+  const { mutate: writeIdeal, isLoading: isWriteIdealLoading } = useMutation(
+    postIdeal,
+    {
+      onSuccess: (data) => {
+        navigate('/research/standard/complete')
+      },
+      onError: () => {
+        openToastPopup('')
+      },
+    }
+  )
 
   const onConfirmButtonClick = () => {
-    if (isLoading) return
+    if (isWriteIdealLoading) return
     if (!categoryQuestions && !answer) return
 
     if (isNotAllAnswered('ideal', answer)) {
@@ -48,6 +49,11 @@ function StandardEditPage() {
 
   return (
     <StyledMain>
+      {(isWriteIdealLoading || isGetQuestionsLoading) && (
+        <Loading
+          text={isGetQuestionsLoading ? '질문지 불러오는 중' : '답안 저장 중'}
+        />
+      )}
       <Header title="내 기준 편집" btnHome />
       <StyledAirticle>
         <TextArea>
