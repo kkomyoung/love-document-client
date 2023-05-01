@@ -16,6 +16,7 @@ import { THUMBNAIL_URL } from '../utils/constants'
 import { useQuery } from 'react-query'
 import { getAnswerDetail } from '../apis'
 import { useParams } from 'react-router-dom'
+import Loading from '../components/loading/Loading'
 
 const AnswerDetailPage = () => {
   const params = useParams()
@@ -48,6 +49,7 @@ const AnswerDetailPage = () => {
 
   return (
     <StyledMain>
+      {isLoading && <Loading text="답변 불러오는 중" />}
       <Header title="질문지 준비 완료" btnBack btnDelete />
       <StyledAirticle>
         {!isLoading ? (
