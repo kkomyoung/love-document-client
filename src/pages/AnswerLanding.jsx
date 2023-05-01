@@ -4,9 +4,18 @@ import changeBgColor from '../utils/changeBgColor'
 import { Link, useParams } from 'react-router-dom'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import { ReactComponent as IconLetter } from '../assets/img_letter.svg'
+import { useQuery } from 'react-query'
+import { getQuetionerNickname } from '../apis/question'
 
 const AnswerLanding = () => {
   const params = useParams()
+  const { data } = useQuery(
+    'quetioner-nickname',
+    () => getQuetionerNickname(params.questionId),
+    {
+      refetchOnWindowFocus: false,
+    }
+  )
 
   changeBgColor('#79c7ff')
   return (
@@ -19,7 +28,7 @@ const AnswerLanding = () => {
         연애서류합
       </StyledTitle>
       <StyledDescription>
-        <span>소개팅 상대방 망고님이 보낸</span>
+        <span>소개팅 상대방 {data && data.nickname}님이 보낸</span>
         <br />
         <span>질문에 답변해보세요 🤩</span>
       </StyledDescription>
