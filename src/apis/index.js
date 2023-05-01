@@ -5,7 +5,7 @@ import {
   postUserOverlap,
   getUsersAnswers,
 } from './user'
-import { postAnswer, getAnswerDetail } from './answer'
+import { postAnswer, getAnswerDetail, deleteAnswer } from './answer'
 import {
   getQuestionsOfQuestioner,
   getQuestionsOfAnswerer,
@@ -39,4 +39,5 @@ export {
   // Answer,
   postAnswer,
   getAnswerDetail,
+  deleteAnswer,
 }
