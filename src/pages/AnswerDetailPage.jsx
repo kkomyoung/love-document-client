@@ -1,20 +1,32 @@
+/* eslint-disable multiline-ternary */
 import React from 'react'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
 import { SubTitle, TextArea, TextDesc, Title } from '../components/texts/Texts'
 import Lottie from '../components/lotties/Lottie'
 import { ReactComponent as HeartPuzzleImg } from '../assets/img_heart_puzzle.svg'
+import { ReactComponent as BrokenHeartPuzzleImg } from '../assets/img_broken_heart_puzzle.svg'
 import { ReactComponent as HeartTokenIcon } from '../assets/icon_heart_token.svg'
 import CategoryLabel from '../components/category/CategoryLabel'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
-// import { ReactComponent as HeartPuzzleIcon } from '../assets/icon_heart_puzzle.svg'
 import useUser from '../hooks/useUser'
 import useToastPopup from '../hooks/useToastPopup'
 import useModal from '../hooks/useModal'
 
 import { THUMBNAIL_URL } from '../utils/constants'
+import { useQuery } from 'react-query'
+import { getAnswerDetail } from '../apis'
+import { useParams } from 'react-router-dom'
 
 const AnswerDetailPage = () => {
+  const params = useParams()
+  const { data } = useQuery(
+    'answer-detail',
+    () => getAnswerDetail(params.answerId),
+    {
+      refetchOnWindowFocus: false,
+    }
+  )
   const { user } = useUser()
   const { openToastPopup, ToastPopup } = useToastPopup()
   const { Modal, openModal, closeModal } = useModal()
@@ -34,6 +46,8 @@ const AnswerDetailPage = () => {
     }
     return modelData
   }
+
+  const { percentage, totalCnt, matchCnt, nonMatchTitleList } = data
 
   return (
     <StyledMain>
@@ -65,26 +79,38 @@ const AnswerDetailPage = () => {
         <PercentageSection>
           <PercentageBox>
             <PercentageRow>
-              <HeartPuzzleImg />
+              {percentage === 100 ? (
+                <HeartPuzzleImg />
+              ) : (
+                <BrokenHeartPuzzleImg />
+              )}
               <PercentageCol>
                 <PercentageTitleText>
-                  100% 일치 <span>(10/10)</span>
+                  {percentage}% 일치{' '}
+                  <span>
+                    {matchCnt}/{totalCnt}
+                  </span>
                 </PercentageTitleText>
 
                 <PercentageSubtitleText>
-                  축! 연애서류 합격이에요!
+                  {percentage === 100 ? (
+                    '축! 연애서류 합격이에요!'
+                  ) : (
+                    <>
+                      <span>{`${totalCnt - matchCnt}개 `}</span>
+                      항목에서 어긋났어요
+                    </>
+                  )}
                 </PercentageSubtitleText>
               </PercentageCol>
             </PercentageRow>
 
             <PercentageRow>
               <CategoryItemList>
-                <CategoryItemItem>키</CategoryItemItem>
-                <CategoryItemItem>타투</CategoryItemItem>
-                <CategoryItemItem>안경</CategoryItemItem>
-                <CategoryItemItem>안경</CategoryItemItem>
-                <CategoryItemItem>안경</CategoryItemItem>
-                <CategoryItemItem>안경</CategoryItemItem>
+                {nonMatchTitleList &&
+                  nonMatchTitleList.map((title, index) => (
+                    <CategoryItemItem key={index}>{title}</CategoryItemItem>
+                  ))}
               </CategoryItemList>
             </PercentageRow>
           </PercentageBox>
@@ -228,6 +254,10 @@ const PercentageSubtitleText = styled.h4`
   ${(props) => props.theme.fontSize.b2}
   color: ${(props) => props.theme.gray800};
   margin-top: 0.5rem;
+
+  span {
+    color: ${(props) => props.theme.pink700};
+  }
 `
 
 const CategoryItemList = styled.ul`
@@ -235,15 +265,21 @@ const CategoryItemList = styled.ul`
 
   li + li {
     margin-left: 0.6rem;
-    margin-top: 0.2rem;
+    margin-top: 0.5rem;
   }
 `
 
 const CategoryItemItem = styled.li`
-  display: inline-flex;
-  background-color: ${(props) => props.theme.pink700};
+  padding: 0.4rem 1.2rem;
+  min-width: 3.6rem;
+  height: 3rem;
   border-radius: 2.6rem;
-  padding: 0.8rem 1.75rem;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${(props) => props.theme.pink700};
+  margin-left: 0.4rem;
+  margin-bottom: 0.2rem;
   ${(props) => props.theme.fontSize.label_s_m}
   color: ${(props) => props.theme.white};
 `
