@@ -46,8 +46,6 @@ const AnswerDetailPage = () => {
     return modelData
   }
 
-  console.log(data)
-
   return (
     <StyledMain>
       <Header title="질문지 준비 완료" btnBack btnDelete />
@@ -69,7 +67,10 @@ const AnswerDetailPage = () => {
                 <AnswererRow>
                   <InfoText>{data.work}</InfoText>
                   <InfoText>
-                    <span>오후 3:43</span>
+                    <span>
+                      {data.dateTime.substr(5, 2)}월{' '}
+                      {data.dateTime.substr(8, 2)}일
+                    </span>
                   </InfoText>
                 </AnswererRow>
               </AnswererBox>
@@ -251,7 +252,7 @@ const PercentageTitleText = styled.h3`
   align-items: center;
   ${(props) => props.theme.fontSize.h3_m}
   color: ${(props) => props.theme.gray900};
-  margin-top: 1rem;
+  margin-top: 0.6rem;
 
   span {
     ${(props) => props.theme.fontSize.b2}
