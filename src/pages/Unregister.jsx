@@ -22,7 +22,7 @@ const Unregister = () => {
     btnConfirm: {
       text: '네, 탈퇴할게요',
       fn: () => {
-        console.log('탈퇴')
+        // console.log('탈퇴')
         navigate('/')
       },
     },
