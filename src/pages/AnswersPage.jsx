@@ -5,17 +5,30 @@ import { TextArea, Title, TextDesc } from '../components/texts/Texts'
 import { ReactComponent as IconLetter } from '../assets/icon_letter.svg'
 import AnswerItem from '../components/answer/AnswerItem'
 import NoDataAnswerItem from '../components/answer/NoDataAnswerItem'
-import { useQuery } from 'react-query'
-import { getUsersAnswers } from '../apis'
+import { useMutation, useQuery } from 'react-query'
+import { deleteAnswer, getUsersAnswers } from '../apis'
+import useToastPopup from '../hooks/useToastPopup'
+import Loading from '../components/loading/Loading'
 
 function AnswersPage() {
-  const { data } = useQuery('usersAnswersList', getUsersAnswers)
+  const { data, refetch } = useQuery('usersAnswersList', getUsersAnswers)
   const dataLength = data?.length || 0
+  const { openToastPopup, ToastPopup } = useToastPopup()
 
-  const onDelete = (id) => {}
+  const { mutate: removeAnswer, isLoading } = useMutation(deleteAnswer, {
+    onSuccess: (data) => {
+      refetch()
+    },
+    onError: () => {
+      openToastPopup('답변삭제를 실패했어요')
+    },
+  })
+
+  const onDelete = (id) => removeAnswer(id)
 
   return (
     <StyledMain>
+      {isLoading && <Loading text="답변 삭제 중" />}
       <Header title="도착한 답변" btnBack></Header>
       <StyledAirticle>
         <TextArea>
@@ -44,6 +57,7 @@ function AnswersPage() {
           </AnswerList>
         </StyledAnswersSection>
       </StyledAirticle>
+      <ToastPopup />
     </StyledMain>
   )
 }

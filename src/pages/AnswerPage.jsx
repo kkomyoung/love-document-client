@@ -67,7 +67,7 @@ function AnswerPage() {
         navigate(`/research/${params.questionId}/answer/complete`)
       },
       onError: () => {
-        openToastPopup('답변하기에 실패했어요.')
+        openToastPopup('답변하기에 실패했어요')
       },
     }
   )
