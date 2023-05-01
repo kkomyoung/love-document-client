@@ -59,7 +59,7 @@ function ResearchReady() {
               text: '네',
               fn: () => {
                 // TODO 회원가입 정보 리셋해야 함
-                navigate('/research')
+                navigate(-1)
               },
             },
           })

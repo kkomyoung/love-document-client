@@ -11,7 +11,7 @@ const AnswerComplete = () => {
 
   return (
     <StyledMain>
-      <Header btnBack btnHome />
+      <Header btnBack />
       <StyledAirticle>
         <StyledImgWrap>
           <ImgHeartWing />
