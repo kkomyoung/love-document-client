@@ -12,7 +12,6 @@ import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import useUser from '../hooks/useUser'
 import useToastPopup from '../hooks/useToastPopup'
 import useModal from '../hooks/useModal'
-
 import { THUMBNAIL_URL } from '../utils/constants'
 import { useQuery } from 'react-query'
 import { getAnswerDetail } from '../apis'
@@ -20,7 +19,7 @@ import { useParams } from 'react-router-dom'
 
 const AnswerDetailPage = () => {
   const params = useParams()
-  const { data } = useQuery(
+  const { data, isLoading } = useQuery(
     'answer-detail',
     () => getAnswerDetail(params.answerId),
     {
@@ -47,131 +46,132 @@ const AnswerDetailPage = () => {
     return modelData
   }
 
-  const { percentage, totalCnt, matchCnt, nonMatchTitleList } = data
+  console.log(data)
 
   return (
     <StyledMain>
       <Header title="질문지 준비 완료" btnBack btnDelete />
       <StyledAirticle>
-        <TextArea>
-          <Title>
-            <span>키위</span>님의 답변
-          </Title>
+        {!isLoading ? (
+          <>
+            <TextArea>
+              <Title>
+                <span>{data.nickname}</span>님의 답변
+              </Title>
 
-          <AnswererBox>
-            <AnswererRow>
-              <InfoText>1996년생</InfoText>
-              <VerticalLine />
-              <InfoText>서울강남구</InfoText>
-            </AnswererRow>
+              <AnswererBox>
+                <AnswererRow>
+                  <InfoText>{data.age}세</InfoText>
+                  <VerticalLine />
+                  <InfoText>{data.live}</InfoText>
+                </AnswererRow>
 
-            <AnswererRow>
-              <InfoText>시각디자인과 대학생</InfoText>
-              <InfoText>
-                <span>오후 3:43</span>
-              </InfoText>
-            </AnswererRow>
-          </AnswererBox>
-        </TextArea>
-
-        <Lottie data="magnifier" />
-
-        <PercentageSection>
-          <PercentageBox>
-            <PercentageRow>
-              {percentage === 100 ? (
-                <HeartPuzzleImg />
-              ) : (
-                <BrokenHeartPuzzleImg />
-              )}
-              <PercentageCol>
-                <PercentageTitleText>
-                  {percentage}% 일치{' '}
-                  <span>
-                    {matchCnt}/{totalCnt}
-                  </span>
-                </PercentageTitleText>
-
-                <PercentageSubtitleText>
-                  {percentage === 100 ? (
-                    '축! 연애서류 합격이에요!'
+                <AnswererRow>
+                  <InfoText>{data.work}</InfoText>
+                  <InfoText>
+                    <span>오후 3:43</span>
+                  </InfoText>
+                </AnswererRow>
+              </AnswererBox>
+            </TextArea>
+            <Lottie data="magnifier" />
+            <PercentageSection>
+              <PercentageBox>
+                <PercentageRow>
+                  {data.percentage === 100 ? (
+                    <HeartPuzzleImg />
                   ) : (
-                    <>
-                      <span>{`${totalCnt - matchCnt}개 `}</span>
-                      항목에서 어긋났어요
-                    </>
+                    <BrokenHeartPuzzleImg />
                   )}
-                </PercentageSubtitleText>
-              </PercentageCol>
-            </PercentageRow>
+                  <PercentageCol>
+                    <PercentageTitleText>
+                      {data.percentage}% 일치
+                      <span>
+                        {data.matchCnt}/{data.totalCnt}
+                      </span>
+                    </PercentageTitleText>
 
-            <PercentageRow>
-              <CategoryItemList>
-                {nonMatchTitleList &&
-                  nonMatchTitleList.map((title, index) => (
-                    <CategoryItemItem key={index}>{title}</CategoryItemItem>
+                    <PercentageSubtitleText>
+                      {data.percentage === 100 ? (
+                        '축! 연애서류 합격이에요!'
+                      ) : (
+                        <>
+                          <span>{`${data.totalCnt - data.matchCnt}개 `}</span>
+                          항목에서 어긋났어요
+                        </>
+                      )}
+                    </PercentageSubtitleText>
+                  </PercentageCol>
+                </PercentageRow>
+
+                <PercentageRow>
+                  <CategoryItemList>
+                    {data.nonMatchTitleList &&
+                      data.nonMatchTitleList.map((title, index) => (
+                        <CategoryItemItem key={index}>{title}</CategoryItemItem>
+                      ))}
+                  </CategoryItemList>
+                </PercentageRow>
+              </PercentageBox>
+            </PercentageSection>
+            <AnswerResultSection>
+              <AnswerResultContainerList>
+                {data.categoryInfoList &&
+                  data.categoryInfoList.map((info, index) => (
+                    <AnswerResultContainerItem key={index}>
+                      <CategoryLabel category={info.title} />
+                      <AnswerResultList>
+                        {info.itemList.map((item, index) => (
+                          <AnswerResultItem key={index}>
+                            {item.answerInfo.location === 1 ? (
+                              <span>{item.answerInfo.answer}</span>
+                            ) : null}
+                            {item.answerInfo.start}
+                            {item.answerInfo.location === 2 ? (
+                              <span>{item.answerInfo.answer}</span>
+                            ) : null}
+                            {item.answerInfo.mid}
+                            {item.answerInfo.location === 3 ? (
+                              <span>{item.answerInfo.answer}</span>
+                            ) : null}
+                            {item.answerInfo.end}
+                          </AnswerResultItem>
+                        ))}
+                      </AnswerResultList>
+                    </AnswerResultContainerItem>
                   ))}
-              </CategoryItemList>
-            </PercentageRow>
-          </PercentageBox>
-        </PercentageSection>
+              </AnswerResultContainerList>
+            </AnswerResultSection>
+            <InformSection>
+              <SubTitle>
+                <i aria-hidden="true">
+                  <HeartTokenIcon />
+                </i>
+                <span>주선자에게 알리기</span>
+              </SubTitle>
+              <TextDesc>
+                주선자에게 링크를 공유해 의사를 밝혀주세요 일치율과 답변 내용은
+                공개되지 않아요
+              </TextDesc>
 
-        <AnswerResultSection>
-          <AnswerResultContainerList>
-            <AnswerResultContainerItem>
-              <CategoryLabel category={'외모'} />
-              <AnswerResultList>
-                <AnswerResultItem>
-                  제 키는 <span>183cm</span> 이에요
-                </AnswerResultItem>
-                <AnswerResultItem isDiff={true}>
-                  제 키는 <span>183cm</span> 이에요
-                </AnswerResultItem>
-              </AnswerResultList>
-            </AnswerResultContainerItem>
+              <ButtonArea full margin="2rem 0 0 0">
+                <RoundButton
+                  text="다른 좋은 인연이 있겠죠"
+                  color="white"
+                  border="true"
+                  onClick={() => openModal(createModalData(false))}
+                />
 
-            <AnswerResultContainerItem>
-              <CategoryLabel category={'외모'} />
-              <AnswerResultList>
-                <AnswerResultItem>
-                  제 키는 <span>183cm</span> 이에요
-                </AnswerResultItem>
-                <AnswerResultItem>
-                  제 키는 <span>183cm</span> 이에요
-                </AnswerResultItem>
-              </AnswerResultList>
-            </AnswerResultContainerItem>
-          </AnswerResultContainerList>
-        </AnswerResultSection>
-
-        <InformSection>
-          <SubTitle>
-            <i aria-hidden="true">
-              <HeartTokenIcon />
-            </i>
-            <span>주선자에게 알리기</span>
-          </SubTitle>
-          <TextDesc>
-            주선자에게 링크를 공유해 의사를 밝혀주세요 일치율과 답변 내용은
-            공개되지 않아요
-          </TextDesc>
-
-          <ButtonArea full margin="2rem 0 0 0">
-            <RoundButton
-              text="다른 좋은 인연이 있겠죠"
-              color="white"
-              border="true"
-              onClick={() => openModal(createModalData(false))}
-            />
-
-            <RoundButton
-              text="소개팅 할게요!"
-              color="white"
-              border="true"
-              onClick={() => openModal(createModalData(true))}
-            />
-          </ButtonArea>
-        </InformSection>
+                <RoundButton
+                  text="소개팅 할게요!"
+                  color="white"
+                  border="true"
+                  onClick={() => openModal(createModalData(true))}
+                />
+              </ButtonArea>
+            </InformSection>
+          </>
+        ) : null}
       </StyledAirticle>
       <ToastPopup />
       <Modal />
@@ -279,7 +279,6 @@ const CategoryItemItem = styled.li`
   align-items: center;
   background-color: ${(props) => props.theme.pink700};
   margin-left: 0.4rem;
-  margin-bottom: 0.2rem;
   ${(props) => props.theme.fontSize.label_s_m}
   color: ${(props) => props.theme.white};
 `
