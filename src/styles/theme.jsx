@@ -11,6 +11,7 @@ const a11yHidden = `
 `
 
 const fontWeight = {
+  regular: 'font-weight: 400;',
   medium: 'font-weight: 500;',
   semibold: 'font-weight: 600;',
   bold: 'font-weight: 700;',
@@ -33,7 +34,7 @@ const fontSize = {
   label_s_sb: `font-size: 1.4rem; line-height: 1; ${fontWeight.semibold};`,
 
   // body
-  b1: 'font-size: 1.6rem; line-height: 1.6;',
+  b1: `font-size: 1.6rem; line-height: 1.6; ${fontWeight.regular}`,
   b2: 'font-size: 1.4rem; line-height: 1.6;',
 }
 

@@ -74,7 +74,9 @@ const AnswerDetailPage = () => {
                 </AnswererRow>
               </AnswererBox>
             </TextArea>
+
             <Lottie data="magnifier" />
+
             <PercentageSection>
               <PercentageBox>
                 <PercentageRow>
@@ -114,6 +116,7 @@ const AnswerDetailPage = () => {
                 </PercentageRow>
               </PercentageBox>
             </PercentageSection>
+
             <AnswerResultSection>
               <AnswerResultContainerList>
                 {data.categoryInfoList &&
@@ -122,19 +125,25 @@ const AnswerDetailPage = () => {
                       <CategoryLabel category={info.title} />
                       <AnswerResultList>
                         {info.itemList.map((item, index) => (
-                          <AnswerResultItem key={index}>
-                            {item.answerInfo.location === 1 ? (
-                              <span>{item.answerInfo.answer}</span>
-                            ) : null}
-                            {item.answerInfo.start}
-                            {item.answerInfo.location === 2 ? (
-                              <span>{item.answerInfo.answer}</span>
-                            ) : null}
-                            {item.answerInfo.mid}
-                            {item.answerInfo.location === 3 ? (
-                              <span>{item.answerInfo.answer}</span>
-                            ) : null}
-                            {item.answerInfo.end}
+                          <AnswerResultItem
+                            key={index}
+                            isNotMatch={item.ideal !== null}
+                          >
+                            <AnswerText isNotMatch={item.ideal !== null}>
+                              {item.answerInfo.location === 1 ? (
+                                <span>{item.answerInfo.answer}</span>
+                              ) : null}
+                              {item.answerInfo.start}
+                              {item.answerInfo.location === 2 ? (
+                                <span>{item.answerInfo.answer}</span>
+                              ) : null}
+                              {item.answerInfo.mid}
+                              {item.answerInfo.location === 3 ? (
+                                <span>{item.answerInfo.answer}</span>
+                              ) : null}
+                              {item.answerInfo.end}
+                            </AnswerText>
+                            {item.ideal && <IdealText>{item.ideal}</IdealText>}
                           </AnswerResultItem>
                         ))}
                       </AnswerResultList>
@@ -142,6 +151,7 @@ const AnswerDetailPage = () => {
                   ))}
               </AnswerResultContainerList>
             </AnswerResultSection>
+
             <InformSection>
               <SubTitle>
                 <i aria-hidden="true">
@@ -270,7 +280,7 @@ const CategoryItemList = styled.ul`
 `
 
 const CategoryItemItem = styled.li`
-  padding: 0.4rem 1.2rem;
+  padding: 0 1rem;
   min-width: 3.6rem;
   height: 3rem;
   border-radius: 2.6rem;
@@ -298,22 +308,32 @@ const AnswerResultContainerItem = styled.li``
 const AnswerResultList = styled.ul`
   display: flex;
   flex-direction: column;
-  margin-top: 1.6rem;
   gap: 0.8rem;
 `
 
 const AnswerResultItem = styled.li`
   background-color: ${(props) => props.theme.gray100};
   border-radius: 0.8rem;
-  border: ${(props) => props.isDiff && `0.2rem solid ${props.theme.pink700}`};
+  border: ${(props) =>
+    props.isNotMatch && `0.2rem solid ${props.theme.pink700}`};
   padding: 2rem;
+`
 
+const AnswerText = styled.p`
   ${(props) => props.theme.fontSize.b1}
   color: ${(props) => props.theme.gray700};
 
   span {
     ${(props) => props.theme.fontWeight.bold}
+    color: ${(props) =>
+      props.isNotMatch ? props.theme.pink700 : props.theme.gray700}
   }
+`
+
+const IdealText = styled.p`
+  ${(props) => props.theme.fontSize.label_s_m}
+  color: ${(props) => props.theme.gray700};
+  margin-top: 1.2rem;
 `
 
 const InformSection = styled.section`
