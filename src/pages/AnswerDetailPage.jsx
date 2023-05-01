@@ -48,6 +48,24 @@ const AnswerDetailPage = () => {
     return modelData
   }
 
+  const removeAnswerModalData = {
+    type: 'alert',
+    title: '답변 삭제',
+    desc: `${data.nickname}남의 답변을 삭제하시겠어요?`,
+    btnCancel: {
+      text: '아니요',
+      fn: () => {
+        closeModal()
+      },
+    },
+    btnConfirm: {
+      text: '네',
+      fn: () => {
+        removeAnswer(params.answerId)
+      },
+    },
+  }
+
   const { mutate: removeAnswer, isLoading: isRemoveAnswerLoading } =
     useMutation(deleteAnswer, {
       onSuccess: (data) => {
@@ -57,8 +75,6 @@ const AnswerDetailPage = () => {
         openToastPopup('답변삭제를 실패했어요')
       },
     })
-
-  const onDelete = (id) => removeAnswer(id)
 
   return (
     <StyledMain>
@@ -70,7 +86,7 @@ const AnswerDetailPage = () => {
       <Header
         title="질문지 준비 완료"
         btnBack
-        btnDelete={() => onDelete(params.answerId)}
+        btnDelete={() => openModal(removeAnswerModalData)}
       />
       <StyledAirticle>
         {!isGetAnswerDetailLoading ? (
@@ -130,14 +146,15 @@ const AnswerDetailPage = () => {
                   </PercentageCol>
                 </PercentageRow>
 
-                <PercentageRow>
-                  <CategoryItemList>
-                    {data.nonMatchTitleList &&
-                      data.nonMatchTitleList.map((title, index) => (
+                {data.nonMatchTitleList.length !== 0 && (
+                  <PercentageRow>
+                    <CategoryItemList>
+                      {data.nonMatchTitleList.map((title, index) => (
                         <CategoryItemItem key={index}>{title}</CategoryItemItem>
                       ))}
-                  </CategoryItemList>
-                </PercentageRow>
+                    </CategoryItemList>
+                  </PercentageRow>
+                )}
               </PercentageBox>
             </PercentageSection>
 
