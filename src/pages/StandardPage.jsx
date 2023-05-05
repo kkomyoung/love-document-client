@@ -71,7 +71,7 @@ function StandardPage() {
               categoryQuestions.map((item, index) => (
                 <QuestionsContainer
                   key={index}
-                  category={item.categoryTitle}
+                  category={item}
                   questions={item.categoryItemInfoList}
                   offset={getQuestionNumberOffset(
                     item.categoryItemInfoList.length

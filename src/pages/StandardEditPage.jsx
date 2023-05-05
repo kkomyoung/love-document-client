@@ -61,7 +61,6 @@ function StandardEditPage() {
           <TextDesc>
             <span>내 애인후보.. 이것만큼은.. 절대 지켜!!</span>
             <br />
-
             <span>상대방에게 바라는 조건을 작성해주세요</span>
           </TextDesc>
         </TextArea>
@@ -72,7 +71,7 @@ function StandardEditPage() {
               categoryQuestions.map((item, index) => (
                 <QuestionsContainer
                   key={index}
-                  category={item.categoryTitle}
+                  category={item}
                   questions={item.categoryItemInfoList}
                   offset={getQuestionNumberOffset(
                     item.categoryItemInfoList.length

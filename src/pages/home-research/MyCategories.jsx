@@ -34,7 +34,10 @@ const MyCategories = ({ openToastPopup }) => {
             </div>
             {data.map((categories) => (
               <StyledCategoryList key={categories.categoryTitle}>
-                <CategoryLabel category={categories.categoryTitle} />
+                <CategoryLabel
+                  emoji={categories.emoji}
+                  title={categories.categoryTitle}
+                />
                 <CategoryItems items={categories.categoryItemList} />
               </StyledCategoryList>
             ))}

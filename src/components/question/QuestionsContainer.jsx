@@ -4,15 +4,16 @@ import CategoryLabel from '../category/CategoryLabel'
 import QuestionItem from './QuestionItem'
 
 function QuestionsContainer({ category, questions, offset }) {
+  console.log(category)
   return (
     <Item>
-      <CategoryLabel category={category} />
+      <CategoryLabel emoji={category.emoji} title={category.categoryTitle} />
 
       <List>
         {questions.map((question, index) => (
           <QuestionItem
             key={index}
-            category={category}
+            category={category.categoryTitle}
             questionNumber={offset + index + 1} // 0부터 시작해 +1
             question={question}
           />
