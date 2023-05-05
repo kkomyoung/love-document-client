@@ -29,7 +29,7 @@ const HomeRearch = () => {
           />
         </StyledResearchBoxSection>
 
-        <MyCategories openToastPopup={openToastPopup} />
+        <MyCategories />
         <MyStandards openToastPopup={openToastPopup} />
       </article>
       <ToastPopup />

@@ -6,9 +6,9 @@ import CategoryItems from '../../components/category/CategoryItems'
 import { getUsersCategories } from '../../apis'
 import { useQuery } from 'react-query'
 import Loading from '../../components/loading/Loading'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-const MyCategories = ({ openToastPopup }) => {
+const MyCategories = () => {
   const { data, isLoading } = useQuery('usersCategories', getUsersCategories)
 
   return (
@@ -19,18 +19,12 @@ const MyCategories = ({ openToastPopup }) => {
           <div className="innerBox">
             <div className="boxHead">
               <h4>내 카테고리</h4>
-              <button onClick={() => openToastPopup('서비스 준비 중입니다')}>
+              <Link to={'/home/category'}>
                 <i aria-hidden="true">
                   <IconEdit></IconEdit>
                 </i>
                 <span>편집</span>
-              </button>
-              {/* <Link to={'/home/category'}>
-                <i aria-hidden="true">
-                  <IconEdit></IconEdit>
-                </i>
-                <span>편집</span>
-              </Link> */}
+              </Link>
             </div>
             {data.map((categories) => (
               <StyledCategoryList key={categories.categoryTitle}>

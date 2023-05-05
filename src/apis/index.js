@@ -10,6 +10,8 @@ import {
   getQuestionsOfQuestioner,
   getQuestionsOfAnswerer,
   getQuetionerNickname,
+  getQuestionsCategories,
+  patchQuestions,
 } from './question'
 import { getCategories, postQuestions, getUsersCategories } from './category'
 import { postIdeal, getIdeals } from './ideal'
@@ -31,6 +33,8 @@ export {
   getQuestionsOfQuestioner,
   getQuestionsOfAnswerer,
   getQuetionerNickname,
+  getQuestionsCategories,
+  patchQuestions,
 
   // Ideal
   postIdeal,

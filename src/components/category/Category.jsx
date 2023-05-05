@@ -5,7 +5,12 @@ import CategoryLabel from './CategoryLabel'
 const CategoryItem = ({ item, name }) => {
   return (
     <Item>
-      <input type="checkbox" name={name} id={item.id} />
+      <input
+        type="checkbox"
+        name={name}
+        id={item.id}
+        defaultChecked={item.selected === 'Y'}
+      />
       <label htmlFor={item.id}>
         <i aria-hidden="true"></i>
         <span>{item.title}</span>
