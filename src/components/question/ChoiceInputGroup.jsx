@@ -4,7 +4,13 @@ import ExampleButton from './ExampleButton'
 import { useRecoilState } from 'recoil'
 import { answerAtom } from '../../utils/atoms'
 
-function ChoiceInputGroup({ questionId, questionType, multiple, examples }) {
+function ChoiceInputGroup({
+  questionId,
+  questionType,
+  multiple,
+  examples,
+  answeredChoices,
+}) {
   const [answer, setAnswer] = useRecoilState(answerAtom)
   const onChoiceButtonClick = (exampleId) => {
     let choices = [exampleId]
@@ -53,6 +59,7 @@ function ChoiceInputGroup({ questionId, questionType, multiple, examples }) {
           content={example.content}
           answer={example.id}
           onClick={onChoiceButtonClick}
+          isChecked={answeredChoices && answeredChoices.includes(example.id)}
         />
       ))}
     </Box>

@@ -155,7 +155,7 @@ function QuestionItem({ questionNumber, question }) {
           questionType={type}
           multiple={multiple}
           examples={examples}
-          choices={choiceIdList}
+          answeredChoices={choiceIdList}
         />
       )}
 
