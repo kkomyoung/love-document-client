@@ -11,24 +11,32 @@ import useToastPopup from '../hooks/useToastPopup'
 import Loading from '../components/loading/Loading'
 
 function AnswersPage() {
-  const { data, refetch } = useQuery('usersAnswersList', getUsersAnswers)
+  const {
+    data,
+    refetch,
+    isLoading: answersIsLoading,
+  } = useQuery('usersAnswersList', getUsersAnswers)
 
   const { openToastPopup, ToastPopup } = useToastPopup()
 
-  const { mutate: removeAnswer, isLoading } = useMutation(deleteAnswer, {
-    onSuccess: (data) => {
-      refetch()
-    },
-    onError: () => {
-      openToastPopup('답변삭제를 실패했어요')
-    },
-  })
+  const { mutate: removeAnswer, isLoading: deleteIsLoading } = useMutation(
+    deleteAnswer,
+    {
+      onSuccess: (data) => {
+        refetch()
+      },
+      onError: () => {
+        openToastPopup('답변삭제를 실패했어요')
+      },
+    }
+  )
 
   const onDelete = (id) => removeAnswer(id)
 
   return (
     <StyledMain>
-      {isLoading && <Loading text="답변 삭제 중" />}
+      {answersIsLoading && <Loading text="답변 불러오는 중" />}
+      {deleteIsLoading && <Loading text="답변 삭제 중" />}
       <Header title="도착한 답변" btnBack></Header>
       <StyledAirticle>
         <TextArea>
