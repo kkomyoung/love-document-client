@@ -64,7 +64,9 @@ function AnswerPage() {
     postAnswer,
     {
       onSuccess: (data) => {
-        navigate(`/research/${params.questionId}/answer/complete`)
+        navigate(`/research/${params.questionId}/answer/complete`, {
+          state: { nickname: answer.nickname },
+        })
       },
       onError: () => {
         openToastPopup('답변하기에 실패했어요')
