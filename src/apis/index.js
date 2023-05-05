@@ -4,6 +4,9 @@ import {
   getUserInfo,
   postUserOverlap,
   getUsersAnswers,
+  patchNickname,
+  postPassword,
+  deleteUser,
 } from './user'
 import { postAnswer, getAnswerDetail, deleteAnswer } from './answer'
 import {
@@ -23,6 +26,9 @@ export {
   getUserInfo,
   postUserOverlap,
   getUsersAnswers,
+  patchNickname,
+  postPassword,
+  deleteUser,
 
   // Category
   getCategories,

@@ -68,7 +68,7 @@ const validatePassword = (value, setError, setErrorMessage) => {
     error = true
   } else if (value.length < 4 || value.length > 20) {
     setError(true)
-    setErrorMessage('1~10자 이내로 입력해주세요')
+    setErrorMessage('4~20자 이내로 입력해주세요')
     error = true
   } else if (regExp.test(value)) {
     setError(true)
@@ -77,6 +77,49 @@ const validatePassword = (value, setError, setErrorMessage) => {
   } else {
     setError(false)
     setErrorMessage('')
+  }
+
+  return !error
+}
+
+const validateNewPassword = (
+  newValue,
+  setNewError,
+  setNewErrorMessage,
+  confirmValue,
+  setConfirmError,
+  setConfirmErrorMessage
+) => {
+  let error = false
+
+  // 특수문자와 공백 제외
+  // eslint-disable-next-line no-useless-escape
+  const regExp = /\s/g
+
+  if (newValue === '' || confirmValue === '') {
+    setNewError(true)
+    setConfirmError(true)
+    setConfirmErrorMessage('새 비밀번호를 입력해주세요')
+    error = true
+  } else if (
+    newValue.length < 4 ||
+    newValue.length > 20 ||
+    confirmValue.length < 4 ||
+    confirmValue.length > 20
+  ) {
+    setNewError(true)
+    setConfirmError(true)
+    setConfirmErrorMessage('4~20자 이내로 입력해주세요')
+    error = true
+  } else if (regExp.test(newValue) || regExp.test(confirmValue)) {
+    setNewError(true)
+    setConfirmError(true)
+    setConfirmErrorMessage('공백을 제거해주세요')
+    error = true
+  } else {
+    setNewError(false)
+    setConfirmError(false)
+    setConfirmErrorMessage('')
   }
 
   return !error
@@ -116,4 +159,9 @@ const validateLogin = (
   return !error
 }
 
-export { validateNickname, validatePassword, validateLogin }
+export {
+  validateNickname,
+  validatePassword,
+  validateNewPassword,
+  validateLogin,
+}

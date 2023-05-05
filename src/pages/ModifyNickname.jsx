@@ -6,14 +6,40 @@ import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import { TextArea, Title, TextDesc } from '../components/texts/Texts'
 import LoginInput from '../components/form/LoginInput'
 import { validateNickname } from '../utils/validate'
+import { useMutation } from 'react-query'
+import { patchNickname } from '../apis'
+import useModal from '../hooks/useModal'
 
 const ModifyNickname = () => {
+  const { Modal, openModal } = useModal()
   const [nickname, setNickname] = useState(localStorage.getItem('nickname'))
   const [error, setError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
+  const { mutate } = useMutation(patchNickname, {
+    onSuccess: (data) => {
+      localStorage.setItem('nickname', data.nickname)
+      localStorage.setItem('token', data.token)
+      openModal({
+        type: 'alert',
+        title: '닉네임이 변경되었습니다',
+        desc: `${nickname}`,
+        btnConfirm: {
+          text: '확인',
+        },
+      })
+    },
+  })
 
   const handlerModify = async () => {
-    await validateNickname(nickname, setError, setErrorMessage)
+    const nicknameValid = await validateNickname(
+      nickname,
+      setError,
+      setErrorMessage
+    )
+
+    if (nicknameValid) {
+      mutate({ nickname })
+    }
   }
 
   return (
@@ -41,6 +67,7 @@ const ModifyNickname = () => {
           </ButtonArea>
         </StyledFixedArea>
       </article>
+      <Modal />
     </StyledMain>
   )
 }

@@ -20,8 +20,8 @@ const Setting = () => {
     btnConfirm: {
       text: '네',
       fn: () => {
-        // console.log('로그아웃')
-        navigate('/')
+        navigate('/', { replace: true })
+        localStorage.clear()
       },
     },
   }

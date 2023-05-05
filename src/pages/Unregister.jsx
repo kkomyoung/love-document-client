@@ -1,31 +1,35 @@
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import { TextArea, Title, TextDesc } from '../components/texts/Texts'
-import QuestionInput from '../components/question/QuestionInput'
-import ExampleButton from '../components/question/ExampleButton'
 import { useNavigate } from 'react-router-dom'
 import useModal from '../hooks/useModal'
+import { useMutation } from 'react-query'
+import { deleteUser } from '../apis'
 
 const Unregister = () => {
+  const formRef = useRef()
+  const [reasonTextValue, setReasonTextValue] = useState('')
+  const [reason, setReason] = useState('')
   const navigate = useNavigate()
   const { Modal, openModal } = useModal()
+  const { mutate } = useMutation(deleteUser, {
+    onSuccess: () => {
+      navigate('/', { replace: true })
+      localStorage.clear()
+    },
+  })
 
-  const modalData = {
-    type: 'alert',
-    title: '탈퇴하기',
-    desc: '정말 탈퇴하실 건가요?',
-    btnCancel: {
-      text: '계속 쓸게요',
-    },
-    btnConfirm: {
-      text: '네, 탈퇴할게요',
-      fn: () => {
-        // console.log('탈퇴')
-        navigate('/')
-      },
-    },
+  const submitForm = () => {
+    const checkedOptions = Array.from(formRef.current.querySelectorAll('input'))
+      .filter((input) => input.checked)
+      .map((option) => option.value)
+
+    if (reasonTextValue !== '') {
+      checkedOptions.push(` 기타사유 : ${reasonTextValue}`)
+    }
+    setReason(checkedOptions.join())
   }
 
   return (
@@ -41,36 +45,69 @@ const Unregister = () => {
             <StyledQuestionTitle>
               <span>Q</span>탈퇴 사유를 알려주세요
             </StyledQuestionTitle>
-            <StyledBox>
-              <ExampleButton
-                name="unregister"
-                exampleId="unregister_01"
-                content="생각했던 서비스가 아니에요"
-              />
-              <ExampleButton
-                name="unregister"
-                exampleId="unregister_02"
-                content="삭제하고 싶은 내용이 있어요"
-              />
-              <ExampleButton
-                name="unregister"
-                exampleId="unregister_03"
-                content="더 이상 사용하지 않아요"
-              />
-            </StyledBox>
-            <QuestionInput
-              questionId="unregisterQ"
-              name="기타 사유"
-              type="text"
-              placeholder="기타 사유를 알려주세요"
-            />
+            <StyledReasonForm>
+              <form ref={formRef} onChange={submitForm}>
+                <div className="reasonRadio">
+                  <input
+                    id="reason01"
+                    type="radio"
+                    name="reason"
+                    value="생각했던 서비스가 아니에요"
+                  />
+                  <label htmlFor="reason01">생각했던 서비스가 아니에요</label>
+                </div>
+                <div className="reasonRadio">
+                  <input
+                    id="reason02"
+                    type="radio"
+                    name="reason"
+                    value="삭제하고 싶은 내용이 있어요"
+                  />
+                  <label htmlFor="reason02">삭제하고 싶은 내용이 있어요</label>
+                </div>
+                <div className="reasonRadio">
+                  <input
+                    id="reason03"
+                    type="radio"
+                    name="reason"
+                    value="더 이상 사용하지 않아요"
+                  />
+                  <label htmlFor="reason03">더 이상 사용하지 않아요</label>
+                </div>
+                <div className="reasonText">
+                  <input
+                    type="text"
+                    id="reason04"
+                    name="reason"
+                    placeholder="기타 사유를 알려주세요"
+                    value={reasonTextValue}
+                    onChange={(e) => setReasonTextValue(e.target.value)}
+                  />
+                </div>
+              </form>
+            </StyledReasonForm>
           </div>
         </StyledMenuWrap>
         <ButtonArea margin="10rem 0 0 0">
           <RoundButton
             size="large"
             text="탈퇴하기"
-            onClick={() => openModal(modalData)}
+            onClick={() => {
+              openModal({
+                type: 'alert',
+                title: '탈퇴하기',
+                desc: '정말 탈퇴하실 건가요?',
+                btnCancel: {
+                  text: '계속 쓸게요',
+                },
+                btnConfirm: {
+                  text: '네, 탈퇴할게요',
+                  fn: () => {
+                    mutate({ reason })
+                  },
+                },
+              })
+            }}
           />
         </ButtonArea>
       </article>
@@ -112,17 +149,62 @@ const StyledQuestionTitle = styled.h4`
   }
 `
 
-const StyledBox = styled.ul`
-  display: flex;
-  flex-direction: column;
+const StyledReasonForm = styled.ul`
   margin: 2rem 0 0.8rem;
 
-  button > label {
-    width: 100%;
+  .reasonRadio {
+    input {
+      ${(props) => props.theme.a11yHidden}
+    }
+
+    input + label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: 5.3rem;
+      background-color: ${(props) => props.theme.bgColor};
+      ${(props) => props.theme.fontSize.label_m_m}
+      color: ${(props) => props.theme.gray900};
+      transition: 0.3s;
+      width: 100%;
+      height: 5.2rem;
+      cursor: pointer;
+      border: 1px solid ${(props) => props.theme.gray300};
+      margin-bottom: 0.8rem;
+    }
+
+    input:checked + label {
+      background-color: ${(props) => props.theme.pink700};
+      color: ${(props) => props.theme.bgColor};
+    }
   }
 
-  button + button {
-    margin-top: 0.8rem;
+  .reasonText {
+    display: flex;
+    border: 1px solid
+      ${(props) => (props.error ? props.theme.pink700 : props.theme.gray500)};
+    border-radius: 0.8rem;
+    overflow: hidden;
+    height: 4.8rem;
+
+    input {
+      font-size: 1.6rem;
+      flex-grow: 1;
+      height: 100%;
+      border: none;
+      padding: 0 1.2rem;
+      ${(props) => props.theme.fontSize.lable_m_m}
+      color: ${(props) => props.theme.gray900};
+
+      &:focus {
+        outline: none;
+      }
+
+      &::placeholder {
+        color: ${(props) => props.theme.gray400};
+      }
+    }
   }
 `
 export default Unregister

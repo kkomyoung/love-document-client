@@ -34,3 +34,26 @@ export const getUsersAnswers = async () => {
   const { data } = await instance.get('/users/answers')
   return data
 }
+// 닉네임 변경
+export const patchNickname = async ({ nickname }) => {
+  const { data } = await instance.patch('/users/nickname', {
+    nickname,
+  })
+  return data
+}
+
+// 현재 비밀번호 확인
+export const postPassword = async ({ nowPassword }) => {
+  const { data } = await instance.post('/users/password', {
+    nowPassword,
+  })
+  return data
+}
+
+// 회원 탈퇴
+export const deleteUser = async ({ reason }) => {
+  const { data } = await instance.delete('/users', {
+    reason,
+  })
+  return data
+}
