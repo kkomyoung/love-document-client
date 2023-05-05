@@ -15,9 +15,8 @@ import useModal from '../hooks/useModal'
 import { THUMBNAIL_URL } from '../utils/constants'
 import { useMutation, useQuery } from 'react-query'
 import { deleteAnswer, getAnswerDetail } from '../apis'
-import { useNavigate, useParams } from 'react-router-dom'
 import Loading from '../components/loading/Loading'
-
+import { useNavigate, useParams } from 'react-router-dom'
 const AnswerDetailPage = () => {
   const params = useParams()
   const navigate = useNavigate()
