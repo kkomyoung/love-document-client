@@ -8,10 +8,10 @@ import QuestionsContainer from '../components/question/QuestionsContainer'
 import { RoundButton, ButtonArea } from '../components/buttons/Buttons'
 import { useQuery, useMutation } from 'react-query'
 import { getQuestionsOfQuestioner } from '../apis/question'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useResetRecoilState } from 'recoil'
 import { answerAtom } from '../utils/atoms'
 import useToastPopup from '../hooks/useToastPopup'
-import { postIdeal } from '../apis'
+import { patchIdeal } from '../apis'
 import useQuestion from '../hooks/useQuestion'
 import Loading from '../components/loading/Loading'
 
@@ -25,15 +25,16 @@ function StandardEditPage() {
   const { getQuestionNumberOffset, isNotAllAnswered, isSameAnswered } =
     useQuestion(0)
   const [answer, setAnswer] = useRecoilState(answerAtom)
+  const resetAnswer = useResetRecoilState(answerAtom)
   const [answerds, setAnswereds] = useState([])
 
   useEffect(() => {
     if (!categoryQuestions) return
 
-    const answereds = []
+    const answerList = []
     categoryQuestions.forEach((categoryQuetion) => {
       categoryQuetion.categoryItemInfoList.forEach((answered) => {
-        answereds.push({
+        answerList.push({
           categoryItemId: answered.id,
           questionType: answered.type,
           rangeList: answered.rangeList,
@@ -44,15 +45,16 @@ function StandardEditPage() {
       })
     })
 
-    setAnswereds(answereds) // 기존 답안 목록 저장
-    setAnswer((prev) => ({ ...prev, answeredList: answereds })) // 기존 답안 atom에 저장
+    setAnswereds(answerList) // 기존 답안 목록 저장
+    setAnswer((prev) => ({ ...prev, answerList })) // 기존 답안 atom에 저장
   }, [categoryQuestions])
 
-  const { mutate: writeIdeal, isLoading: isWriteIdealLoading } = useMutation(
-    postIdeal,
+  const { mutate: modifyIdeal, isLoading: isModifyIdealLoading } = useMutation(
+    patchIdeal,
     {
       onSuccess: (data) => {
-        navigate('/research/standard/complete')
+        resetAnswer()
+        navigate(-1)
       },
       onError: () => {
         openToastPopup('기준을 수정하는데 실패했어요')
@@ -61,14 +63,25 @@ function StandardEditPage() {
   )
 
   const onConfirmButtonClick = () => {
+    if (isModifyIdealLoading) return
+    if (!categoryQuestions && !answer) return
+
     if (isSameAnswered(answerds, answer.answerList)) {
-      openToastPopup('기준이 이전과 같아요')
+      openToastPopup('내 기준이 이전과 같아요')
+      return
     }
+
+    if (isNotAllAnswered('ideal', answer)) {
+      openToastPopup('아직 응답하지 않은 항목이 있어요')
+      return
+    }
+
+    modifyIdeal({ idealList: answer.answerList })
   }
 
   return (
     <StyledMain>
-      {(isWriteIdealLoading || isGetQuestionsLoading) && (
+      {(isModifyIdealLoading || isGetQuestionsLoading) && (
         <Loading
           text={isGetQuestionsLoading ? '질문지 불러오는 중' : '답안 저장 중'}
         />
