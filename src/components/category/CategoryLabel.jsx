@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 
-function CategoryLabel({ category }) {
+function CategoryLabel({ emoji, title }) {
   return (
     <StyledLabel>
       <strong>
-        <i aria-hidden="true">👀</i>
-        {category}
+        <i aria-hidden="true">{emoji}</i>
+        {title}
       </strong>
     </StyledLabel>
   )

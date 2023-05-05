@@ -26,7 +26,7 @@ const CategoryItemList = ({ itemList, name }) => {
 const CategoryBox = ({ category }) => {
   return (
     <Box>
-      <CategoryLabel category={category.title} />
+      <CategoryLabel emoji={category.emoji} title={category.title} />
       <CategoryItemList
         itemList={category.categoryItemList}
         name={category.title}
