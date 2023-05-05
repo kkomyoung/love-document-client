@@ -14,7 +14,7 @@ import {
   patchQuestions,
 } from './question'
 import { getCategories, postQuestions, getUsersCategories } from './category'
-import { postIdeal, getIdeals } from './ideal'
+import { postIdeal, getIdeals, patchIdeal } from './ideal'
 
 export {
   // User
@@ -39,6 +39,7 @@ export {
   // Ideal
   postIdeal,
   getIdeals,
+  patchIdeal,
 
   // Answer,
   postAnswer,
