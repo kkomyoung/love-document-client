@@ -1,13 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Header from '../components/header/Header'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import { Title, TextDesc } from '../components/texts/Texts'
 import { ReactComponent as ImgHeartWing } from '../assets/img_heart_wing.svg'
 
 const AnswerComplete = () => {
-  const name = '사과'
+  const {
+    state: { nickname },
+  } = useLocation()
 
   return (
     <StyledMain>
@@ -18,9 +20,9 @@ const AnswerComplete = () => {
         </StyledImgWrap>
         <Title>답변 전달 완료</Title>
         <TextDesc>
-          <span>{name}님의 답변이 전달되었어요.</span>
+          <span>{nickname}님의 답변이 전달되었어요.</span>
           <br />
-          <span>{name}님도 질문지를 만들어 상대에게 전달해보세요 😍</span>
+          <span>{nickname}님도 질문지를 만들어 상대에게 전달해보세요 😍</span>
         </TextDesc>
         <ButtonArea margin="6.2rem 0 0 0">
           <RoundButton
