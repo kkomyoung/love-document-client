@@ -33,7 +33,7 @@ function StandardPage() {
         navigate('/research/standard/complete')
       },
       onError: () => {
-        openToastPopup('')
+        openToastPopup('내 기준 작성에 실패했어요')
       },
     }
   )
@@ -46,6 +46,7 @@ function StandardPage() {
       openToastPopup('아직 응답하지 않은 항목이 있어요.')
       return
     }
+
     writeIdeal({ idealList: answer.answerList })
   }
 

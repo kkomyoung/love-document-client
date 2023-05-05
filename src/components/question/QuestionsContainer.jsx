@@ -4,7 +4,6 @@ import CategoryLabel from '../category/CategoryLabel'
 import QuestionItem from './QuestionItem'
 
 function QuestionsContainer({ category, questions, offset }) {
-  console.log(category)
   return (
     <Item>
       <CategoryLabel emoji={category.emoji} title={category.categoryTitle} />
