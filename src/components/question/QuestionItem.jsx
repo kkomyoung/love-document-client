@@ -183,7 +183,7 @@ function QuestionItem({ questionNumber, question }) {
         <RangeInputGroup
           questionId={id}
           questionType={type}
-          range={rangeList}
+          answeredRange={rangeList}
         />
       )}
     </Item>

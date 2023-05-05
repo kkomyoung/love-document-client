@@ -4,8 +4,8 @@ import styled from 'styled-components'
 import { useSetRecoilState } from 'recoil'
 import { answerAtom } from '../../utils/atoms'
 
-function RangeInputGroup({ questionId, questionType }) {
-  const { register, watch } = useForm()
+function RangeInputGroup({ questionId, questionType, answeredRange }) {
+  const { register, watch, setValue } = useForm()
   const setAnswer = useSetRecoilState(answerAtom)
   const minimum = watch('minimum')
   const maximum = watch('maximum')
@@ -15,6 +15,13 @@ function RangeInputGroup({ questionId, questionType }) {
       e.target.value = e.target.value.slice(0, e.target.maxLength)
     }
   }
+
+  useEffect(() => {
+    if (answeredRange) {
+      setValue('minimum', answeredRange[0])
+      setValue('maximum', answeredRange[1])
+    }
+  }, [answeredRange, setValue])
 
   useEffect(() => {
     if (minimum && minimum.length > 0 && maximum && maximum.length > 0) {
