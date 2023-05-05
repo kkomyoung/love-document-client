@@ -163,7 +163,7 @@ const AnswerDetailPage = () => {
                 {data.categoryInfoList &&
                   data.categoryInfoList.map((info, index) => (
                     <AnswerResultContainerItem key={index}>
-                      <CategoryLabel category={info.title} />
+                      <CategoryLabel emoji={info.emoji} title={info.title} />
                       <AnswerResultList>
                         {info.itemList.map((item, index) => (
                           <AnswerResultItem
