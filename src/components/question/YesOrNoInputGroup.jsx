@@ -9,7 +9,7 @@ function YesOrNoInputGroup({
   questionType,
   positiveLabel,
   negativeLabel,
-  yn = 'N',
+  yn,
 }) {
   const setAnswer = useSetRecoilState(answerAtom)
   const onYesOrNotButtonClick = (yn) => {
