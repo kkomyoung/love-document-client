@@ -84,7 +84,7 @@ const AnswerDetailPage = () => {
         />
       )}
       <Header
-        title="질문지 준비 완료"
+        title="답변 상세"
         btnBack
         btnDelete={() => openModal(removeAnswerModalData)}
       />
@@ -129,7 +129,7 @@ const AnswerDetailPage = () => {
                     <PercentageTitleText>
                       {data.percentage}% 일치
                       <span>
-                        {data.matchCnt}/{data.totalCnt}
+                        ({data.matchCnt}/{data.totalCnt})
                       </span>
                     </PercentageTitleText>
 
@@ -184,7 +184,11 @@ const AnswerDetailPage = () => {
                               ) : null}
                               {item.answerInfo.end}
                             </AnswerText>
-                            {item.ideal && <IdealText>{item.ideal}</IdealText>}
+                            {item.ideal && (
+                              <IdealText>
+                                <p>{item.ideal}</p>
+                              </IdealText>
+                            )}
                           </AnswerResultItem>
                         ))}
                       </AnswerResultList>
@@ -236,7 +240,7 @@ const StyledMain = styled.main`
 `
 
 const StyledAirticle = styled.article`
-  padding: 0 2.4rem;
+  /* padding: 0 2.4rem; */
 
   h1 > span {
     color: ${(props) => props.theme.blue500};
@@ -269,15 +273,16 @@ const VerticalLine = styled.span`
 `
 
 const PercentageSection = styled.section`
-  display: flex;
-  background-color: ${(props) => props.theme.pink300};
-  border-radius: 0.8rem;
-  padding: 1.2rem;
+  padding: 0 2.4rem;
+  margin-top: 2rem;
 `
 
 const PercentageBox = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 3.2rem 2rem;
+  background-color: ${(props) => props.theme.pink300};
+  border-radius: 0.8rem;
 `
 
 const PercentageRow = styled.div`
@@ -335,6 +340,7 @@ const CategoryItemItem = styled.li`
 `
 
 const AnswerResultSection = styled.section`
+  padding: 0 2.4rem;
   margin-top: 4.5rem;
 `
 
@@ -371,13 +377,35 @@ const AnswerText = styled.p`
   }
 `
 
-const IdealText = styled.p`
-  ${(props) => props.theme.fontSize.label_s_m}
-  color: ${(props) => props.theme.gray700};
+const IdealText = styled.div`
   margin-top: 1.2rem;
+  text-align: right;
+  p {
+    position: relative;
+    ${(props) => props.theme.fontSize.label_s_m}
+    color: ${(props) => props.theme.gray700};
+    display: inline-flex;
+    padding: 1rem;
+    background: ${(props) => props.theme.gray300};
+    border-radius: 0.8rem;
+    margin-right: 0.8rem;
+
+    &:before {
+      position: absolute;
+      right: -0.8rem;
+      bottom: 1rem;
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border-top: 0.8rem solid ${(props) => props.theme.gray300};
+      border-right: 1rem solid transparent;
+    }
+  }
 `
 
 const InformSection = styled.section`
   margin-top: 4.8rem;
+  padding: 0 2.4rem;
 `
 export default AnswerDetailPage

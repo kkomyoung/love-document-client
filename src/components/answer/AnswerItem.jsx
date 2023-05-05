@@ -40,7 +40,7 @@ function AnswerItem({
   return (
     <Item>
       <Box onPointerDown={onPointerDown} onPointerUp={onPointerUp} ref={ref}>
-        <Col as={Link} to={`/home/answers/${answerId}`}>
+        <LeftCol as={Link} to={`/home/answers/${answerId}`}>
           <NicknameText>
             <NicknamePinkText>{nickname}</NicknamePinkText>님의 답변
             <i aria-hidden="true">
@@ -54,13 +54,13 @@ function AnswerItem({
             <VerticalLine />
             <InfoText>{live}</InfoText>
           </InfoParagraph>
-        </Col>
-        <Col alignRight>
+        </LeftCol>
+        <RightCol>
           <MatchText>{show === 'N' ? '??' : percentage}% 일치</MatchText>
           <InfoText>
             {dateTime.substr(5, 2)}월 {dateTime.substr(8, 2)}일
           </InfoText>
-        </Col>
+        </RightCol>
       </Box>
       <DeleteButton onClick={() => onDelete(answerId)}>
         <IconTrashCan />
@@ -90,13 +90,6 @@ const Box = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 2.4rem 2rem;
-
-  /* & > a {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2.4rem 2rem;
-  } */
 `
 
 const DeleteButton = styled.button`
@@ -112,12 +105,21 @@ const DeleteButton = styled.button`
   cursor: pointer;
 `
 
-const Col = styled.div`
+const LeftCol = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  max-width: 60%;
+
+  align-items: start;
+`
+
+const RightCol = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
 
-  align-items: ${(props) => (props.alignRight ? 'end' : 'start')};
+  align-items: end;
 `
 
 const NicknameText = styled.span`
@@ -130,11 +132,13 @@ const NicknameText = styled.span`
     width: 2rem;
     height: 2rem;
     margin-left: 0.5rem;
+    vertical-align: top;
   }
 `
 
 const NicknamePinkText = styled.span`
   color: ${(props) => props.theme.pink700};
+  word-break: break-all;
 `
 
 const InfoParagraph = styled.p`

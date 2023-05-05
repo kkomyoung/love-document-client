@@ -12,7 +12,7 @@ import Loading from '../components/loading/Loading'
 
 function AnswersPage() {
   const { data, refetch } = useQuery('usersAnswersList', getUsersAnswers)
-  const dataLength = data?.length || 0
+
   const { openToastPopup, ToastPopup } = useToastPopup()
 
   const { mutate: removeAnswer, isLoading } = useMutation(deleteAnswer, {
@@ -38,14 +38,15 @@ function AnswersPage() {
             </i>
             도착한 답변
           </Title>
-          {dataLength === 0 && (
-            <TextDesc>아직 도착한 답변이 없어요 :(</TextDesc>
-          )}
+          {!data ||
+            (data.length === 0 && (
+              <TextDesc>아직 도착한 답변이 없어요 :(</TextDesc>
+            ))}
         </TextArea>
 
         <StyledAnswersSection>
           <AnswerList>
-            {dataLength === 0 && <NoDataAnswerItem />}
+            {!data || (data.length === 0 && <NoDataAnswerItem />)}
             {data &&
               data.map((answer) => (
                 <AnswerItem
