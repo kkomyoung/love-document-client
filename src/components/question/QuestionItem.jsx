@@ -39,9 +39,9 @@ const categoryItemInfoList = [
       },
     ],
     choiceIdList: [],
-    rangeNumList: [],
-    scoreNumList: [],
-    ynBoolList: [],
+    rangeList: [],
+    score: 2,
+    yn: null,
   },
   {
     id: 8,
@@ -120,6 +120,10 @@ function QuestionItem({ questionNumber, question }) {
     positiveLabel,
     negativeLabel,
     placeholder,
+    choiceIdList,
+    rangeList,
+    score,
+    yn,
   } = question
 
   return (
@@ -151,6 +155,7 @@ function QuestionItem({ questionNumber, question }) {
           questionType={type}
           multiple={multiple}
           examples={examples}
+          choices={choiceIdList}
         />
       )}
 
@@ -160,6 +165,7 @@ function QuestionItem({ questionNumber, question }) {
           questionType={type}
           positiveLabel={positiveLabel}
           negativeLabel={negativeLabel}
+          yn={yn}
         />
       )}
 
@@ -169,11 +175,16 @@ function QuestionItem({ questionNumber, question }) {
           questionType={type}
           positiveLabel={positiveLabel}
           negativeLabel={negativeLabel}
+          score={score}
         />
       )}
 
       {question.type === QUESTION_TYPE.RANGE && (
-        <RangeInputGroup questionId={id} questionType={type} />
+        <RangeInputGroup
+          questionId={id}
+          questionType={type}
+          range={rangeList}
+        />
       )}
     </Item>
   )

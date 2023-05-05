@@ -9,6 +9,7 @@ function YesOrNoInputGroup({
   questionType,
   positiveLabel,
   negativeLabel,
+  yn = 'N',
 }) {
   const setAnswer = useSetRecoilState(answerAtom)
   const onYesOrNotButtonClick = (yn) => {
@@ -38,6 +39,7 @@ function YesOrNoInputGroup({
         content={negativeLabel}
         answer={'N'}
         onClick={onYesOrNotButtonClick}
+        isChecked={yn === 'N'}
       />
       <ExampleButton
         name={`${questionType}#${questionId}`}
@@ -45,6 +47,7 @@ function YesOrNoInputGroup({
         content={positiveLabel}
         answer={'Y'}
         onClick={onYesOrNotButtonClick}
+        isChecked={yn === 'Y'}
       />
     </Box>
   )
