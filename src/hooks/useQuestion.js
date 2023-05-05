@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+import { QUESTION_TYPE } from '../utils/constants'
+
 export default function useQuestionNumber(initLength) {
   let totalQuestionLength = initLength
 
@@ -23,5 +26,38 @@ export default function useQuestionNumber(initLength) {
     return false
   }
 
-  return { getQuestionNumberOffset, isNotAllAnswered }
+  const isSameAnswered = (answereds, answers) => {
+    const result = answereds.filter((answered) => {
+      let flag = false
+      const answer = answers.find(
+        (item) => item.categoryItemId === answered.categoryItemId
+      )
+      if (!answer) return flag
+
+      switch (answer.questionType) {
+        case QUESTION_TYPE.RANGE:
+          flag =
+            answer.rangeList[0] === answered.rangeList[0] &&
+            answer.rangeList[1] === answered.rangeList[1]
+          break
+        case QUESTION_TYPE.CHOICE:
+          flag =
+            JSON.stringify(answer.choiceIdList) ===
+            JSON.stringify(answered.choiceIdList)
+          break
+        case QUESTION_TYPE.SCORE:
+          flag = answer.score === answered.score
+          break
+        case QUESTION_TYPE.YN:
+          flag = answer.yn === answered.yn
+          break
+      }
+
+      return flag
+    })
+
+    return result.length === answers.length
+  }
+
+  return { getQuestionNumberOffset, isNotAllAnswered, isSameAnswered }
 }

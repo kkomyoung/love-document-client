@@ -18,8 +18,8 @@ function RangeInputGroup({ questionId, questionType, answeredRange }) {
 
   useEffect(() => {
     if (answeredRange) {
-      setValue('minimum', answeredRange[0])
-      setValue('maximum', answeredRange[1])
+      setValue('minimum', answeredRange[0].toString())
+      setValue('maximum', answeredRange[1].toString())
     }
   }, [answeredRange, setValue])
 

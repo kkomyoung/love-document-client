@@ -1,4 +1,5 @@
-import React from 'react'
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
 import { Link, useNavigate } from 'react-router-dom'
@@ -7,7 +8,7 @@ import QuestionsContainer from '../components/question/QuestionsContainer'
 import { RoundButton, ButtonArea } from '../components/buttons/Buttons'
 import { useQuery, useMutation } from 'react-query'
 import { getQuestionsOfQuestioner } from '../apis/question'
-import { useRecoilValue } from 'recoil'
+import { useRecoilState } from 'recoil'
 import { answerAtom } from '../utils/atoms'
 import useToastPopup from '../hooks/useToastPopup'
 import { postIdeal } from '../apis'
@@ -15,14 +16,37 @@ import useQuestion from '../hooks/useQuestion'
 import Loading from '../components/loading/Loading'
 
 function StandardEditPage() {
+  const navigate = useNavigate()
+  const { openToastPopup, ToastPopup } = useToastPopup()
   const { data: categoryQuestions, isLoading: isGetQuestionsLoading } =
     useQuery('quetioner-questions-edit', getQuestionsOfQuestioner, {
       refetchOnWindowFocus: false,
     })
-  const { getQuestionNumberOffset, isNotAllAnswered } = useQuestion(0)
-  const answer = useRecoilValue(answerAtom)
-  const { openToastPopup, ToastPopup } = useToastPopup()
-  const navigate = useNavigate()
+  const { getQuestionNumberOffset, isNotAllAnswered, isSameAnswered } =
+    useQuestion(0)
+  const [answer, setAnswer] = useRecoilState(answerAtom)
+  const [answerds, setAnswereds] = useState([])
+
+  useEffect(() => {
+    if (!categoryQuestions) return
+
+    const answereds = []
+    categoryQuestions.forEach((categoryQuetion) => {
+      categoryQuetion.categoryItemInfoList.forEach((answered) => {
+        answereds.push({
+          categoryItemId: answered.id,
+          questionType: answered.type,
+          rangeList: answered.rangeList,
+          yn: answered.yn,
+          score: answered.score,
+          choiceIdList: answered.choiceIdList,
+        })
+      })
+    })
+
+    setAnswereds(answereds) // 기존 답안 목록 저장
+    setAnswer((prev) => ({ ...prev, answeredList: answereds })) // 기존 답안 atom에 저장
+  }, [categoryQuestions])
 
   const { mutate: writeIdeal, isLoading: isWriteIdealLoading } = useMutation(
     postIdeal,
@@ -31,20 +55,15 @@ function StandardEditPage() {
         navigate('/research/standard/complete')
       },
       onError: () => {
-        openToastPopup('')
+        openToastPopup('기준을 수정하는데 실패했어요')
       },
     }
   )
 
   const onConfirmButtonClick = () => {
-    if (isWriteIdealLoading) return
-    if (!categoryQuestions && !answer) return
-
-    if (isNotAllAnswered('ideal', answer)) {
-      openToastPopup('아직 응답하지 않은 항목이 있어요.')
-      return
+    if (isSameAnswered(answerds, answer.answerList)) {
+      openToastPopup('기준이 이전과 같아요')
     }
-    writeIdeal({ idealList: answer.answerList })
   }
 
   return (

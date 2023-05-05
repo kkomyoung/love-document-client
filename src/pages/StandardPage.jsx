@@ -7,7 +7,7 @@ import QuestionsContainer from '../components/question/QuestionsContainer'
 import { RoundButton, ButtonArea } from '../components/buttons/Buttons'
 import { useQuery, useMutation } from 'react-query'
 import { getQuestionsOfQuestioner } from '../apis/question'
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useResetRecoilState } from 'recoil'
 import { answerAtom } from '../utils/atoms'
 import useToastPopup from '../hooks/useToastPopup'
 import { postIdeal } from '../apis'
@@ -21,6 +21,7 @@ function StandardPage() {
     })
   const { getQuestionNumberOffset, isNotAllAnswered } = useQuestion(0)
   const answer = useRecoilValue(answerAtom)
+  const resetAnswer = useResetRecoilState(answerAtom)
   const { openToastPopup, ToastPopup } = useToastPopup()
   const navigate = useNavigate()
 
@@ -28,6 +29,7 @@ function StandardPage() {
     postIdeal,
     {
       onSuccess: (data) => {
+        resetAnswer()
         navigate('/research/standard/complete')
       },
       onError: () => {
