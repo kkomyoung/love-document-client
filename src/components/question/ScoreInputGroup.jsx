@@ -9,6 +9,7 @@ function ScoreInputGroup({
   questionType,
   positiveLabel,
   negativeLabel,
+  answerScore,
 }) {
   const setAnswer = useSetRecoilState(answerAtom)
   const onScoreButtonClick = (score) => {
@@ -42,6 +43,7 @@ function ScoreInputGroup({
               name={`${questionType}#${questionId}`}
               value={score}
               onClick={() => onScoreButtonClick(score)}
+              defaultChecked={answerScore === score}
             />
             <label htmlFor={`${questionType}#${questionId}_${score}`} />
             <IconHeart fill="white" />

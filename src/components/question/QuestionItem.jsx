@@ -165,7 +165,7 @@ function QuestionItem({ questionNumber, question }) {
           questionType={type}
           positiveLabel={positiveLabel}
           negativeLabel={negativeLabel}
-          yn={yn}
+          answeredYn={yn}
         />
       )}
 
@@ -175,7 +175,7 @@ function QuestionItem({ questionNumber, question }) {
           questionType={type}
           positiveLabel={positiveLabel}
           negativeLabel={negativeLabel}
-          score={score}
+          answeredScore={score}
         />
       )}
 
