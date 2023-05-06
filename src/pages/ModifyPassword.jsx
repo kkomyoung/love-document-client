@@ -1,14 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
 import { TextArea, Title, TextDesc } from '../components/texts/Texts'
 import LoginInput from '../components/form/LoginInput'
 import { useMutation } from 'react-query'
-import { postPassword } from '../apis'
+import { patchPassword, postPassword } from '../apis'
 import { validateNewPassword } from '../utils/validate'
+import useModal from '../hooks/useModal'
+import { useNavigate } from 'react-router-dom'
 
 const ModifyPassword = () => {
+  const navigate = useNavigate()
+  const { Modal, openModal } = useModal()
   const [nowPassword, setNowPassword] = useState('')
   const [nowError, setNowError] = useState(false)
   const [nowErrorMessage, setNowErrorMessage] = useState('')
@@ -18,17 +22,45 @@ const ModifyPassword = () => {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [confirmError, setConfirmError] = useState(false)
   const [confirmErrorMessage, setConfirmErrorMessage] = useState('')
-  const [isValid02, setIsValid02] = useState(false)
+  const [isValid, setIsValid] = useState(false)
 
+  useEffect(() => {
+    if (isValid) {
+      if (nowPassword === newPassword) {
+        setNewError(true)
+        setConfirmError(true)
+        setConfirmErrorMessage('현재 비밀번호와 동일합니다')
+      } else {
+        patchPasswordMutate({
+          password: newPassword,
+          checkedPassword: confirmPassword,
+        })
+      }
+    }
+  }, [isValid])
+
+  // 비밀번호 변경
+  const { mutate: patchPasswordMutate } = useMutation(patchPassword, {
+    onSuccess: () => {
+      openModal({
+        type: 'alert',
+        title: '비밀번호가 변경되었습니다',
+        btnConfirm: {
+          text: '확인',
+          fn: () => {
+            navigate('/setting')
+          },
+        },
+      })
+    },
+  })
+
+  // 현재 비밀번호 확인
   const { mutate: postPasswordMutate } = useMutation(postPassword, {
     onSuccess: () => {
       setNowError(false)
       setNowErrorMessage('')
-
-      console.log(isValid02)
-      if (isValid02) {
-        console.log('변경 가능!!!!!!!')
-      }
+      setIsValid(false)
     },
     onError: () => {
       setNowError(true)
@@ -65,9 +97,11 @@ const ModifyPassword = () => {
         setNewError(true)
         setConfirmError(true)
         setConfirmErrorMessage('새 비밀번호가 일치하지 않습니다')
-        setIsValid02(true)
+        setIsValid(false)
       } else {
-        setIsValid02(false)
+        setNewError(false)
+        setConfirmError(false)
+        setIsValid(true)
       }
     }
   }
@@ -116,6 +150,7 @@ const ModifyPassword = () => {
           </ButtonArea>
         </StyledFixedArea>
       </article>
+      <Modal />
     </StyledMain>
   )
 }

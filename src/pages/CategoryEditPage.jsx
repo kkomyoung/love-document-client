@@ -90,7 +90,7 @@ const CategoryEditPage = () => {
     <StyledMain>
       {dataIsLoading && <Loading />}
       {patchQuestionsIsLoading && <Loading text="질문지 저장중" />}
-      <Header title="내 카테고리 편집" btnHome />
+      <Header title="내 카테고리 편집" btnBack />
       <article>
         <TextArea>
           <Title>내 카테고리 편집</Title>

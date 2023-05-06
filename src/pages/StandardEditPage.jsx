@@ -86,7 +86,7 @@ function StandardEditPage() {
           text={isGetQuestionsLoading ? '질문지 불러오는 중' : '답안 저장 중'}
         />
       )}
-      <Header title="내 기준 편집" btnHome />
+      <Header title="내 기준 편집" btnBack />
       <StyledAirticle>
         <TextArea>
           <Title>내 기준 편집</Title>

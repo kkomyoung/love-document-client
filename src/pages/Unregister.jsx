@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
@@ -7,8 +7,10 @@ import { useNavigate } from 'react-router-dom'
 import useModal from '../hooks/useModal'
 import { useMutation } from 'react-query'
 import { deleteUser } from '../apis'
+import useToastPopup from '../hooks/useToastPopup'
 
 const Unregister = () => {
+  const { openToastPopup, ToastPopup } = useToastPopup()
   const formRef = useRef()
   const [reasonTextValue, setReasonTextValue] = useState('')
   const [reason, setReason] = useState('')
@@ -21,15 +23,29 @@ const Unregister = () => {
     },
   })
 
+  useEffect(() => {
+    submitForm()
+  }, [reasonTextValue])
+
   const submitForm = () => {
     const checkedOptions = Array.from(formRef.current.querySelectorAll('input'))
       .filter((input) => input.checked)
       .map((option) => option.value)
 
     if (reasonTextValue !== '') {
-      checkedOptions.push(` 기타사유 : ${reasonTextValue}`)
+      checkedOptions.push(reasonTextValue)
     }
-    setReason(checkedOptions.join())
+    setReason(checkedOptions.join(', '))
+  }
+
+  const uncheckOtherCheckboxes = (e) => {
+    if (e.target.checked) {
+      formRef.current.elements.reason.forEach((elem) => {
+        if (elem !== e.target) {
+          elem.checked = false
+        }
+      })
+    }
   }
 
   return (
@@ -50,27 +66,36 @@ const Unregister = () => {
                 <div className="reasonRadio">
                   <input
                     id="reason01"
-                    type="radio"
+                    type="checkbox"
                     name="reason"
                     value="생각했던 서비스가 아니에요"
+                    onClick={(e) => {
+                      uncheckOtherCheckboxes(e)
+                    }}
                   />
                   <label htmlFor="reason01">생각했던 서비스가 아니에요</label>
                 </div>
                 <div className="reasonRadio">
                   <input
                     id="reason02"
-                    type="radio"
+                    type="checkbox"
                     name="reason"
                     value="삭제하고 싶은 내용이 있어요"
+                    onClick={(e) => {
+                      uncheckOtherCheckboxes(e)
+                    }}
                   />
                   <label htmlFor="reason02">삭제하고 싶은 내용이 있어요</label>
                 </div>
                 <div className="reasonRadio">
                   <input
                     id="reason03"
-                    type="radio"
+                    type="checkbox"
                     name="reason"
                     value="더 이상 사용하지 않아요"
+                    onClick={(e) => {
+                      uncheckOtherCheckboxes(e)
+                    }}
                   />
                   <label htmlFor="reason03">더 이상 사용하지 않아요</label>
                 </div>
@@ -81,6 +106,11 @@ const Unregister = () => {
                     name="reason"
                     placeholder="기타 사유를 알려주세요"
                     value={reasonTextValue}
+                    // onFocus={() =>
+                    //   formRef.current.elements.reason.forEach(
+                    //     (elem) => (elem.checked = false)
+                    //   )
+                    // }
                     onChange={(e) => setReasonTextValue(e.target.value)}
                   />
                 </div>
@@ -93,25 +123,31 @@ const Unregister = () => {
             size="large"
             text="탈퇴하기"
             onClick={() => {
-              openModal({
-                type: 'alert',
-                title: '탈퇴하기',
-                desc: '정말 탈퇴하실 건가요?',
-                btnCancel: {
-                  text: '계속 쓸게요',
-                },
-                btnConfirm: {
-                  text: '네, 탈퇴할게요',
-                  fn: () => {
-                    mutate({ reason })
+              if (reason === '') {
+                openToastPopup('탈퇴사유를 선택해주세요')
+              } else {
+                openModal({
+                  type: 'alert',
+                  title: '탈퇴하기',
+                  desc: '정말 탈퇴하실 건가요?',
+                  btnCancel: {
+                    text: '계속 쓸게요',
                   },
-                },
-              })
+                  btnConfirm: {
+                    text: '네, 탈퇴할게요',
+                    fn: () => {
+                      console.log(reason)
+                      mutate(reason)
+                    },
+                  },
+                })
+              }
             }}
           />
         </ButtonArea>
       </article>
       <Modal />
+      <ToastPopup />
     </StyledMain>
   )
 }

@@ -6,6 +6,7 @@ import {
   getUsersAnswers,
   patchNickname,
   postPassword,
+  patchPassword,
   deleteUser,
 } from './user'
 import { postAnswer, getAnswerDetail, deleteAnswer } from './answer'
@@ -28,6 +29,7 @@ export {
   getUsersAnswers,
   patchNickname,
   postPassword,
+  patchPassword,
   deleteUser,
 
   // Category

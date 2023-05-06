@@ -50,10 +50,21 @@ export const postPassword = async ({ nowPassword }) => {
   return data
 }
 
+// 비밀번호 변경
+export const patchPassword = async ({ password, checkedPassword }) => {
+  const { data } = await instance.patch('/users/password', {
+    password,
+    checkedPassword,
+  })
+  return data
+}
+
 // 회원 탈퇴
-export const deleteUser = async ({ reason }) => {
+export const deleteUser = async (reason) => {
   const { data } = await instance.delete('/users', {
-    reason,
+    data: {
+      reason,
+    },
   })
   return data
 }

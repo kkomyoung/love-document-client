@@ -9,8 +9,10 @@ import { validateNickname } from '../utils/validate'
 import { useMutation } from 'react-query'
 import { patchNickname } from '../apis'
 import useModal from '../hooks/useModal'
+import { useNavigate } from 'react-router-dom'
 
 const ModifyNickname = () => {
+  const navigate = useNavigate()
   const { Modal, openModal } = useModal()
   const [nickname, setNickname] = useState(localStorage.getItem('nickname'))
   const [error, setError] = useState(false)
@@ -25,6 +27,9 @@ const ModifyNickname = () => {
         desc: `${nickname}`,
         btnConfirm: {
           text: '확인',
+          fn: () => {
+            navigate('/setting')
+          },
         },
       })
     },
