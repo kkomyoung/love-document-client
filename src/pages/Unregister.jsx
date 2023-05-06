@@ -136,7 +136,6 @@ const Unregister = () => {
                   btnConfirm: {
                     text: '네, 탈퇴할게요',
                     fn: () => {
-                      console.log(reason)
                       mutate(reason)
                     },
                   },
