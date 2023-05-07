@@ -47,7 +47,7 @@ const Setting = () => {
                 as="a"
                 href="https://minuxx.notion.site/720831ba0d294d0685fd24bc1362b467"
                 target="_blank"
-                text="이메일 문의"
+                text="문의"
                 color="white"
                 border="true"
               />
