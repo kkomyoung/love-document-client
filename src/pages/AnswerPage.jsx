@@ -109,7 +109,7 @@ function AnswerPage() {
           <CategoryQuestionList>
             <QuestionsContainer
               key={0}
-              category={defaultCategoryQuestions.categoryTitle}
+              category={defaultCategoryQuestions}
               questions={defaultCategoryQuestions.categoryItemInfoList}
               offset={getQuestionNumberOffset(
                 defaultCategoryQuestions.categoryItemInfoList.length
@@ -120,7 +120,7 @@ function AnswerPage() {
               categoryQuestions.map((item, index) => (
                 <QuestionsContainer
                   key={index}
-                  category={item.categoryTitle}
+                  category={item}
                   questions={item.categoryItemInfoList}
                   offset={getQuestionNumberOffset(
                     item.categoryItemInfoList.length
