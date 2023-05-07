@@ -88,6 +88,9 @@ const Login = () => {
           <TextButton
             type="underline"
             text="로그인 정보를 잊었다면? 문의하기"
+            as="a"
+            href="https://minuxx.notion.site/720831ba0d294d0685fd24bc1362b467"
+            target="_blank"
           />
         </ButtonArea>
         <ButtonArea margin="4rem 0 0 0">

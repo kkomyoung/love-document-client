@@ -28,7 +28,16 @@ const StyledCircleButton = styled.button`
   background: #f6f6fc;
 `
 
-const TextButton = ({ text, type, as, to, onClick, disabled = false }) => {
+const TextButton = ({
+  text,
+  type,
+  as,
+  to,
+  onClick,
+  href,
+  target,
+  disabled = false,
+}) => {
   return (
     <StyledTextButton
       type={type}
@@ -36,6 +45,8 @@ const TextButton = ({ text, type, as, to, onClick, disabled = false }) => {
       to={to}
       onClick={onClick}
       disabled={disabled}
+      href={href}
+      target={target}
     >
       <span>{text}</span>
     </StyledTextButton>
