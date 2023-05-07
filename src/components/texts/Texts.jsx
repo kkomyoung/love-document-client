@@ -26,7 +26,7 @@ const StyledTitle = styled.h1`
   align-items: center;
   ${(props) => props.theme.fontSize.h1}
   color: ${(props) => props.theme.gray900};
-
+  flex-wrap: wrap;
   i {
     display: inline-flex;
     justify-content: center;

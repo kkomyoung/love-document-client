@@ -118,7 +118,7 @@ const AnswerDetailPage = () => {
 
             <PercentageSection>
               <PercentageBox>
-                <PercentageRow>
+                <PercentageRow align={data.percentage === 100 && 'center'}>
                   {data.percentage === 100 ? (
                     <HeartPuzzleImg />
                   ) : (
@@ -287,6 +287,14 @@ const PercentageBox = styled.div`
 const PercentageRow = styled.div`
   display: flex;
   flex-direction: row;
+  ${(props) => {
+    if (props.align === 'center') {
+      return `
+      align-items: center;
+      h3 {margin-top: 0}
+      `
+    }
+  }}
 `
 
 const PercentageCol = styled.div``
