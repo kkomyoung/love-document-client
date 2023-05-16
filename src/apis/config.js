@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const BASE_URL = 'http://api-dev.love-document.com'
+const BASE_URL = 'https://api-dev.love-document.com'
 
 export function getToken() {
   if (typeof window !== 'undefined') {
