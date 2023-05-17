@@ -25,9 +25,7 @@ function Register({
           <span>질문지 저장</span>
         </SubTitle>
         <TextDesc>
-          <span>상대의 답변을 확인하려면 질문지를 저장해야해요</span>
-          <br />
-          <span>확인용 닉네임과 비밀번호를 설정해주세요</span>
+          <span>상대의 답변을 받아보기 위해서는 질문지를 저장해야해요</span>
         </TextDesc>
       </SubTextArea>
       <StyledLoginFormArea>

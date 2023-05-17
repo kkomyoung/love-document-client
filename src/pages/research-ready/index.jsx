@@ -39,7 +39,7 @@ function ResearchReady() {
   const onDelete = (id) => removeAnswer(id)
 
   const onCopyURL = () => {
-    openToastPopup('설문지링크가 복사되었습니다.')
+    openToastPopup('링크가 복사되었어요')
   }
 
   return (

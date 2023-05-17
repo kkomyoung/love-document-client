@@ -20,9 +20,11 @@ const AnswerComplete = () => {
         </StyledImgWrap>
         <Title>답변 전달 완료</Title>
         <TextDesc>
-          <span>{nickname}님의 답변이 전달되었어요.</span>
+          <span>{nickname}님의 답변이 전달되었어요.😍</span>
           <br />
-          <span>{nickname}님도 질문지를 만들어 상대에게 전달해보세요 😍</span>
+          <span>주선자를 통해 성사 여부를 확인해주세요!</span>
+          <br />
+          <span>{nickname}님도 질문지를 만들어보시겠어요?</span>
         </TextDesc>
         <ButtonArea margin="6.2rem 0 0 0">
           <RoundButton

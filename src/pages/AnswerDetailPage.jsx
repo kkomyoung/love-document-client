@@ -35,11 +35,11 @@ const AnswerDetailPage = () => {
       type: 'share',
       title: isAccept ? '소개팅 할게요!' : '다른 좋은 인연이 있겠죠',
       desc: '주선자에게 의사를 전달해보세요',
-      researchURL: `http://www.love-document.com/research/${user.linkId}`,
+      researchURL: `https://www.love-document.com/research/${user.linkId}`,
       thumbnailURL: isAccept ? THUMBNAIL_URL.ACCEPT : THUMBNAIL_URL.REJECT,
       btnCancel: {
         fn: () => {
-          openToastPopup('설문지 링크가 복사되었어요')
+          openToastPopup('링크가 복사되었어요')
           closeModal()
         },
       },

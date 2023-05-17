@@ -25,7 +25,7 @@ const HomeRearch = () => {
         </TextArea>
         <StyledResearchBoxSection>
           <ShareResearchBox
-            onCopyURL={() => openToastPopup('설문지링크가 복사되었습니다.')}
+            onCopyURL={() => openToastPopup('링크가 복사되었어요')}
           />
         </StyledResearchBoxSection>
 
