@@ -15,7 +15,7 @@ import useToastPopup from '../../hooks/useToastPopup'
 import useModal from '../../hooks/useModal'
 import { useNavigate } from 'react-router-dom'
 import { useMutation, useQuery } from 'react-query'
-import { deleteAnswer, getUsersAnswers } from '../../apis'
+import { deleteAnswer, deleteUser, getUsersAnswers } from '../../apis'
 import NoDataAnswerItem from '../../components/answer/NoDataAnswerItem'
 import Loading from '../../components/loading/Loading'
 
@@ -26,6 +26,13 @@ function ResearchReady() {
 
   const { data, refetch } = useQuery('usersAnswersList', getUsersAnswers)
   const dataLength = data?.length || 0
+
+  const { mutate: unregister } = useMutation(deleteUser, {
+    onSuccess: () => {
+      navigate('/research', { replace: true })
+      localStorage.clear()
+    },
+  })
 
   const { mutate: removeAnswer, isLoading } = useMutation(deleteAnswer, {
     onSuccess: (data) => {
@@ -59,7 +66,7 @@ function ResearchReady() {
               text: '네',
               fn: () => {
                 // TODO 회원가입 정보 리셋해야 함
-                navigate(-1)
+                unregister('질문지 준비 완료 후 뒤로가기 버튼 클릭')
               },
             },
           })

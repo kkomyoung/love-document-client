@@ -23,16 +23,24 @@ import AnswerDetailPage from './pages/AnswerDetailPage'
 import CategoryEditPage from './pages/CategoryEditPage'
 
 function requireLogin(Component) {
-  const navigate = useNavigate()
-  const isLoggedIn = !!localStorage.getItem('nickname')
+  function AuthenticatedComponent() {
+    const navigate = useNavigate()
+    const isLoggedIn = !!localStorage.getItem('nickname')
 
-  useEffect(() => {
-    if (!isLoggedIn) {
-      navigate('/login')
+    useEffect(() => {
+      if (!isLoggedIn) {
+        navigate('/login')
+      }
+    }, [isLoggedIn, navigate])
+
+    if (isLoggedIn) {
+      return <Component />
+    } else {
+      return null
     }
-  }, [isLoggedIn, navigate])
+  }
 
-  return isLoggedIn ? Component : null
+  return <AuthenticatedComponent />
 }
 
 function Router() {
@@ -42,53 +50,42 @@ function Router() {
         <Route path="/" element={<Landing />} />
         <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/home" element={requireLogin(<Home />)} />
-        <Route path="/setting" element={requireLogin(<Setting />)} />
-        <Route
-          path="/setting/unregister"
-          element={requireLogin(<Unregister />)}
-        />
-        <Route path="/setting/modify" element={requireLogin(<Modify />)} />
+        <Route path="/home" element={requireLogin(Home)} />
+        <Route path="/setting" element={requireLogin(Setting)} />
+        <Route path="/setting/unregister" element={requireLogin(Unregister)} />
+        <Route path="/setting/modify" element={requireLogin(Modify)} />
         <Route
           path="/setting/modify/nickname"
-          element={requireLogin(<ModifyNickname />)}
+          element={requireLogin(ModifyNickname)}
         />
         <Route
           path="/setting/modify/password"
-          element={requireLogin(<ModifyPassword />)}
+          element={requireLogin(ModifyPassword)}
         />
         <Route path="/research" element={<Research />} />
         <Route
           path="/research/ready"
-          element={requireLogin(<ResearchReadyPage />)}
+          element={requireLogin(ResearchReadyPage)}
         />
+        <Route path="/research/standard" element={requireLogin(StandardPage)} />
         <Route
-          path="/research/standard"
-          element={requireLogin(<StandardPage />)}
+          path="/research/standard/complete"
+          element={requireLogin(StandardComplete)}
         />
+
+        <Route path="/home/answers" element={requireLogin(AnswersPage)} />
+        <Route
+          path="/home/answers/:answerId"
+          element={requireLogin(AnswerDetailPage)}
+        />
+        <Route path="/home/research" element={requireLogin(HomeRearch)} />
+        <Route path="/home/category" element={requireLogin(CategoryEditPage)} />
+        <Route path="/home/standard" element={requireLogin(StandardEditPage)} />
         <Route path="/research/:questionId" element={<AnswerLanding />} />
         <Route path="/research/:questionId/answer" element={<AnswerPage />} />
         <Route
-          path="/research/standard/complete"
-          element={<StandardComplete />}
-        />
-        <Route
           path="/research/:questionId/answer/complete"
           element={<AnswerComplete />}
-        />
-        <Route path="/home/answers" element={requireLogin(<AnswersPage />)} />
-        <Route
-          path="/home/answers/:answerId"
-          element={requireLogin(<AnswerDetailPage />)}
-        />
-        <Route path="/home/research" element={requireLogin(<HomeRearch />)} />
-        <Route
-          path="/home/category"
-          element={requireLogin(<CategoryEditPage />)}
-        />
-        <Route
-          path="/home/standard"
-          element={requireLogin(<StandardEditPage />)}
         />
       </Routes>
     </>
