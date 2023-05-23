@@ -15,7 +15,8 @@ import useToastPopup from '../../hooks/useToastPopup'
 import useModal from '../../hooks/useModal'
 import { useNavigate } from 'react-router-dom'
 import { useMutation, useQuery } from 'react-query'
-import { deleteAnswer, deleteUser, getUsersAnswers } from '../../apis'
+// import { deleteAnswer, deleteUser, getUsersAnswers } from '../../apis'
+import { deleteAnswer, getUsersAnswers } from '../../apis'
 import NoDataAnswerItem from '../../components/answer/NoDataAnswerItem'
 import Loading from '../../components/loading/Loading'
 
@@ -27,12 +28,12 @@ function ResearchReady() {
   const { data, refetch } = useQuery('usersAnswersList', getUsersAnswers)
   const dataLength = data?.length || 0
 
-  const { mutate: unregister } = useMutation(deleteUser, {
-    onSuccess: () => {
-      navigate('/research', { replace: true })
-      localStorage.clear()
-    },
-  })
+  // const { mutate: unregister } = useMutation(deleteUser, {
+  //   onSuccess: () => {
+  //     navigate('/research', { replace: true })
+  //     localStorage.clear()
+  //   },
+  // })
 
   const { mutate: removeAnswer, isLoading } = useMutation(deleteAnswer, {
     onSuccess: (data) => {
@@ -54,23 +55,23 @@ function ResearchReady() {
       {isLoading && <Loading text="답변 삭제 중" />}
       <Header
         title="질문지 준비 완료"
-        btnBack={() =>
-          openModal({
-            type: 'alert',
-            title: '뒤로 가기',
-            desc: '질문지 작성 페이지로 돌아갈까요?',
-            btnCancel: {
-              text: '아니요',
-            },
-            btnConfirm: {
-              text: '네',
-              fn: () => {
-                // TODO 회원가입 정보 리셋해야 함
-                unregister('질문지 준비 완료 후 뒤로가기 버튼 클릭')
-              },
-            },
-          })
-        }
+        // btnBack={() =>
+        //   openModal({
+        //     type: 'alert',
+        //     title: '뒤로 가기',
+        //     desc: '질문지 작성 페이지로 돌아갈까요?',
+        //     btnCancel: {
+        //       text: '아니요',
+        //     },
+        //     btnConfirm: {
+        //       text: '네',
+        //       fn: () => {
+        //         // TODO 회원가입 정보 리셋해야 함
+        //         unregister('질문지 준비 완료 후 뒤로가기 버튼 클릭')
+        //       },
+        //     },
+        //   })
+        // }
         btnHome={() =>
           openModal({
             type: 'alert',
