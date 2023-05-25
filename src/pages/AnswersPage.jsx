@@ -9,6 +9,7 @@ import { useMutation, useQuery } from 'react-query'
 import { deleteAnswer, getUsersAnswers } from '../apis'
 import useToastPopup from '../hooks/useToastPopup'
 import Loading from '../components/loading/Loading'
+import useModal from '../hooks/useModal'
 
 function AnswersPage() {
   const {
@@ -18,6 +19,7 @@ function AnswersPage() {
   } = useQuery('usersAnswersList', getUsersAnswers)
 
   const { openToastPopup, ToastPopup } = useToastPopup()
+  const { Modal, openModal, closeModal } = useModal()
 
   const { mutate: removeAnswer, isLoading: deleteIsLoading } = useMutation(
     deleteAnswer,
@@ -31,7 +33,25 @@ function AnswersPage() {
     }
   )
 
-  const onDelete = (id) => removeAnswer(id)
+  const onDelete = (id) => {
+    openModal({
+      type: 'alert',
+      title: '답변 삭제',
+      desc: '답변을 삭제하시겠어요?',
+      btnCancel: {
+        text: '아니요',
+        fn: () => {
+          closeModal()
+        },
+      },
+      btnConfirm: {
+        text: '네',
+        fn: () => {
+          removeAnswer(id)
+        },
+      },
+    })
+  }
 
   return (
     <StyledMain>
@@ -67,6 +87,7 @@ function AnswersPage() {
         </StyledAnswersSection>
       </StyledAirticle>
       <ToastPopup />
+      <Modal />
     </StyledMain>
   )
 }
