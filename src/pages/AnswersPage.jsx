@@ -73,7 +73,7 @@ function AnswersPage() {
         </TextArea>
 
         <StyledAnswersSection>
-          <AnswerList>
+          <StyledAnswerList>
             {!data || (data.length === 0 && <NoDataAnswerItem />)}
             {data &&
               data.map((answer) => (
@@ -83,7 +83,7 @@ function AnswersPage() {
                   onDelete={onDelete}
                 />
               ))}
-          </AnswerList>
+          </StyledAnswerList>
         </StyledAnswersSection>
       </StyledAirticle>
       <ToastPopup />
@@ -101,7 +101,7 @@ const StyledMain = styled.main`
 const StyledAirticle = styled.article``
 const StyledAnswersSection = styled.section``
 
-const AnswerList = styled.ul`
+const StyledAnswerList = styled.ul`
   margin-top: 2.8rem;
   padding: 0px 2rem;
 

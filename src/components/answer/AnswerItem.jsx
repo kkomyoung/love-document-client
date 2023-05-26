@@ -1,9 +1,9 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import styled from 'styled-components'
 import { ReactComponent as IconTrashCan } from '../../assets/icon_trash_can.svg'
 import { ReactComponent as IconHeartMatch } from '../../assets/icon_heart_match.svg'
 import { ReactComponent as IconHeartNotMatch } from '../../assets/icon_heart_notmatch.svg'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 function AnswerItem({
   answerId,
@@ -15,32 +15,50 @@ function AnswerItem({
   dateTime,
   onDelete,
 }) {
+  const navigate = useNavigate()
+  const [isDragging, setIsDragging] = useState(false)
+  const [clickable, setClickable] = useState(true)
   const ref = useRef()
   let downX
 
   const onPointerMove = (e) => {
     const newX = e.clientX
+    setIsDragging(true)
+    setClickable(false)
 
     if (newX - downX < -30) {
       ref.current.style.transform = 'translate(-80px)'
-      setTimeout(() => {
-        if (ref.current) ref.current.style.transform = 'translate(0px)'
-      }, 5000)
-    } else ref.current.style.transform = 'translate(0px)'
+    } else {
+      ref.current.style.transform = 'translate(0px)'
+    }
   }
 
   const onPointerDown = (e) => {
     downX = e.clientX
     ref.current.addEventListener('pointermove', onPointerMove)
+    setClickable(true)
   }
 
-  const onPointerUp = () =>
+  const onPointerUp = (e) => {
     ref.current.removeEventListener('pointermove', onPointerMove)
+    setIsDragging(false)
+  }
+
+  const onClick = (e) => {
+    if (clickable && !isDragging) {
+      navigate(`/home/answers/${answerId}`)
+    }
+  }
 
   return (
     <Item>
-      <Box onPointerDown={onPointerDown} onPointerUp={onPointerUp} ref={ref}>
-        <LeftCol as={Link} to={`/home/answers/${answerId}`}>
+      <Box
+        onClick={onClick}
+        onPointerDown={onPointerDown}
+        onPointerUp={onPointerUp}
+        ref={ref}
+      >
+        <LeftCol>
           <NicknameText>
             <NicknamePinkText>{nickname}</NicknamePinkText>님의 답변
             <i aria-hidden="true">
