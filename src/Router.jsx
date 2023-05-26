@@ -21,6 +21,7 @@ import HomeRearch from './pages/home-research'
 import StandardEditPage from './pages/StandardEditPage'
 import AnswerDetailPage from './pages/AnswerDetailPage'
 import CategoryEditPage from './pages/CategoryEditPage'
+import NotFound from './pages/NotFound'
 
 function requireLogin(Component) {
   function AuthenticatedComponent() {
@@ -87,6 +88,7 @@ function Router() {
           path="/research/:questionId/answer/complete"
           element={<AnswerComplete />}
         />
+        <Route path="/*" element={<NotFound />} />
       </Routes>
     </>
   )
