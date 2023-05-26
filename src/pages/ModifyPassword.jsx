@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Header from '../components/header/Header'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom'
 
 const ModifyPassword = () => {
   const navigate = useNavigate()
-  const { Modal, openModal } = useModal()
+  const { Modal, openModal, closeModal } = useModal()
   const [nowPassword, setNowPassword] = useState('')
   const [nowError, setNowError] = useState(false)
   const [nowErrorMessage, setNowErrorMessage] = useState('')
@@ -22,45 +22,39 @@ const ModifyPassword = () => {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [confirmError, setConfirmError] = useState(false)
   const [confirmErrorMessage, setConfirmErrorMessage] = useState('')
-  const [isValid, setIsValid] = useState(false)
-
-  useEffect(() => {
-    if (isValid) {
-      if (nowPassword === newPassword) {
-        setNewError(true)
-        setConfirmError(true)
-        setConfirmErrorMessage('현재 비밀번호와 동일합니다')
-      } else {
-        patchPasswordMutate({
-          password: newPassword,
-          checkedPassword: confirmPassword,
-        })
-      }
-    }
-  }, [isValid])
-
-  // 비밀번호 변경
-  const { mutate: patchPasswordMutate } = useMutation(patchPassword, {
-    onSuccess: () => {
-      openModal({
-        type: 'alert',
-        title: '비밀번호가 변경되었습니다',
-        btnConfirm: {
-          text: '확인',
-          fn: () => {
-            navigate('/setting')
-          },
-        },
-      })
-    },
-  })
 
   // 현재 비밀번호 확인
   const { mutate: postPasswordMutate } = useMutation(postPassword, {
     onSuccess: () => {
       setNowError(false)
       setNowErrorMessage('')
-      setIsValid(false)
+
+      if (nowPassword === newPassword) {
+        setNewError(true)
+        setConfirmError(true)
+        setConfirmErrorMessage('현재 비밀번호와 동일합니다')
+      } else if (newPassword === confirmPassword) {
+        openModal({
+          type: 'alert',
+          title: '비밀번호 변경',
+          desc: '비밀번호를 변경하시겠어요?',
+          btnCancel: {
+            text: '아니요',
+            fn: () => {
+              closeModal()
+            },
+          },
+          btnConfirm: {
+            text: '네',
+            fn: () => {
+              patchPasswordMutate({
+                password: newPassword,
+                checkedPassword: confirmPassword,
+              })
+            },
+          },
+        })
+      }
     },
     onError: () => {
       setNowError(true)
@@ -69,19 +63,14 @@ const ModifyPassword = () => {
     },
   })
 
-  const handlerSubmit = () => {
-    handlerNewPassword()
-    if (nowPassword === '') {
-      setNowError(true)
-      setNowErrorMessage('현재 비밀번호를 입력해주세요')
-    } else {
-      setNowError(false)
-      postPasswordMutate({
-        nowPassword,
-      })
-    }
-  }
+  // 비밀번호 변경
+  const { mutate: patchPasswordMutate } = useMutation(patchPassword, {
+    onSuccess: () => {
+      navigate('/setting/modify')
+    },
+  })
 
+  // 새 비밀번호 벨리데이션 체크
   const handlerNewPassword = () => {
     const newPasswordValid = validateNewPassword(
       newPassword,
@@ -97,13 +86,24 @@ const ModifyPassword = () => {
         setNewError(true)
         setConfirmError(true)
         setConfirmErrorMessage('새 비밀번호가 일치하지 않습니다')
-        setIsValid(false)
       } else {
         setNewError(false)
         setConfirmError(false)
-        setIsValid(true)
       }
     }
+  }
+
+  const handlerSubmit = () => {
+    if (nowPassword === '') {
+      setNowError(true)
+      setNowErrorMessage('현재 비밀번호를 입력해주세요')
+    } else {
+      setNowError(false)
+      postPasswordMutate({
+        nowPassword,
+      })
+    }
+    handlerNewPassword()
   }
 
   return (
