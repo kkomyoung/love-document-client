@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom'
 
 const ModifyNickname = () => {
   const navigate = useNavigate()
-  const { Modal, openModal } = useModal()
+  const { Modal, openModal, closeModal } = useModal()
   const [nickname, setNickname] = useState(localStorage.getItem('nickname'))
   const [error, setError] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
@@ -21,17 +21,7 @@ const ModifyNickname = () => {
     onSuccess: (data) => {
       localStorage.setItem('nickname', data.nickname)
       localStorage.setItem('token', data.token)
-      openModal({
-        type: 'alert',
-        title: '닉네임이 변경되었습니다',
-        desc: `${nickname}`,
-        btnConfirm: {
-          text: '확인',
-          fn: () => {
-            navigate('/setting')
-          },
-        },
-      })
+      navigate('/setting/modify')
     },
   })
 
@@ -43,7 +33,23 @@ const ModifyNickname = () => {
     )
 
     if (nicknameValid) {
-      mutate({ nickname })
+      openModal({
+        type: 'alert',
+        title: '닉네임 변경',
+        desc: '닉네임을 변경하시겠어요?',
+        btnCancel: {
+          text: '아니요',
+          fn: () => {
+            closeModal()
+          },
+        },
+        btnConfirm: {
+          text: '네',
+          fn: () => {
+            mutate({ nickname })
+          },
+        },
+      })
     }
   }
 
