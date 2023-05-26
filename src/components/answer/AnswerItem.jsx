@@ -91,8 +91,8 @@ export default AnswerItem
 const Item = styled.li`
   display: flex;
   position: relative;
-  background-color: ${(props) => props.theme.pink700};
-  border-radius: 8px;
+  /* background-color: ${(props) => props.theme.pink700}; */
+  /* border-radius: 8px; */
 `
 
 const Box = styled.div`
@@ -100,7 +100,7 @@ const Box = styled.div`
   z-index: 10;
   background-color: ${(props) => props.theme.gray100};
   border: 1px solid ${(props) => props.theme.gray300};
-  border-radius: 8px;
+  border-radius: 0.8rem;
   user-select: none;
   transition: transform 800ms;
   cursor: pointer;
@@ -116,11 +116,16 @@ const DeleteButton = styled.button`
   align-items: center;
   position: absolute;
   right: 0;
-  height: 99%;
-  margin: 0.5px 1px 0.5px 0px;
+  height: 100%;
   border: none;
-  min-width: 80px;
+  min-width: 9rem;
   cursor: pointer;
+  background-color: ${(props) => props.theme.pink700};
+  border-radius: 0 0.9rem 0.9rem 0;
+
+  svg {
+    margin-left: 1rem;
+  }
 `
 
 const LeftCol = styled.div`
@@ -175,7 +180,7 @@ const InfoText = styled.span`
 
 const VerticalLine = styled.span`
   height: 0.8rem;
-  border-left: 1px solid ${(props) => props.theme.gray400};
+  border-left: 0.1rem solid ${(props) => props.theme.gray400};
 `
 
 const MatchText = styled.span`
