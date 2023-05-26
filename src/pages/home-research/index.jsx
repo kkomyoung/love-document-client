@@ -13,7 +13,7 @@ const HomeRearch = () => {
 
   return (
     <StyledMain>
-      <Header title="질문지 준비 완료" btnBack btnHome />
+      <Header title="내 질문지" btnBack btnHome />
       <article>
         <TextArea>
           <Title>
