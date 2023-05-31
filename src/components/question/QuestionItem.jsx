@@ -6,6 +6,7 @@ import YesOrNoInputGroup from './YesOrNoInputGroup'
 import RangeInputGroup from './RangeInputGroup'
 import { QUESTION_TYPE } from '../../utils/constants'
 import QuestionInput from './QuestionInput'
+import QuestionSelect from './QuestionSelect'
 
 // eslint-disable-next-line no-unused-vars
 const categoryItemInfoList = [
@@ -140,8 +141,17 @@ function QuestionItem({ questionNumber, question }) {
         </QuestionText>
       </TitleBox>
 
-      {type === 'INPUT' && (
+      {type === QUESTION_TYPE.INPUT && name !== 'age' && (
         <QuestionInput
+          questionId={id}
+          name={name || `input${id}`}
+          type="text"
+          placeholder={placeholder}
+        />
+      )}
+
+      {type === QUESTION_TYPE.INPUT && name === 'age' && (
+        <QuestionSelect
           questionId={id}
           name={name || `input${id}`}
           type="text"
