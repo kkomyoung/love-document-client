@@ -18,3 +18,11 @@ export const THUMBNAIL_URL = {
   REJECT:
     'https://firebasestorage.googleapis.com/v0/b/love-document.appspot.com/o/love-document-reject.png?alt=media&token=847386bd-25fd-4c16-b5e6-f08257b546f2',
 }
+
+export const QUETION_DATA_LIST = {
+  height: [150, 155, 160, 165, 170, 175, 180, 185, 190, 195, 200],
+  age: [
+    20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38,
+    39, 40,
+  ],
+}
