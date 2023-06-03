@@ -29,7 +29,7 @@ const defaultCategoryQuestions = {
     {
       id: 0,
       name: 'age',
-      type: QUESTION_TYPE.SELECT,
+      type: QUESTION_TYPE.INPUT,
       question: '나이가 어떻게 되시나요?',
       placeholder: '18',
     },
