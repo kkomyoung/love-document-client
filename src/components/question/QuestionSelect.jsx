@@ -1,18 +1,20 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { QUETION_DATAS } from '../../utils/constants'
 
-function QuestionSelect() {
-  const selectList = ['apple', 'banana', 'grape', 'orange']
+function QuestionSelect({ questionId, dataType }) {
   const [selected, setSelected] = useState('')
 
   const handleSelect = (e) => {
+    console.log(`id: ${questionId}, selected: ${e.target.value}`)
     setSelected(e.target.value)
   }
+
   return (
     <Box>
       <select onChange={handleSelect} value={selected}>
-        {selectList.map((item) => (
-          <option value={item} key={item}>
+        {QUETION_DATAS[dataType].map((item, index) => (
+          <option value={item} key={index}>
             {item}
           </option>
         ))}

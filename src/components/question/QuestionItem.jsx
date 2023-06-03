@@ -141,7 +141,7 @@ function QuestionItem({ questionNumber, question }) {
         </QuestionText>
       </TitleBox>
 
-      {type === QUESTION_TYPE.INPUT && name !== 'age' && (
+      {type === QUESTION_TYPE.INPUT && (
         <QuestionInput
           questionId={id}
           name={name || `input${id}`}
@@ -150,13 +150,8 @@ function QuestionItem({ questionNumber, question }) {
         />
       )}
 
-      {type === QUESTION_TYPE.INPUT && name === 'age' && (
-        <QuestionSelect
-          questionId={id}
-          name={name || `input${id}`}
-          type="text"
-          placeholder={placeholder}
-        />
+      {type === QUESTION_TYPE.SELECT && (
+        <QuestionSelect questionId={id} dataType={name} />
       )}
 
       {type === QUESTION_TYPE.CHOICE && (

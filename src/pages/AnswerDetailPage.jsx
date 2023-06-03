@@ -97,7 +97,9 @@ const AnswerDetailPage = () => {
 
               <AnswererBox>
                 <AnswererRow>
-                  <InfoText>{data.age}세</InfoText>
+                  <InfoText>
+                    {new Date().getFullYear() - Number(data.age)}년생
+                  </InfoText>
                   <VerticalLine />
                   <InfoText>{data.live}</InfoText>
                 </AnswererRow>
