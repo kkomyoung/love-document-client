@@ -17,6 +17,8 @@ import { useMutation, useQuery } from 'react-query'
 import { deleteAnswer, getAnswerDetail } from '../apis'
 import Loading from '../components/loading/Loading'
 import { useNavigate, useParams } from 'react-router-dom'
+import WriteStandard from './research-ready/WriteStandard'
+
 const AnswerDetailPage = () => {
   const params = useParams()
   const navigate = useNavigate()
@@ -118,46 +120,50 @@ const AnswerDetailPage = () => {
 
             <Lottie data="magnifier" />
 
-            <PercentageSection>
-              <PercentageBox>
-                <PercentageRow align={data.percentage === 100 && 'center'}>
-                  {data.percentage === 100 ? (
-                    <HeartPuzzleImg />
-                  ) : (
-                    <BrokenHeartPuzzleImg />
-                  )}
-                  <PercentageCol>
-                    <PercentageTitleText>
-                      {data.percentage}% 일치
-                      <span>
-                        ({data.matchCnt}/{data.totalCnt})
-                      </span>
-                    </PercentageTitleText>
+            {data.hasIdeal && (
+              <PercentageSection>
+                <PercentageBox>
+                  <PercentageRow align={data.percentage === 100 && 'center'}>
+                    {data.percentage === 100 ? (
+                      <HeartPuzzleImg />
+                    ) : (
+                      <BrokenHeartPuzzleImg />
+                    )}
+                    <PercentageCol>
+                      <PercentageTitleText>
+                        {data.percentage}% 일치
+                        <span>
+                          ({data.matchCnt}/{data.totalCnt})
+                        </span>
+                      </PercentageTitleText>
 
-                    <PercentageSubtitleText>
-                      {data.percentage === 100 ? (
-                        '축! 연애서류 합격이에요!'
-                      ) : (
-                        <>
-                          <span>{`${data.totalCnt - data.matchCnt}개 `}</span>
-                          항목에서 어긋났어요
-                        </>
-                      )}
-                    </PercentageSubtitleText>
-                  </PercentageCol>
-                </PercentageRow>
-
-                {data.nonMatchTitleList.length !== 0 && (
-                  <PercentageRow>
-                    <CategoryItemList>
-                      {data.nonMatchTitleList.map((title, index) => (
-                        <CategoryItemItem key={index}>{title}</CategoryItemItem>
-                      ))}
-                    </CategoryItemList>
+                      <PercentageSubtitleText>
+                        {data.percentage === 100 ? (
+                          '축! 연애서류 합격이에요!'
+                        ) : (
+                          <>
+                            <span>{`${data.totalCnt - data.matchCnt}개 `}</span>
+                            항목에서 어긋났어요
+                          </>
+                        )}
+                      </PercentageSubtitleText>
+                    </PercentageCol>
                   </PercentageRow>
-                )}
-              </PercentageBox>
-            </PercentageSection>
+
+                  {data.nonMatchTitleList.length !== 0 && (
+                    <PercentageRow>
+                      <CategoryItemList>
+                        {data.nonMatchTitleList.map((title, index) => (
+                          <CategoryItemItem key={index}>
+                            {title}
+                          </CategoryItemItem>
+                        ))}
+                      </CategoryItemList>
+                    </PercentageRow>
+                  )}
+                </PercentageBox>
+              </PercentageSection>
+            )}
 
             <AnswerResultSection>
               <AnswerResultContainerList>
@@ -197,6 +203,12 @@ const AnswerDetailPage = () => {
                   ))}
               </AnswerResultContainerList>
             </AnswerResultSection>
+
+            {!data.hasIdeal && (
+              <WriteStandardSection>
+                <WriteStandard />
+              </WriteStandardSection>
+            )}
 
             <InformSection>
               <SubTitle>
@@ -274,8 +286,7 @@ const VerticalLine = styled.span`
 `
 
 const PercentageSection = styled.section`
-  padding: 0 2.4rem;
-  margin-top: 2rem;
+  padding: 2rem 2.4rem;
 `
 
 const PercentageBox = styled.div`
@@ -349,8 +360,7 @@ const CategoryItemItem = styled.li`
 `
 
 const AnswerResultSection = styled.section`
-  padding: 0 2.4rem;
-  margin-top: 4.5rem;
+  padding: 2rem 2.4rem 2.4rem 2.4rem;
 `
 
 const AnswerResultContainerList = styled.ul`
@@ -413,8 +423,12 @@ const IdealText = styled.div`
   }
 `
 
-const InformSection = styled.section`
-  margin-top: 4.8rem;
-  padding: 0 2.4rem;
+const WriteStandardSection = styled.section`
+  padding: 2rem 0 0 0;
 `
+
+const InformSection = styled.section`
+  padding: 2.4rem 2.4rem 0 2.4rem;
+`
+
 export default AnswerDetailPage
