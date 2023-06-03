@@ -6,7 +6,10 @@ import Router from './Router'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { RecoilRoot } from 'recoil'
+import { init as firebaseInit } from './apis/firebase'
+
 const queryClient = new QueryClient()
+firebaseInit()
 
 function App() {
   useEffect(() => {
