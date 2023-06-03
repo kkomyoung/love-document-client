@@ -58,7 +58,6 @@ function QuestionInput({ questionId, name, type, placeholder }) {
       }
     }
   }, [inputWatcher])
-
   return (
     <Box>
       {name === 'nickname' && (
