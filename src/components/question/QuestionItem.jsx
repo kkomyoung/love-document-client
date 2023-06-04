@@ -3,10 +3,11 @@ import styled from 'styled-components'
 import ChoiceInputGroup from './ChoiceInputGroup'
 import ScoreInputGroup from './ScoreInputGroup'
 import YesOrNoInputGroup from './YesOrNoInputGroup'
-import RangeInputGroup from './RangeInputGroup'
+// import RangeInputGroup from './RangeInputGroup'
 import { QUESTION_TYPE } from '../../utils/constants'
 import QuestionInput from './QuestionInput'
 import QuestionSelect from './QuestionSelect'
+import RangeSelectGroup from './RangeSelectGroup'
 
 // eslint-disable-next-line no-unused-vars
 const categoryItemInfoList = [
@@ -117,6 +118,7 @@ function QuestionItem({ questionNumber, question }) {
     question: title,
     exampleList: examples,
     type,
+    dataType,
     multiple,
     positiveLabel,
     negativeLabel,
@@ -151,7 +153,7 @@ function QuestionItem({ questionNumber, question }) {
       )}
 
       {type === QUESTION_TYPE.SELECT && (
-        <QuestionSelect questionId={id} dataType={name} />
+        <QuestionSelect questionId={id} name={name} dataType={dataType} />
       )}
 
       {type === QUESTION_TYPE.CHOICE && (
@@ -185,10 +187,11 @@ function QuestionItem({ questionNumber, question }) {
       )}
 
       {question.type === QUESTION_TYPE.RANGE && (
-        <RangeInputGroup
+        <RangeSelectGroup
           questionId={id}
           questionType={type}
           answeredRange={rangeList}
+          dataType={dataType}
         />
       )}
     </Item>

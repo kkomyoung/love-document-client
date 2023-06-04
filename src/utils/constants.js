@@ -20,10 +20,10 @@ export const THUMBNAIL_URL = {
     'https://firebasestorage.googleapis.com/v0/b/love-document.appspot.com/o/love-document-reject.png?alt=media&token=847386bd-25fd-4c16-b5e6-f08257b546f2',
 }
 
-export const QUETION_DATAS = {
-  height: [150, 155, 160, 165, 170, 175, 180, 185, 190, 195, 200],
-  age: [
+export const SELECT_OPTIONS = {
+  나이: [
     20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38,
     39, 40,
   ],
+  키: [150, 155, 160, 165, 170, 175, 180, 185, 190, 195, 200],
 }

@@ -29,7 +29,8 @@ const defaultCategoryQuestions = {
     {
       id: 0,
       name: 'age',
-      type: QUESTION_TYPE.INPUT,
+      type: QUESTION_TYPE.SELECT,
+      dataType: '나이',
       question: '나이가 어떻게 되시나요?',
       placeholder: '18',
     },
@@ -78,6 +79,7 @@ function AnswerPage() {
     if (isWriteAnswerLoading) return
     if (!params.questionId && !categoryQuestions && !answer) return
     if (isNotAllAnswered('answer', answer)) {
+      console.log(answer)
       openToastPopup('아직 응답하지 않은 항목이 있어요.')
       return
     }
