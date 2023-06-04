@@ -153,7 +153,7 @@ function QuestionItem({ questionNumber, question }) {
       )}
 
       {type === QUESTION_TYPE.SELECT && (
-        <QuestionSelect questionId={id} dataType={dataType} />
+        <QuestionSelect questionId={id} name={name} dataType={dataType} />
       )}
 
       {type === QUESTION_TYPE.CHOICE && (

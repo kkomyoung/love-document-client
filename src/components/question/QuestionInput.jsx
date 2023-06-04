@@ -13,12 +13,7 @@ function QuestionInput({ questionId, name, type, placeholder }) {
 
   useEffect(() => {
     if (inputWatcher && inputWatcher.length > 0) {
-      if (
-        name === 'nickname' ||
-        name === 'age' ||
-        name === 'live' ||
-        name === 'work'
-      ) {
+      if (name === 'nickname' || name === 'live' || name === 'work') {
         setAnswer((prev) => ({ ...prev, [name]: inputWatcher }))
       } else {
         setAnswer((prev) => ({
@@ -39,12 +34,7 @@ function QuestionInput({ questionId, name, type, placeholder }) {
         }))
       }
     } else {
-      if (
-        name === 'nickname' ||
-        name === 'age' ||
-        name === 'live' ||
-        name === 'work'
-      ) {
+      if (name === 'nickname' || name === 'live' || name === 'work') {
         setAnswer((prev) => ({ ...prev, [name]: null }))
       } else {
         setAnswer((prev) => ({

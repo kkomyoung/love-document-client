@@ -79,6 +79,7 @@ function AnswerPage() {
     if (isWriteAnswerLoading) return
     if (!params.questionId && !categoryQuestions && !answer) return
     if (isNotAllAnswered('answer', answer)) {
+      console.log(answer)
       openToastPopup('아직 응답하지 않은 항목이 있어요.')
       return
     }

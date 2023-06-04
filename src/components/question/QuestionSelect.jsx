@@ -1,49 +1,70 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { SELECT_OPTIONS } from '../../utils/constants'
+import { QUESTION_TYPE, SELECT_OPTIONS } from '../../utils/constants'
+import { useSetRecoilState } from 'recoil'
+import { answerAtom } from '../../utils/atoms'
 
-function QuestionSelect({ questionId, dataType }) {
-  const [selected, setSelected] = useState('')
+function QuestionSelect({ questionId, name, dataType }) {
+  const [value, setValue] = useState('')
+  const setAnswer = useSetRecoilState(answerAtom)
 
   const handleSelect = (e) => {
-    setSelected(e.target.value)
+    setValue(e.target.value)
   }
 
+  useEffect(() => {
+    if (questionId === 0 && name === 'age') {
+      setAnswer((prev) => ({ ...prev, [name]: value }))
+    } else {
+      setAnswer((prev) => ({
+        ...prev,
+        answerList: [
+          ...prev.answerList.filter(
+            (answer) => answer.categoryItemId !== questionId
+          ),
+          {
+            categoryItemId: questionId,
+            questionType: QUESTION_TYPE.INPUT,
+            rangeList: [+value],
+            yn: null,
+            score: null,
+            choiceIdList: null,
+          },
+        ],
+      }))
+    }
+  }, [value])
+
   return (
-    <Box>
-      <Select onChange={handleSelect} value={selected}>
-        <Option value="" disabled selected hidden>
-          {dataType}
+    <Select onChange={handleSelect} value={value}>
+      <Option value="" disabled selected hidden>
+        {dataType}
+      </Option>
+      {SELECT_OPTIONS[dataType].map((item, index) => (
+        <Option value={item} key={index}>
+          {item}
         </Option>
-        {SELECT_OPTIONS[dataType].map((item, index) => (
-          <Option value={item} key={index}>
-            {item}
-          </Option>
-        ))}
-      </Select>
-    </Box>
+      ))}
+    </Select>
   )
 }
 
 export default QuestionSelect
 
-const Box = styled.div`
+const Select = styled.select`
   display: flex;
+  height: 4.8rem;
+  width: 100%;
   border: 1px solid ${(props) => props.theme.gray500};
   border-radius: 0.8rem;
-  overflow: hidden;
-  height: 4.8rem;
-`
-
-const Select = styled.select`
-  font-size: 1.6rem;
-  flex-grow: 1;
-  height: 100%;
-  border: none;
   padding: 0 1.2rem;
+  overflow: hidden;
+  outline: none;
+  font-size: 1.6rem;
   ${(props) => props.theme.fontSize.lable_m_m}
   color: ${(props) =>
     props.value === '' ? props.theme.gray400 : props.theme.gray900};
+
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
