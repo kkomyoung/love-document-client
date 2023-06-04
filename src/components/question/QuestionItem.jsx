@@ -117,6 +117,7 @@ function QuestionItem({ questionNumber, question }) {
     question: title,
     exampleList: examples,
     type,
+    dataType,
     multiple,
     positiveLabel,
     negativeLabel,
@@ -150,13 +151,8 @@ function QuestionItem({ questionNumber, question }) {
         />
       )}
 
-      {type === QUESTION_TYPE.INPUT && name === 'age' && (
-        <QuestionSelect
-          questionId={id}
-          name={name || `input${id}`}
-          type="text"
-          placeholder={placeholder}
-        />
+      {type === QUESTION_TYPE.SELECT && (
+        <QuestionSelect questionId={id} dataType={dataType} />
       )}
 
       {type === QUESTION_TYPE.CHOICE && (
