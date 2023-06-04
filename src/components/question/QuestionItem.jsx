@@ -143,7 +143,7 @@ function QuestionItem({ questionNumber, question }) {
         </QuestionText>
       </TitleBox>
 
-      {type === QUESTION_TYPE.INPUT && name !== 'age' && (
+      {type === QUESTION_TYPE.INPUT && (
         <QuestionInput
           questionId={id}
           name={name || `input${id}`}
