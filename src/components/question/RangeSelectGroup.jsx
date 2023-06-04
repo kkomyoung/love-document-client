@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import { SELECT_OPTIONS } from '../../utils/constants'
+import { useSetRecoilState } from 'recoil'
+import { answerAtom } from '../../utils/atoms'
 
 function RangeSelectGroup({
   questionId,
@@ -9,18 +11,52 @@ function RangeSelectGroup({
   answeredRange,
   dataType,
 }) {
-  const [selected, setSelected] = useState('')
+  const [minimum, setMinimum] = useState('')
+  const [maximum, setMaximum] = useState('')
+  const setAnswer = useSetRecoilState(answerAtom)
 
   const handleSelect = (e) => {
-    setSelected(e.target.value)
+    if (e.target.name === 'minimum') {
+      if (maximum !== '' && +e.target.value >= maximum) return
+      setMinimum(e.target.value)
+    } else {
+      if (minimum !== '' && +e.target.value <= minimum) return
+      setMaximum(e.target.value)
+    }
   }
+
+  useEffect(() => {
+    if (answeredRange) {
+      setMinimum(answeredRange[0].toString())
+      setMaximum(answeredRange[1].toString())
+    }
+  }, [answeredRange])
+
+  useEffect(() => {
+    if (minimum === '' || maximum === '') return
+
+    setAnswer((prev) => ({
+      ...prev,
+      answerList: [
+        ...prev.answerList.filter(
+          (answer) => answer.categoryItemId !== questionId
+        ),
+        {
+          categoryItemId: questionId,
+          questionType,
+          rangeList: [+minimum, +maximum],
+          yn: null,
+          score: null,
+          choiceIdList: null,
+        },
+      ],
+    }))
+  }, [minimum, maximum])
 
   return (
     <Box>
-      <Select onChange={handleSelect} value={selected}>
-        <Option value="" disabled selected hidden>
-          {dataType}
-        </Option>
+      <Select name={'minimum'} onChange={handleSelect} value={minimum}>
+        <Option value="" disabled selected hidden />
         {SELECT_OPTIONS[dataType].map((item, index) => (
           <Option value={item} key={index}>
             {item}
@@ -30,10 +66,8 @@ function RangeSelectGroup({
 
       <span>이상</span>
 
-      <Select onChange={handleSelect} value={selected}>
-        <Option value="" disabled selected hidden>
-          {dataType}
-        </Option>
+      <Select name={'maximum'} onChange={handleSelect} value={maximum}>
+        <Option value="" disabled selected hidden />
         {SELECT_OPTIONS[dataType].map((item, index) => (
           <Option value={item} key={index}>
             {item}
