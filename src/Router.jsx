@@ -22,6 +22,7 @@ import StandardEditPage from './pages/StandardEditPage'
 import AnswerDetailPage from './pages/AnswerDetailPage'
 import CategoryEditPage from './pages/CategoryEditPage'
 import NotFound from './pages/NotFound'
+import NoticePage from './pages/NoticePage'
 
 function requireLogin(Component) {
   function AuthenticatedComponent() {
@@ -89,6 +90,7 @@ function Router() {
           element={<AnswerComplete />}
         />
         <Route path="/*" element={<NotFound />} />
+        <Route path="/notice" element={<NoticePage />} />
       </Routes>
     </>
   )
