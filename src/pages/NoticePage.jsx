@@ -9,7 +9,7 @@ import { RoundButton, ButtonArea } from '../components/buttons/Buttons'
 
 function NoticePage() {
   const params = useParams()
-  console.log(params)
+
   changeBgColor(params.isAccept === 'accept' ? '#79c7ff' : '#181818')
 
   return (
@@ -58,6 +58,10 @@ function NoticePage() {
 
 const StyledMain = styled.main`
   padding-bottom: 4.8rem;
+
+  @media (max-width: 499px) {
+    min-height: calc(100vh - 6rem);
+  }
 `
 
 const StyledAirticle = styled.article`
@@ -67,7 +71,6 @@ const StyledAirticle = styled.article`
 const Box = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 10rem;
 `
 
 const TitleRow = styled.div`
@@ -88,6 +91,7 @@ const TitleText = styled.h1`
   ${(props) => props.theme.fontSize.h1}
   color: ${(props) => props.theme.white};
   white-space: pre-wrap;
+  margin-top: 10rem;
 `
 
 const SubtitleText = styled.h4`

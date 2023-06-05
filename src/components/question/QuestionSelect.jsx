@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { QUESTION_TYPE, SELECT_OPTIONS } from '../../utils/constants'
+import { QUESTION_TYPE, createSelectOptions } from '../../utils/constants'
 import { useSetRecoilState } from 'recoil'
 import { answerAtom } from '../../utils/atoms'
 
@@ -40,7 +40,7 @@ function QuestionSelect({ questionId, name, dataType }) {
       <Option value="" disabled selected hidden>
         {dataType}
       </Option>
-      {SELECT_OPTIONS[dataType].map((item, index) => (
+      {createSelectOptions(dataType).map((item, index) => (
         <Option value={item} key={index}>
           {item}
         </Option>

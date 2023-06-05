@@ -27,3 +27,23 @@ export const SELECT_OPTIONS = {
   ],
   키: [150, 155, 160, 165, 170, 175, 180, 185, 190, 195, 200],
 }
+
+export function createSelectOptions(dataType) {
+  const options = []
+  let start
+  let end
+
+  if (dataType === '나이') {
+    start = 16
+    end = 50
+  } else if (dataType === '키') {
+    start = 100
+    end = 230
+  }
+
+  for (let i = start; i <= end; i++) {
+    options.push(i)
+  }
+
+  return options
+}
