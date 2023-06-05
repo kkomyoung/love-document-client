@@ -108,6 +108,7 @@ const Select = styled.select`
   overflow: hidden;
   padding: 0 1.2rem;
   outline: none;
+  background-color: ${(props) => props.theme.white};
   ${(props) => props.theme.fontSize.lable_m_m}
   color: ${(props) =>
     props.value === '' ? props.theme.gray400 : props.theme.gray900};

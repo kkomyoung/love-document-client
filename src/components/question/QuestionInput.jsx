@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { ReactComponent as IconUser } from '../../assets/icon_user.svg'
 import { useForm } from 'react-hook-form'
@@ -10,6 +10,7 @@ function QuestionInput({ questionId, name, type, placeholder }) {
   const { register, watch } = useForm()
   const setAnswer = useSetRecoilState(answerAtom)
   const inputWatcher = watch(name)
+  const [isFocused, setIsFocused] = useState(false)
 
   useEffect(() => {
     if (inputWatcher && inputWatcher.length > 0) {
@@ -49,13 +50,19 @@ function QuestionInput({ questionId, name, type, placeholder }) {
     }
   }, [inputWatcher])
   return (
-    <Box>
+    <Box isFocused={isFocused}>
       {name === 'nickname' && (
         <i aria-hidden="true">
           <IconUser />
         </i>
       )}
-      <input {...register(name)} type={type} placeholder={placeholder} />
+      <input
+        {...register(name)}
+        type={type}
+        placeholder={placeholder}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+      />
     </Box>
   )
 }
@@ -65,7 +72,7 @@ export default QuestionInput
 const Box = styled.div`
   display: flex;
   border: 1px solid
-    ${(props) => (props.error ? props.theme.pink700 : props.theme.gray500)};
+    ${(props) => (props.isFocused ? props.theme.pink700 : props.theme.gray500)};
   border-radius: 0.8rem;
   overflow: hidden;
   height: 4.8rem;
