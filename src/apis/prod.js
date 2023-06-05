@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const getFirebaseConfig = () => {
+  console.log('prod')
   return new Promise((resolve, reject) => {
     axios
       .get('/__/firebase/init.json')

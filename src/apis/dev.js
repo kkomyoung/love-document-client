@@ -8,7 +8,9 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_MEASUREMENT_ID,
 }
 
-const getFirebaseConfig = () =>
-  new Promise((resolve, reject) => resolve(firebaseConfig))
+const getFirebaseConfig = () => {
+  console.log('dev')
+  return new Promise((resolve, reject) => resolve(firebaseConfig))
+}
 
 export default getFirebaseConfig
