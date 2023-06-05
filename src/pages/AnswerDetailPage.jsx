@@ -9,7 +9,6 @@ import { ReactComponent as BrokenHeartPuzzleImg } from '../assets/img_broken_hea
 import { ReactComponent as HeartTokenIcon } from '../assets/icon_heart_token.svg'
 import CategoryLabel from '../components/category/CategoryLabel'
 import { ButtonArea, RoundButton } from '../components/buttons/Buttons'
-import useUser from '../hooks/useUser'
 import useToastPopup from '../hooks/useToastPopup'
 import useModal from '../hooks/useModal'
 import { THUMBNAIL_URL } from '../utils/constants'
@@ -29,7 +28,6 @@ const AnswerDetailPage = () => {
       refetchOnWindowFocus: false,
     }
   )
-  const { user } = useUser()
   const { openToastPopup, ToastPopup } = useToastPopup()
   const { Modal, openModal, closeModal } = useModal()
   const createModalData = (isAccept) => {
@@ -37,7 +35,9 @@ const AnswerDetailPage = () => {
       type: 'share',
       title: isAccept ? '소개팅 할게요!' : '다른 좋은 인연이 있겠죠',
       desc: '주선자에게 의사를 전달해보세요',
-      researchURL: `https://www.love-document.com/research/${user.linkId}`,
+      researchURL: `https://www.love-document.com/notice/${
+        isAccept ? 'accept' : 'reject'
+      }`,
       thumbnailURL: isAccept ? THUMBNAIL_URL.ACCEPT : THUMBNAIL_URL.REJECT,
       btnCancel: {
         fn: () => {
