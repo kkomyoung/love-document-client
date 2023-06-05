@@ -66,7 +66,7 @@ const ModifyPassword = () => {
   // 비밀번호 변경
   const { mutate: patchPasswordMutate } = useMutation(patchPassword, {
     onSuccess: () => {
-      navigate('/setting/modify')
+      navigate(-1)
     },
   })
 

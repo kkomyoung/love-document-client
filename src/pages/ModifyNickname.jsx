@@ -21,7 +21,7 @@ const ModifyNickname = () => {
     onSuccess: (data) => {
       localStorage.setItem('nickname', data.nickname)
       localStorage.setItem('token', data.token)
-      navigate('/setting/modify')
+      navigate(-1)
     },
   })
 
