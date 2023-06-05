@@ -100,7 +100,7 @@ const AnswerDetailPage = () => {
               <AnswererBox>
                 <AnswererRow>
                   <InfoText>
-                    {new Date().getFullYear() - Number(data.age)}년생
+                    {new Date().getFullYear() - Number(data.age) + 1}년생
                   </InfoText>
                   <VerticalLine />
                   <InfoText>{data.live}</InfoText>
