@@ -90,7 +90,7 @@ function Router() {
           element={<AnswerComplete />}
         />
         <Route path="/*" element={<NotFound />} />
-        <Route path="/notice" element={<NoticePage />} />
+        <Route path="/notice/:isAccept" element={<NoticePage />} />
       </Routes>
     </>
   )
