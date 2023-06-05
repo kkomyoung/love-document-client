@@ -9,7 +9,6 @@ const firebaseConfig = {
 }
 
 const getFirebaseConfig = () => {
-  console.log('dev')
   return new Promise((resolve, reject) => resolve(firebaseConfig))
 }
 
