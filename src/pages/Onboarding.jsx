@@ -15,7 +15,7 @@ function Onboarding() {
         <Title>연애서류합이란?</Title>
         <TextDesc>
           소개팅을 하기 전 상대방이 나의 이상형과 얼마나 비슷한지 확인할 수 있는
-          서비스 입니다. 주선자를 통해 질문지를 공유하고 상대의 답변을
+          서비스입니다. 주선자를 통해 질문지를 공유하고 상대의 답변을
           받아보세요.
         </TextDesc>
         <ButtonArea margin="4rem 0 0 0">
