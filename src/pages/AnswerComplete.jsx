@@ -27,12 +27,7 @@ const AnswerComplete = () => {
           <span>{nickname}님도 질문지를 만들어보시겠어요?</span>
         </TextDesc>
         <ButtonArea margin="6.2rem 0 0 0">
-          <RoundButton
-            as={Link}
-            to="/research"
-            size="large"
-            text="질문지 만들기"
-          />
+          <RoundButton as={Link} to="/" size="large" text="질문지 만들기" />
         </ButtonArea>
       </StyledAirticle>
     </StyledMain>
