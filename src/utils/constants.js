@@ -10,6 +10,7 @@ export const QUESTION_TYPE = {
 export const ERR_CODE = {
   U001: 'U001',
 }
+
 export const THUMBNAIL_URL = {
   BASIC:
     'https://firebasestorage.googleapis.com/v0/b/love-document.appspot.com/o/love-document.png?alt=media&token=a9922bcf-1c8a-46d4-a054-2e0e07e4a296',
