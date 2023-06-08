@@ -60,7 +60,7 @@ const StyledMain = styled.main`
   padding-bottom: 4.8rem;
 
   @media (max-width: 499px) {
-    min-height: calc(100vh - 6rem);
+    min-height: calc(100vh - 4.8rem);
   }
 `
 
@@ -111,6 +111,7 @@ const LoveDocumentText = styled.h3`
   p {
     font-size: 1rem;
     font-weight: 400;
+    margin-bottom: 0.2rem;
   }
 `
 
