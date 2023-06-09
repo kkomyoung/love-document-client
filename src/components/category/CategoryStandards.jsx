@@ -26,6 +26,7 @@ const StyledItems = styled.ul`
   }
 
   p {
+    max-width: 70%;
     ${(props) => props.theme.fontSize.label_s_m}
     color: ${(props) => props.theme.gray700};
   }
