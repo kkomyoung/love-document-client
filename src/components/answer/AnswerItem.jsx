@@ -18,7 +18,7 @@ function AnswerItem({
   dateTime,
   onDelete,
 }) {
-  const { data } = useQuery(['answer-detail', answerId], () =>
+  const { data: ideals } = useQuery(['answer-detail', answerId], () =>
     getAnswerDetail(answerId)
   )
 
@@ -58,7 +58,7 @@ function AnswerItem({
   }
 
   return (
-    data && (
+    ideals && (
       <Item>
         <Box
           onClick={onClick}
@@ -68,18 +68,22 @@ function AnswerItem({
         >
           <LeftCol>
             <NicknameText>
-              <NicknamePinkText>{nickname}</NicknamePinkText>님의 답변
-              <i aria-hidden="true">
-                {show === 'Y' && percentage === 100 && (
-                  <object data={iconHeartMatch} type="image/svg+xml"></object>
-                )}
-                {show === 'Y' && percentage !== 100 && (
-                  <object
-                    data={iconHeartNotMatch}
-                    type="image/svg+xml"
-                  ></object>
-                )}
-              </i>
+              <NicknamePinkText>
+                <strong>{nickname}</strong>님의 답변
+              </NicknamePinkText>
+              {ideals.hasIdeal && (
+                <i aria-hidden="true">
+                  {show === 'Y' && percentage === 100 && (
+                    <object data={iconHeartMatch} type="image/svg+xml"></object>
+                  )}
+                  {show === 'Y' && percentage !== 100 && (
+                    <object
+                      data={iconHeartNotMatch}
+                      type="image/svg+xml"
+                    ></object>
+                  )}
+                </i>
+              )}
             </NicknameText>
 
             <InfoParagraph>
@@ -89,10 +93,10 @@ function AnswerItem({
             </InfoParagraph>
           </LeftCol>
           <RightCol>
-            {data.hasIdeal && (
+            {ideals.hasIdeal && (
               <MatchText>{show === 'N' ? '??' : percentage}% 일치</MatchText>
             )}
-            {!data.hasIdeal && <MatchText>??% 일치</MatchText>}
+            {!ideals.hasIdeal && <MatchText>??% 일치</MatchText>}
             <InfoText>
               {dateTime.substr(5, 2)}월 {dateTime.substr(8, 2)}일
             </InfoText>
@@ -151,7 +155,7 @@ const LeftCol = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  max-width: 60%;
+  max-width: 64%;
 
   align-items: start;
 `
@@ -165,22 +169,24 @@ const RightCol = styled.div`
 `
 
 const NicknameText = styled.span`
-  ${(props) => props.theme.fontSize.h4_m}
-
   i {
     display: inline-flex;
     justify-content: center;
     align-items: center;
     width: 2rem;
     height: 2rem;
-    margin-left: 0.5rem;
     vertical-align: top;
   }
 `
 
 const NicknamePinkText = styled.span`
-  color: ${(props) => props.theme.pink700};
-  word-break: break-all;
+  margin-right: 0.5rem;
+  ${(props) => props.theme.fontSize.h4_m}
+
+  strong {
+    color: ${(props) => props.theme.pink700};
+    word-break: break-all;
+  }
 `
 
 const InfoParagraph = styled.p`
