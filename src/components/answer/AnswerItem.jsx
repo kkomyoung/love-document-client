@@ -1,8 +1,9 @@
 import React, { useRef, useState } from 'react'
 import styled from 'styled-components'
 import { ReactComponent as IconTrashCan } from '../../assets/icon_trash_can.svg'
-import { ReactComponent as IconHeartMatch } from '../../assets/icon_heart_match.svg'
-import { ReactComponent as IconHeartNotMatch } from '../../assets/icon_heart_notmatch.svg'
+import iconHeartMatch from '../../assets/icon_heart_match.svg'
+import iconHeartNotMatch from '../../assets/icon_heart_notmatch.svg'
+
 import { useNavigate } from 'react-router-dom'
 
 function AnswerItem({
@@ -62,8 +63,12 @@ function AnswerItem({
           <NicknameText>
             <NicknamePinkText>{nickname}</NicknamePinkText>님의 답변
             <i aria-hidden="true">
-              {show === 'Y' && percentage === 100 && <IconHeartMatch />}
-              {show === 'Y' && percentage !== 100 && <IconHeartNotMatch />}
+              {show === 'Y' && percentage === 100 && (
+                <object data={iconHeartMatch} type="image/svg+xml"></object>
+              )}
+              {show === 'Y' && percentage !== 100 && (
+                <object data={iconHeartNotMatch} type="image/svg+xml"></object>
+              )}
             </i>
           </NicknameText>
 
