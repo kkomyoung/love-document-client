@@ -5,6 +5,8 @@ import iconHeartMatch from '../../assets/icon_heart_match.svg'
 import iconHeartNotMatch from '../../assets/icon_heart_notmatch.svg'
 
 import { useNavigate } from 'react-router-dom'
+import { useQuery } from 'react-query'
+import { getAnswerDetail } from '../../apis'
 
 function AnswerItem({
   answerId,
@@ -16,6 +18,10 @@ function AnswerItem({
   dateTime,
   onDelete,
 }) {
+  const { data } = useQuery(['answer-detail', answerId], () =>
+    getAnswerDetail(answerId)
+  )
+
   const navigate = useNavigate()
   const [isDragging, setIsDragging] = useState(false)
   const [clickable, setClickable] = useState(true)
@@ -52,43 +58,51 @@ function AnswerItem({
   }
 
   return (
-    <Item>
-      <Box
-        onClick={onClick}
-        onPointerDown={onPointerDown}
-        onPointerUp={onPointerUp}
-        ref={ref}
-      >
-        <LeftCol>
-          <NicknameText>
-            <NicknamePinkText>{nickname}</NicknamePinkText>님의 답변
-            <i aria-hidden="true">
-              {show === 'Y' && percentage === 100 && (
-                <object data={iconHeartMatch} type="image/svg+xml"></object>
-              )}
-              {show === 'Y' && percentage !== 100 && (
-                <object data={iconHeartNotMatch} type="image/svg+xml"></object>
-              )}
-            </i>
-          </NicknameText>
+    data && (
+      <Item>
+        <Box
+          onClick={onClick}
+          onPointerDown={onPointerDown}
+          onPointerUp={onPointerUp}
+          ref={ref}
+        >
+          <LeftCol>
+            <NicknameText>
+              <NicknamePinkText>{nickname}</NicknamePinkText>님의 답변
+              <i aria-hidden="true">
+                {show === 'Y' && percentage === 100 && (
+                  <object data={iconHeartMatch} type="image/svg+xml"></object>
+                )}
+                {show === 'Y' && percentage !== 100 && (
+                  <object
+                    data={iconHeartNotMatch}
+                    type="image/svg+xml"
+                  ></object>
+                )}
+              </i>
+            </NicknameText>
 
-          <InfoParagraph>
-            <InfoText>{age}세</InfoText>
-            <VerticalLine />
-            <InfoText>{live}</InfoText>
-          </InfoParagraph>
-        </LeftCol>
-        <RightCol>
-          <MatchText>{show === 'N' ? '??' : percentage}% 일치</MatchText>
-          <InfoText>
-            {dateTime.substr(5, 2)}월 {dateTime.substr(8, 2)}일
-          </InfoText>
-        </RightCol>
-      </Box>
-      <DeleteButton onClick={() => onDelete(answerId)}>
-        <IconTrashCan />
-      </DeleteButton>
-    </Item>
+            <InfoParagraph>
+              <InfoText>{age}세</InfoText>
+              <VerticalLine />
+              <InfoText>{live}</InfoText>
+            </InfoParagraph>
+          </LeftCol>
+          <RightCol>
+            {data.hasIdeal && (
+              <MatchText>{show === 'N' ? '??' : percentage}% 일치</MatchText>
+            )}
+            {!data.hasIdeal && <MatchText>??% 일치</MatchText>}
+            <InfoText>
+              {dateTime.substr(5, 2)}월 {dateTime.substr(8, 2)}일
+            </InfoText>
+          </RightCol>
+        </Box>
+        <DeleteButton onClick={() => onDelete(answerId)}>
+          <IconTrashCan />
+        </DeleteButton>
+      </Item>
+    )
   )
 }
 
