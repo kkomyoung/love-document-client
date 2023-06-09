@@ -9,8 +9,10 @@ import CategoryBoxList from '../components/category/Category'
 import useToastPopup from '../hooks/useToastPopup'
 import useModal from '../hooks/useModal'
 import Loading from '../components/loading/Loading'
+import { useNavigate } from 'react-router-dom'
 
 const CategoryEditPage = () => {
+  const navigate = useNavigate()
   const { openToastPopup, ToastPopup } = useToastPopup()
   const { openModal, Modal } = useModal()
   const formRef = useRef()
@@ -38,6 +40,9 @@ const CategoryEditPage = () => {
           desc: '수정사항이 저장되었어요',
           btnConfirm: {
             text: '확인',
+            fn: () => {
+              navigate('/home/research')
+            },
           },
         })
       },
