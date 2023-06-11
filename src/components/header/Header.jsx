@@ -111,7 +111,7 @@ const StyledHeader = styled.header`
     position: sticky;
     top: 0;
     left: 0;
-    z-index: 10;
+    z-index: 90;
 
     p {
       display: block;
