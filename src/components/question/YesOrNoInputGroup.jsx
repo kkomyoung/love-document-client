@@ -58,15 +58,15 @@ export default YesOrNoInputGroup
 const Box = styled.div`
   display: flex;
 
-  button {
+  span {
     flex: 1;
   }
 
-  button > label {
+  span > label {
     width: 100%;
   }
 
-  button + button {
+  span + span {
     margin-left: 0.8rem;
   }
 `

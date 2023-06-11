@@ -24,7 +24,7 @@ function ExampleButton({
   )
 }
 
-const Button = styled.button`
+const Button = styled.span`
   display: inline-flex;
 
   input {

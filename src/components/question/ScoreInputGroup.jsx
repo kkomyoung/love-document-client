@@ -35,25 +35,27 @@ function ScoreInputGroup({
   return (
     <Box>
       <ScoreButtonBox>
-        {[1, 2, 3, 4, 5].map((score) => (
-          <ScoreButton key={score}>
-            <input
-              id={`${questionType}#${questionId}_${score}`}
-              type="radio"
-              name={`${questionType}#${questionId}`}
-              value={score}
-              onClick={() => onScoreButtonClick(score)}
-              defaultChecked={answeredScore === score}
-            />
-            <label htmlFor={`${questionType}#${questionId}_${score}`} />
-            <IconHeart fill="white" />
-          </ScoreButton>
-        ))}
+        <div className="input-area">
+          {[1, 2, 3, 4, 5].map((score) => (
+            <span className="input-wrap" key={score}>
+              <input
+                id={`${questionType}#${questionId}_${score}`}
+                type="radio"
+                name={`${questionType}#${questionId}`}
+                value={score}
+                onClick={() => onScoreButtonClick(score)}
+                defaultChecked={answeredScore === score}
+              />
+              <label htmlFor={`${questionType}#${questionId}_${score}`} />
+              <IconHeart fill="white" />
+            </span>
+          ))}
+        </div>
+        <ExampleTextBox>
+          <ExampleText>{negativeLabel}</ExampleText>
+          <ExampleText>{positiveLabel}</ExampleText>
+        </ExampleTextBox>
       </ScoreButtonBox>
-      <ExampleTextBox>
-        <ExampleText>{negativeLabel}</ExampleText>
-        <ExampleText>{positiveLabel}</ExampleText>
-      </ExampleTextBox>
     </Box>
   )
 }
@@ -67,74 +69,81 @@ const Box = styled.div`
 
 const ScoreButtonBox = styled.div`
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
+  margin: 0 auto;
 
-  button + button {
-    margin-left: 0.8rem;
+  .input-area {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
-  button:nth-child(odd) label {
+  .input-wrap {
+    position: relative;
+
+    input {
+      ${(props) => props.theme.a11yHidden}
+    }
+
+    input + label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border: 1px solid ${(props) => props.theme.gray300};
+      border-radius: 50%;
+      background-color: ${(props) => props.theme.bgColor};
+      transition: 0.2s;
+
+      ${(props) => props.theme.fontSize.label_m_m}
+      cursor: pointer;
+    }
+
+    input + label:hover {
+      border: 1px solid ${(props) => props.theme.pink700};
+    }
+
+    input ~ svg {
+      display: none;
+    }
+
+    input:checked + label {
+      background-color: ${(props) => props.theme.pink700};
+      border: 1px solid ${(props) => props.theme.pink700};
+    }
+
+    input:checked ~ svg {
+      display: flex;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+    }
+  }
+
+  /* .input-wrap + .input-wrap {
+    margin-left: 0.8rem;
+  } */
+
+  .input-wrap:nth-child(odd) label {
     width: 4.8rem;
     height: 4.8rem;
   }
-  button:nth-child(even) label {
+  .input-wrap:nth-child(even) label {
     width: 4rem;
     height: 4rem;
   }
-  button:nth-child(3) label {
+  .input-wrap:nth-child(3) label {
     width: 3.2rem;
     height: 3.2rem;
   }
 `
-
-const ScoreButton = styled.button`
-  display: inline-flex;
-  position: relative;
-
-  input {
-    ${(props) => props.theme.a11yHidden}
-  }
-
-  input + label {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    border: 1px solid ${(props) => props.theme.gray300};
-    border-radius: 50%;
-    background-color: ${(props) => props.theme.bgColor};
-    transition: 0.2s;
-
-    ${(props) => props.theme.fontSize.label_m_m}
-    cursor: pointer;
-  }
-
-  input + label:hover {
-    border: 1px solid ${(props) => props.theme.pink700};
-  }
-
-  input ~ svg {
-    display: none;
-  }
-
-  input:checked + label {
-    background-color: ${(props) => props.theme.pink700};
-    border: 1px solid ${(props) => props.theme.pink700};
-  }
-
-  input:checked ~ svg {
-    display: flex;
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-  }
-`
-
 const ExampleTextBox = styled.div`
+  width: 100%;
   margin-top: 0.8rem;
 
   & span:nth-child(1) {

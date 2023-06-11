@@ -70,11 +70,11 @@ const Box = styled.div`
   display: flex;
   flex-direction: column;
 
-  button > label {
+  span > label {
     width: 100%;
   }
 
-  button + button {
+  span + span {
     margin-top: 0.8rem;
   }
 `
