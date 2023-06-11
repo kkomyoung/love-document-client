@@ -86,6 +86,7 @@ const Box = styled.div`
     padding: 0 1.2rem;
     ${(props) => props.theme.fontSize.lable_m_m}
     color: ${(props) => props.theme.gray900};
+    width: 100%;
 
     &:focus {
       outline: none;
