@@ -31,13 +31,17 @@ function NoticePage() {
           </TitleRow>
 
           <LogoRow>
-            <LoveDocumentText>
-              <p>두근 - 두근</p>연애서류합
-            </LoveDocumentText>
+            <p>
+              두근 - 두근 <strong>연애서류합</strong>
+            </p>
             {params.isAccept === 'accept' ? (
-              <ImgHeartPuzzle />
+              <figure className="img-accept">
+                <ImgHeartPuzzle />
+              </figure>
             ) : (
-              <ImgBrokenHeartPuzzle />
+              <figure className="img-broken">
+                <ImgBrokenHeartPuzzle />
+              </figure>
             )}
           </LogoRow>
 
@@ -57,15 +61,15 @@ function NoticePage() {
 }
 
 const StyledMain = styled.main`
-  padding-bottom: 4.8rem;
-
-  @media (max-width: 499px) {
-    min-height: calc(100vh - 4.8rem);
-  }
+  position: relative;
+  height: 100vh;
+  max-height: 100%;
+  display: flex;
+  align-items: center;
 `
 
 const StyledAirticle = styled.article`
-  padding: 0 2.4rem;
+  flex: 1;
 `
 
 const Box = styled.div`
@@ -76,22 +80,13 @@ const Box = styled.div`
 const TitleRow = styled.div`
   display: flex;
   flex-direction: column;
-`
-
-const LogoRow = styled.div`
-  display: flex;
-  flex-direction: row;
-
-  svg {
-    height: fit-content;
-  }
+  padding: 0 2.4rem;
 `
 
 const TitleText = styled.h1`
   ${(props) => props.theme.fontSize.h1}
   color: ${(props) => props.theme.white};
   white-space: pre-wrap;
-  margin-top: 10rem;
 `
 
 const SubtitleText = styled.h4`
@@ -100,18 +95,56 @@ const SubtitleText = styled.h4`
   color: ${(props) => (props.isAccept ? '#FFFFC3' : props.theme.pink400)};
 `
 
-const LoveDocumentText = styled.h3`
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  font-size: 1.7rem;
-  font-weight: 700;
-  color: ${(props) => props.theme.white};
+const LogoRow = styled.div`
+  width: 100%;
+  position: relative;
+  overflow: hidden;
 
   p {
+    position: absolute;
+    bottom: 2.3rem;
+    left: 2.4rem;
+    color: ${(props) => props.theme.white};
     font-size: 1rem;
     font-weight: 400;
-    margin-bottom: 0.2rem;
+    z-index: 1;
+
+    strong {
+      display: block;
+      font-size: 1.7rem;
+      margin-top: 0.2rem;
+      font-weight: 700;
+      color: ${(props) => props.theme.white};
+    }
+  }
+
+  figure {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+    svg {
+      display: inline-block;
+      width: 90%;
+    }
+  }
+
+  .img-accept svg {
+    margin-right: -2.5rem;
+    margin-bottom: -2.3rem;
+  }
+
+  .img-broken svg {
+    margin-top: -1.5rem;
+    margin-right: -2rem;
+    margin-bottom: -5.2rem;
+  }
+
+  @media (max-width: 499px) {
+    .img-broken svg {
+      margin-right: -1.5rem;
+      margin-bottom: -4.8rem;
+    }
   }
 `
 
