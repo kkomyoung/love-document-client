@@ -11,7 +11,6 @@ function ScoreInputGroup({
   negativeLabel,
   answeredScore,
 }) {
-  console.log(answeredScore)
   const [checkedScore, setCheckedSocre] = useState(null)
   const setAnswer = useSetRecoilState(answerAtom)
   const onScoreButtonChange = (score) => {
