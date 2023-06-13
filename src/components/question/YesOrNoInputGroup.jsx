@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import ExampleButton from './ExampleButton'
 import { useSetRecoilState } from 'recoil'
@@ -11,6 +11,7 @@ function YesOrNoInputGroup({
   negativeLabel,
   answeredYn,
 }) {
+  const [checkedYn, setCheckedYn] = useState(null)
   const setAnswer = useSetRecoilState(answerAtom)
   const onYesOrNotButtonClick = (yn) => {
     setAnswer((prev) => ({
@@ -29,7 +30,12 @@ function YesOrNoInputGroup({
         },
       ],
     }))
+    setCheckedYn(yn)
   }
+
+  useEffect(() => {
+    setCheckedYn(answeredYn)
+  }, [answeredYn])
 
   return (
     <Box>
@@ -39,7 +45,7 @@ function YesOrNoInputGroup({
         content={negativeLabel}
         answer={'N'}
         onClick={onYesOrNotButtonClick}
-        isChecked={answeredYn === 'N'}
+        isChecked={checkedYn === 'N'}
       />
       <ExampleButton
         name={`${questionType}#${questionId}`}
@@ -47,7 +53,7 @@ function YesOrNoInputGroup({
         content={positiveLabel}
         answer={'Y'}
         onClick={onYesOrNotButtonClick}
-        isChecked={answeredYn === 'Y'}
+        isChecked={checkedYn === 'Y'}
       />
     </Box>
   )

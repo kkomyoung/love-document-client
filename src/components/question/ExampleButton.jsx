@@ -16,8 +16,8 @@ function ExampleButton({
         id={`${name}_${exampleId}`}
         type={multiple === 'Y' ? 'checkbox' : 'radio'}
         name={name}
-        onClick={() => onClick(answer)}
-        defaultChecked={isChecked}
+        onChange={() => onClick(answer)}
+        checked={isChecked}
       />
       <label htmlFor={`${name}_${exampleId}`}>{content}</label>
     </Button>

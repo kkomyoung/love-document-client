@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import ExampleButton from './ExampleButton'
 import { useRecoilState } from 'recoil'
@@ -11,6 +11,7 @@ function ChoiceInputGroup({
   examples,
   answeredChoices,
 }) {
+  const [checkedChoices, setCheckedChoices] = useState(null)
   const [answer, setAnswer] = useRecoilState(answerAtom)
   const onChoiceButtonClick = (exampleId) => {
     let choices = [exampleId]
@@ -46,7 +47,12 @@ function ChoiceInputGroup({
         },
       ],
     }))
+    setCheckedChoices(choices)
   }
+
+  useEffect(() => {
+    setCheckedChoices(answeredChoices)
+  }, [answeredChoices])
 
   return (
     <Box>
@@ -59,7 +65,7 @@ function ChoiceInputGroup({
           content={example.content}
           answer={example.id}
           onClick={onChoiceButtonClick}
-          isChecked={answeredChoices && answeredChoices.includes(example.id)}
+          isChecked={checkedChoices && checkedChoices.includes(example.id)}
         />
       ))}
     </Box>
