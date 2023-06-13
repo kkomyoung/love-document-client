@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { ReactComponent as IconHeart } from '../../assets/icon_heart.svg'
 import { useSetRecoilState } from 'recoil'
@@ -11,8 +11,9 @@ function ScoreInputGroup({
   negativeLabel,
   answeredScore,
 }) {
+  const [checkedScore, setCheckedSocre] = useState(0)
   const setAnswer = useSetRecoilState(answerAtom)
-  const onScoreButtonClick = (score) => {
+  const onScoreButtonChange = (score) => {
     // 이전 선택한 답변 객체를 삭제하고(처음 선택한 경우여도 없기 때문에 상관 없음) 새로 답변 추가
     setAnswer((prev) => ({
       ...prev,
@@ -30,7 +31,12 @@ function ScoreInputGroup({
         },
       ],
     }))
+    setCheckedSocre(score)
   }
+
+  useEffect(() => {
+    setCheckedSocre(answeredScore)
+  }, [answeredScore])
 
   return (
     <Box>
@@ -43,8 +49,8 @@ function ScoreInputGroup({
                 type="radio"
                 name={`${questionType}#${questionId}`}
                 value={score}
-                onClick={() => onScoreButtonClick(score)}
-                defaultChecked={answeredScore === score}
+                onChange={() => onScoreButtonChange(score)}
+                checked={checkedScore === score}
               />
               <label htmlFor={`${questionType}#${questionId}_${score}`} />
               <IconHeart fill="white" />
