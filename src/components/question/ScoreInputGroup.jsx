@@ -11,7 +11,8 @@ function ScoreInputGroup({
   negativeLabel,
   answeredScore,
 }) {
-  const [checkedScore, setCheckedSocre] = useState(0)
+  console.log(answeredScore)
+  const [checkedScore, setCheckedSocre] = useState(null)
   const setAnswer = useSetRecoilState(answerAtom)
   const onScoreButtonChange = (score) => {
     // 이전 선택한 답변 객체를 삭제하고(처음 선택한 경우여도 없기 때문에 상관 없음) 새로 답변 추가
