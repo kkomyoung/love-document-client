@@ -35,8 +35,8 @@ export function createSelectOptions(dataType) {
   let end
 
   if (dataType === '나이') {
-    start = 16
-    end = 50
+    start = 1980
+    end = 2010
   } else if (dataType === '키') {
     start = 100
     end = 230

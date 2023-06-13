@@ -87,7 +87,9 @@ function AnswerItem({
             </NicknameText>
 
             <InfoParagraph>
-              <InfoText>{age}세</InfoText>
+              <InfoText>
+                {new Date().getFullYear() - Number(age) + 1}세
+              </InfoText>
               <VerticalLine />
               <InfoText>{live}</InfoText>
             </InfoParagraph>
