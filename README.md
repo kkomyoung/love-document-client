@@ -47,13 +47,12 @@ npm run build
 
 ## 협업 문서
 ### Notion
-
-* <a href="https://www.notion.so/minuxx/be45aec614a74078b437845a80bab34c?pvs=4" target="_blank">테스트시트</a>    
-* <a href="https://www.notion.so/minuxx/d6ac81b071924e72bdb492d0eac2a94a?v=ed6fe7603b1f48b79ec9488109db228a&pvs=4" target="_blank">코딩리스트</a>
-* <a href="https://www.notion.so/minuxx/API-Sheet-d111fd6eebeb432297e7f413cdbd4fa7?pvs=4" target="_blank">API리스트</a>   
-
+* [테스트시트](https://www.notion.so/minuxx/be45aec614a74078b437845a80bab34c?pvs=4)
+* [코딩리스트](https://www.notion.so/minuxx/d6ac81b071924e72bdb492d0eac2a94a?v=ed6fe7603b1f48b79ec9488109db228a&pvs=4)
+* [API리스트](https://www.notion.so/minuxx/API-Sheet-d111fd6eebeb432297e7f413cdbd4fa7?pvs=4)
+  
 ### Swagger
-* <a href="http://3.239.26.220:8080/dailyb/swagger-ui/index.html#/" target="_blank">API문서</a>    
+* [API문서](http://3.239.26.220:8080/dailyb/swagger-ui/index.html#/)
 
 ### Figma
-* <a href="https://www.figma.com/file/8qs7dpuzT5DClrdzIBblmh/%EA%B9%8C%EA%B9%8C%EB%93%A4?type=design&node-id=201%3A1038&mode=design&t=ut56TkUQYoR3jelk-1" target="_blank">디자인</a>
+* [디자인](https://www.figma.com/file/8qs7dpuzT5DClrdzIBblmh/%EA%B9%8C%EA%B9%8C%EB%93%A4?type=design&node-id=201%3A1038&mode=design&t=ut56TkUQYoR3jelk-1)
