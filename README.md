@@ -7,14 +7,18 @@
 2023.03 ~ 2023.06 (12주)
 
 #### 참여 인원
-프론트엔드 2명, 백엔드 3명, 디자인 3명
+프론트엔드 2명, 백엔드 1명, 디자인 3명
 
-#### 사용 기술
+<br />
+
+## 사용 기술
 * React
 * React-Query, Recoil 
 * Styled-Component
 * [Lottie](https://airbnb.io/lottie/#/web)
 * Prettier, Eslint
+
+<br />
 
 ## 주요 기능
 ### 1. 질문지 만들기 (회원가입)
@@ -30,6 +34,9 @@
 ### 6. 회원정보 수정, 탈퇴
 닉네임 변경, 비밀번호 변경, 회원탈퇴 가능
 
+<br />
+
+
 ## 시작하기
 1. 설치
 ```
@@ -43,6 +50,9 @@ npm run start
 ```
 npm run build
 ```
+
+<br />
+<br />
 
 
 ## 협업 문서
