@@ -18,7 +18,7 @@ https://www.love-document.com/
 * React
 * React-Query, Recoil 
 * Styled-Component
-* [Lottie](https://airbnb.io/lottie/#/web)
+* [Lottie](https://airbnb.io/lottie/#/README)
 * Prettier, Eslint
 
 <br />
@@ -26,6 +26,8 @@ https://www.love-document.com/
 ## 주요 기능
 ### 1. 질문지 만들기 (회원가입)
 소개팅 상대에게 질문하고 싶은 카테고리를 선택하고, 닉네임과 비밀번호를 입력하면 질문지가 생성됨
+![시퀀스01](https://github.com/kkomyoung/love-document-client/assets/49858684/3cd1c299-4690-4b86-8c10-2dc14c2c6450)
+
 ### 2. 내 기준 입력하기
 선택한 카테고리에 대한 나의 기준을 입력함
 ### 3. 답변하기
