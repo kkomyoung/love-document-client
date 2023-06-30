@@ -25,11 +25,14 @@ https://www.love-document.com/
 
 ## 주요 기능
 ### 1. 질문지 만들기 (회원가입)
-소개팅 상대에게 질문하고 싶은 카테고리를 선택하고, 닉네임과 비밀번호를 입력하면 질문지가 생성됨
-![시퀀스01](https://github.com/kkomyoung/love-document-client/assets/49858684/3cd1c299-4690-4b86-8c10-2dc14c2c6450)
+소개팅 상대에게 질문하고 싶은 카테고리를 선택하고, 닉네임과 비밀번호를 입력하면 질문지가 생성됨    
+![시퀀스01](https://github.com/kkomyoung/love-document-client/assets/49858684/3054d368-a182-4b94-8976-b79c1d0e3cc0)
 
 ### 2. 내 기준 입력하기
-선택한 카테고리에 대한 나의 기준을 입력함
+선택한 카테고리에 대한 나의 기준을 입력함    
+![시퀀스02](https://github.com/kkomyoung/love-document-client/assets/49858684/9404d0d4-38d6-47cc-ae31-fbc6374e5d75)
+
+
 ### 3. 답변하기
 내가 생성한 질문지의 링크를 상대방에게 공유하고 답변을 받음
 ### 4. 로그인, 로그아웃
