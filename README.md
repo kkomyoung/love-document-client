@@ -40,11 +40,18 @@ https://www.love-document.com/
 ![시퀀스03](https://github.com/kkomyoung/love-document-client/assets/49858684/47346226-c299-49af-a30f-906f4a8922d9)
 
 ### 4. 로그인, 로그아웃
-[질문지 만들기]에서 입력한 닉네임과 비밀번호를 입력하여 로그인할 수 있음
+[질문지 만들기]에서 입력한 닉네임과 비밀번호를 입력하여 로그인할 수 있음    
+![시퀀스04](https://github.com/kkomyoung/love-document-client/assets/49858684/17ba7ffe-2732-4fe5-a28d-f8b2022691b5)
+
 ### 5. 도착한 답변 분석하기
-도착한 상대방의 답변과 나의 기준을 비교하여 궁합을 퍼센트로 보여줌
+도착한 상대방의 답변과 나의 기준을 비교하여 궁합을 퍼센트로 보여줌    
+![시퀀스05](https://github.com/kkomyoung/love-document-client/assets/49858684/6e44de69-5996-46a3-b489-4e27615104bb)
+![시퀀스05](https://github.com/kkomyoung/love-document-client/assets/49858684/fa0b0e0b-f218-4b3b-97b8-67c02e7cd18c)
+
 ### 6. 회원정보 수정, 탈퇴
-닉네임 변경, 비밀번호 변경, 회원탈퇴 가능
+닉네임 변경, 비밀번호 변경, 회원탈퇴 가능    
+![시퀀스06](https://github.com/kkomyoung/love-document-client/assets/49858684/64d4e3a8-0172-4586-a186-708197c7b804)
+
 
 <br />
 
