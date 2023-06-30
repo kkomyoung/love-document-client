@@ -14,7 +14,7 @@
 내 기준을 담은 질문지를 만들고 상대에게 공유해 답변을 받아 보세요 😘
 
 #### URL
-https://www.love-document.com/
+https://www.love-document.com
 
 #### 개발 기간
 2023.03 ~ 2023.06 (12주)
