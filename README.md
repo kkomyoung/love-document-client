@@ -1,3 +1,13 @@
+  
+## 리팩토링
+| 등록일 | 이슈번호 | 이슈명 | 
+| ------------ | ------------- | ------------- |
+| 2023.07.01 | https://github.com/kkomyoung/love-document-client/issues/1 | Styled-component 네이밍 규칙 수정  
+<br />    
+<br />  
+<br />  
+
+
 두근-두근 연애서류합
 =============
 연애서류합은 소개팅을 받기 전 상대방이 내 이상형 기준에 맞는지 확인할 수 있는 서비스 입니다.   
@@ -70,7 +80,6 @@ npm run start
 npm run build
 ```
 
-<br />
 <br />
 
 
