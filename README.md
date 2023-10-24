@@ -72,7 +72,6 @@ npm run build
 
 ## 협업 문서
 ### Notion
-* [테스트시트](https://www.notion.so/minuxx/be45aec614a74078b437845a80bab34c?pvs=4)
 * [코딩리스트](https://www.notion.so/minuxx/d6ac81b071924e72bdb492d0eac2a94a?v=ed6fe7603b1f48b79ec9488109db228a&pvs=4)
 * [API리스트](https://www.notion.so/minuxx/API-Sheet-d111fd6eebeb432297e7f413cdbd4fa7?pvs=4)
   
